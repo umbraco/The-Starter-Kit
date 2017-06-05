@@ -1,0 +1,27 @@
+<div ng-controller="UmbracoForms.Dashboards.YourFormsController as vm" ng-show="vm.forms">
+
+    <h4 class="umb-forms-title">
+        <strong>Your forms</strong>
+        <div class="umb-forms__show-all">
+            <a class="btn btn-link" href="" ng-if="vm.forms.length > vm.formsLimit" ng-click="vm.showAll()">Show all</a>
+        </div>
+    </h4>
+
+    <ul class="umb-forms-list">
+      <li class="umb-forms-form" ng-repeat="form in vm.forms | limitTo:vm.formsLimit">
+            <a class="umb-forms-card"  ng-href="#/forms/form/{{vm.entriesUrl}}/{{form.id}}">
+
+                <div class="card-name">
+                    <h4>{{form.name}}</h4>
+                </div>
+
+                <div class="card-body">
+                    <small>Entries</small>
+                    {{form.entries | number:0}}
+                </div>
+
+            </a>
+      </li>
+    </ul>
+
+</div>

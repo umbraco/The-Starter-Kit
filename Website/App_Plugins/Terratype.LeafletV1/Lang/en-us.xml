@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language alias="en" intName="English (US)" localName="English (US)" lcid="" culture="en-US">
+  <creator>
+    <name>Jonathan Richards</name>
+  </creator>
+
+  <area alias="terratypeLeafletV1">
+    <key alias="name">Leaflet V1</key>
+    <key alias="description">Popular javascript framework for displaying interactivce maps from various sources including OpenStreetMap</key>
+    <key alias="referenceUrl">http://leafletjs.com/index.html</key>
+  </area>
+
+  <area alias="terratypeLeafletV1ConfigAppearance">
+  </area>
+
+  <area alias="terratypeLeafletV1Terratype">
+    <key alias="name">Terratype</key>
+    <key alias="description">Terratype tile server. Map the future</key>
+    <key alias="keyName">Access Key</key>
+    <key alias="keyPlaceholder">Access Key</key>
+    <key alias="keyDescription">Access key required to access all services</key>
+    <key alias="keyUrl"><![CDATA[<small>Terratype Access Key can be retrieved from <a href="https://terratype.io">your account</a></small>]]></key>
+    <key alias="standardName">Standard</key>
+    <key alias="standardAttribution">Terratype TileServer</key>
+    <key alias="redAlertName">Red Alert</key>
+    <key alias="redAlertAttribution">Terratype TileServer</key>
+    <key alias="iceName">Ice</key>
+    <key alias="iceAttribution">Terratype TileServer</key>
+  </area>
+
+  <area alias="terratypeLeafletV1OpenStreetMap">
+    <key alias="name">OpenStreetMap</key>
+    <key alias="description"><![CDATA[As well as being a collaborative project to create a free editable map of the world, where OpenStreetMap is normally accessed via paid for Tile Servers ran by other groups. OpenStreetMap can also be used as a Tile Server, but is <a href="https://operations.osmfoundation.org/policies/tiles/">severely restricted to non-commercial limited fair usage rules</a>]]></key>
+
+    <key alias="mapnikName">Mapnik</key>
+    <key alias="mapnikAttribution"><![CDATA[&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>]]></key>
+
+    <key alias="blackwhiteName">Black and White</key>
+    <key alias="blackwhiteAttribution"><![CDATA[&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>]]></key>
+
+    <key alias="deName">Germany</key>
+    <key alias="deAttribution"><![CDATA[&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap Deutschland</a>]]></key>
+
+    <key alias="frName">France</key>
+    <key alias="frAttribution"><![CDATA[&copy; Openstreetmap France | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>]]></key>
+
+    <key alias="hotName">Humanitarian OpenStreetMap Team</key>
+    <key alias="hotAttribution"><![CDATA[&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>]]></key>
+  </area>
+
+  <area alias="terratypeLeafletV1OpenSeaMap">
+    <key alias="name">OpenSeaMap</key>
+    <key alias="description"><![CDATA[Free <a href="http://wiki.openstreetmap.org/wiki/OpenSeaMap">nautical database</a> adding nautical and tourism information relevant to sailors. Including beacons, bouys, ports, waypoints, repair shops and ship supplies. Based off <a href="http://wiki.openstreetmap.org/wiki/Mapnik">Mapnik</a>.]]></key>
+
+    <key alias="standardName">Standard</key>
+    <key alias="standardAttribution"><![CDATA[Map data: &copy; <a href="http://www.openseamap.org">OpenSeaMap</a> contributors]]></key>
+  </area>
+
+  <area alias="terratypeLeafletV1OpenTopoMap">
+    <key alias="name">OpenTopoMap</key>
+    <key alias="description"><![CDATA[<a href="http://wiki.openstreetmap.org/wiki/OpenTopoMap">Topographic maps</a> focussing on high contrast contour lines and hillshading. Familiar to Germans]]></key>
+
+    <key alias="standardName">Standard</key>
+    <key alias="standardAttribution"><![CDATA[Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)]]></key>
+  </area>
+
+  <area alias="terratypeLeafletV1Thunderforest">
+    <key alias="name">Thunderforest</key>
+    <key alias="description"><![CDATA[The <a href="https://www.thunderforest.com/">Thunderforest</a> Platform is the 4th major revision of the systems that powers OpenCycleMap. With mapnik and postgis at its core, supported with mod_tile, squid, and a host of other components, it provides robust, fast, reliable and wonderful-looking maps. The Thunderforest Platform has enabled me to expand to easily host multiple map styles and serve millions of requests per month to clients all around the globe.]]></key>
+
+    <key alias="keyName">API Key:</key>
+    <key alias="keyDescription">Api Key as defined in your Thunderforest acccount</key>
+    <key alias="keyPlaceholder">Thunderforest API Key</key>
+    <key alias="keyUrl"><![CDATA[Thunderforest API Key can be configured by signing into your <a href="https://manage.thunderforest.com/users/sign_in">Thunderforest account</a>]]></key>
+
+    <key alias="openCycleMapName">OpenCycleMap</key>
+    <key alias="openCycleMapAttribution"><![CDATA[&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>]]></key>
+
+    <key alias="transportName">Transport</key>
+    <key alias="transportAttribution"><![CDATA[&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>]]></key>
+  </area>
+
+  <area alias="terratypeLeafletV1TianDiTu">
+    <key alias="name">Tianditu</key>
+    <key alias="description"><![CDATA[China’s State Bureau of Surveying and Mapping (SBSM) official <a href="https://en.wikipedia.org/wiki/Tianditu">web mapping service</a>]]></key>
+
+    <key alias="basicName">Basic</key>
+    <key alias="basicAttribution"></key>
+
+    <key alias="satelliteName">Satellite</key>
+    <key alias="satelliteAttribution"></key>
+
+    <key alias="terrainName">Terrain</key>
+    <key alias="terrainAttribution"></key>
+  </area>
+
+  <area alias="terratypeLeafletV1GoogleCN">
+    <key alias="name">Google China</key>
+    <key alias="description"><![CDATA[Google's Map offering in China, complying with Chinese state law regarding coordinates systems]]></key>
+
+    <key alias="basicName">Basic</key>
+    <key alias="basicAttribution"><![CDATA[Map data &copy;2017]]></key>
+
+    <key alias="satelliteName">Satellite</key>
+    <key alias="satelliteAttribution"><![CDATA[Map data &copy;2017]]></key>
+  </area>
+
+  <area alias="terratypeLeafletV1ConfigDefinition">
+    <key alias="mapSourceLabel">Map Source:</key>
+    <key alias="mapSourceDescription">Organisations or companies that delivers map based data compatible with Leaflet V1</key>
+    <key alias="tileServerLabel">Tile Server:</key>
+    <key alias="tileServerDescription">Server that you will be requesting image tiles from that creates the visual map</key>
+    <key alias="tileServerInvalidCoordinateSystem">Error: This tile server Doesn&apos;t support the current coordinate system. Either change your coordinate system or this tile server</key>
+
+    <key alias="mapSourceMessage">LeafletV1 allows multiple map sources to be used at different map resolutions. So as you zoom in or out, the contents of the map can come from different servers. The reason to do this, is that many of the free servers only allow resolution upto a certain zoom level or a map source will only provide maps images at specific resolution and expect other sources to be used at other zoom levels. Feel free to add as many zoom levels as required, as the zoom control will try and only allow maps within the zoom range that is set</key>
+    <key alias="mapSourceAdd">Add a Map Source</key>
+    <key alias="mapSourceAddAnother">Add another Map Source</key>
+    <key alias="mapSourceDeleteTitle">Delete this map source</key>
+    <key alias="minZoomLabel">Min Zoom:</key>
+    <key alias="minZoomDescription">Minimum zoom that you wish this tile server to be used. 0 = showing the whole world, 24 = smallest detail. Each tile server has its own range of zooms it can serve</key>
+    <key alias="maxZoomLabel">Max Zoom:</key>
+    <key alias="maxZoomDescription">Maximum zoom that you wish this tile server to be used. If you wish for this tile server to serve for only one zoom level then set min and max zoom to the same value</key>
+    <key alias="minZoomError"><![CDATA[Minimum zoom level for this tile server has to be bewteen {{vm().provider.tileServerById[store().provider.mapSources[$index].tileServer.id].minZoom}} and {{vm().provider.tileServerById[store().provider.mapSources[$index].tileServer.id].maxZoom}}]]></key>
+    <key alias="maxZoomError"><![CDATA[Maximum zoom level for this tile server has to be bewteen {{vm().provider.tileServerById[store().provider.mapSources[$index].tileServer.id].minZoom}} and {{vm().provider.tileServerById[store().provider.mapSources[$index].tileServer.id].maxZoom}}]]></key>
+    <key alias="maxZoomInvalid">The maximum zoom level is lower than the minimum zoom level</key>
+    <key alias="minZoomPlaceholder"><![CDATA[Integer between {{vm().provider.tileServerById[store().provider.mapSources[$index].tileServer.id].minZoom}} and {{vm().provider.tileServerById[store().provider.mapSources[$index].tileServer.id].maxZoom}}]]></key>
+    <key alias="maxZoomPlaceholder"><![CDATA[Integer between {{store().provider.mapSources[$index].minZoom}} and {{vm().provider.tileServerById[store().provider.mapSources[$index].tileServer.id].maxZoom}}]]></key>
+
+    <key alias="imagetestLabel">Image Test:</key>
+    <key alias="imageDescription">Tries to directly access a map tile, this isn't always guarenteed to work for all tile servers that require login / access keys. If no image is shown, there is a chance this tile server is down, the Terratype configuration is out-of-date or the zoom level you require is invalid</key>
+    <key alias="retryTitle">Reload this map with current configuration</key>
+    <key alias="retryLabel">Reload</key>
+  </area>
+
+  <area alias="terratypeLeafletV1ConfigAppearance">
+    <key alias="zoomLabel">Zoom:</key>
+    <key alias="zoomDescription">Show zoom control</key>
+    <key alias="zoomPositionLabel">Zoom Position:</key>
+    <key alias="zoomPositionDescription">Where do you want the zoom control buttons to be positioned on the map</key>
+
+    <key alias="positionTopLeft">Top Left</key>
+    <key alias="positionTopRight">Top Right</key>
+    <key alias="positionBottomLeft">Bottom Left</key>
+    <key alias="positionBottomRight">Bottom Right</key>
+
+    <key alias="positionLabel">Default location:</key>
+    <key alias="positionDescription">Select the default location when displaying this map to a content editor</key>
+  </area>
+
+  <area alias="terratypeLeafletV1EditorAppearance">
+    <key alias="locationPlaceholder">latitude (-90.0 to 90.0), longitude (-180.0 to 180.0)</key>
+  </area>
+
+</language>

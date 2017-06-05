@@ -1,0 +1,94 @@
+﻿<div class="angulargoolemapsConfigIcon" ng-controller="AGM81b046644d304191a1413398692df1d6iconconfig" ng-init="initialize()">
+    <div class="umb-editor">
+        <label for="agm_{{model.alias}}_predefine">
+            Predefine:
+        </label>
+        <select id="agm_{{model.alias}}_predefine" ng-model="predefineIndex" class="umb-editor" ng-change="setPredefine()">
+            <option ng-repeat="predefine in predefines track by $index" value="{{$index}}" ng-selected="{{$index}} == predefineIndex">{{predefine.name}}</option>
+        </select>
+    </div>
+
+    <div class="umb-editor">
+        <label for="agm_{{model.alias}}_image">
+            Image url:
+        </label>
+        <input type="url" id="agm_{{model.alias}}_image" ng-model="model.value.image" class="umb-editor" ng-change="predefineIndex = '0'" placeholder="Url" />
+    </div>
+
+    <div class="umb-editor" style="display:none;">
+        <label for="agm_{{model.alias}}_shadow">
+            Shadow image url:
+        </label>
+        <input type="url" id="agm_{{model.alias}}_shadow" ng-model="model.value.shadowImage" class="umb-editor" ng-change="predefineIndex = '0'" placeholder="Url" />
+    </div>
+
+    <div class="umb-editor">
+        <label for="agm_{{model.alias}}_width">
+            Width:
+        </label>
+        <input type="number" id="agm_{{model.alias}}_width" ng-model="model.value.size.width" class="umb-editor" ng-change="predefineIndex = '0'" placeholder="Numeric value" />
+    </div>
+
+    <div class="umb-editor">
+        <label for="agm_{{model.alias}}_height">
+            Height:
+        </label>
+        <input type="number" id="agm_{{model.alias}}_height" ng-model="model.value.size.height" class="umb-editor" ng-change="predefineIndex = '0'" placeholder="Numeric value" />
+    </div>
+
+    <div class="umb-editor">
+        <label for="agm_{{model.alias}}_hat">
+            Horizontal anchor:
+        </label>
+        <input type="radio" name="agm_{{model.alias}}_har" ng-value="true" ng-model="isAnchorHorizontalManual" title="Use custom value" />
+        <input type="number" id="agm_{{model.alias}}_hat" ng-model="anchorHorizontalManual" class="umb-editor" ng-disabled="!isAnchorHorizontalManual" placeholder="Custom numeric value" ng-change="setHorizontal()" />
+    </div>
+
+    <div class="umb-editor">
+        <label>
+            &nbsp;
+        </label>
+        <input type="radio" name="agm_{{model.alias}}_har" ng-value="false" ng-model="isAnchorHorizontalManual" title="Use predefine value" />
+        <select ng-model="anchorHorizontalAutomatic" class="umb-editor" ng-disabled="isAnchorHorizontalManual" ng-change="setHorizontal()">
+            <option value="left">Left</option>
+            <option value="center">Center</option>
+            <option value="right">Right</option>
+        </select>
+    </div>
+
+    <div class="umb-editor">
+        <label for="agm_{{model.alias}}_vat">
+            Vertical anchor:
+        </label>
+        <input type="radio" name="agm_{{model.alias}}_var" ng-value="true" ng-model="isAnchorVerticalManual" title="Use custom value" />
+        <input type="number" id="agm_{{model.alias}}_vat" ng-model="anchorVerticalManual" class="umb-editor" ng-disabled="!isAnchorVerticalManual" placeholder="Custom numeric value" ng-change="setVertical()" />
+    </div>
+
+    <div class="umb-editor">
+        <label>
+            &nbsp;
+        </label>
+        <input type="radio" name="agm_{{model.alias}}_var" ng-value="false" ng-model="isAnchorVerticalManual" title="Use predefine value" />
+        <select ng-model="anchorVerticalAutomatic" class="umb-editor" ng-disabled="isAnchorVerticalManual" ng-change="setVertical()">
+            <option value="top">Top</option>
+            <option value="center">Center</option>
+            <option value="bottom">Bottom</option>
+        </select>
+    </div>
+    <br />
+
+    <div ng-switch="model.value.image.trim()">
+        <div ng-switch-when="">
+            <div ng-switch="model.value.shadowImage">
+                <span ng-switch-when="">&nbsp;</span>
+                <img ng-switch-default src="{{model.value.shadowImage}}" style="width:{{model.value.size.width}}px;height:{{model.value.size.height}}px;" />
+            </div>
+        </div>
+        <div ng-switch-default>
+            <div ng-switch="model.value.shadowImage">
+                <img ng-switch-when="" src="{{model.value.image}}" style="width:{{model.value.size.width}}px;height:{{model.value.size.height}}px;" />
+                <img ng-switch-default src="{{model.value.image}}" style="width:{{model.value.size.width}}px;height:{{model.value.size.height}}px;background-image:url({{model.value.shadowImage}});background-size:{{model.value.size.width}}px {{model.value.size.height}}px;" />
+            </div>
+        </div>
+    </div>
+</div>

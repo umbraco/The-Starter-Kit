@@ -1,0 +1,20 @@
+<umb-control-group
+    label="Message on submit"
+    description="Show a message when the form is submitted">
+
+    <textarea
+        ng-model="model.messageOnSubmit">
+    </textarea>
+
+</umb-control-group>
+
+
+<umb-control-group
+    label="Go to page"
+    description="Go to an umbraco page when the form is submitted">
+
+    <umb-forms-content-picker
+        ng-model="model.goToPageOnSubmit">
+    </umb-forms-content-picker>
+
+</umb-control-group>

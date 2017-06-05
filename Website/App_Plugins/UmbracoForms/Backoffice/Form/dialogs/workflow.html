@@ -1,0 +1,38 @@
+﻿<div class="umb-panel" ng-controller="UmbracoForms.Editors.Form.Dialogs.WorkflowsController">
+    <div class="umb-panel-body no-header with-footer">
+        <div class="umb-pane">
+
+            <h5>Workflow</h5>
+
+            <umb-control-group label="Name" description="">
+                <input type="text" ng-model="workflow.name" />
+            </umb-control-group>
+
+            <umb-control-group label="Type" description="Select the type of workflow">
+                <select ng-model="workflow.workflowTypeId" ng-options="type.id as type.name for type in types" ng-change="setType()">
+                    <option value="">Choose type...</option>
+                </select>
+            </umb-control-group>
+
+            <umb-control-group ng-repeat="setting in workflow.$type.settings" label="{{setting.name}}" description="{{setting.description}}">
+                <div ng-include="setting.view"></div>
+            </umb-control-group>
+
+        </div>
+    </div>
+
+    <div class="umb-panel-footer">
+        <div class="btn-toolbar umb-btn-toolbar pull-right">
+            <a href="" class="btn btn-link" ng-click="close()">
+                <localize key="cancel" class="ng-isolate-scope ng-scope">Cancel</localize>
+            </a>
+
+            <input type="button" ng-click="delete()" class="btn btn-danger" value="Delete" ng-hide="dialogData.add">
+            
+            <input type="button" ng-click="add()" class="btn btn-primary" value="Add" ng-show="dialogData.add">
+            
+            <input type="button" ng-click="update()" class="btn btn-primary" value="Update" ng-hide="dialogData.add">
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,21 @@
+<div ng-controller="UmbracoForms.Dashboards.ActivityController" style="display: none">
+    <h3>Recent form entries</h3>
+
+    <ul class="unstyled">
+        <li class="span2" style="padding: 0 20px 20px 0; min-width: 120px" ng-repeat="record in records.results">
+            <div class="umb-forms-card">
+                <h4>
+                    <i class="icon icon-circle-dotted-active" title="Record has been approved"></i><a ng-href="#/forms/form/entries/{{record.form}}">#{{record.id}}</a>
+                </h4>
+
+                <div class="card-body">
+                    <ul class="unstyled">
+                        <li><i class="icon icon-inbox-full"></i> Submitted {{record.created | date:'medium'}}</li>
+                        <li><i class="icon icon-autofill"></i> to '<a ng-href="#/forms/form/workflows/{{record.form}}">{{record.formName}}</a>'</li>
+                    </ul>
+                </div>
+            </div>
+      </li>
+    </ul>
+
+</div>

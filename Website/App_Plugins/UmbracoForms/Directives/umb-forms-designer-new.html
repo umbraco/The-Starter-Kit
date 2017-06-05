@@ -1,0 +1,324 @@
+<div class="umb-forms-designer clearfix">
+
+    <umb-editor-sub-header style="margin-bottom: 0;">
+        <umb-editor-sub-header-content-right>
+            <umb-button
+                type="button"
+                button-style="link"
+                label-key="{{sortingButtonKey}}"
+                icon="icon-navigation"
+                action="toggleSortingMode();">
+            </umb-button>
+        </umb-editor-sub-header-content-right>
+    </umb-editor-sub-header>
+
+    <div class="umb-forms__pages" ui-sortable="sortablePages" ng-model="form.pages">
+
+        <div class="umb-forms__page sortable" ng-repeat="page in form.pages">
+
+            <div class="umb-forms__page-header">
+
+                <i class="icon-navigation umb-forms__page-sort-handle sortable-handle" ng-if="sortingMode"></i>
+
+                <div class="umb-forms__page-number">{{ $index + 1 }}</div>
+
+                <input type="text"
+                   class="umb-forms__page-name"
+                   ng-model="page.caption"
+                   placeholder="Untitled page (optional)">
+
+                <div class="umb-forms__actions -page" ng-if="form.pages.length > 1">
+                    <a href="">
+                        <i class="icon-trash" ng-click="togglePrompt(page)"></i>
+                        <umb-confirm-action
+                            ng-if="page.deletePrompt"
+                            direction="left"
+                            on-confirm="removePage(form.pages, $index)"
+                            on-cancel="hidePrompt(page)">
+                        </umb-confirm-action>
+                    </a>
+                </div>
+            </div>
+
+            <div class="umb-forms__fieldsets" ng-class="{'-empty': page.fieldSets.length === 0}" ui-sortable="sortableFieldsets" ng-model="page.fieldSets">
+
+                <div class="umb-forms__fieldset sortable" ng-repeat="fieldset in page.fieldSets">
+
+                    <div class="umb-forms__fieldset-header">
+
+                        <div class="umb-forms__fieldset-info">
+                            <i class="icon-navigation umb-forms__fieldset-sort-handle sortable-handle" ng-if="sortingMode"></i>
+                            <input
+                                class="umb-forms__fieldset-name"
+                                ng-if="!sortingMode"
+                                placeholder="Untitled group (optional)"
+                                ng-model="fieldset.caption"
+                                umb-auto-resize />
+                            <div class="umb-forms__fieldset-name" ng-if="sortingMode">{{ fieldset.caption }}</div>
+                        </div>
+
+                        <div class="umb-forms__fieldset-condition" ng-if="fieldset.condition.enabled">
+                            {{ fieldset.condition.actionType }} this group if {{ fieldset.condition.logicType }} of the following match:
+                            <span ng-repeat="rule in fieldset.condition.rules">
+                                <span>{{ getFieldNameFromGuid(rule.field) }} {{ rule.operator }} {{ rule.value }}</span><span ng-if="!$last">, </span>
+                            </span>
+                        </div>
+
+                        <div class="umb-forms__actions -fieldset" ng-if="!sortingMode">
+                            <a href="" ng-click="editFieldset(fieldset)"><i class="icon-settings"></i></a>
+                            <a href="">
+                                <i class="icon-trash" ng-click="togglePrompt(fieldset)"></i>
+                                <umb-confirm-action
+                                    ng-if="fieldset.deletePrompt"
+                                    direction="left"
+                                    on-confirm="removeFieldset(page, fieldset)"
+                                    on-cancel="hidePrompt(fieldset)">
+                                </umb-confirm-action>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="umb-forms__containers">
+
+                        <div
+                            class="umb-forms__container"
+                            ng-class="{'-collapsed': sortingMode, '-element-column': fieldset.containers.length > 1 }"
+                            ng-repeat="container in fieldset.containers">
+
+                            <div class="umb-forms__fields" ng-class="{'-empty': container.fields.length === 0}" ui-sortable="sortableFields" ng-model="container.fields">
+
+                                <div class="umb-forms__field sortable" ng-class="{'-collapsed': sortingMode}" ng-repeat="field in container.fields">
+
+                                    <div class="umb-forms__field-content">
+
+                                        <i class="icon-navigation umb-forms__field-sort-handle sortable-handle" ng-if="sortingMode"></i>
+
+                                        <div class="umb-forms__field-info" ng-class="{'-inline': sortingMode}">
+                                            
+                                            <umb-locked-field
+                                                ng-if="field.alias"
+                                                locked="locked"
+                                                ng-model="field.alias"
+                                                placeholder-text="'Alias...'"
+                                                server-validation-field="{{'field_' + field.alias}}">
+                                            </umb-locked-field>
+
+                                            <div class="umb-forms__field-mandatory" ng-if="field.mandatory">*</div>
+
+                                            <textarea
+                                                class="umb-forms__field-name"
+                                                ng-if="!sortingMode"
+                                                placeholder="Question"
+                                                ng-model="field.caption"
+                                                umb-auto-resize>
+                                            </textarea>
+                                            <div class="umb-forms__field-name" ng-if="sortingMode">{{ field.caption }}</div>
+
+                                            <textarea
+                                                placeholder="Help text"
+                                                class="umb-forms__field-description"
+                                                ng-model="field.tooltip"
+                                                umb-auto-resize>
+                                            </textarea>
+
+                                        </div>
+
+                                        <div class="umb-forms__field-wrapper">
+
+                                            <div class="umb-forms__field-condition" ng-if="field.condition.enabled">
+                                                {{ field.condition.actionType }} this question if {{ field.condition.logicType }} of the following match:
+                                                <span ng-repeat="rule in field.condition.rules">
+                                                    <span>{{ getFieldNameFromGuid(rule.field) }} {{ rule.operator }} {{ rule.value }}</span><span ng-if="!$last">, </span>
+                                                </span>
+                                            </div>
+
+                                            <div class="umb-forms__field-preview">
+                                                <div ng-include="field.$fieldType.view"></div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="umb-forms__actions" ng-if="sortingMode === false">
+                                            <a href="" ng-click="openFieldSettings(field)"><i class="icon-settings"></i></a>
+                                            <a href="" ng-click="">
+                                                <i class="icon-trash" ng-click="togglePrompt(field)"></i>
+                                                <umb-confirm-action
+                                                    ng-if="field.deletePrompt"
+                                                    direction="left"
+                                                    on-confirm="removeField(fieldset, container, field)"
+                                                    on-cancel="hidePrompt(field)">
+                                                </umb-confirm-action>
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="umb-forms__no-fields" ng-if="container.fields.length === 0 && !sortingMode">
+                                    <umb-button
+                                        type="button"
+                                        action="addField(fieldset, container)"
+                                        label="Add question">
+                                    </umb-button>
+                                </div>
+
+                                <div class="umb-forms__field-footer" ng-if="container.fields.length > 0 && !sortingMode">
+                                    <umb-button
+                                        type="button"
+                                        action="addField(fieldset, container)"
+                                        label="Add question">
+                                    </umb-button>
+                                </div>
+
+                                <div class="umb-forms__no-fields" ng-if="container.fields.length === 0 && sortingMode">
+                                    <div ng-if="!container.dropOnEmpty">
+                                        <p class="umb-forms__no-fields-text" >Group is empty</p>
+                                        <small>Drop a question here...</small>
+                                    </div>
+                                    <div ng-if="container.dropOnEmpty">
+                                        <p class="umb-forms__no-fields-text">Yaay.. let go</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="umb-forms__no-fields" ng-if="page.fieldSets.length === 0 && sortingMode">
+                    <div ng-if="!page.dropOnEmpty">
+                        <p class="umb-forms__no-fields-text">Page is empty</p>
+                        <small>Drop a group here...</small>
+                    </div>
+                    <div ng-if="page.dropOnEmpty">
+                        <p class="umb-forms__no-fields-text">Yaay.. let go</p>
+                    </div>
+                </div>
+
+                <!-- Add new sections if fields are present -->
+                <div class="umb-forms__page-footer" ng-if="!sortingMode && pageHasFields(page)">
+                    <umb-button
+                        button-style="link"
+                        type="button"
+                        action="addFieldset(page)"
+                        label="Add new group">
+                    </umb-button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="umb-forms-workflow-actions" ng-if="!sortingMode">
+
+        <div class="umb-forms-workflow-flows">
+
+            <div class="umb-forms-workflow-flow">
+
+                <span class="umb-forms-workflow-preview">
+                    <span class="umb-forms__page-number"><i class="icon-check"></i></span>
+                    On
+                </span>
+
+                <span class="umb-forms-workflow-preview">
+                    <strong>&nbsp; {{ form.submitLabel }} &rarr;</strong>
+                </span>
+
+                <span class="umb-forms-workflow-preview">
+                    <a class="umb-forms-workflow-preview__item" href="" ng-click="editSubmitMessageWorkflow()">Submit message / Go to page</a>
+                    <span ng-if="(form.formWorkflows.onSubmit | filter:{isDeleted:'false'}).length > 0">and</span>
+                </span>
+
+                <span class="umb-forms-workflow-preview" ng-repeat="workflow in form.formWorkflows.onSubmit | filter:{isDeleted:'false'}">
+                    <a class="umb-forms-workflow-preview__item" ng-if="security.userSecurity.manageWorkflows" href="" ng-click="editWorkflowSettings(workflow)">{{ workflow.name }}</a>
+                    <span class="umb-forms-workflow-preview__item" ng-if="security.userSecurity.manageWorkflows === false">{{ workflow.name }}</span>
+                    <span ng-if="!$last">and</span>
+                </span>
+            </div>
+
+            <div class="umb-forms-workflow-flow" ng-if="form.manualApproval">
+                <span class="umb-forms-workflow-preview">
+                    <span class="umb-forms__page-number"><i class="icon-thumb-up"></i></span>
+                    On
+                </span>
+
+                <span class="umb-forms-workflow-preview">
+                    <strong>&nbsp; Approve &rarr;</strong>
+                </span>
+
+                <span class="umb-forms-workflow-preview" ng-repeat="workflow in form.formWorkflows.onApprove | filter:{isDeleted:'false'}">
+                    <a class="umb-forms-workflow-preview__item" ng-if="security.userSecurity.manageWorkflows" href="" ng-click="editWorkflowSettings(workflow)">{{ workflow.name }}</a>
+                    <span class="umb-forms-workflow-preview__item" ng-if="security.userSecurity.manageWorkflows === false">{{ workflow.name }}</span>
+                    <span ng-if="!$last">and</span>
+                </span>
+
+                <span class="umb-forms-workflow-preview" ng-if="(form.formWorkflows.onApprove | filter:{isDeleted:'false'} ).length === 0">&nbsp; No workflows are added</span>
+
+            </div>
+
+        </div>
+
+        <div class="umb-forms-workflow-settings" ng-if="security.userSecurity.manageWorkflows">
+            <a href="" ng-click="editWorkflows()">configure workflow</a>
+        </div>
+
+    </div>
+
+    <div class="umb-forms__footer">
+        <umb-button
+            ng-if="!sortingMode && formHasFields(form)"
+            type="button"
+            action="addPage(form)"
+            label="Add new page">
+        </umb-button>
+    </div>
+
+    <umb-overlay
+        ng-if="fieldOverlay.show"
+        model="fieldOverlay"
+        position="target"
+        view="fieldOverlay.view">
+    </umb-overlay>
+
+    <umb-overlay
+        ng-if="fieldSettingsOverlay.show"
+        model="fieldSettingsOverlay"
+        position="right"
+        view="fieldSettingsOverlay.view">
+    </umb-overlay>
+
+    <umb-overlay
+        ng-if="workflowsOverlay.show"
+        model="workflowsOverlay"
+        position="right"
+        view="workflowsOverlay.view">
+    </umb-overlay>
+
+    <umb-overlay
+        ng-if="workflowSettingsOverlay.show"
+        model="workflowSettingsOverlay"
+        position="right"
+        view="workflowSettingsOverlay.view">
+    </umb-overlay>
+
+    <umb-overlay
+        ng-if="submitMessageWorkflowOverlay.show"
+        model="submitMessageWorkflowOverlay"
+        position="right"
+        view="submitMessageWorkflowOverlay.view">
+    </umb-overlay>
+
+    <umb-overlay
+        ng-if="fieldsetSettingsOverlay.show"
+        model="fieldsetSettingsOverlay"
+        position="right"
+        view="fieldsetSettingsOverlay.view">
+    </umb-overlay>
+
+</div>

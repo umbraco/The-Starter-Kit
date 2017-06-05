@@ -1,0 +1,163 @@
+<div ng-controller="UmbracoForms.Dashboards.LicensingController">
+
+    <div class="umb-forms-install-overlay" ng-show="overlay.show">
+        <a href class="close" ng-click="overlay.show = false">Close</a>
+        <div>
+            <div class="succes"> </div>
+
+            <h2><strong>{{overlay.title}}</strong></h2>
+
+            <p>{{overlay.description}}</p>
+
+            <div class="divider"></div>
+
+            <umb-button
+                button-style="success"
+                type="button"
+                action="create()"
+                label="Create a form">
+            </umb-button>
+
+        </div>
+    </div>
+
+    <div ng-if="version.upgradeAvailable && isAdminUser">
+
+        <div class="row-fluid">
+            <div class="span8">
+                <h3>There is a new version available</h3>
+                <p>
+                    You can now install Umbraco forms {{version.remoteVersion}}
+                </p>
+            </div>
+            <div class="span4 umb-db-form-action">
+                <umb-button
+                    ng-if="!installing"
+                    button-style="success"
+                    type="button"
+                    action="upgrade()"
+                    label="Upgrade now">
+                </umb-button>
+            </div>
+        </div>
+
+
+        <div style="width: 99%; overflow: hidden" ng-if="installing">
+            <p>Downloading and upgrading forms...</p>
+            <div class="umb-loader"></div>
+        </div>
+
+        <hr />
+    </div>
+
+
+    <div ng-if="status.isTrial || status.isInValid === true">
+
+        <div class="alert alert-error" ng-if="status.isInValid">
+            <h4>Invalid license</h4>
+            Your current forms license is only valid for:
+            <pre>{{status.validDomains}}</pre>
+            Please re-configure your license below.
+        </div>
+
+
+        <div class="row-fluid" ng-if="!status.state">
+            <div class="span8">
+                <h3>Thank you for trying out Umbraco Forms</h3>
+                <p>To continue using Umbraco forms, you must purchase a license, or use an existing license</p>
+            </div>
+
+            <div class="span4 umb-db-form-action">
+                <umb-button
+                    style="display: block;"
+                    button-style="success"
+                    type="button"
+                    action="status.state = 'buy'"
+                    label="Buy license">
+                </umb-button>
+                <a class="btn btn-link btn-tiny" ng-click="status.state = 'use'">Configure existing license</a>
+            </div>
+        </div>
+
+
+        <div ng-if="status.state === 'buy'">
+
+            <h3>Buying a license</h3>
+            <p>
+                Its really easy to buy a license on Umbraco.com, simply pick your license from our license page, swipe your
+                creditcard, and you will instantly have a license, ready to use, when you have completed your purchase, return to
+                this page and configure it.
+            </p>
+
+            <a href="https://umbraco.com/products/umbraco-forms/?utm_source=core&utm_medium=dashboard&utm_content=topic-link&utm_campaign=formslicensing" target="_blank" class="btn btn-primart">Go to umbraco.com/products/umbraco-forms</a> <a class="btn btn-link" ng-click="status.state = undefined">Back</a>
+        </div>
+
+
+        <div ng-if="status.state === 'use'">
+            <h3>Configure a Umbraco Forms license</h3>
+            <p>
+                Great! you already have a license, simply enter the umbraco.com credentials used to purchase it - <a class="btn btn-link" ng-click="status.state = undefined">No wait, I actually don't have a license</a>.
+            </p>
+
+            <umb-control-group label="Email">
+                <input type="text" ng-model="configuration.email" />
+            </umb-control-group>
+
+            <umb-control-group label="Password">
+                <input type="password" ng-model="configuration.password" />
+            </umb-control-group>
+
+            <umb-control-group>
+                <button class="btn" ng-click="getLicenses(configuration)">Find licenses</button>
+                <span ng-if="loginError" class="red"><i class="icon icon-alert red" title="Invalid email or password"></i> Invalid email or password</span>
+                <span ng-if="hasLicenses === false" class="red"><i class="icon icon-alert red" title="No licenses found"></i> No Umbraco Forms licenses available on this account</span>
+            </umb-control-group>
+
+            <umb-control-group label="Licenses" ng-if="hasLicenses">
+                <p>
+                    Found <strong>{{openLicenses.length + configuredLicenses.length}}</strong> licenses on the <strong>{{configuration.email}}</strong> account
+                </p>
+
+                <div ng-if="openLicenses.length > 0">
+                    <ul class="unstyled list-icons">
+                        <li ng-repeat="license in openLicenses" style="max-width: 600px">
+                            <i class="icon icon-certificate blue"></i>
+
+                            <a href ng-click="status.selectedLicense = license; configuration.license = license.id">{{license.label}}</a><br />
+                            <small>Has no domains assigned</small>
+
+                            <div ng-if="license === status.selectedLicense">
+                                <p>Please set a domain on this license:</p>
+                                <input type="text" ng-model="configuration.domain" />
+                                <button class="btn" ng-click="configure(configuration)">Configure and Install</button>
+                            </div>
+                        </li>
+                    </ul>
+                    <hr />
+                </div>
+
+                <ul class="unstyled list-icons">
+                    <li ng-repeat="license in configuredLicenses">
+                        <i class="icon icon-certificate"></i>
+
+                        <a href ng-click="status.selectedLicense = license; configuration.license = license.id">{{license.label}}</a><br />
+                        <small>
+                            <i class="icon icon-alert red" ng-hide="license.currentDomainMatch" title="This license is not valid on the curent domain"></i> Valid domains: {{license.bindings.join()}}
+                        </small>
+
+                        <div ng-if="license === status.selectedLicense">
+                            <button class="btn" ng-click="configure(configuration)">Install this license</button>
+                        </div>
+                    </li>
+                </ul>
+            </umb-control-group>
+        </div>
+
+        <hr />
+    </div>
+
+    <div ng-if="currentVersion">
+        <small>Current installed version of Umbraco Forms: {{ currentVersion }}</small>
+    </div>
+
+</div>

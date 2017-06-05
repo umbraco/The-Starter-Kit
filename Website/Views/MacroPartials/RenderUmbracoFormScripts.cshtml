@@ -1,0 +1,11 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Umbraco.Forms.Web.Controllers
+
+@if (TempData["UmbracoForms"] != null)
+{
+    foreach (var form in (List<Guid>)TempData["UmbracoForms"])
+    {
+        Html.RenderAction("Render", "UmbracoForms", new { formId = form, mode = "script"});
+    }
+}
+    

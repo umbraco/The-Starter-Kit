@@ -1,0 +1,106 @@
+<div ng-controller="UmbracoForms.Overlays.FieldsetSettingsOverlay as vm">
+
+    <h5>Conditions</h5>
+
+    <div class="umb-forms__conditions">
+
+        <div class="control-group umb-control-group">
+            <label class="checkbox">
+                <input type="checkbox" ng-model="model.fieldset.condition.enabled">
+                Enable conditions
+            </label>
+        </div>
+
+        <div class="control-group umb-control-group" ng-show="model.fieldset.condition.enabled">
+
+            <div class="umb-forms__condition-select">
+                <div class="umb-forms__select">
+                    <select
+                        ng-model="model.fieldset.condition.actionType"
+                        ng-options="actionType.value as actionType.name for actionType in vm.actionTypes">
+                    </select>
+                </div>
+
+                <span>this fieldset if</span>
+
+                <div class="umb-forms__select">
+                    <select
+                        ng-model="model.fieldset.condition.logicType"
+                        ng-options="logicType.value as logicType.name for logicType in vm.logicTypes">
+                    </select>
+                </div>
+                <span>of the following match:</span>
+            </div>
+
+            <div ng-repeat="rule in model.fieldset.condition.rules" class="umb-forms-rule">
+                <div class="umb-forms-rule__cond">
+                    <div class="umb-forms__select">
+                        <select
+                            ng-model="rule.field"
+                            ng-options="field.id as field.caption for field in model.fields"
+                            ng-change="vm.conditionFieldSelected(rule.field, rule)"
+                            ng-init="vm.conditionFieldSelected(rule.field, rule)">
+                            <option value="">Select field</option>
+                        </select>
+                    </div>
+
+                    <div class="umb-forms__select">
+                        <select
+                            ng-model="rule.operator"
+                            ng-options="operator.value as operator.name for operator in vm.operators">
+                        </select>
+                    </div>
+
+                    <div class="umb-forms__select" ng-if="rule.$preValues">
+                        <select
+                            ng-model="rule.value"
+                            ng-options="preValue.value as preValue.value for preValue in rule.$preValues"
+                            ng-change="vm.rulePrevalueSelected(rule.value)">
+                        </select>
+                    </div>
+
+                    <div class="umb-forms__conditions-rule" ng-if="!rule.$preValues">
+                        <input type="text" ng-model="rule.value"/>
+                    </div>
+
+                    <a ng-click="vm.deleteConditionRule(model.fieldset.condition.rules,rule)">
+                        <i class="icon-trash"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <button class="umb-forms-button" ng-click="vm.addConditionRule(model.fieldset.condition)">
+                Add condition
+            </button>
+
+        </div>
+    </div>
+
+    <h5>
+        Columns
+    </h5>
+
+    <p>
+        Set how many columns you wish to have in your group. <br>
+        <strong>This group currently has {{ model.fieldset.containers.length }}</strong>
+    </p>
+
+    <div class="umb-forms__columns-template">
+
+        <div class="umb-forms__columns-template__form">
+            <div class="umb-forms__columns-template__column"
+                 ng-repeat="container in model.fieldset.containers">
+                 <a class="umb-forms__columns-template__remove" href="" ng-click="vm.removeColumn(container)" ng-if="model.fieldset.containers.length > 1">
+                     <i class="icon-wrong"></i>
+                 </a>
+            </div>
+        </div>
+
+        <button class="umb-forms-button" ng-click="vm.addColumn()">
+            Add column
+        </button>
+
+    </div>
+
+</div>

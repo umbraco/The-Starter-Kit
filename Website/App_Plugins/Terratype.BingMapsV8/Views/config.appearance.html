@@ -1,0 +1,136 @@
+﻿<div class="umb-el-wrap control-group">
+    <label for="terratype_{{identifier}}_bingmapsv8_variety_basic" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_basicMapLabel">Standard Map:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_basicMapDescription">Do you want to see the standard map</localize>
+        </small>
+    </label>
+    <div class="controls">
+        <input id="terratype_{{identifier}}_bingmapsv8_variety_basic" type="checkbox" ng-model="config().provider.variety.basic" ng-change="vm().provider.events.optionChange()" ng-disabled="config().provider.variety.satellite == false && config().provider.variety.terrain == false" />
+    </div>
+</div>
+<div class="umb-el-wrap control-group">
+    <label for="terratype_{{identifier}}_bingmapsv8_variety_satallite" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_satelliteMapLabel">Satellite Map:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_satelliteMapDescription">Do you want to see the satellite map</localize>
+        </small>
+    </label>
+    <div class="controls">
+        <input id="terratype_{{identifier}}_bingmapsv8_variety_satellite" type="checkbox" ng-model="config().provider.variety.satellite" ng-change="vm().provider.events.optionChange()" ng-disabled="config().provider.variety.basic == false && config().provider.variety.terrain == false" />
+    </div>
+</div>
+<div class="umb-el-wrap control-group">
+    <label for="terratype_{{identifier}}_bingmapsv8_variety_streetview" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_streetViewMapLabel">Street View:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_streetViewDescription">Do you want to see the Street View mode</localize>
+        </small>
+    </label>
+    <div class="controls">
+        <input id="terratype_{{identifier}}_bingmapsv8_variety_streetview" type="checkbox" ng-model="config().provider.variety.streetView" ng-change="vm().provider.events.optionChange()" ng-disabled="config().provider.variety.basic == false && config().provider.variety.terrain == false" />
+    </div>
+</div>
+<div class="umb-el-wrap control-group" ng-show="config().provider.variety.basic == true">
+    <label for="terratype_{{identifier}}_bingmapsv8_style" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_stylingLabel">Styling:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_stylingDescription">Predefined map styles</localize>
+        </small>
+    </label>
+    <div class="controls">
+        <select id="terratype_{{identifier}}_bingmapsv8_style" ng-model="config().provider.predefineStyling" class="umb-editor" ng-change="vm().provider.events.styleChange()">
+            <option value="road" terratype-translate="terratypeBingMapsV8ConfigAppearance_stylingStandard"></option>
+            <option value="roadVector2" terratype-translate="@terratypeBingMapsV8ConfigAppearance_stylingRoadVector2"></option>
+            <option value="canvasDark" terratype-translate="@terratypeBingMapsV8ConfigAppearance_stylingDark"></option>
+            <option value="canvasLight" terratype-translate="@terratypeBingMapsV8ConfigAppearance_stylingLight"></option>
+            <option value="grayscale" terratype-translate="@terratypeBingMapsV8ConfigAppearance_stylingGrayScale"></option>
+            <option value="ordnanceSurvey" terratype-translate="@terratypeBingMapsV8ConfigAppearance_stylingOrdnanceSurvey"></option>
+            <option value="roadVector1" terratype-translate="@terratypeBingMapsV8ConfigAppearance_stylingRoadVector1"></option>
+        </select>
+    </div>
+</div>
+
+<div class="umb-el-wrap control-group">
+    <label for="terratype_{{identifier}}_bingmapsv8_dashboard_enable" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_dashboardLabel">Navigation Control:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_dashboardDescription"></localize>
+        </small>
+    </label>
+    <div class="controls">
+        <input id="terratype_{{identifier}}_bingmapsv8_dashboard_enable" type="checkbox" ng-model="config().provider.dashboard.enable" ng-change="vm().provider.events.optionChange()" />
+    </div>
+</div>
+<div class="umb-el-wrap control-group" ng-show="config().provider.dashboard.enable == true">
+    <label for="terratype_{{identifier}}_bingmapsv8_breadcrumb_enable" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_breadcrumbLabel">Breadcrumb:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_breadcrumbDescription"></localize>
+        </small>
+    </label>
+    <div class="controls">
+        <input id="terratype_{{identifier}}_bingmapsv8_breadcrumb_enable" type="checkbox" ng-model="config().provider.breadcrumb.enable" ng-change="vm().provider.events.optionChange()" />
+    </div>
+</div>
+
+<div class="umb-el-wrap control-group" ng-show="config().provider.variety.basic == true || config().provider.variety.satellite == true">
+    <label for="terratype_{{identifier}}_bingmapsv8_scale_enable" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_scaleLabel">Scale:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_scaleDescription"></localize>
+        </small>
+    </label>
+    <div class="controls">
+        <input id="terratype_{{identifier}}_bingmapsv8_scale_enable" type="checkbox" ng-model="config().provider.scale.enable" ng-change="vm().provider.events.optionChange()" />
+    </div>
+</div>
+
+<div class="umb-el-wrap control-group">
+    <label for="terratype_{{identifier}}_bingmapsv8_showlabels" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_labelsLabel">Labels:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_labelsDescription"></localize>
+        </small>
+    </label>
+    <div class="controls">
+        <input id="terratype_{{identifier}}_bingmapsv8_showlabels" type="checkbox" ng-model="config().provider.showLabels" ng-change="vm().provider.events.optionChange()" />
+    </div>
+</div>
+
+<div class="umb-el-wrap control-group">
+    <label for="terratype_{{identifier}}_bingmapsv8_showtraffic" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_trafficLabel">Traffic:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_trafficDescription"></localize>
+        </small>
+    </label>
+    <div class="controls">
+        <input id="terratype_{{identifier}}_bingmapsv8_showtraffic" type="checkbox" ng-model="config().provider.traffic.enable" ng-change="vm().provider.events.optionChange()" />
+    </div>
+</div>
+
+<div class="umb-el-wrap control-group" ng-show="config().provider.traffic.enable == true">
+    <label for="terratype_{{identifier}}_bingmapsv8_showlegendtraffic" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_trafficLegendLabel">Traffic Legend:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_trafficLegendDescription"></localize>
+        </small>
+    </label>
+    <div class="controls">
+        <input id="terratype_{{identifier}}_bingmapsv8_showlegendtraffic" type="checkbox" ng-model="config().provider.traffic.legend" ng-change="vm().provider.events.optionChange()" />
+    </div>
+</div>
+
+<div class="umb-el-wrap control-group">
+    <label for="terratype_{{identifier}}_bingmapsv8_defaultlocation" class="control-label">
+        <localize key="terratypeBingMapsV8ConfigAppearance_positionLabel">Default location:</localize>
+        <small>
+            <localize key="terratypeBingMapsV8ConfigAppearance_positionDescription">Select the default location when displaying this map to a content editor</localize>
+        </small>
+    </label>
+    <div class="controls">
+        <ng-include src="vm().provider.events.files.views.editor.appearance">
+        </ng-include>
+    </div>
+</div>

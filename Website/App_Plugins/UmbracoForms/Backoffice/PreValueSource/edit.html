@@ -1,0 +1,67 @@
+﻿<form name="preValueSourceForm"
+      ng-controller="UmbracoForms.Editors.PreValueSource.EditController"
+      ng-show="loaded && security.userSecurity.managePreValueSources"
+      ng-submit="save()"
+      val-form-manager>
+    <umb-panel>
+        <umb-header>
+
+            <div class="span7">
+                <umb-content-name placeholder="@placeholders_entername"
+                                  ng-model="preValueSource.name" />
+            </div>
+
+            <div class="span5">
+                <div class="btn-toolbar pull-right umb-btn-toolbar">
+                    <umb-options-menu ng-show="currentNode"
+                                      current-node="currentNode"
+                                      current-section="{{currentSection}}">
+                    </umb-options-menu>
+                </div>
+            </div>
+        </umb-header>
+
+        <div class="umb-panel-body umb-scrollable row-fluid">
+            <div class="tab-content form-horizontal" style="padding-bottom: 90px">
+                <div class="umb-pane">
+
+
+
+                    <umb-control-group label="Type" description="Select the type of prevalue source">
+                        <select ng-model="preValueSource.fieldPreValueSourceTypeId" ng-options="type.id as type.name for type in types" ng-change="setType()">
+                            <option value="">-- choose type --</option>
+                        </select>
+                    </umb-control-group>
+
+                    
+                    <umb-control-group ng-repeat="setting in preValueSource.$type.settings" label="{{setting.name}}" description="{{setting.description}}">
+                        <div ng-include="setting.view"></div>
+                    </umb-control-group>
+
+                   
+                  
+                    
+                    <table ng-show="prevalues" class="table table-striped">
+                        <tr>
+                            <th>Id</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr ng-repeat="prevalue in prevalues">
+                            <td>{{prevalue.id}}</td>
+                            <td>{{prevalue.value}}</td>
+                        </tr>
+                    </table>
+                    <div class="umb-tab-buttons" detect-fold>
+                        <div class="btn-group">
+                            <button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
+                                <localize key="buttons_save">Save</localize>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </umb-panel>
+</form>

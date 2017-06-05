@@ -1,0 +1,30 @@
+<div ng-controller="UmbracoForms.Overlays.FieldTypePickerOverlayController as vm">
+
+    <!-- FILTER -->
+    <div class="umb-control-group -no-border">
+		<div class="form-search">
+			<i class="icon-search"></i>
+			<input type="text"
+				style="width: 100%"
+				ng-change="vm.filterItems()"
+				ng-model="vm.searchTerm"
+				class="umb-search-field search-query search-input input-block-level"
+				localize="placeholder"
+	            placeholder="@placeholders_filter"
+				umb-auto-focus>
+		</div>
+	</div>
+
+    <ul class="umb-card-grid" ng-mouseleave="vm.hideDetailsOverlay()">
+        <li	ng-repeat="fieldType in vm.fieldTypes | filter: vm.searchTerm"
+            ng-mouseover="vm.showDetailsOverlay(fieldType)"
+            ng-click="vm.pickFieldType(fieldType)"
+            class="-four-in-row">
+            <a class="umb-card-grid-item" href="" title="{{ fieldType.name }}">
+                <i ng-class="fieldType.icon"></i>
+                {{ fieldType.name }}
+            </a>
+        </li>
+    </ul>
+
+</div>

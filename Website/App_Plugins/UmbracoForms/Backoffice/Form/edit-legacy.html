@@ -1,0 +1,62 @@
+<form novalidate name="contentForm"
+      ng-controller="UmbracoForms.Editors.Form.EditLegacyController"
+      ng-show="ready && (security.userSecurity.manageForms && hasAccessToCurrentForm)"
+      ng-submit="save()"
+      val-form-manager>
+    <umb-panel>
+
+
+        <umb-header>
+            <div class="span7">
+                <umb-content-name
+                    placeholder="@placeholders_entername"
+                    ng-model="form.name"/>
+            </div>
+
+            <div class="span5">
+                <div class="btn-toolbar pull-right umb-btn-toolbar">
+
+                    <div class="btn-group">
+                        <!-- options button -->
+                        <a class="btn" href="#" prevent-default="" data-toggle="dropdown">
+                            <localize key="general_actions">Actions</localize>
+                            <span class="caret"></span>
+                        </a>
+
+                        <!-- actions -->
+                        <ul class="dropdown-menu umb-actions" role="menu" aria-labelledby="dLabel">
+                            <li class="action"><a href ng-click="editForm(form, 'validation')"><i class="icon icon-filter-arrows"></i> <span class="menu-label">Validation</span></a></li>
+                            <li class="action"><a href ng-click="editForm(form, 'styling')"><i class="icon icon-brush"></i> <span class="menu-label">Styling</span></a></li>
+                            <li class="action"><a href ng-click="editForm(form, 'submission')"><i class="icon icon-check"></i> <span class="menu-label">On submit</span></a></li>
+
+                            <li class="action sep" ng-if="saved"><a ng-href="{{entriesUrl}}"><i class="icon icon-inbox-full"></i> <span class="menu-label">Entries</span></a></li>
+                            <li class="action" ng-if="saved && security.userSecurity.manageWorkflows"><a ng-href="{{workflowsUrl}}"><i class="icon icon-mindmap"></i> <span class="menu-label">Workflows</span></a></li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+        </umb-header>
+
+
+        <div class="umb-panel-body umb-scrollable row-fluid">
+            <div class="tab-content form-horizontal" style="padding-bottom: 90px">
+
+                <div class="umb-pane">
+                    <umb-forms-designer ng-if="ready" form="form" currentPage="currentPage" fieldtypes="fieldtypes" prevaluesources="prevaluesources" />
+                </div>
+
+
+                <div class="umb-tab-buttons" style="padding-left:15px" detect-fold>
+                    <div class="btn-group">
+                        <button data-hotkey="ctrl+s" class="btn btn-success">
+                            <localize key="buttons_save">Save</localize>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </umb-panel>
+</form>

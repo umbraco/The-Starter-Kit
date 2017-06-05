@@ -1,0 +1,11 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Umbraco.Web;
+@{ var site = Model.Content.AncestorsOrSelf().Last();
+var selection = site.Children.Where("Visible");
+}
+<!-- uncomment this line if you don't want it to appear in the top navigation -->
+<a class="nav-link @Html.Raw(@Model.Content.Id == site.Id ? "navi-link--active" : "")" href="/">@CurrentPage.Site().Name</a>
+@foreach (var item in selection)
+{
+	<a class="nav-link @(item.IsAncestorOrSelf(Model.Content) ? "nav-link--active" : null)" href="@item.Url">@item.Name</a>
+}

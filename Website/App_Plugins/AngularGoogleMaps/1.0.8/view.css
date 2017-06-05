@@ -1,0 +1,30 @@
+﻿.AGM-Search {
+	margin-bottom: 5px;
+}
+
+.AGM-Map {
+	position: relative;
+	overflow: hidden;
+}
+
+.angular-google-map-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.AGM-Coord {
+	margin-top:5px;
+}
+
+.angulargoolemapsConfigIcon label {
+    width: 150px;
+    margin-top:3px;
+}
+
+.angulargoolemapsConfigIcon select, .angulargoolemapsConfigIcon input {
+    margin-bottom: 10px;
+}
+

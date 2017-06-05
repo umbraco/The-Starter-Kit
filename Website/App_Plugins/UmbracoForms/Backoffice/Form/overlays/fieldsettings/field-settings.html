@@ -1,0 +1,218 @@
+<div class="content-type-editor-dialog edit-property-settings" ng-controller="UmbracoForms.Overlays.FieldSettingsOverlay as vm">
+
+    <!-- Name -->
+    <div class="umb-control-group control-group">
+        <textarea
+            class="editor-label"
+            name="propertyLabel"
+            ng-model="model.field.caption"
+            placeholder="Enter question..."
+            umb-auto-focus
+            focus-on-filled="true"
+            umb-auto-resize
+            required
+            overlay-submit-on-enter>
+        </textarea>
+
+        <div class="umb-validation-label" val-msg-for="propertyLabel" val-toggle-msg="required">Required label</div>
+    </div>
+
+    <!-- Alias -->
+    <div class="umb-control-group control-group">
+        <umb-generate-alias
+            enable-lock="true"
+            alias-from="model.field.caption"
+            alias="model.field.alias">
+        </umb-generate-alias>
+    </div>
+
+    <!-- Description -->
+    <div class="umb-control-group control-group">
+        <textarea
+            class="editor-description"
+            ng-model="model.field.tooltip"
+            placeholder="Enter help text..."
+            overlay-submit-on-enter
+            umb-auto-resize>
+        </textarea>
+    </div>
+
+    <!-- Field type -->
+    <div class="editor-wrapper umb-control-group control-group" ng-model="model.field.fieldTypeId" val-require-component>
+
+        <a href="" ng-if="!model.field.fieldTypeId" class="editor-placeholder" ng-click="vm.openFieldTypePickerOverlay(model.field)">Choose answer type</a>
+
+        <div class="editor clearfix" ng-if="model.field.fieldTypeId">
+
+            <a href="" class="editor-icon-wrapper" ng-click="vm.openFieldTypePickerOverlay(model.field)">
+               <i class="icon {{ model.field.$fieldType.icon }}" ng-class="{'icon-autofill': model.field.$fieldType.icon == null}"></i>
+            </a>
+
+            <div class="editor-details">
+               <a href="" class="editor-name" ng-click="vm.openFieldTypePickerOverlay(model.field)">{{ model.field.$fieldType.name }}</a>
+               <a href="" class="editor-editor" ng-click="vm.openFieldTypePickerOverlay(model.field)">{{ model.field.$fieldType.description }}</a>
+            </div>
+
+         </div>
+
+    </div>
+
+    <!-- Field type settings -->
+    <div class="umb-control-group" ng-if="model.field.$fieldType.supportsPrevalues">
+        <h5>Prevalues</h5>
+        <div class="umb-property">
+
+            <div class="control-group umb-control-group" ng-if="model.field.prevalueSourceId == null || model.field.prevalueSourceId == '00000000-0000-0000-0000-000000000000'">
+                <label class="control-label">Items</label>
+                <umb-forms-prevalue-editor ng-model="model.field.preValues" />
+            </div>
+
+            <div class="control-group umb-control-group" ng-if="model.prevalueSources">
+                <label class="control-label">Prevalue source</label>
+                <select ng-model="model.field.prevalueSourceId" ng-change="vm.getPrevalues(model.field)">
+                    <option value="00000000-0000-0000-0000-000000000000" ng-selected="model.field.prevalueSourceId == '00000000-0000-0000-0000-000000000000'">Choose...</option>
+                    <option ng-repeat="source in model.prevalueSources" value="{{source.id}}" ng-selected="model.field.prevalueSourceId == source.id">{{source.name}}</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="umb-control-group" ng-if="model.field.$fieldType.settings.length > 0">
+        <h5>Settings</h5>
+        <div class="umb-property">
+            <div class="control-row" ng-repeat="setting in model.field.$fieldType.settings">
+                <div class="control-group umb-control-group -no-border">
+                    <label class="control-label">{{setting.name}}</label>
+                    <div ng-include="setting.view"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Validation -->
+    <div class="umb-control-group">
+
+        <h5>Mandatory</h5>
+
+        <label class="checkbox no-indent">
+            <input type="checkbox" ng-model="model.field.mandatory" focus-when="{{vm.focusOnMandatoryField}}">
+            <localize key="validation_fieldIsMandatory"></localize>
+        </label>
+
+        <input class="-full-width-input" type="text" ng-if="model.field.mandatory" ng-model="model.field.requiredErrorMessage" placeholder="Enter a field mandatory message...">
+
+    </div>
+
+    <div class="umb-control-group" ng-if="model.field.$fieldType.supportsRegex">
+
+        <h5>Validation</h5>
+
+        <select class="umb-dropdown" ng-options="validationType.name for validationType in vm.validationTypes" ng-model="vm.selectedValidationType" ng-change="vm.changeValidationType(vm.selectedValidationType)">
+            <option value="">Validation</option>
+        </select>
+
+        <textarea
+            class="editor-validation-pattern"
+            placeholder="Enter a regular expression"
+            ng-model="model.field.regex"
+            ng-change="vm.changeValidationPattern()"
+            ng-if="vm.showValidationPattern"
+            umb-auto-resize
+            focus-when="{{vm.focusOnPatternField}}"
+            overlay-submit-on-enter>
+        </textarea>
+
+        <div ng-if="model.field.regex">
+            <input class="-full-width-input" type="text" ng-model="model.field.invalidErrorMessage" placeholder="Enter a field invalid message...">
+        </div>
+
+    </div>
+
+    <div class="umb-control-group">
+        <h5>Conditions</h5>
+
+        <div class="umb-forms__conditions">
+
+            <div class="control-group umb-control-group">
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="model.field.condition.enabled">
+                    Enable conditions
+                </label>
+            </div>
+
+            <div
+                class="control-group umb-control-group"
+                ng-show="model.field.condition.enabled">
+
+                <div class="umb-forms__condition-select">
+                    <div class="umb-forms__select">
+                        <select
+                            ng-model="model.field.condition.actionType"
+                            ng-options="actionType.value as actionType.name for actionType in vm.actionTypes">
+                        </select>
+                    </div>
+                    <span>this field if</span>
+                    <div class="umb-forms__select">
+                        <select
+                            ng-model="model.field.condition.logicType"
+                            ng-options="logicType.value as logicType.name for logicType in vm.logicTypes">
+                        </select>
+                    </div>
+                    <span>of the following match:</span>
+                </div>
+
+                <div ng-repeat="rule in model.field.condition.rules" class="umb-forms-rule">
+                    <div class="umb-forms-rule__cond">
+                        <div class="umb-forms__select">
+                            <select
+                                ng-model="rule.field"
+                                ng-options="field.id as field.caption for field in vm.fieldConditions"
+                                ng-change="vm.conditionFieldSelected(rule.field, rule)"
+                                ng-init="vm.conditionFieldSelected(rule.field, rule)">
+                                <option value="">Select field</option>
+                            </select>
+                        </div>
+
+                        <div class="umb-forms__select">
+                            <select
+                                ng-model="rule.operator"
+                                ng-options="operator.value as operator.name for operator in vm.operators">
+                            </select>
+                        </div>
+
+                        <div class="umb-forms__select" ng-if="rule.$preValues">
+                            <select
+                                ng-model="rule.value"
+                                ng-options="preValue.value as preValue.value for preValue in rule.$preValues"
+                                ng-change="vm.rulePrevalueSelected(rule.value)">
+                            </select>
+                        </div>
+
+                        <div class="umb-forms__conditions-rule" ng-if="!rule.$preValues">
+                            <input  type="text" ng-model="rule.value"/>
+                        </div>
+
+                        <a href="" ng-click="vm.deleteConditionRule(model.field.condition.rules,rule)">
+                            <i class="icon-trash"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <button class="umb-forms-button" ng-click="vm.addConditionRule(model.field.condition)">
+                    Add condition
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <umb-overlay
+       ng-if="vm.fieldTypePickerOverlay.show"
+       model="vm.fieldTypePickerOverlay"
+       position="right"
+       view="vm.fieldTypePickerOverlay.view">
+    </umb-overlay>
+
+</div>

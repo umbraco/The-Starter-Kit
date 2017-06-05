@@ -1,0 +1,165 @@
+﻿<div ng-disabled="vm().provider.status.loading" ng-show="store().position.id">
+    <div class="umb-el-wrap control-group">
+        <div ng-show="!config().provider || !config().provider.mapSources || config().provider.mapSources.length == 0" style="">
+            <label ng-click="vm().provider.events.mapSourceAddRow();vm().provider.events.mapSourceToggleRow(0, true)" style="cursor:pointer;">
+                <i class="icon icon-add">
+                </i>
+                <localize key="terratypeLeafletV1ConfigDefinition_mapSourceAdd">Add a Map Source</localize>
+            </label>
+        </div>
+        <div ng-repeat="l in config().provider.mapSources track by $index" style="border-bottom:1px dashed #dddddd;margin-bottom:5px;" ng-class="{'error': !vm().provider.events.mapSourceValid(l)}">
+            <div>
+                <div class="terratype-header" ng-click="vm().provider.events.mapSourceToggleRow($index)" style="min-width:180px;height:30px;float:left;cursor:pointer;">
+                    <div ng-class="(vm().provider.mapSources[$index].show) ? 'terratype-caret-open' : 'terratype-caret-close'">
+                    </div>
+                    <span class="header">
+                        {{l.minZoom}}-{{l.maxZoom}} {{vm().provider.events.mapSourceById[l.mapSource.id].name}} {{vm().provider.events.tileServerById[l.tileServer.id].name}}
+                    </span>
+                </div>
+                <div style="float:right;cursor:pointer;color:#ddd;">
+                    <i class="icon icon-delete" ng-click="vm().provider.events.mapSourceDeleteRow($index)" localize="title" title="@terratypeLeafletV1ConfigDefinition_mapSourceDeleteTitle"></i>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div class="terratype-content" id="terratype_{{identifier}}_leafletv1_mapSources_{{$index}}" ng-show="vm().provider.mapSources[$index].show" style="margin-left:10px;">
+                <div class="umb-el-wrap control-group">
+                    <label for="terratype_{{identifier}}_leafletv1_mapSource_{{$index}}" class="control-label">
+                        <localize key="terratypeLeafletV1ConfigDefinition_mapSourceLabel">Map Source:</localize>
+                        <small>
+                            <localize key="terratypeLeafletV1ConfigDefinition_mapSourceDescription">Organisations or companies that delivers map based data compatible with Leaflet V1</localize>
+                        </small>
+                    </label>
+                    <div class="controls">
+                        <select id="terratype_{{identifier}}_leafletv1_mapSource_{{$index}}" ng-model="config().provider.mapSources[$index].mapSource.id" class="umb-editor" ng-options="p.id as p.name for p in vm().provider.events.mapSourceByCoordinateSystem[store().position.id] | orderBy: 'p.name'"></select>
+                        <div ng-show="l.mapSource.id">
+                            <small ng-bind-html="vm().provider.events.mapSourceById[l.mapSource.id].description">
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="umb-el-wrap control-group" ng-show="l.mapSource.id">
+                    <label for="terratype_{{identifier}}_leafletv1_tileServer_{{$index}}" class="control-label">
+                        <localize key="terratypeLeafletV1ConfigDefinition_tileServerLabel">Tile Server:</localize>
+                        <small>
+                            <localize key="terratypeLeafletV1ConfigDefinition_tileServerDescription">Server</localize>
+                        </small>
+                    </label>
+                    <div class="controls">
+                        <select id="terratype_{{identifier}}_leafletv1_tileServer_{{$index}}" ng-model="config().provider.mapSources[$index].tileServer.id" class="umb-editor" ng-options="p.id as p.name for p in vm().provider.events.tileServerByCoordinateSystemAndMapSource[store().position.id][l.mapSource.id] | orderBy: 'p.name'" ng-change="vm().provider.events.mapSourceMinZoomBind(null, $index);vm().provider.events.mapSourceMaxZoomBind(null, $index);vm().provider.events.mapSourceTestImageBind(vm().provider.events.tileServerById[l.tileServer.id].minZoom, $index)"></select>
+                        <div ng-show="l.tileServer.id && !vm().provider.events.tileServerByCoordinateSystemAndId[store().position.id + '.' + l.tileServer.id]">
+                            <small style="color:red;">
+                                <localize key="terratypeLeafletV1ConfigDefinition_tileServerInvalidCoordinateSystem"></localize>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="umb-el-wrap control-group" ng-show="l.mapSource.id && vm().provider.events.mapSourceById[l.mapSource.id].key.enable == true">
+                    <label for="terratype_{{identifier}}_leafletv1_key_{{$index}}" class="control-label">
+                        <span ng-bind-html="vm().provider.events.mapSourceById[l.mapSource.id].key.name"></span>
+                        <small ng-bind-html="vm().provider.events.mapSourceById[l.mapSource.id].key.description">
+                        </small>
+                    </label>
+                    <div class="controls">
+                        <input id="terratype_{{identifier}}_leafletv1_key_{{$index}}" type="text" ng-model="config().provider.mapSources[$index].key" class="umb-editor umb-textstring textstring" placeholder="{{vm().provider.events.mapSourceById[l.mapSource.id].key.placeholder}}" spellcheck="false" />
+                        <div>
+                            <div ng-bind-html="vm().provider.events.mapSourceById[l.mapSource.id].key.url">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="config().provider.mapSources[$index].tileServer.id">
+                    <div class="umb-el-wrap control-group">
+                        <label for="terratype_{{identifier}}_leafletv1_minZoom_{{$index}}" class="control-label">
+                            <localize key="terratypeLeafletV1ConfigDefinition_minZoomLabel">Min Zoom:</localize>
+                            <small>
+                                <localize key="terratypeLeafletV1ConfigDefinition_minZoomDescription">Minimum zoom</localize>
+                            </small>
+                        </label>
+                        <div class="controls">
+                            <div>
+                                <input type="range" ng-model="vm().provider.mapSources[$index].minZoom" id="terratype_{{identifier}}_leafletv1_minZoom_{{$index}}" min="{{vm().provider.events.tileServerById[l.tileServer.id].minZoom}}" max="{{vm().provider.events.tileServerById[l.tileServer.id].maxZoom}}" style="float:left;" ng-change="vm().provider.events.mapSourceMinZoomBind(vm().provider.mapSources[$index].minZoom, $index);" ng-mousemove="vm().provider.events.mapSourceMinZoomBindIE('terratype_' + identifier + '_leafletv1_minZoom_' + $index, $index);">
+                                <div style="width:3em;float:left;margin-left:5px;">
+                                    <input type="number" ng-model="config().provider.mapSources[$index].minZoom" class="umb-editor" style="width:3em;" maxlength="2" ng-change="vm().provider.events.mapSourceMinZoomBind(config().provider.mapSources[$index].minZoom, $index);" />
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div ng-show="l.minZoom && (l.minZoom < vm().provider.events.tileServerById[l.tileServer.id].minZoom || l.minZoom > vm().provider.events.tileServerById[l.tileServer.id].maxZoom)">
+                                <small style="color:red;">
+                                    <span terratype-translate="terratypeLeafletV1ConfigDefinition_minZoomError"></span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="umb-el-wrap control-group">
+                        <label for="terratype_{{identifier}}_leafletv1_maxZoom_{{$index}}" class="control-label">
+                            <localize key="terratypeLeafletV1ConfigDefinition_maxZoomLabel">Max Zoom:</localize>
+                            <small>
+                                <localize key="terratypeLeafletV1ConfigDefinition_maxZoomDescription">Maximum zoom</localize>
+                            </small>
+                        </label>
+                        <div class="controls">
+                            <div>
+                                <input type="range" ng-model="vm().provider.mapSources[$index].maxZoom" id="terratype_{{identifier}}_leafletv1_maxZoom_{{$index}}" min="{{vm().provider.events.tileServerById[l.tileServer.id].minZoom}}" max="{{vm().provider.events.tileServerById[l.tileServer.id].maxZoom}}" style="float:left;" ng-change="vm().provider.events.mapSourceMaxZoomBind(vm().provider.mapSources[$index].maxZoom, $index);" ng-mousemove="vm().provider.events.mapSourceMaxZoomBindIE('terratype_' + identifier + '_leafletv1_maxZoom_' + $index, $index);">
+                                <div style="width:3em;float:left;margin-left:5px;">
+                                    <input type="number" ng-model="config().provider.mapSources[$index].maxZoom" class="umb-editor" style="width:3em;" maxlength="2" ng-change="vm().provider.events.mapSourceMaxZoomBind(config().provider.mapSources[$index].maxZoom, $index);" />
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div ng-show="l.maxZoom && (l.maxZoom < vm().provider.events.tileServerById[l.tileServer.id].minZoom || l.maxZoom > vm().provider.events.tileServerById[l.tileServer.id].maxZoom)">
+                                <small style="color:red;">
+                                    <span terratype-translate="terratypeLeafletV1ConfigDefinition_maxZoomError"></span>
+                                </small>
+                            </div>
+                            <div ng-show="l.maxZoom < l.minZoom">
+                                <small style="color:red;">
+                                    <localize key="terratypeLeafletV1ConfigDefinition_maxZoomInvalid"></localize>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="umb-el-wrap control-group" ng-if="vm().provider.events.mapSourceValid(l)">
+                    <label for="terratype_{{identifier}}_leafletv1_imagetest_{{$index}}" class="control-label">
+                        <localize key="terratypeLeafletV1ConfigDefinition_imagetestLabel">Image Test:</localize>
+                        <small>
+                            <localize key="terratypeLeafletV1ConfigDefinition_imageDescription">Why image test</localize>
+                        </small>
+                    </label>
+                    <div class="controls">
+                        <div>
+                            <img ng-src="{{vm().provider.events.mapSourceImageTest($index)}}" style="width:256px;height:256px;" />
+                        </div>
+                        <div style="margin-top:5px;">
+                            <input type="range" ng-model="vm().provider.mapSources[$index].testImageRange" id="terratype_{{identifier}}_leafletv1_imagetest_{{$index}}" min="{{config().provider.mapSources[$index].minZoom}}" max="{{config().provider.mapSources[$index].maxZoom}}" ng-change="vm().provider.events.mapSourceTestImageBind(vm().provider.mapSources[$index].testImageRange, $index)" ng-mousemove="vm().provider.events.mapSourceTestImageBindIE('terratype_' + identifier + '_leafletv1_imagetest_' + $index, $index);">
+                            <input type="number" ng-model="vm().provider.mapSources[$index].testImage" style="width:3em;" maxlength="2" ng-change="vm().provider.events.mapSourceTestImageBind(vm().provider.mapSources[$index].testImage, $index)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="config().provider && config().provider.mapSources && config().provider.mapSources.length != 0" style="">
+            <div ng-click="vm().provider.events.mapSourceOrderRows();vm().provider.events.mapSourceAddRow();vm().provider.events.mapSourceToggleRow(config().provider.mapSources.length - 1, true)">
+                <i class="icon icon-add">
+                </i>
+                <label>
+                    <localize key="terratypeLeafletV1ConfigDefinition_mapSourceAddAnother">Add a Map Source</localize>
+                </label>
+            </div>
+        </div>
+
+        <div class="umb-el-wrap control-group" ng-show="vm().provider.events.mapSourceValid()" style="margin-top:20px;">
+            <label class="control-label">
+            </label>
+            <div class="controls">
+                <button type="button" ng-click="vm().provider.events.reload()" localize="title" title="@terratypeLeafletV1ConfigDefinition_retryTitle"><localize key="terratypeLeafletV1ConfigDefinition_retryLabel">Retry</localize></button>
+            </div>
+        </div>
+
+        <div style="margin-top:10px;padding:10px;background-color:#efefef;border:1px solid #dddddd">
+            <small>
+                <localize key="terratypeLeafletV1ConfigDefinition_mapSourceMessage"></localize>
+            </small>
+        </div>
+    </div>
+
+</div>

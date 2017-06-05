@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+	
+	
+@if (Model.MacroParameters["FormGuid"] != null)
+{
+    var s = Model.MacroParameters["FormGuid"].ToString();
+    var g = new Guid(s);
+
+    var recordGuid = Guid.Empty;
+
+    if (string.IsNullOrEmpty(Request.QueryString["recordId"]) == false)
+    {
+        Guid.TryParse(Request.QueryString["recordId"], out recordGuid);
+    }
+	Html.RenderAction("Render", "UmbracoForms", new {formId = g, mode = "form"});
+}

@@ -1,0 +1,19 @@
+﻿<div ng-controller="AGM81b046644d304191a1413398692df1d6ctrl">
+	<div id="AGM_{{model.alias}}_map" ng-style="model.height" ng-hide="model.hideMap" class="AGM-Map">
+		<ui-gmap-google-map center="map.center"
+							zoom="map.zoom"
+							options="map.options"
+							dragging="map.dragging"
+							control="map.control"
+							events="map.events"
+							refresh="map.refresh">
+			<ui-gmap-search-box template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
+			<ui-gmap-marker coords="map.marker" options="map.marker.options" events="map.marker.events" idkey="map.marker.id" icon="map.marker.icon"></ui-gmap-marker>
+		</ui-gmap-google-map>
+	</div>
+
+	<div class="AGM-Coord">
+		<input type="text" id="AGM_{{model.alias}}_coords" class="umb-editor umb-textstring textstring" placeholder="latitude (-90.0 to 90.0), longitude (-180.0 to 180.0), zoom (1 to 20)" ng-model="model.value" ng-change="checkCoords()" ng-style="model.forecolor" />
+	</div>
+</div>
+

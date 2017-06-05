@@ -1,0 +1,38 @@
+<div ng-controller="UmbracoForms.Overlays.WorkflowTypesOverlayController as vm">
+
+    <!-- FILTER -->
+    <div class="umb-control-group -no-border">
+		<div class="form-search">
+			<i class="icon-search"></i>
+			<input type="text"
+				style="width: 100%"
+				ng-change="vm.filterItems()"
+				ng-model="vm.searchTerm"
+				class="umb-search-field search-query search-input input-block-level"
+				localize="placeholder"
+	            placeholder="@placeholders_filter"
+				umb-auto-focus>
+		</div>
+	</div>
+
+
+    <ul class="umb-card-grid" ng-mouseleave="vm.hideDetailsOverlay()">
+        <li	ng-repeat="workflowType in vm.workflowTypes | filter: vm.searchTerm | orderBy:'name'"
+            ng-mouseover="vm.showDetailsOverlay(workflowType)"
+            ng-click="vm.pickWorkflowType(workflowType)"
+            class="-three-in-row">
+            <a class="umb-card-grid-item" href="" title="{{ workflowType.name }}">
+                <i class="{{ workflowType.icon }}"></i>
+                {{ workflowType.name }}
+            </a>
+        </li>
+    </ul>
+
+    <umb-overlay
+        ng-if="vm.workflowSettingsOverlay.show"
+        model="vm.workflowSettingsOverlay"
+        view="vm.workflowSettingsOverlay.view"
+        position="right">
+    </umb-overlay>
+
+</div>
