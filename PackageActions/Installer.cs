@@ -24,22 +24,19 @@ namespace Umbraco.SampleSite.Installer
             var dataTypeService = ApplicationContext.Current.Services.DataTypeService;
             var macroService = ApplicationContext.Current.Services.MacroService;
             var fileService = ApplicationContext.Current.Services.FileService;
-
-
-            IMedia mediaRoot = mediaService.GetById(-1);
-            IContent contentHome = contentService.GetRootContent().FirstOrDefault<IContent>();
-
+            var doctypeService = ApplicationContext.Current.Services.ContentTypeService;
+            
             // check if forms is installed
             var formMacro = macroService.GetByAlias("renderUmbracoForm");
             if (formMacro == null)
             {
                 // find the doctype and change the form chooser property type
-                var doctypeService = ApplicationContext.Current.Services.ContentTypeService;
+                
                 var contactFormType = doctypeService.GetContentType("contact");
                 if (contactFormType != null)
                 {
                     var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == "contactForm");
-                    var labelDataType = dataTypeService.GetAllDataTypeDefinitions().First<IDataTypeDefinition>(x => x.Name == "Label");
+                    var labelDataType = dataTypeService.GetDataTypeDefinitionByName("Label");
                     if (labelDataType != null && formPicker != null)
                     {
                         formPicker.DataTypeDefinitionId = labelDataType.Id;
@@ -54,7 +51,7 @@ namespace Umbraco.SampleSite.Installer
                     var templateContent = contactView.Content;
                     if (string.IsNullOrWhiteSpace(templateContent) == false)
                     {
-                        templateContent = templateContent.Replace(PRE_INSTALL_CONTACT_FORM_HTML, POST_INSTALL_CONTACT_FORM_HTML);
+                        templateContent = templateContent.Replace(PreInstallContactFormHtml, PostInstallContactFormHtml);
                         contactView.Content = templateContent;
                         fileService.SaveTemplate(contactView);
                     }
@@ -76,21 +73,30 @@ namespace Umbraco.SampleSite.Installer
                     }
                 }
             }
-            // update default design 
-            contentHome.SetValue("colorTheme", getPreValueId(dataTypeService, "Home - Color Theme - Radio button list", "earth"));
-            contentHome.SetValue("font", getPreValueId(dataTypeService, "Home - Font - Radio button list", "serif"));
+            
+            var contentHome = contentService.GetRootContent().FirstOrDefault(x => x.ContentType.Alias == "home");
+            if (contentHome != null)
+            {
+                // update default design 
+                contentHome.SetValue("colorTheme", GetPreValueId(dataTypeService, "Home - Color Theme - Radio button list", "earth"));
+                contentHome.SetValue("font", GetPreValueId(dataTypeService, "Home - Font - Radio button list", "serif"));
+            }
 
             // update default currency pre value
             IContent productContent = contentService.GetById(new Guid("485343b1-d99c-4789-a676-e9b4c98a38d4"));
-            productContent.SetValue("defaultCurrency", (object)this.getPreValueId(dataTypeService, "Products - Default Currency - Dropdown list", "€"));
+            if (productContent != null)
+            {
+                productContent.SetValue("defaultCurrency", (object)this.GetPreValueId(dataTypeService, "Products - Default Currency - Dropdown list", "€"));
+            }
 
             // create media folders
-            this.createMediaItem(mediaService, -1, "folder", new Guid("b6f11172-373f-4473-af0f-0b0e5aefd21c"), "Design", string.Empty, true);
-            this.createMediaItem(mediaService, -1, "folder", new Guid("1fd2ecaf-f371-4c00-9306-867fa4585e7a"), "People", string.Empty, true);
-            this.createMediaItem(mediaService, -1, "folder", new Guid("6d5bf746-cb82-45c5-bd15-dd3798209b87"), "Products", string.Empty, true);
+            this.CreateMediaItem(mediaService, -1, "folder", new Guid("b6f11172-373f-4473-af0f-0b0e5aefd21c"), "Design", string.Empty, true);
+            this.CreateMediaItem(mediaService, -1, "folder", new Guid("1fd2ecaf-f371-4c00-9306-867fa4585e7a"), "People", string.Empty, true);
+            this.CreateMediaItem(mediaService, -1, "folder", new Guid("6d5bf746-cb82-45c5-bd15-dd3798209b87"), "Products", string.Empty, true);
 
             // create media
-            IEnumerable<IMedia> rootMedia = mediaService.GetRootMedia();
+            IMedia mediaRoot = mediaService.GetById(-1);
+            IEnumerable<IMedia> rootMedia = mediaService.GetRootMedia().ToArray();
             try
             {
                 if (xmlData.HasChildNodes)
@@ -100,7 +106,7 @@ namespace Umbraco.SampleSite.Installer
                         IMedia media1 = mediaRoot;
                         foreach (IMedia media2 in rootMedia)
                         {
-                            if (media2.Name.ToLower() == selectNode.Attributes["folder"].Value.ToLower())
+                            if (media2.Name.InvariantEquals(selectNode.Attributes["folder"].Value))
                                 media1 = media2;
                         }
 
@@ -109,7 +115,7 @@ namespace Umbraco.SampleSite.Installer
                             string.IsNullOrWhiteSpace(selectNode.Attributes["key"].Value) == false
                             ? Guid.Parse(selectNode.Attributes["key"].Value)
                             : Guid.Empty;
-                        int mediaItem = createMediaItem(mediaService, media1.Id, "image", key, selectNode.Attributes["name"].Value, selectNode.Attributes["path"].Value, false);
+                        int mediaItem = CreateMediaItem(mediaService, media1.Id, "image", key, selectNode.Attributes["name"].Value, selectNode.Attributes["path"].Value, false);
                     }
                 }
             }
@@ -118,8 +124,11 @@ namespace Umbraco.SampleSite.Installer
                 LogHelper.Error<InstallPackageAction>("Error during post processing of Starter Kit", ex);
             }
 
-            // publish everything (moved here due to Deploy dependency checking
-            contentService.PublishWithChildrenWithStatus(contentHome, 0, true);
+            if (contentHome != null)
+            {
+                // publish everything (moved here due to Deploy dependency checking)
+                contentService.PublishWithChildrenWithStatus(contentHome, 0, true);
+            }
 
             return true;
         }
@@ -139,13 +148,13 @@ namespace Umbraco.SampleSite.Installer
             return umbraco.cms.businesslogic.packager.standardPackageActions.helper.parseStringToXmlNode("<Action runat=\"install\" undo=\"false\" alias=\"SampleSiteInitialContent\"><mediaItem folder=\"\" name=\"\" path=\"\" updateDocPath=\"\" updatePropertyAlias=\"\" /></Action>");
         }
 
-        private int getPreValueId(IDataTypeService dts, string dataTypeName, string preValueText)
+        private int GetPreValueId(IDataTypeService dts, string dataTypeName, string preValueText)
         {
             IDataTypeDefinition dataTypeDefinition = dts.GetAllDataTypeDefinitions().First<IDataTypeDefinition>((Func<IDataTypeDefinition, bool>)(x => x.Name == dataTypeName));
             return dts.GetPreValuesCollectionByDataTypeId(dataTypeDefinition.Id).PreValuesAsDictionary.Where<KeyValuePair<string, PreValue>>((Func<KeyValuePair<string, PreValue>, bool>)(d => d.Value.Value == preValueText)).Select<KeyValuePair<string, PreValue>, int>((Func<KeyValuePair<string, PreValue>, int>)(f => f.Value.Id)).First<int>();
         }
 
-        private int createMediaItem(IMediaService service, int parentFolder, string nodeTypeAlias, Guid key, string nodeName, string mediaPath, bool checkForDuplicate = false)
+        private int CreateMediaItem(IMediaService service, int parentFolder, string nodeTypeAlias, Guid key, string nodeName, string mediaPath, bool checkForDuplicate = false)
         {
             bool flag = false;
             IMedia media1 = (IMedia)null;
