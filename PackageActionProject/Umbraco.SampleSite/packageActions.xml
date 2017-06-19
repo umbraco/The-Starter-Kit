@@ -1,0 +1,16 @@
+﻿<Action runat="install" undo="false" alias="SampleSiteInitialContent">
+  <mediaItem folder="design" name="Umbraco Campari Meeting Room" path="/media/1030/16403439029_f500be349b_o.jpg" key="3d758b1f-24ec-47b0-a75c-225b0444991b" updateDocPath="//home" updatePropertyAlias="heroBackgroundImage" />
+  <mediaItem folder="products" name="Biker Jacket" path="/media/1001/4730684907_8a7f8759cb_b.jpg" key="208abda1-63b5-4ba1-bc2a-3d40fe156bb6" updateDocPath="//product [@nodeName = 'Biker Jacket']" updatePropertyAlias="photos" />
+  <mediaItem folder="products" name="Tattoo" path="/media/1012/7371127652_e01b6ab56f_b.jpg" key="ce075369-df3d-426f-972a-36b355fd535f" updateDocPath="//product [@nodeName = 'Tattoo']" updatePropertyAlias="photos" />
+  <mediaItem folder="products" name="Unicorn" path="/media/1016/14272036539_469ca21d5c_h.jpg" key="7239dc96-6ea1-418e-9a6e-4caa9a8014fa" updateDocPath="//product [@nodeName = 'Unicorn']" updatePropertyAlias="photos" />
+  <mediaItem folder="products" name="Ping Pong Ball" path="/media/1011/5852022211_9028df67c0_b.jpg" key="57643398-d917-4b93-bc71-e9c3038a0abc" updateDocPath="//product [@nodeName = 'Ping Pong Ball']" updatePropertyAlias="photos" />
+  <mediaItem folder="products" name="Bowling Ball" path="/media/1010/5852022091_87c5d045ab_b.jpg" key="dbce2b92-a00a-4aa2-9e16-ca9bb4c2c712" updateDocPath="//product [@nodeName = 'Bowling Ball']" updatePropertyAlias="photos" />
+  <mediaItem folder="products" name="Jumpsuit" path="/media/1015/7377957524_347859faac_b.jpg" key="e415f0b7-5dcd-4a99-ab99-82eba3a1cc00" updateDocPath="//product [@nodeName = 'Jumpsuit']" updatePropertyAlias="photos" />
+  <mediaItem folder="products" name="Banjo" path="/media/1014/7373036290_5e8420bf36_b.jpg" key="10d1d7ab-3774-482f-b621-a6ef396104bc" updateDocPath="//product [@nodeName = 'Banjo']" updatePropertyAlias="photos" />
+  <mediaItem folder="products" name="Knitted West" path="/media/1013/7373036208_30257976a0_b.jpg" key="f450c238-accb-42b3-9532-473407359a24" updateDocPath="//product [@nodeName = 'Knitted West']" updatePropertyAlias="photos" />
+  <mediaItem folder="people" name="Jan Skovgaard" path="/media/1006/18720470241_ff77768544_h.jpg" key="c28e5b4b-54af-44d8-9eb9-7eff7253f546" updateDocPath="//person [@nodeName = 'Jan Skovgaard']" updatePropertyAlias="photo" />
+  <mediaItem folder="people" name="Matt Brailsford" path="/media/1003/18531852339_981b067419_h.jpg" key="8319cfa9-910a-4100-8064-a1c3b648cb60" updateDocPath="//person [@nodeName = 'Matt Brailsford']" updatePropertyAlias="photo" />
+  <mediaItem folder="people" name="Lee Kelleher" path="/media/1004/18531854019_351c579559_h.jpg" key="def8b962-2107-486d-b2d6-5be3639a6c31" updateDocPath="//person [@nodeName = 'Lee Kelleher']" updatePropertyAlias="photo" />
+  <mediaItem folder="people" name="Jeavon Leopold" path="/media/1002/18095416144_44a566a5f4_h.jpg" key="981014a4-f0b9-46db-aa91-87cf2027f6e0" updateDocPath="//person [@nodeName = 'Jeavon Leopold']" updatePropertyAlias="photo" />
+  <mediaItem folder="people" name="Jeroen Breuer" path="/media/1005/18530280048_459b8b61b2_h.jpg" key="fcc18600-8f9b-4995-8954-3cb0d335faf1" updateDocPath="//person [@nodeName = 'Jeroen Breuer']" updatePropertyAlias="photo" />
+</Action>

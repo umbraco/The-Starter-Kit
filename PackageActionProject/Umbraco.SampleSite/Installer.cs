@@ -14,6 +14,8 @@ namespace Umbraco.SampleSite.Installer
 {
     public class InstallPackageAction : IPackageAction
     {
+        public static string PRE_INSTALL_CONTACT_FORM_HTML = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()})";
+        public static string POST_INSTALL_CONTACT_FORM_HTML = "<p>You can get a contact form appearing here by installing Umbraco Forms.<br /> <a href=\"/umbraco/#/forms\" class=\"button button--border--solid\">Go to Back Office and install Forms</a>" + Environment.NewLine + "<!-- When Umbraco Forms is installed, uncomment this line -->" + Environment.NewLine + "@* @Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()}) *@";
         public bool Execute(string packageName, XmlNode xmlData)
         {
             var contentService = ApplicationContext.Current.Services.ContentService;
@@ -51,8 +53,7 @@ namespace Umbraco.SampleSite.Installer
                     var templateContent = contactView.Content;
                     if (string.IsNullOrWhiteSpace(templateContent) == false)
                     {
-                        templateContent = templateContent.Replace("@Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()})",
-                            "<p>You can get a contact form appearing here by installing Umbraco Forms.<br /> <a href=\"/umbraco/#/forms\" class=\"button button--border--solid\">Go to Back Office and install Forms</a>" + Environment.NewLine + "<!-- When Umbraco Forms is installed, uncomment this line -->" + Environment.NewLine + "@* @Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()}) *@");
+                        templateContent = templateContent.Replace(PRE_INSTALL_CONTACT_FORM_HTML, POST_INSTALL_CONTACT_FORM_HTML);
                         contactView.Content = templateContent;
                         fileService.SaveTemplate(contactView);
                     }
@@ -74,16 +75,13 @@ namespace Umbraco.SampleSite.Installer
                     }
                 }
             }
-            // update default design
+            // update default design 
             contentHome.SetValue("colorTheme", getPreValueId(dataTypeService, "Home - Color Theme - Radio button list", "earth"));
             contentHome.SetValue("font", getPreValueId(dataTypeService, "Home - Font - Radio button list", "serif"));
-            contentService.PublishWithChildrenWithStatus(contentHome, 0, true);
 
             // update default currency pre value
-            Node productNode = uQuery.GetNodesByType("products").FirstOrDefault<Node>();
-            IContent productContent = contentService.GetById(productNode.Id);
+            IContent productContent = contentService.GetById(new Guid("485343b1-d99c-4789-a676-e9b4c98a38d4"));
             productContent.SetValue("defaultCurrency", (object)this.getPreValueId(dataTypeService, "Products - Default Currency - Dropdown list", "€"));
-            contentService.PublishWithStatus(productContent);
 
             // create media folders
             this.createMediaItem(mediaService, -1, "folder", new Guid("b6f11172-373f-4473-af0f-0b0e5aefd21c"), "Design", string.Empty, true);
@@ -110,7 +108,7 @@ namespace Umbraco.SampleSite.Installer
                             string.IsNullOrWhiteSpace(selectNode.Attributes["key"].Value) == false
                             ? Guid.Parse(selectNode.Attributes["key"].Value)
                             : Guid.Empty;
-                        int mediaItem = this.createMediaItem(mediaService, media1.Id, "image", key, selectNode.Attributes["name"].Value, selectNode.Attributes["path"].Value, false);
+                        int mediaItem = createMediaItem(mediaService, media1.Id, "image", key, selectNode.Attributes["name"].Value, selectNode.Attributes["path"].Value, false);
                     }
                 }
             }
@@ -118,6 +116,10 @@ namespace Umbraco.SampleSite.Installer
             {
                 LogHelper.Error<InstallPackageAction>("Error during post processing of Starter Kit", ex);
             }
+
+            // publish everything (moved here due to Deploy dependency checking
+            contentService.PublishWithChildrenWithStatus(contentHome, 0, true);
+
             return true;
         }
 
