@@ -14,8 +14,9 @@ namespace Umbraco.SampleSite.Installer
 {
     public class InstallPackageAction : IPackageAction
     {
-        public static string PRE_INSTALL_CONTACT_FORM_HTML = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()})";
-        public static string POST_INSTALL_CONTACT_FORM_HTML = "<p>You can get a contact form appearing here by installing Umbraco Forms.<br /> <a href=\"/umbraco/#/forms\" class=\"button button--border--solid\">Go to Back Office and install Forms</a>" + Environment.NewLine + "<!-- When Umbraco Forms is installed, uncomment this line -->" + Environment.NewLine + "@* @Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()}) *@";
+        public static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()})";
+        public static string PostInstallContactFormHtml = "<p>You can get a contact form appearing here by installing Umbraco Forms.<br /> <a href=\"/umbraco/#/forms\" class=\"button button--border--solid\">Go to Back Office and install Forms</a>" + Environment.NewLine + "<!-- When Umbraco Forms is installed, uncomment this line -->" + Environment.NewLine + "@* @Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()}) *@";
+
         public bool Execute(string packageName, XmlNode xmlData)
         {
             var contentService = ApplicationContext.Current.Services.ContentService;

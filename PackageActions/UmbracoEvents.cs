@@ -12,14 +12,18 @@ using Umbraco.Web;
 
 namespace Umbraco.SampleSite
 {
-    public class updatePropertyEditorOnFormInstall : ApplicationEventHandler
+    public class UmbracoEvents : ApplicationEventHandler
     {
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
             InstalledPackage.AfterSave += InstalledPackage_AfterSave;
         }
 
-
+        /// <summary>
+        /// This will update the Contact template 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InstalledPackage_AfterSave(InstalledPackage sender, EventArgs e)
         {
             if (sender.Data.Name == "Umbraco Forms" && sender.Data.Files.Count > 20)
@@ -45,7 +49,7 @@ namespace Umbraco.SampleSite
                 if (contactView != null)
                 {
                     var templateContent = contactView.Content;
-                    templateContent = templateContent.Replace(Installer.InstallPackageAction.POST_INSTALL_CONTACT_FORM_HTML, Installer.InstallPackageAction.PRE_INSTALL_CONTACT_FORM_HTML);
+                    templateContent = templateContent.Replace(Installer.InstallPackageAction.PostInstallContactFormHtml, Installer.InstallPackageAction.PreInstallContactFormHtml);
                     contactView.Content = templateContent;
                     fileService.SaveTemplate(contactView);
                 }
