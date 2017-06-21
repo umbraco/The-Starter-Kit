@@ -28,22 +28,8 @@ namespace Umbraco.SampleSite
         {
             if (sender.Data.Name == "Umbraco Forms" && sender.Data.Files.Count > 20)
             {
-                // find the doctype and change the form chooser property type
-                var doctypeService = ApplicationContext.Current.Services.ContentTypeService;
                 var fileService = ApplicationContext.Current.Services.FileService;
-/*                var contactFormType = doctypeService.GetContentType("contact");
-                if (contactFormType != null)
-                {
 
-                    var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == "contactForm");
-                    if (formPicker != null && formPicker.PropertyEditorAlias == "Label")
-                    {
-                        formPicker.PropertyEditorAlias = "UmbracoForms.FormPicker";
-                        doctypeService.Save(contactFormType);
-                    }
-                }
-
-    */
                 // update contact template
                 var contactView = fileService.GetTemplate("contact");
                 if (contactView != null)
