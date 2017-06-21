@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using umbraco;
+using umbraco.interfaces;
 using Umbraco.Core;
+using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
-using umbraco.interfaces;
-using umbraco.NodeFactory;
-using Umbraco.Core.Logging;
 
-namespace Umbraco.SampleSite.Installer
+namespace Umbraco.SampleSite
 {
     public class InstallPackageAction : IPackageAction
     {

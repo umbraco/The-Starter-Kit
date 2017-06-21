@@ -264,7 +264,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Installer.cs" />
+    <Compile Include="InstallPackageAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UmbracoEvents.cs" />
   </ItemGroup>
