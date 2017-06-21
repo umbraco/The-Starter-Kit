@@ -1,0 +1,2361 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+  <files>
+    <file>
+      <guid>Terratype.GoogleMapsV3.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>Terratype.GoogleMapsV3.dll</orgName>
+    </file>
+    <file>
+      <guid>4730684907_8a7f8759cb_b.jpg</guid>
+      <orgPath>/Media/1001</orgPath>
+      <orgName>4730684907_8a7f8759cb_b.jpg</orgName>
+    </file>
+    <file>
+      <guid>18095416144_44a566a5f4_h.jpg</guid>
+      <orgPath>/Media/1002</orgPath>
+      <orgName>18095416144_44a566a5f4_h.jpg</orgName>
+    </file>
+    <file>
+      <guid>18531852339_981b067419_h.jpg</guid>
+      <orgPath>/Media/1003</orgPath>
+      <orgName>18531852339_981b067419_h.jpg</orgName>
+    </file>
+    <file>
+      <guid>18531854019_351c579559_h.jpg</guid>
+      <orgPath>/Media/1004</orgPath>
+      <orgName>18531854019_351c579559_h.jpg</orgName>
+    </file>
+    <file>
+      <guid>18530280048_459b8b61b2_h.jpg</guid>
+      <orgPath>/Media/1005</orgPath>
+      <orgName>18530280048_459b8b61b2_h.jpg</orgName>
+    </file>
+    <file>
+      <guid>18720470241_ff77768544_h.jpg</guid>
+      <orgPath>/Media/1006</orgPath>
+      <orgName>18720470241_ff77768544_h.jpg</orgName>
+    </file>
+    <file>
+      <guid>5852022091_87c5d045ab_b.jpg</guid>
+      <orgPath>/Media/1010</orgPath>
+      <orgName>5852022091_87c5d045ab_b.jpg</orgName>
+    </file>
+    <file>
+      <guid>5852022211_9028df67c0_b.jpg</guid>
+      <orgPath>/Media/1011</orgPath>
+      <orgName>5852022211_9028df67c0_b.jpg</orgName>
+    </file>
+    <file>
+      <guid>7371127652_e01b6ab56f_b.jpg</guid>
+      <orgPath>/Media/1012</orgPath>
+      <orgName>7371127652_e01b6ab56f_b.jpg</orgName>
+    </file>
+    <file>
+      <guid>7373036208_30257976a0_b.jpg</guid>
+      <orgPath>/Media/1013</orgPath>
+      <orgName>7373036208_30257976a0_b.jpg</orgName>
+    </file>
+    <file>
+      <guid>7373036290_5e8420bf36_b.jpg</guid>
+      <orgPath>/Media/1014</orgPath>
+      <orgName>7373036290_5e8420bf36_b.jpg</orgName>
+    </file>
+    <file>
+      <guid>7377957524_347859faac_b.jpg</guid>
+      <orgPath>/Media/1015</orgPath>
+      <orgName>7377957524_347859faac_b.jpg</orgName>
+    </file>
+    <file>
+      <guid>14272036539_469ca21d5c_h.jpg</guid>
+      <orgPath>/Media/1016</orgPath>
+      <orgName>14272036539_469ca21d5c_h.jpg</orgName>
+    </file>
+    <file>
+      <guid>16403439029_f500be349b_o.jpg</guid>
+      <orgPath>/Media/1030</orgPath>
+      <orgName>16403439029_f500be349b_o.jpg</orgName>
+    </file>
+    <file>
+      <guid>categoryLinks.cshtml</guid>
+      <orgPath>/Views/Partials</orgPath>
+      <orgName>categoryLinks.cshtml</orgName>
+    </file>
+    <file>
+      <guid>SectionHeader.cshtml</guid>
+      <orgPath>/Views/Partials</orgPath>
+      <orgName>SectionHeader.cshtml</orgName>
+    </file>
+    <file>
+      <guid>featuredProducts.cshtml</guid>
+      <orgPath>/Views/MacroPartials</orgPath>
+      <orgName>featuredProducts.cshtml</orgName>
+    </file>
+    <file>
+      <guid>latestBlogposts.cshtml</guid>
+      <orgPath>/Views/MacroPartials</orgPath>
+      <orgName>latestBlogposts.cshtml</orgName>
+    </file>
+    <file>
+      <guid>SubNavigation.cshtml</guid>
+      <orgPath>/Views/Partials/Navigation</orgPath>
+      <orgName>SubNavigation.cshtml</orgName>
+    </file>
+    <file>
+      <guid>TopNavigation.cshtml</guid>
+      <orgPath>/Views/Partials/Navigation</orgPath>
+      <orgName>TopNavigation.cshtml</orgName>
+    </file>
+    <file>
+      <guid>app.js</guid>
+      <orgPath>/scripts</orgPath>
+      <orgName>app.js</orgName>
+    </file>
+    <file>
+      <guid>package.manifest</guid>
+      <orgPath>/App_Plugins/NestedContent</orgPath>
+      <orgName>package.manifest</orgName>
+    </file>
+    <file>
+      <guid>nestedcontent.css</guid>
+      <orgPath>/App_Plugins/NestedContent/Css</orgPath>
+      <orgName>nestedcontent.css</orgName>
+    </file>
+    <file>
+      <guid>nestedcontent.controllers.js</guid>
+      <orgPath>/App_Plugins/NestedContent/Js</orgPath>
+      <orgName>nestedcontent.controllers.js</orgName>
+    </file>
+    <file>
+      <guid>nestedcontent.directives.js</guid>
+      <orgPath>/App_Plugins/NestedContent/Js</orgPath>
+      <orgName>nestedcontent.directives.js</orgName>
+    </file>
+    <file>
+      <guid>nestedcontent.filters.js</guid>
+      <orgPath>/App_Plugins/NestedContent/Js</orgPath>
+      <orgName>nestedcontent.filters.js</orgName>
+    </file>
+    <file>
+      <guid>nestedcontent.resources.js</guid>
+      <orgPath>/App_Plugins/NestedContent/Js</orgPath>
+      <orgName>nestedcontent.resources.js</orgName>
+    </file>
+    <file>
+      <guid>nestedcontent.services.js</guid>
+      <orgPath>/App_Plugins/NestedContent/Js</orgPath>
+      <orgName>nestedcontent.services.js</orgName>
+    </file>
+    <file>
+      <guid>nestedcontent.doctypepicker.html</guid>
+      <orgPath>/App_Plugins/NestedContent/Views</orgPath>
+      <orgName>nestedcontent.doctypepicker.html</orgName>
+    </file>
+    <file>
+      <guid>nestedcontent.editor.html</guid>
+      <orgPath>/App_Plugins/NestedContent/Views</orgPath>
+      <orgName>nestedcontent.editor.html</orgName>
+    </file>
+    <file>
+      <guid>nestedcontent.html</guid>
+      <orgPath>/App_Plugins/NestedContent/Views</orgPath>
+      <orgName>nestedcontent.html</orgName>
+    </file>
+    <file>
+      <guid>Umbraco.SampleSite.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>Umbraco.SampleSite.dll</orgName>
+    </file>
+    <file>
+      <guid>749afd85-76ec-408a-b923-dd9829326091_package.manifest</guid>
+      <orgPath>/App_Plugins/Terratype</orgPath>
+      <orgName>package.manifest</orgName>
+    </file>
+    <file>
+      <guid>readme.txt</guid>
+      <orgPath>/App_Plugins/Terratype</orgPath>
+      <orgName>readme.txt</orgName>
+    </file>
+    <file>
+      <guid>label.standard.css</guid>
+      <orgPath>/App_Plugins/Terratype/Css</orgPath>
+      <orgName>label.standard.css</orgName>
+    </file>
+    <file>
+      <guid>Terratype.png</guid>
+      <orgPath>/App_Plugins/Terratype/Images</orgPath>
+      <orgName>Terratype.png</orgName>
+    </file>
+    <file>
+      <guid>en-us.xml</guid>
+      <orgPath>/App_Plugins/Terratype/Lang</orgPath>
+      <orgName>en-us.xml</orgName>
+    </file>
+    <file>
+      <guid>terratype.js</guid>
+      <orgPath>/App_Plugins/Terratype/Scripts</orgPath>
+      <orgName>terratype.js</orgName>
+    </file>
+    <file>
+      <guid>config.html</guid>
+      <orgPath>/App_Plugins/Terratype/Views</orgPath>
+      <orgName>config.html</orgName>
+    </file>
+    <file>
+      <guid>editor.html</guid>
+      <orgPath>/App_Plugins/Terratype/Views</orgPath>
+      <orgName>editor.html</orgName>
+    </file>
+    <file>
+      <guid>grid.cshtml</guid>
+      <orgPath>/App_Plugins/Terratype/Views</orgPath>
+      <orgName>grid.cshtml</orgName>
+    </file>
+    <file>
+      <guid>grid.html</guid>
+      <orgPath>/App_Plugins/Terratype/Views</orgPath>
+      <orgName>grid.html</orgName>
+    </file>
+    <file>
+      <guid>grid.overlay.html</guid>
+      <orgPath>/App_Plugins/Terratype/Views</orgPath>
+      <orgName>grid.overlay.html</orgName>
+    </file>
+    <file>
+      <guid>label.standard.html</guid>
+      <orgPath>/App_Plugins/Terratype/Views</orgPath>
+      <orgName>label.standard.html</orgName>
+    </file>
+    <file>
+      <guid>1e070742-e075-4e14-9886-23cfa9a50d00_readme.txt</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3</orgPath>
+      <orgName>readme.txt</orgName>
+    </file>
+    <file>
+      <guid>Example.png</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Images</orgPath>
+      <orgName>Example.png</orgName>
+    </file>
+    <file>
+      <guid>Logo.png</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Images</orgPath>
+      <orgName>Logo.png</orgName>
+    </file>
+    <file>
+      <guid>m1.png</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Images</orgPath>
+      <orgName>m1.png</orgName>
+    </file>
+    <file>
+      <guid>m2.png</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Images</orgPath>
+      <orgName>m2.png</orgName>
+    </file>
+    <file>
+      <guid>m3.png</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Images</orgPath>
+      <orgName>m3.png</orgName>
+    </file>
+    <file>
+      <guid>m4.png</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Images</orgPath>
+      <orgName>m4.png</orgName>
+    </file>
+    <file>
+      <guid>m5.png</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Images</orgPath>
+      <orgName>m5.png</orgName>
+    </file>
+    <file>
+      <guid>837d1e05-e048-4f1a-81fd-27809a40fb6a_en-us.xml</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Lang</orgPath>
+      <orgName>en-us.xml</orgName>
+    </file>
+    <file>
+      <guid>markerclusterer.js</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Scripts</orgPath>
+      <orgName>markerclusterer.js</orgName>
+    </file>
+    <file>
+      <guid>markerclusterer.min.js</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Scripts</orgPath>
+      <orgName>markerclusterer.min.js</orgName>
+    </file>
+    <file>
+      <guid>Terratype.GoogleMapsV3.js</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Scripts</orgPath>
+      <orgName>Terratype.GoogleMapsV3.js</orgName>
+    </file>
+    <file>
+      <guid>Terratype.GoogleMapsV3.Renderer.js</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Scripts</orgPath>
+      <orgName>Terratype.GoogleMapsV3.Renderer.js</orgName>
+    </file>
+    <file>
+      <guid>config.appearance.html</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Views</orgPath>
+      <orgName>config.appearance.html</orgName>
+    </file>
+    <file>
+      <guid>config.definition.html</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Views</orgPath>
+      <orgName>config.definition.html</orgName>
+    </file>
+    <file>
+      <guid>config.search.html</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Views</orgPath>
+      <orgName>config.search.html</orgName>
+    </file>
+    <file>
+      <guid>editor.appearance.html</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Views</orgPath>
+      <orgName>editor.appearance.html</orgName>
+    </file>
+    <file>
+      <guid>grid.appearance.html</guid>
+      <orgPath>/App_Plugins/Terratype.GoogleMapsV3/Views</orgPath>
+      <orgName>grid.appearance.html</orgName>
+    </file>
+    <file>
+      <guid>Terratype.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>Terratype.dll</orgName>
+    </file>
+    <file>
+      <guid>adf160f1-39f5-44c0-b01d-9e2da32bf093.json</guid>
+      <orgPath>/App_Data/UmbracoForms/Data/forms</orgPath>
+      <orgName>adf160f1-39f5-44c0-b01d-9e2da32bf093.json</orgName>
+    </file>
+  </files>
+  <info>
+    <package>
+      <name>Starter Kit Beta</name>
+      <version>0.998</version>
+      <iconUrl />
+      <license url="http://opensource.org/licenses/MIT">MIT License</license>
+      <url>https://umbraco.com</url>
+      <requirements type="strict">
+        <major>7</major>
+        <minor>6</minor>
+        <patch>4</patch>
+      </requirements>
+    </package>
+    <author>
+      <name>Umbraco HQ</name>
+      <website>https://umbraco.com</website>
+    </author>
+    <readme><![CDATA[Starter Kit. 
+
+Todo: 
+- Review implementation code
+- Update copy]]></readme>
+  </info>
+  <Documents>
+    <DocumentSet importMode="root">
+      <home id="1127" key="156f1933-e327-4dce-b665-110d62720d03" parentID="-1" level="1" creatorID="0" sortOrder="0" createDate="2017-05-30T14:47:51" updateDate="2017-06-12T14:17:57" nodeName="Home" urlName="home" path="-1,1127" isDoc="" nodeType="1117" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1109" nodeTypeAlias="home">
+        <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": [
+        {
+          "name": "Full Width",
+          "areas": [
+            {
+              "grid": 12,
+              "allowAll": false,
+              "allowed": [
+                "media",
+                "macro",
+                "embed",
+                "headline"
+              ],
+              "hasConfig": false,
+              "controls": [
+                {
+                  "value": {
+                    "macroAlias": "latestBlogposts",
+                    "macroParamsDictionary": {
+                      "numberOfPosts": "3",
+                      "startNodeId": "umb://document/1cb33e0a400a49389547b05a35739b8b"
+                    }
+                  },
+                  "editor": {
+                    "alias": "macro"
+                  },
+                  "active": false
+                }
+              ]
+            }
+          ],
+          "hasConfig": false,
+          "id": "cbb67dcf-dc82-700a-617f-84e754458e6a"
+        }
+      ]
+    }
+  ]
+}]]></bodyText>
+        <colorTheme>51</colorTheme>
+        <HeroBackgroundImage><![CDATA[umb://media/3d758b1f24ec47b0a75c225b0444991b]]></HeroBackgroundImage>
+        <sitename><![CDATA[Umbraco Sample Site]]></sitename>
+        <font>54</font>
+        <footerDescription><![CDATA[Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat]]></footerDescription>
+        <footerAddress><![CDATA[Umbraco HQ - Unicorn Square - Haubergsvej 1 - 5000 Odense C - Denmark - +45 70 26 11 62]]></footerAddress>
+        <footerCTACaption><![CDATA[Read All on the Blog]]></footerCTACaption>
+        <footerHeader><![CDATA[Umbraco Demo]]></footerHeader>
+        <FooterCtalink><![CDATA[umb://document/1cb33e0a400a49389547b05a35739b8b]]></FooterCtalink>
+        <heroDescription><![CDATA[Moonfish, steelhead, lamprey southern flounder tadpole fish sculpin bigeye, blue-redstripe danio collared dogfish. Smalleye squaretail goldfish arowana butterflyfish pipefish wolf-herring jewel tetra, shiner; gibberfish red velvetfish. Thornyhead yellowfin pike threadsail ayu cutlassfish.]]></heroDescription>
+        <heroCTACaption><![CDATA[Check our products]]></heroCTACaption>
+        <heroHeader><![CDATA[Umbraco Demo]]></heroHeader>
+        <HeroCtalink><![CDATA[umb://document/485343b1d99c4789a676e9b4c98a38d4]]></HeroCtalink>
+        <products id="1128" key="485343b1-d99c-4789-a676-e9b4c98a38d4" parentID="1127" level="2" creatorID="0" sortOrder="0" createDate="2017-05-30T14:47:51" updateDate="2017-06-05T10:37:43" nodeName="Products" urlName="products" path="-1,1127,1128" isDoc="" nodeType="1126" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1114" nodeTypeAlias="products">
+          <pageTitle><![CDATA[Our Gorgeous Selection]]></pageTitle>
+          <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": []
+    }
+  ]
+}]]></bodyText>
+          <umbracoNavihide>0</umbracoNavihide>
+          <defaultCurrency><![CDATA[€]]></defaultCurrency>
+          <featuredProducts><![CDATA[umb://document/e09253c015204aac802390742b6180dc,umb://document/9c4dffe2201541998576fdf7120c861d,umb://document/dd4011757019487994315403fb7f62d2,umb://document/978b40bce0084a70950baf7f7ebe7281]]></featuredProducts>
+          <product id="1129" key="e09253c0-1520-4aac-8023-90742b6180dc" parentID="1128" level="3" creatorID="0" sortOrder="0" createDate="2017-05-30T14:47:51" updateDate="2017-06-05T10:37:43" nodeName="Biker Jacket" urlName="biker-jacket" path="-1,1127,1128,1129" isDoc="" nodeType="1125" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1113" nodeTypeAlias="product">
+            <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": []
+    }
+  ]
+}]]></bodyText>
+            <features><![CDATA[[{"name":"Free shipping","ncContentTypeAlias":"feature","featureName":"Free shipping","featureDetails":"Isn't that awesome - you only pay for the product"},{"name":"1 Day return policy","ncContentTypeAlias":"feature","featureName":"1 Day return policy","featureDetails":"You'll need to make up your mind fast"},{"name":"100 Years warranty","ncContentTypeAlias":"feature","featureName":"100 Years warranty","featureDetails":"But if you're satisfied it'll last a lifetime"}]]]></features>
+            <photos><![CDATA[umb://media/208abda163b54ba1bc2a3d40fe156bb6]]></photos>
+            <productName><![CDATA[Biker Jacket]]></productName>
+            <price>199</price>
+            <category><![CDATA[bingo,clothing]]></category>
+            <description><![CDATA[Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.]]></description>
+            <sku><![CDATA[UMB-BIKER-JACKET]]></sku>
+          </product>
+          <product id="1130" key="cb88aaa9-10a9-42fb-ac7b-e3e993d493f5" parentID="1128" level="3" creatorID="0" sortOrder="1" createDate="2017-05-30T14:47:51" updateDate="2017-06-12T14:16:43" nodeName="Tattoo" urlName="tattoo" path="-1,1127,1128,1130" isDoc="" nodeType="1125" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1113" nodeTypeAlias="product">
+            <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": []
+    }
+  ]
+}]]></bodyText>
+            <photos><![CDATA[umb://media/ce075369df3d426f972a36b355fd535f]]></photos>
+            <productName><![CDATA[Tattoo]]></productName>
+            <price>499</price>
+            <category><![CDATA[tattoo,dedication]]></category>
+            <description><![CDATA[Cras ultricies ligula sed magna dictum porta.]]></description>
+            <sku><![CDATA[UMB-TATTOO]]></sku>
+          </product>
+          <product id="1131" key="9c4dffe2-2015-4199-8576-fdf7120c861d" parentID="1128" level="3" creatorID="0" sortOrder="2" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:16:51" nodeName="Unicorn" urlName="unicorn" path="-1,1127,1128,1131" isDoc="" nodeType="1125" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1113" nodeTypeAlias="product">
+            <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": []
+    }
+  ]
+}]]></bodyText>
+            <photos><![CDATA[umb://media/7239dc966ea1418e9a6e4caa9a8014fa]]></photos>
+            <productName><![CDATA[Unicorn]]></productName>
+            <price>249</price>
+            <category><![CDATA[animals]]></category>
+            <description><![CDATA[Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Cras ultricies ligula sed magna dictum porta.]]></description>
+            <sku><![CDATA[UMB-UNICORN]]></sku>
+          </product>
+          <product id="1132" key="dd401175-7019-4879-9431-5403fb7f62d2" parentID="1128" level="3" creatorID="0" sortOrder="3" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:16:59" nodeName="Ping Pong Ball" urlName="ping-pong-ball" path="-1,1127,1128,1132" isDoc="" nodeType="1125" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1113" nodeTypeAlias="product">
+            <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": []
+    }
+  ]
+}]]></bodyText>
+            <photos><![CDATA[umb://media/57643398d9174b93bc71e9c3038a0abc]]></photos>
+            <productName><![CDATA[Ping Pong Ball]]></productName>
+            <price>2</price>
+            <category><![CDATA[sports,bingo]]></category>
+            <description><![CDATA[Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras ultricies ligula sed magna dictum porta.]]></description>
+            <sku><![CDATA[UMB-PINGPONG]]></sku>
+          </product>
+          <product id="1133" key="300c30c1-ed8f-4943-af8b-803eaa8bbeef" parentID="1128" level="3" creatorID="0" sortOrder="4" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:17:07" nodeName="Bowling Ball" urlName="bowling-ball" path="-1,1127,1128,1133" isDoc="" nodeType="1125" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1113" nodeTypeAlias="product">
+            <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": []
+    }
+  ]
+}]]></bodyText>
+            <photos><![CDATA[umb://media/dbce2b92a00a4aa29e16ca9bb4c2c712]]></photos>
+            <productName><![CDATA[Bowling Ball]]></productName>
+            <price>899</price>
+            <category><![CDATA[sports,bingo]]></category>
+            <description><![CDATA[Cras ultricies ligula sed magna dictum porta.]]></description>
+            <sku><![CDATA[UMB-BOWLING]]></sku>
+          </product>
+          <product id="1134" key="978b40bc-e008-4a70-950b-af7f7ebe7281" parentID="1128" level="3" creatorID="0" sortOrder="5" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:17:14" nodeName="Jumpsuit" urlName="jumpsuit" path="-1,1127,1128,1134" isDoc="" nodeType="1125" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1113" nodeTypeAlias="product">
+            <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": []
+    }
+  ]
+}]]></bodyText>
+            <photos><![CDATA[umb://media/e415f0b75dcd4a99ab9982eba3a1cc00]]></photos>
+            <productName><![CDATA[Jumpsuit]]></productName>
+            <price>89</price>
+            <category><![CDATA[fashion,bingo]]></category>
+            <description><![CDATA[Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Cras ultricies ligula sed magna dictum porta.]]></description>
+            <sku><![CDATA[UMB-JUMPSUIT]]></sku>
+          </product>
+          <product id="1135" key="26797b92-8186-4ac4-af7f-9f6ae4aad4f7" parentID="1128" level="3" creatorID="0" sortOrder="6" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:17:21" nodeName="Banjo" urlName="banjo" path="-1,1127,1128,1135" isDoc="" nodeType="1125" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1113" nodeTypeAlias="product">
+            <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": []
+    }
+  ]
+}]]></bodyText>
+            <photos><![CDATA[umb://media/10d1d7ab3774482fb621a6ef396104bc]]></photos>
+            <productName><![CDATA[Banjo]]></productName>
+            <price>399</price>
+            <category><![CDATA[bingo,music]]></category>
+            <description><![CDATA[Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus.]]></description>
+            <sku><![CDATA[UMB-BANJO]]></sku>
+          </product>
+          <product id="1136" key="dab8bdbc-5b36-481d-9244-95d17af7b98a" parentID="1128" level="3" creatorID="0" sortOrder="7" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:17:27" nodeName="Knitted West" urlName="knitted-west" path="-1,1127,1128,1136" isDoc="" nodeType="1125" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1113" nodeTypeAlias="product">
+            <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": []
+    }
+  ]
+}]]></bodyText>
+            <photos><![CDATA[umb://media/f450c238accb42b39532473407359a24]]></photos>
+            <productName><![CDATA[Knitted Unicorn West]]></productName>
+            <price>1899</price>
+            <category><![CDATA[bingo,fashion]]></category>
+            <description><![CDATA[Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Cras ultricies ligula sed magna dictum porta.]]></description>
+            <sku><![CDATA[UMB-WEST]]></sku>
+          </product>
+        </products>
+        <people id="1142" key="5582ae2f-efa8-422f-a9c9-7ff1c9e8dd85" parentID="1127" level="2" creatorID="0" sortOrder="1" createDate="2017-05-30T14:47:52" updateDate="2017-06-05T10:37:43" nodeName="People" urlName="people" path="-1,1127,1142" isDoc="" nodeType="1123" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1111" nodeTypeAlias="people">
+          <pageTitle><![CDATA[Nice crazy people]]></pageTitle>
+          <bodyText><![CDATA[{"name":"1 column layout","sections":[{"grid":"12","rows":[]}]}]]></bodyText>
+          <umbracoNavihide>0</umbracoNavihide>
+          <person id="1143" key="9acdfbe7-bfe7-4acc-9d75-b2229ece935b" parentID="1142" level="3" creatorID="0" sortOrder="0" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:15:28" nodeName="Jan Skovgaard" urlName="jan-skovgaard" path="-1,1127,1142,1143" isDoc="" nodeType="1124" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1112" nodeTypeAlias="person">
+            <umbracoNavihide>0</umbracoNavihide>
+            <department><![CDATA[mvp,Denmark]]></department>
+            <photo><![CDATA[umb://media/c28e5b4b54af44d89eb97eff7253f546]]></photo>
+          </person>
+          <person id="1144" key="23dca8e9-d496-4507-8726-dc06ecc5962f" parentID="1142" level="3" creatorID="0" sortOrder="1" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:15:52" nodeName="Matt Brailsford" urlName="matt-brailsford" path="-1,1127,1142,1144" isDoc="" nodeType="1124" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1112" nodeTypeAlias="person">
+            <umbracoNavihide>0</umbracoNavihide>
+            <department><![CDATA[United Kingdom,mvp]]></department>
+            <photo><![CDATA[umb://media/8319cfa9910a41008064a1c3b648cb60]]></photo>
+            <twitterUsername><![CDATA[mattbrailsford]]></twitterUsername>
+            <instagramUsername><![CDATA[circuitbeard]]></instagramUsername>
+          </person>
+          <person id="1145" key="bff7b1f1-cc49-4bda-8699-ecb85f18bc83" parentID="1142" level="3" creatorID="0" sortOrder="2" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:16:04" nodeName="Lee Kelleher" urlName="lee-kelleher" path="-1,1127,1142,1145" isDoc="" nodeType="1124" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1112" nodeTypeAlias="person">
+            <umbracoNavihide>0</umbracoNavihide>
+            <department><![CDATA[United Kingdom,mvp]]></department>
+            <photo><![CDATA[umb://media/def8b9622107486db2d65be3639a6c31]]></photo>
+          </person>
+          <person id="1146" key="bb6f3ea1-6f18-4a27-a463-714822d36032" parentID="1142" level="3" creatorID="0" sortOrder="3" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:16:14" nodeName="Jeavon Leopold" urlName="jeavon-leopold" path="-1,1127,1142,1146" isDoc="" nodeType="1124" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1112" nodeTypeAlias="person">
+            <umbracoNavihide>0</umbracoNavihide>
+            <department><![CDATA[United Kingdom,mvp]]></department>
+            <photo><![CDATA[umb://media/981014a4f0b946dbaa9187cf2027f6e0]]></photo>
+          </person>
+          <person id="1147" key="44c58a9d-b60d-4001-b9f3-d7783000caa0" parentID="1142" level="3" creatorID="0" sortOrder="4" createDate="2017-05-30T14:47:52" updateDate="2017-06-12T14:15:28" nodeName="Jeroen Breuer" urlName="jeroen-breuer" path="-1,1127,1142,1147" isDoc="" nodeType="1124" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1112" nodeTypeAlias="person">
+            <umbracoNavihide>0</umbracoNavihide>
+            <department><![CDATA[Netherlands,mvp]]></department>
+            <photo><![CDATA[umb://media/fcc186008f9b499589543cb0d335faf1]]></photo>
+          </person>
+        </people>
+        <contentPage id="1148" key="d62f0f1d-e4a9-4093-94ae-4efce18872ee" parentID="1127" level="2" creatorID="0" sortOrder="2" createDate="2017-05-30T14:47:52" updateDate="2017-06-05T10:37:43" nodeName="About Us" urlName="about-us" path="-1,1127,1148" isDoc="" nodeType="1122" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1108" nodeTypeAlias="contentPage">
+          <pageTitle><![CDATA[About Us]]></pageTitle>
+          <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": [
+        {
+          "name": "Full Width",
+          "areas": [
+            {
+              "grid": 12,
+              "allowAll": false,
+              "allowed": [
+                "media",
+                "embed",
+                "headline",
+                "rte",
+                "macro"
+              ],
+              "config": null,
+              "styles": null,
+              "hasConfig": false,
+              "controls": [
+                {
+                  "value": "Oooh la la",
+                  "editor": {
+                    "alias": "headline"
+                  },
+                  "styles": null,
+                  "config": null
+                }
+              ]
+            }
+          ],
+          "styles": null,
+          "config": null,
+          "hasConfig": false,
+          "id": "295c0639-aea7-219f-3f3c-bb2e7fcd099c"
+        },
+        {
+          "name": "Article",
+          "areas": [
+            {
+              "grid": 4,
+              "allowAll": false,
+              "allowed": [
+                "quote",
+                "embed",
+                "macro",
+                "media",
+                "rte"
+              ],
+              "config": null,
+              "styles": null,
+              "hasConfig": false,
+              "controls": [
+                {
+                  "value": {
+                    "focalPoint": {
+                      "left": 0.5,
+                      "top": 0.5
+                    },
+                    "id": 1115,
+                    "image": "/media/1002/18095416144_44a566a5f4_h.jpg"
+                  },
+                  "editor": {
+                    "alias": "media"
+                  },
+                  "styles": null,
+                  "config": null
+                }
+              ]
+            },
+            {
+              "grid": 8,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media",
+                "macro",
+                "embed",
+                "headline",
+                "quote"
+              ],
+              "config": null,
+              "styles": null,
+              "hasConfig": false,
+              "controls": [
+                {
+                  "value": "<p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Curabitur aliquet quam id dui posuere blandit. Vivamus suscipit tortor eget felis porttitor volutpat. Proin eget tortor risus. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Pellentesque in ipsum id orci porta dapibus. Pellentesque in ipsum id orci porta dapibus. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>\n<p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Curabitur aliquet quam id dui posuere blandit. Vivamus suscipit tortor eget felis porttitor volutpat. Proin eget tortor risus. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Pellentesque in ipsum id orci porta dapibus. Pellentesque in ipsum id orci porta dapibus. Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>",
+                  "editor": {
+                    "alias": "rte"
+                  },
+                  "styles": null,
+                  "config": null
+                },
+                {
+                  "value": "<iframe width=\"360\" height=\"203\" src=\"https://www.youtube.com/embed/HPgKSCp_Y_U?feature=oembed\" frameborder=\"0\" allowfullscreen></iframe>",
+                  "editor": {
+                    "alias": "embed"
+                  },
+                  "active": true
+                }
+              ],
+              "hasActiveChild": true,
+              "active": true
+            }
+          ],
+          "styles": null,
+          "config": null,
+          "hasConfig": false,
+          "id": "ea5aec16-412c-26dc-6649-462288d5ad5d",
+          "hasActiveChild": true,
+          "active": true
+        }
+      ]
+    }
+  ]
+}]]></bodyText>
+          <umbracoNavihide>0</umbracoNavihide>
+          <contentPage id="1149" key="2b804661-b071-473b-9604-d9004ff341ab" parentID="1148" level="3" creatorID="0" sortOrder="0" createDate="2017-05-30T14:47:52" updateDate="2017-06-05T10:37:43" nodeName="About this Starter Kit" urlName="about-this-starter-kit" path="-1,1127,1148,1149" isDoc="" nodeType="1122" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1108" nodeTypeAlias="contentPage">
+            <pageTitle><![CDATA[About this Starter Kit]]></pageTitle>
+            <bodyText><![CDATA[{"name":"1 column layout","sections":[{"grid":"12","rows":[]}]}]]></bodyText>
+            <umbracoNavihide>0</umbracoNavihide>
+          </contentPage>
+          <contentPage id="1150" key="0fcf0fff-f19e-4df9-b3a5-a5fcd2c460ab" parentID="1148" level="3" creatorID="0" sortOrder="1" createDate="2017-05-30T14:47:52" updateDate="2017-06-05T10:37:43" nodeName="Todo list for the Starter Kit" urlName="todo-list-for-the-starter-kit" path="-1,1127,1148,1150" isDoc="" nodeType="1122" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1108" nodeTypeAlias="contentPage">
+            <pageTitle><![CDATA[Things to improve]]></pageTitle>
+            <bodyText><![CDATA[{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": [
+        {
+          "name": "Full Width",
+          "areas": [
+            {
+              "grid": 12,
+              "allowAll": false,
+              "allowed": [
+                "media",
+                "embed",
+                "headline",
+                "rte",
+                "macro"
+              ],
+              "config": null,
+              "styles": null,
+              "hasConfig": false,
+              "controls": [
+                {
+                  "value": "<p>Here's what could be improved in the Starter Kit so far:</p>\n<p> </p>\n<p>For v1:</p>\n<ul>\n<li>Use a custom grid editor for testimonials</li>\n<li>Integrated Analytics on pages</li>\n<li>Call To Action Button in the grid (with \"Tag Manager\" integration)</li>\n<li>Macro for fetching products (with friendly grid preview)</li>\n<li>Design Review (polish)</li>\n<li>Verify licenses of photos (Niels)</li>\n</ul>\n<p>For vNext</p>\n<ul>\n<li><span style=\"text-decoration: line-through;\">Swap text with uploaded logo</span></li>\n<li>Nicer pickers of products and employees</li>\n<li>Custom Listview for products and employees</li>\n<li>Discus template on blog posts</li>\n<li>404 template</li>\n<li>Member Login/Register/Profile/Forgot password</li>\n<li>Update default styling of grid header</li>\n<li>On a Blog post -&gt; Share/Social (tweet this / facebook this)</li>\n</ul>",
+                  "editor": {
+                    "alias": "rte"
+                  },
+                  "styles": null,
+                  "config": null,
+                  "active": true
+                }
+              ]
+            }
+          ],
+          "styles": null,
+          "config": null,
+          "hasConfig": false,
+          "id": "74647d9c-958f-8877-8e60-03771deeb7d6"
+        }
+      ]
+    }
+  ]
+}]]></bodyText>
+            <umbracoNavihide>0</umbracoNavihide>
+          </contentPage>
+        </contentPage>
+        <blog id="1138" key="1cb33e0a-400a-4938-9547-b05a35739b8b" parentID="1127" level="2" creatorID="0" sortOrder="3" createDate="2017-05-30T14:47:52" updateDate="2017-06-05T10:37:43" nodeName="Blog" urlName="blog" path="-1,1127,1138" isDoc="" nodeType="1119" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1105" nodeTypeAlias="blog">
+          <pageTitle><![CDATA[Behind The Scenes]]></pageTitle>
+          <bodyText><![CDATA[{"name":"1 column layout","sections":[{"grid":"12","rows":[]}]}]]></bodyText>
+          <umbracoNavihide>0</umbracoNavihide>
+          <howManyPostsShouldBeShown><![CDATA[2]]></howManyPostsShouldBeShown>
+          <blogpost id="1139" key="7eedc1b4-b045-4084-8174-9588146ac012" parentID="1138" level="3" creatorID="0" sortOrder="0" createDate="2017-05-30T14:47:52" updateDate="2017-06-05T10:37:43" nodeName="My Blog Post" urlName="my-blog-post" path="-1,1127,1138,1139" isDoc="" nodeType="1120" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1106" nodeTypeAlias="blogpost">
+            <umbracoNavihide>0</umbracoNavihide>
+            <excerpt><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo eget malesuada. Donec rutrum congue leo eget malesuada.]]></excerpt>
+            <categories><![CDATA[demo,umbraco,starter kit]]></categories>
+            <pageTitle><![CDATA[My Blog Post]]></pageTitle>
+            <bodyText><![CDATA[{"name":"1 column layout","sections":[{"grid":"12","rows":[{"name":"Full Width","id":"4dc695d1-336c-0733-399e-0dda19d61c36","areas":[{"grid":"12","controls":[{"value":"<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec sollicitudin molestie malesuada.</p>\n<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec sollicitudin molestie malesuada.</p>\n<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec sollicitudin molestie malesuada.</p>","editor":{"alias":"rte","view":null},"styles":null,"config":null}],"styles":null,"config":null}],"styles":null,"config":null}]}]}]]></bodyText>
+          </blogpost>
+          <blogpost id="1140" key="a4174f42-86fb-47ee-a376-c3366597c5fc" parentID="1138" level="3" creatorID="0" sortOrder="1" createDate="2017-05-30T14:47:52" updateDate="2017-06-05T10:37:43" nodeName="Another one" urlName="another-one" path="-1,1127,1138,1140" isDoc="" nodeType="1120" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1106" nodeTypeAlias="blogpost">
+            <umbracoNavihide>0</umbracoNavihide>
+            <excerpt><![CDATA[Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh.]]></excerpt>
+            <categories><![CDATA[cg16,codegarden,umbraco]]></categories>
+            <pageTitle><![CDATA[Now it gets exciting]]></pageTitle>
+            <bodyText><![CDATA[{"name":"1 column layout","sections":[{"grid":"12","rows":[{"name":"Article","id":"55820a9f-2fa6-7a03-394d-da36257da59c","areas":[{"grid":"4","controls":[{"value":{"focalPoint":{"left":0.72576832151300241,"top":0.38775510204081631},"id":1109,"image":"/media/1001/4730684907_8a7f8759cb_b.jpg"},"editor":{"alias":"media","view":null},"styles":null,"config":null}],"styles":null,"config":null},{"grid":"8","controls":[{"value":"<p>Donec sollicitudin molestie malesuada. Proin eget tortor risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla porttitor accumsan tincidunt. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla porttitor accumsan tincidunt. Donec rutrum congue leo eget malesuada.</p>\n<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Pellentesque in ipsum id orci porta dapibus. Donec rutrum congue leo eget malesuada. Nulla porttitor accumsan tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. Sed porttitor lectus nibh.</p>\n<p>Pellentesque in ipsum id orci porta dapibus. Curabitur aliquet quam id dui posuere blandit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec rutrum congue leo eget malesuada. Donec rutrum congue leo eget malesuada. Sed porttitor lectus nibh. Nulla quis lorem ut libero malesuada feugiat.</p>","editor":{"alias":"rte","view":null},"styles":null,"config":null}],"styles":null,"config":null}],"styles":null,"config":null}]}]}]]></bodyText>
+          </blogpost>
+          <blogpost id="1141" key="09feeca2-a32c-4de0-9c8a-dc19140651c5" parentID="1138" level="3" creatorID="0" sortOrder="2" createDate="2017-05-30T14:47:52" updateDate="2017-06-05T10:37:43" nodeName="This will be great" urlName="this-will-be-great" path="-1,1127,1138,1141" isDoc="" nodeType="1120" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1106" nodeTypeAlias="blogpost">
+            <umbracoNavihide>0</umbracoNavihide>
+            <excerpt><![CDATA[Proin eget tortor risus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus magna justo, lacinia eget consectetur sed]]></excerpt>
+            <categories><![CDATA[great,umbraco]]></categories>
+            <pageTitle><![CDATA[This will be great]]></pageTitle>
+            <bodyText><![CDATA[{"name":"1 column layout","sections":[{"grid":"12","rows":[{"name":"Full Width","id":"274a2190-82fb-409a-7948-b9c12467e098","areas":[{"grid":"12","controls":[{"value":"<p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Proin eget tortor risus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec rutrum congue leo eget malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>","editor":{"alias":"rte","view":null},"styles":null,"config":null},{"value":"<div class=\"umb-loader\" style=\"height: 10px; margin: 10px 0px;\"></div>","editor":{"alias":"embed","view":null},"styles":null,"config":null},{"value":"<p> </p>\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta. Pellentesque in ipsum id orci porta dapibus.</p>\n<p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla quis lorem ut libero malesuada feugiat. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Sed porttitor lectus nibh. Vivamus suscipit tortor eget felis porttitor volutpat. Nulla porttitor accumsan tincidunt. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla porttitor accumsan tincidunt.</p>\n<p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec rutrum congue leo eget malesuada. Nulla porttitor accumsan tincidunt. Nulla quis lorem ut libero malesuada feugiat. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.</p>\n<p>Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.</p>","editor":{"alias":"rte","view":null},"styles":null,"config":null}],"styles":null,"config":null}],"styles":null,"config":null}]}]}]]></bodyText>
+          </blogpost>
+        </blog>
+        <contact id="1137" key="71a7e71e-7db2-4b9d-a71c-559b11c683c0" parentID="1127" level="2" creatorID="0" sortOrder="4" createDate="2017-05-30T14:47:52" updateDate="2017-06-05T10:37:43" nodeName="Contact" urlName="contact" path="-1,1127,1137" isDoc="" nodeType="1121" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="0" template="1107" nodeTypeAlias="contact">
+          <umbracoNavihide>0</umbracoNavihide>
+          <contactForm><![CDATA[adf160f1-39f5-44c0-b01d-9e2da32bf093]]></contactForm>
+          <contactIntro><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget lacinia nisl. Aenean sollicitudin diam vitae enim ultrices, semper euismod magna efficitur.</p>]]></contactIntro>
+          <pageTitle><![CDATA[Let's have a chat]]></pageTitle>
+          <contactFormHeader><![CDATA[Send Us A Message]]></contactFormHeader>
+          <apiKey><![CDATA[AIzaSyBSjIm2tkaskXtivVDbvlXcWkP6JDCoqA4]]></apiKey>
+          <mapHeader><![CDATA[You'll find us here]]></mapHeader>
+          <map><![CDATA[{
+  "zoom": 13,
+  "position": {
+    "id": "WGS84",
+    "datum": "55.406321,10.387015"
+  }
+}]]></map>
+        </contact>
+      </home>
+    </DocumentSet>
+  </Documents>
+  <DocumentTypes>
+    <DocumentType>
+      <Info>
+        <Name>Blog</Name>
+        <Alias>blog</Alias>
+        <Icon>icon-calendar-alt</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>True</IsListView>
+        <Compositions>
+          <Composition>contentBase</Composition>
+          <Composition>navigationBase</Composition>
+        </Compositions>
+        <AllowedTemplates>
+          <Template>Blog</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Blog</DefaultTemplate>
+      </Info>
+      <Structure>
+        <DocumentType>blogpost</DocumentType>
+      </Structure>
+      <GenericProperties>
+        <GenericProperty>
+          <Name>How many posts should be shown?</Name>
+          <Alias>howManyPostsShouldBeShown</Alias>
+          <Type>Umbraco.Slider</Type>
+          <Definition>889bac09-6ea1-428e-914e-80f0b0dd9ee9</Definition>
+          <Tab>Settings</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Disqus Shortname</Name>
+          <Alias>disqusShortname</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Settings</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[To use comments, you'll need to sign up for Disqus and enter your shortname here (more info: https://help.disqus.com/customer/portal/articles/472097-universal-embed-code)]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>25</Id>
+          <Caption>Settings</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Blogpost</Name>
+        <Alias>blogpost</Alias>
+        <Icon>icon-calendar</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions>
+          <Composition>navigationBase</Composition>
+        </Compositions>
+        <AllowedTemplates>
+          <Template>Blogpost</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Blogpost</DefaultTemplate>
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Excerpt</Name>
+          <Alias>excerpt</Alias>
+          <Type>Umbraco.TextboxMultiple</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Content</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[Introduction to your blog post. This is also used in the summaries on the front of the blog as well as the homepage]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Categories (tags)</Name>
+          <Alias>categories</Alias>
+          <Type>Umbraco.Tags</Type>
+          <Definition>b6b73142-b9c1-4bf8-a16d-e1c23320b549</Definition>
+          <Tab>Content</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Page Title</Name>
+          <Alias>pageTitle</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Content</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[The title of the page, this is also the first text in a google search result. The ideal length is between 40 and 60 characters]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Content</Name>
+          <Alias>bodyText</Alias>
+          <Type>Umbraco.Grid</Type>
+          <Definition>1cd1f7c5-f2ed-4aa2-ac7c-fb2ab363a743</Definition>
+          <Tab>Content</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>26</Id>
+          <Caption>Content</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Contact</Name>
+        <Alias>contact</Alias>
+        <Icon>icon-map-location</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions>
+          <Composition>navigationBase</Composition>
+        </Compositions>
+        <AllowedTemplates>
+          <Template>Contact</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Contact</DefaultTemplate>
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Pick a Contact Form</Name>
+          <Alias>contactForm</Alias>
+          <Type>UmbracoForms.FormPicker</Type>
+          <Definition>c535b55f-78dc-48c5-ac18-52f47e6d09af</Definition>
+          <Tab>Form</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[If Umbraco Forms is installed you'll be able to select a form here.]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Contact Intro</Name>
+          <Alias>contactIntro</Alias>
+          <Type>Umbraco.TinyMCEv3</Type>
+          <Definition>6cb46f55-a79a-43b9-adf4-324eded44723</Definition>
+          <Tab>Form</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Page Title</Name>
+          <Alias>pageTitle</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Form</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[The title of the page, this is also the first text in a google search result. The ideal length is between 40 and 60 characters]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Contact Form Header</Name>
+          <Alias>contactFormHeader</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Form</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>ApiKey</Name>
+          <Alias>apiKey</Alias>
+          <Type>Umbraco.TextboxMultiple</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Map</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[To use the map you'll need your own Google API key. More information here: https://developers.google.com/maps/documentation/javascript/error-messages#no-api-keys]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Map Header</Name>
+          <Alias>mapHeader</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Map</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Your Address</Name>
+          <Alias>map</Alias>
+          <Type>Terratype</Type>
+          <Definition>018e0ec8-d804-4874-a655-91cb72d5efb2</Definition>
+          <Tab>Map</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[Plot your address on the map and it'll be displayed on the contact page]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>27</Id>
+          <Caption>Form</Caption>
+          <SortOrder>1</SortOrder>
+        </Tab>
+        <Tab>
+          <Id>28</Id>
+          <Caption>Map</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType Folders="Compositions">
+      <Info>
+        <Name>Content Base</Name>
+        <Alias>contentBase</Alias>
+        <Icon>icon-document-dashed-line</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates />
+        <DefaultTemplate />
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Page Title</Name>
+          <Alias>pageTitle</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Content</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[The title of the page, this is also the first text in a google search result. The ideal length is between 40 and 60 characters]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Content</Name>
+          <Alias>bodyText</Alias>
+          <Type>Umbraco.Grid</Type>
+          <Definition>1cd1f7c5-f2ed-4aa2-ac7c-fb2ab363a743</Definition>
+          <Tab>Content</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>18</Id>
+          <Caption>Content</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Content Page</Name>
+        <Alias>contentPage</Alias>
+        <Icon>icon-umb-content</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions>
+          <Composition>contentBase</Composition>
+          <Composition>navigationBase</Composition>
+        </Compositions>
+        <AllowedTemplates>
+          <Template>ContentPage</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>ContentPage</DefaultTemplate>
+      </Info>
+      <Structure>
+        <DocumentType>contentPage</DocumentType>
+      </Structure>
+      <GenericProperties />
+      <Tabs />
+    </DocumentType>
+    <DocumentType Folders="Compositions">
+      <Info>
+        <Name>Feature</Name>
+        <Alias>feature</Alias>
+        <Icon>icon-plugin</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates />
+        <DefaultTemplate />
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Details</Name>
+          <Alias>featureDetails</Alias>
+          <Type>Umbraco.TextboxMultiple</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Feature</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Name</Name>
+          <Alias>featureName</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Feature</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>19</Id>
+          <Caption>Feature</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Home</Name>
+        <Alias>home</Alias>
+        <Icon>icon-home</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>True</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates>
+          <Template>Home</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Home</DefaultTemplate>
+      </Info>
+      <Structure>
+        <DocumentType>blog</DocumentType>
+        <DocumentType>contact</DocumentType>
+        <DocumentType>contentPage</DocumentType>
+        <DocumentType>people</DocumentType>
+        <DocumentType>products</DocumentType>
+      </Structure>
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Content</Name>
+          <Alias>bodyText</Alias>
+          <Type>Umbraco.Grid</Type>
+          <Definition>f4084ca6-fc6c-40c7-ab0e-64888d7d869c</Definition>
+          <Tab>Content</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Color Theme</Name>
+          <Alias>colorTheme</Alias>
+          <Type>Umbraco.RadioButtonList</Type>
+          <Definition>14f884bf-e8f7-481b-a0ba-88b132ab97e8</Definition>
+          <Tab>Design</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[This will be a custom property editor later]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Hero Background</Name>
+          <Alias>HeroBackgroundImage</Alias>
+          <Type>Umbraco.MediaPicker2</Type>
+          <Definition>f5264d17-afc1-4070-a0b6-c0b205890bfe</Definition>
+          <Tab>Design</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[Spice up the homepage by adding a beautiful photo that relates to your business]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Sitename</Name>
+          <Alias>sitename</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Design</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[Used on the homepage as well as the title and social cards]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Font</Name>
+          <Alias>font</Alias>
+          <Type>Umbraco.RadioButtonList</Type>
+          <Definition>28e0c92d-3547-4346-99c4-8287d8a541b9</Definition>
+          <Tab>Design</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[This will be a custom property editor later]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Logo</Name>
+          <Alias>SiteLogo</Alias>
+          <Type>Umbraco.MediaPicker2</Type>
+          <Definition>f5264d17-afc1-4070-a0b6-c0b205890bfe</Definition>
+          <Tab>Design</Tab>
+          <SortOrder>4</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[Optional. If you add a logo it'll be used in the upper left corner instead of the site name. Make sure to use a transparent logo for best results]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Description</Name>
+          <Alias>footerDescription</Alias>
+          <Type>Umbraco.TextboxMultiple</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Footer</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Address</Name>
+          <Alias>footerAddress</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Footer</Tab>
+          <SortOrder>4</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Call To Action Caption</Name>
+          <Alias>footerCTACaption</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Footer</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[Caption on the Call To Action Button]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Header</Name>
+          <Alias>footerHeader</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Footer</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Call To Action Link</Name>
+          <Alias>FooterCtalink</Alias>
+          <Type>Umbraco.ContentPicker2</Type>
+          <Definition>e449f1bd-2664-4e0d-a7b8-439196b96eda</Definition>
+          <Tab>Footer</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Description</Name>
+          <Alias>heroDescription</Alias>
+          <Type>Umbraco.TextboxMultiple</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Hero</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Call To Action Caption</Name>
+          <Alias>heroCTACaption</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Hero</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[The caption on the button]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Header</Name>
+          <Alias>heroHeader</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Hero</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[This is the main headline for the hero area on the Homepage]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Call To Action Link</Name>
+          <Alias>HeroCtalink</Alias>
+          <Type>Umbraco.ContentPicker2</Type>
+          <Definition>e449f1bd-2664-4e0d-a7b8-439196b96eda</Definition>
+          <Tab>Hero</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>20</Id>
+          <Caption>Content</Caption>
+          <SortOrder>1</SortOrder>
+        </Tab>
+        <Tab>
+          <Id>21</Id>
+          <Caption>Design</Caption>
+          <SortOrder>3</SortOrder>
+        </Tab>
+        <Tab>
+          <Id>22</Id>
+          <Caption>Footer</Caption>
+          <SortOrder>2</SortOrder>
+        </Tab>
+        <Tab>
+          <Id>23</Id>
+          <Caption>Hero</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType Folders="Compositions">
+      <Info>
+        <Name>Navigation Base</Name>
+        <Alias>navigationBase</Alias>
+        <Icon>icon-nodes</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates />
+        <DefaultTemplate />
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Hide in Navigation</Name>
+          <Alias>umbracoNavihide</Alias>
+          <Type>Umbraco.TrueFalse</Type>
+          <Definition>92897bc6-a5f3-4ffe-ae27-f2e7e33dda49</Definition>
+          <Tab>Navigation &amp; SEO</Tab>
+          <SortOrder>4</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[If you don't want this page to appear in the navigation, check this box]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Description</Name>
+          <Alias>seoMetaDescription</Alias>
+          <Type>Umbraco.TextboxMultiple</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Navigation &amp; SEO</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[A brief description of the content on your page. This text is shown below the title in a google search result and also used for Social Sharing Cards. The ideal length is between 130 and 155 characters]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Keywords</Name>
+          <Alias>keywords</Alias>
+          <Type>Umbraco.Tags</Type>
+          <Definition>b6b73142-b9c1-4bf8-a16d-e1c23320b549</Definition>
+          <Tab>Navigation &amp; SEO</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>False</Mandatory>
+          <Description><![CDATA[Keywords that describe the content of the page. This is consired optional since most modern search engines don't use this anymore]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>24</Id>
+          <Caption>Navigation &amp; SEO</Caption>
+          <SortOrder>100</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>People</Name>
+        <Alias>people</Alias>
+        <Icon>icon-user-females-alt</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>True</IsListView>
+        <Compositions>
+          <Composition>contentBase</Composition>
+          <Composition>navigationBase</Composition>
+        </Compositions>
+        <AllowedTemplates>
+          <Template>People</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>People</DefaultTemplate>
+      </Info>
+      <Structure>
+        <DocumentType>person</DocumentType>
+      </Structure>
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Featured People</Name>
+          <Alias>featuredPeople</Alias>
+          <Type>Umbraco.MultiNodeTreePicker2</Type>
+          <Definition>dfab9a27-67d3-4dba-ac91-3a70f9faadfe</Definition>
+          <Tab>Content</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>29</Id>
+          <Caption>Content</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Person</Name>
+        <Alias>person</Alias>
+        <Icon>icon-user-female</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions>
+          <Composition>navigationBase</Composition>
+        </Compositions>
+        <AllowedTemplates>
+          <Template>Person</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Person</DefaultTemplate>
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Email</Name>
+          <Alias>email</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Details</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Department</Name>
+          <Alias>department</Alias>
+          <Type>Umbraco.Tags</Type>
+          <Definition>71e1e182-da10-4280-aa35-800a8de19a32</Definition>
+          <Tab>Details</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Photo</Name>
+          <Alias>photo</Alias>
+          <Type>Umbraco.MediaPicker2</Type>
+          <Definition>c63ba300-f879-40e9-86cb-2e9401f64e16</Definition>
+          <Tab>Details</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Twitter username</Name>
+          <Alias>twitterUsername</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Social</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Instagram Username</Name>
+          <Alias>instagramUsername</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Social</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Facebook username</Name>
+          <Alias>facebookUsername</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Social</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>LinkedIn username</Name>
+          <Alias>linkedInUsername</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Social</Tab>
+          <SortOrder>2</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>30</Id>
+          <Caption>Details</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+        <Tab>
+          <Id>31</Id>
+          <Caption>Social</Caption>
+          <SortOrder>1</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Product</Name>
+        <Alias>product</Alias>
+        <Icon>icon-sweatshirt</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates>
+          <Template>Product</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Product</DefaultTemplate>
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Content</Name>
+          <Alias>bodyText</Alias>
+          <Type>Umbraco.Grid</Type>
+          <Definition>1cd1f7c5-f2ed-4aa2-ac7c-fb2ab363a743</Definition>
+          <Tab>Detailed Description</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Features</Name>
+          <Alias>features</Alias>
+          <Type>Our.Umbraco.NestedContent</Type>
+          <Definition>2b806d03-d9f7-41a3-8226-4abc870585c4</Definition>
+          <Tab>Features</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Photos</Name>
+          <Alias>photos</Alias>
+          <Type>Umbraco.MediaPicker2</Type>
+          <Definition>67758eb3-51c7-4742-9958-97bc66e4e635</Definition>
+          <Tab>Product Details</Tab>
+          <SortOrder>6</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[You can add multiple photos - the first one will be the default and used in overviews and lists]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Product Name</Name>
+          <Alias>productName</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Product Details</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Price</Name>
+          <Alias>price</Alias>
+          <Type>Umbraco.Decimal</Type>
+          <Definition>68e8fef5-9761-426e-b7d4-f4d5435cf41f</Definition>
+          <Tab>Product Details</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Category</Name>
+          <Alias>category</Alias>
+          <Type>Umbraco.Tags</Type>
+          <Definition>b6b73142-b9c1-4bf8-a16d-e1c23320b549</Definition>
+          <Tab>Product Details</Tab>
+          <SortOrder>3</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Description</Name>
+          <Alias>description</Alias>
+          <Type>Umbraco.TextboxMultiple</Type>
+          <Definition>c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3</Definition>
+          <Tab>Product Details</Tab>
+          <SortOrder>4</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>SKU</Name>
+          <Alias>sku</Alias>
+          <Type>Umbraco.Textbox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Product Details</Tab>
+          <SortOrder>5</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>32</Id>
+          <Caption>Detailed Description</Caption>
+          <SortOrder>2</SortOrder>
+        </Tab>
+        <Tab>
+          <Id>33</Id>
+          <Caption>Features</Caption>
+          <SortOrder>1</SortOrder>
+        </Tab>
+        <Tab>
+          <Id>34</Id>
+          <Caption>Product Details</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Products</Name>
+        <Alias>products</Alias>
+        <Icon>icon-shopping-basket</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>True</IsListView>
+        <Compositions>
+          <Composition>contentBase</Composition>
+          <Composition>navigationBase</Composition>
+        </Compositions>
+        <AllowedTemplates>
+          <Template>Products</Template>
+        </AllowedTemplates>
+        <DefaultTemplate>Products</DefaultTemplate>
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Default Currency</Name>
+          <Alias>defaultCurrency</Alias>
+          <Type>Umbraco.DropDown</Type>
+          <Definition>4d7ef8eb-0e2f-4847-8025-9570aae43544</Definition>
+          <Tab>Shop</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>True</Mandatory>
+          <Description><![CDATA[This is just used to prefix pricing]]></Description>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Featured Products</Name>
+          <Alias>featuredProducts</Alias>
+          <Type>Umbraco.MultiNodeTreePicker2</Type>
+          <Definition>d865637a-829e-47b9-a9ca-b19a0bb4d3ee</Definition>
+          <Tab>Shop</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>True</Mandatory>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>35</Id>
+          <Caption>Shop</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+  </DocumentTypes>
+  <Templates>
+    <Template>
+      <Name>Blog</Name>
+      <Alias>Blog</Alias>
+      <Design><![CDATA[@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Blog>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+}
+            @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+
+            <section class="section">
+
+                <div class="container">
+
+@Umbraco.RenderMacro("latestBlogposts", 
+					 new {
+						 numberOfPosts=Model.Content.HowManyPostsShouldBeShown,
+						 startNodeId=Model.Content.Id})
+<!-- todo: implement paging -->
+<!--                    <nav class="nav-bar nav-bar--center">
+                        <a class="nav-link nav-link--black" href="">Prev</a>
+                        <a class="nav-link nav-link--black nav-link--active" href="">P1</a>
+                        <a class="nav-link nav-link--black" href="">P2</a>
+                        <a class="nav-link nav-link--black" href="">P3</a>
+                        <a class="nav-link nav-link--black" href="">P4</a>
+                        <a class="nav-link nav-link--black" href="">P5</a>
+                        <a class="nav-link nav-link--black" href="">Next</a>
+                    </nav>
+-->
+                </div>
+
+            </section>]]></Design>
+    </Template>
+    <Template>
+      <Name>Blogpost</Name>
+      <Alias>Blogpost</Alias>
+      <Design><![CDATA[@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Blogpost>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+}
+            @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+
+            <section class="section">
+
+                <div class="container">
+
+                    <article>
+
+                        <div class="blogpost-meta">
+                            <small class="blogpost-date">@Model.Content.CreateDate.ToShortDateString()</small>
+                            <span class="blogpost-cat">
+                                @Html.Partial("~/Views/Partials/CategoryLinks.cshtml", Model.Content.Categories)
+                            </span>
+                        </div>
+
+                        <h3>@Model.Content.Excerpt</h3>
+
+				@Html.GetGridHtml(Model.Content, "bodyText", "bootstrap3-fluid")
+
+<!-- todo: implement discus comments -->
+                    </article>
+
+                </div>
+
+            </section>]]></Design>
+    </Template>
+    <Template>
+      <Name>Contact</Name>
+      <Alias>Contact</Alias>
+      <Design><![CDATA[@inherits UmbracoTemplatePage<Contact>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using Terratype;
+@{
+    Layout = "Master.cshtml";
+}
+            @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+
+            <section class="section">
+
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <h2>@Model.Content.MapHeader</h2>
+                            @Html.Terratype(Model.Content.Map)
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <h2>@Model.Content.ContactFormHeader</h2>
+							@Model.Content.ContactIntro
+							@Umbraco.RenderMacro("renderUmbracoForm", new {FormGuid=Model.Content.ContactForm.ToString()})
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </section>
+]]></Design>
+    </Template>
+    <Template>
+      <Name>Content Page</Name>
+      <Alias>ContentPage</Alias>
+      <Design><![CDATA[@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.ContentPage>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+            @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+
+            <section class="section">
+
+                <div class="container">
+
+                    <div class="col-md-3">
+
+                        <nav class="nav-bar nav-bar--list">
+							@Html.Partial("~/Views/Partials/Navigation/SubNavigation.cshtml")
+                        </nav>
+
+                    </div>
+
+                    <div class="col-md-9">
+
+                        <article>
+
+						@Html.GetGridHtml(Model.Content, "bodyText", "bootstrap3-fluid")
+
+
+
+                        </article>
+
+
+                    </div>
+
+                </div>
+
+            </section>]]></Design>
+    </Template>
+    <Template>
+      <Name>Home</Name>
+      <Alias>Home</Alias>
+      <Design><![CDATA[@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+    var backgroundImage = Model.Content.HeroBackgroundImage != null ? Model.Content.HeroBackgroundImage.Url : String.Empty;
+}
+            <section 
+                class="section section--full-height background-image-full overlay overlay--dark section--content-center section--thick-border" 
+                style="background-image: url('@backgroundImage')">
+                <div class="section__hero-content">
+                    <h1>@Model.Content.HeroHeader</h1>
+                    <p class="section__description">@Model.Content.HeroDescription</p>
+                    <a class="button button--border--solid" href="@Model.Content.HeroCtalink.Url">
+                        @Model.Content.HeroCtacaption</a>
+
+                </div>
+            </section>
+
+            <section class="section section">
+            @Html.GetGridHtml(Model.Content, "bodyText", "bootstrap3-fluid")
+            </section>
+            
+
+            <section class="section section--themed">
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="ta-center">
+                            <h2>@Model.Content.FooterHeader</h2>
+                            <p class="section__description mw-640 ma-h-auto">@Model.Content.FooterDescription</p>
+
+                            <a class="button button--border--light_solid" href="@Model.Content.FooterCtalink.Url">
+                                @Model.Content.FooterCtacaption</a>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+]]></Design>
+    </Template>
+    <Template>
+      <Name>Master</Name>
+      <Alias>Master</Alias>
+      <Design><![CDATA[@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using Umbraco.Core
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+
+    // Get basic design settings from the homepage
+    ContentModels.Home home = Model.Content.Site() as ContentModels.Home;
+    var colorTheme = Umbraco.GetPreValueAsString(home.ColorTheme);
+    var font = Umbraco.GetPreValueAsString(home.Font);
+}
+
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>@Model.Content.Name - @home.Sitename</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="/css/style.css" />
+    @RenderSection("Header", required: false)
+    </head>
+
+    <body class="frontpage theme-font-@font theme-color-@colorTheme">
+        <div class="mobile-nav">
+            <nav class="nav-bar">
+                @Html.Partial("~/views/partials/navigation/topNavigation.cshtml")
+            </nav>
+        </div>
+
+        <header class="header">
+
+            <div class="logo">
+                @if (home.SiteLogo != null && !string.IsNullOrEmpty(home.SiteLogo.Url))
+                {
+                    <div class="nav-link--home">
+                        <img class="logo-image" src="@home.SiteLogo.Url" alt="@home.Sitename">
+                    </div>
+                }
+                else
+                {
+                    <a class="nav-link nav-link--home nav-link--home__text logo-text" href="/">@home.Sitename</a>
+                }
+            </div>
+
+            <nav class="nav-bar top-nav">
+                @Html.Partial("~/Views/Partials/Navigation/TopNavigation.cshtml")
+            </nav>
+
+            <div class="mobile-nav-handler">
+                <div class="hamburger lines" id="toggle-nav">
+                    <span></span>
+                </div>
+            </div>
+
+        </header>
+
+        <main>
+            @RenderBody()
+        </main>
+
+        <footer class="section--themed">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 ta-center">
+                        @home.FooterAddress
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+        <script src="/scripts/app.js"></script>
+
+    </body>
+
+</html>
+]]></Design>
+    </Template>
+    <Template>
+      <Name>People</Name>
+      <Alias>People</Alias>
+      <Design><![CDATA[@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.People>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+}
+@helper SocialLink(string content, string service) {
+	if (!String.IsNullOrEmpty(content)) {
+		<a class="employee-grid__item__contact-item" href="http://@(service).com/@content">@service</a>		
+	}
+}            @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+
+            <section class="section">
+
+                <div class="container">
+<!-- todo: implement department filter -->
+<!--
+                    <nav class="nav-bar nav-bar--center nav-bar--air-bottom">
+                        <a class="nav-link nav-link--black nav-link--active" href="">All</a>
+                        <a class="nav-link nav-link--black" href="">Marketing</a>
+                        <a class="nav-link nav-link--black" href="">Package People</a>
+                        <a class="nav-link nav-link--black" href="">Designers</a>
+                        <a class="nav-link nav-link--black" href="">Other</a>
+                    </nav>
+-->
+                    <div class="employee-grid">
+@foreach(ContentModels.Person person in Model.Content.Children) {
+
+                        <div class="employee-grid__item">
+                            <div class="employee-grid__item__image" style="background-image: url('@person.Photo.Url')"></div>
+                            <div class="employee-grid__item__details">
+                                <h3 class="employee-grid__item__name">@person.Name</h3>
+                                @if (!String.IsNullOrEmpty(person.Email)) {
+									<a href="mailto:@person.Email" class="employee-grid__item__email">@person.Email</a>
+								}
+                                <div class="employee-grid__item__contact">
+									@SocialLink(person.FacebookUsername, "Facebook")
+									@SocialLink(person.TwitterUsername, "Twitter")
+									@SocialLink(person.LinkedInUsername, "LinkedIn")
+									@SocialLink(person.InstagramUsername, "Instagram")
+                                </div>
+                            </div>
+                        </div>
+}
+                    </div>
+                </div>
+
+            </section>]]></Design>
+    </Template>
+    <Template>
+      <Name>Person</Name>
+      <Alias>Person</Alias>
+      <Design><![CDATA[@{
+	Layout = "Master.cshtml";
+}
+<p>Nothing to see, but we could make a lesson to display a person</p>]]></Design>
+    </Template>
+    <Template>
+      <Name>Product</Name>
+      <Alias>Product</Alias>
+      <Design><![CDATA[@inherits UmbracoTemplatePage<Product>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+    Layout = "Master.cshtml";
+}
+<!-- for the section we want to show the shop header -->
+@Html.Partial("~/Views/Partials/SectionHeader.cshtml", Model.Content.Parent)
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-image-container">
+                    <img class="product-image" src="@Model.Content.Photos.FirstOrDefault().Url" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1>@Model.Content.ProductName</h1>
+                <div class="product-price">@Model.Content.Parent.GetPropertyValue("DefaultCurrency") @Model.Content.Price.ToString("F")</div>
+                <div class="product-teaser">@Model.Content.Description</div>
+                <div class="product-button">
+                    <button class="button button--border--solid">Buy</button>
+                </div>
+                <div class="product-advantages">
+                    @if (Model.Content.Features != null)
+                    {
+                        foreach (var feature in Model.Content.Features)
+                        {
+                            <div class="product-advantage">
+                                <h4>@feature.GetPropertyValue("featureName")</h4>
+                                <h5>@feature.GetPropertyValue("featureDetails")</h5>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section section--sand">
+    <div class="container">
+        <!-- todo: Check if grid is empty via a property value converter ->
+                                @Html.GetGridHtml(Model.Content, "bodyText", "bootstrap3-fluid")
+
+
+                        </div>
+
+                    </section>
+]]></Design>
+    </Template>
+    <Template>
+      <Name>Products</Name>
+      <Alias>Products</Alias>
+      <Design><![CDATA[@inherits UmbracoTemplatePage<Products>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+}
+            @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+
+            <section class="section">
+
+                <div class="container">
+
+<!-- todo: implement category selector -->
+<!--
+                    <nav class="nav-bar nav-bar--center nav-bar--air-bottom">
+                        <a class="nav-link nav-link--black nav-link--active" href="">All</a>
+                        <a class="nav-link nav-link--black" href="">Clothing</a>
+                        <a class="nav-link nav-link--black" href="">Instruments</a>
+                        <a class="nav-link nav-link--black" href="">Accessories</a>
+                        <a class="nav-link nav-link--black" href="">Other</a>
+                    </nav>
+-->
+                    <div class="product-grid">
+                    @if (Model.Content.FeaturedProducts != null)
+                    {
+                        foreach (Product product in Model.Content.FeaturedProducts)
+                        {
+                            <a href="@product.Url" class="product-grid__item" style="background-image: url('@product.Photos.FirstOrDefault().Url')">
+                                <div class="product-grid__item__overlay">
+                                    <div class="product-grid__item__name">@product.ProductName</div>
+                                    <div class="product-grid__item__price">@Model.Content.DefaultCurrency @product.Price.ToString("F")</div>
+                                </div>
+                            </a>
+                        }
+                    }
+ 	                </div>
+                </div>
+
+            </section>]]></Design>
+    </Template>
+  </Templates>
+  <Stylesheets>
+    <Stylesheet>
+      <Name>style</Name>
+      <FileName>style.css</FileName>
+      <Content><![CDATA[@import url(https://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro:400,700,300,600,600italic,400italic);@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,300,500|Lato:400,700,900);@import url(https://fonts.googleapis.com/css?family=Playfair+Display:400,700italic,700,400italic|Noto+Sans:400,700);*,:after,:before{box-sizing:border-box}body,html{-webkit-font-smoothing:antialiased;font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}.container{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}.container:after,.container:before{content:" ";display:table}.container:after{clear:both}.container-fluid{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}.container-fluid:after,.container-fluid:before{content:" ";display:table}.container-fluid:after{clear:both}.row{margin-left:-15px;margin-right:-15px}.row:after,.row:before{content:" ";display:table}.row:after{clear:both}.col-lg-1,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-10,.col-lg-11,.col-lg-12,.col-md-1,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-10,.col-md-11,.col-md-12,.col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11,.col-sm-12,.col-xs-1,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-10,.col-xs-11,.col-xs-12{position:relative;min-height:1px;padding-left:15px;padding-right:15px}.col-xs-1,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-10,.col-xs-11,.col-xs-12{float:left}.col-xs-1{width:8.333333%}.col-xs-2{width:16.666667%}.col-xs-3{width:25%}.col-xs-4{width:33.333333%}.col-xs-5{width:41.666667%}.col-xs-6{width:50%}.col-xs-7{width:58.333333%}.col-xs-8{width:66.666667%}.col-xs-9{width:75%}.col-xs-10{width:83.333333%}.col-xs-11{width:91.666667%}.col-xs-12{width:100%}.col-xs-pull-0{right:auto}.col-xs-pull-1{right:8.333333%}.col-xs-pull-2{right:16.666667%}.col-xs-pull-3{right:25%}.col-xs-pull-4{right:33.333333%}.col-xs-pull-5{right:41.666667%}.col-xs-pull-6{right:50%}.col-xs-pull-7{right:58.333333%}.col-xs-pull-8{right:66.666667%}.col-xs-pull-9{right:75%}.col-xs-pull-10{right:83.333333%}.col-xs-pull-11{right:91.666667%}.col-xs-pull-12{right:100%}.col-xs-push-0{left:auto}.col-xs-push-1{left:8.333333%}.col-xs-push-2{left:16.666667%}.col-xs-push-3{left:25%}.col-xs-push-4{left:33.333333%}.col-xs-push-5{left:41.666667%}.col-xs-push-6{left:50%}.col-xs-push-7{left:58.333333%}.col-xs-push-8{left:66.666667%}.col-xs-push-9{left:75%}.col-xs-push-10{left:83.333333%}.col-xs-push-11{left:91.666667%}.col-xs-push-12{left:100%}.col-xs-offset-0{margin-left:0}.col-xs-offset-1{margin-left:8.333333%}.col-xs-offset-2{margin-left:16.666667%}.col-xs-offset-3{margin-left:25%}.col-xs-offset-4{margin-left:33.333333%}.col-xs-offset-5{margin-left:41.666667%}.col-xs-offset-6{margin-left:50%}.col-xs-offset-7{margin-left:58.333333%}.col-xs-offset-8{margin-left:66.666667%}.col-xs-offset-9{margin-left:75%}.col-xs-offset-10{margin-left:83.333333%}.col-xs-offset-11{margin-left:91.666667%}.col-xs-offset-12{margin-left:100%}fieldset{margin:0;min-width:0}fieldset,legend{padding:0;border:0}legend{display:block;width:100%;margin-bottom:20px;font-size:21px;line-height:inherit;color:#333;border-bottom:1px solid #e5e5e5}label{display:inline-block;max-width:100%;margin-bottom:5px;font-weight:700}input[type=search]{box-sizing:border-box}input[type=checkbox],input[type=radio]{margin:4px 0 0;margin-top:1px\9;line-height:normal}input[type=file]{display:block}input[type=range]{display:block;width:100%}select[multiple],select[size]{height:auto}input[type=checkbox]:focus,input[type=file]:focus,input[type=radio]:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}output{padding-top:7px}.form-control,output{display:block;font-size:14px;line-height:1.428571;color:#555}.form-control{width:100%;height:34px;padding:6px 12px;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,.075);transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)}.form-control::-moz-placeholder{color:#999;opacity:1}.form-control:-ms-input-placeholder{color:#999}.form-control::-webkit-input-placeholder{color:#999}.form-control::-ms-expand{border:0;background-color:transparent}.form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{background-color:#eee;opacity:1}.form-control[disabled],fieldset[disabled] .form-control{cursor:not-allowed}textarea.form-control{height:auto}input[type=search]{-webkit-appearance:none}.form-group{margin-bottom:15px}.checkbox,.radio{position:relative;display:block;margin-top:10px;margin-bottom:10px}.checkbox label,.radio label{min-height:20px;padding-left:20px;margin-bottom:0;font-weight:400;cursor:pointer}.checkbox-inline input[type=checkbox],.checkbox input[type=checkbox],.radio-inline input[type=radio],.radio input[type=radio]{position:absolute;margin-left:-20px;margin-top:4px\9}.checkbox+.checkbox,.radio+.radio{margin-top:-5px}.checkbox-inline,.radio-inline{position:relative;display:inline-block;padding-left:20px;margin-bottom:0;vertical-align:middle;font-weight:400;cursor:pointer}.checkbox-inline+.checkbox-inline,.radio-inline+.radio-inline{margin-top:0;margin-left:10px}.checkbox-inline.disabled,.checkbox.disabled label,.radio-inline.disabled,.radio.disabled label,fieldset[disabled] .checkbox-inline,fieldset[disabled] .checkbox label,fieldset[disabled] .radio-inline,fieldset[disabled] .radio label,fieldset[disabled] input[type=checkbox],fieldset[disabled] input[type=radio],input[type=checkbox].disabled,input[type=checkbox][disabled],input[type=radio].disabled,input[type=radio][disabled]{cursor:not-allowed}.form-control-static{padding-top:7px;padding-bottom:7px;margin-bottom:0;min-height:34px}.form-control-static.input-lg,.form-control-static.input-sm,.input-group-lg>.form-control-static.form-control,.input-group-lg>.form-control-static.input-group-addon,.input-group-lg>.input-group-btn>.form-control-static.btn,.input-group-sm>.form-control-static.form-control,.input-group-sm>.form-control-static.input-group-addon,.input-group-sm>.input-group-btn>.form-control-static.btn{padding-left:0;padding-right:0}.input-group-sm>.form-control,.input-group-sm>.input-group-addon,.input-group-sm>.input-group-btn>.btn,.input-sm{height:30px;padding:5px 10px;font-size:12px;line-height:1.5;border-radius:3px}.input-group-sm>.input-group-btn>select.btn,.input-group-sm>select.form-control,.input-group-sm>select.input-group-addon,select.input-sm{height:30px;line-height:30px}.input-group-sm>.input-group-btn>select[multiple].btn,.input-group-sm>.input-group-btn>textarea.btn,.input-group-sm>select[multiple].form-control,.input-group-sm>select[multiple].input-group-addon,.input-group-sm>textarea.form-control,.input-group-sm>textarea.input-group-addon,select[multiple].input-sm,textarea.input-sm{height:auto}.form-group-sm .form-control{height:30px;padding:5px 10px;font-size:12px;line-height:1.5;border-radius:3px}.form-group-sm select.form-control{height:30px;line-height:30px}.form-group-sm select[multiple].form-control,.form-group-sm textarea.form-control{height:auto}.form-group-sm .form-control-static{height:30px;min-height:32px;padding:6px 10px;font-size:12px;line-height:1.5}.input-group-lg>.form-control,.input-group-lg>.input-group-addon,.input-group-lg>.input-group-btn>.btn,.input-lg{height:46px;padding:10px 16px;font-size:18px;line-height:1.333333;border-radius:6px}.input-group-lg>.input-group-btn>select.btn,.input-group-lg>select.form-control,.input-group-lg>select.input-group-addon,select.input-lg{height:46px;line-height:46px}.input-group-lg>.input-group-btn>select[multiple].btn,.input-group-lg>.input-group-btn>textarea.btn,.input-group-lg>select[multiple].form-control,.input-group-lg>select[multiple].input-group-addon,.input-group-lg>textarea.form-control,.input-group-lg>textarea.input-group-addon,select[multiple].input-lg,textarea.input-lg{height:auto}.form-group-lg .form-control{height:46px;padding:10px 16px;font-size:18px;line-height:1.333333;border-radius:6px}.form-group-lg select.form-control{height:46px;line-height:46px}.form-group-lg select[multiple].form-control,.form-group-lg textarea.form-control{height:auto}.form-group-lg .form-control-static{height:46px;min-height:38px;padding:11px 16px;font-size:18px;line-height:1.333333}.has-feedback{position:relative}.has-feedback .form-control{padding-right:42.5px}.form-control-feedback{position:absolute;top:0;right:0;z-index:2;display:block;width:34px;height:34px;line-height:34px;text-align:center;pointer-events:none}.form-group-lg .form-control+.form-control-feedback,.input-group-lg+.form-control-feedback,.input-group-lg>.form-control+.form-control-feedback,.input-group-lg>.input-group-addon+.form-control-feedback,.input-group-lg>.input-group-btn>.btn+.form-control-feedback,.input-lg+.form-control-feedback{width:46px;height:46px;line-height:46px}.form-group-sm .form-control+.form-control-feedback,.input-group-sm+.form-control-feedback,.input-group-sm>.form-control+.form-control-feedback,.input-group-sm>.input-group-addon+.form-control-feedback,.input-group-sm>.input-group-btn>.btn+.form-control-feedback,.input-sm+.form-control-feedback{width:30px;height:30px;line-height:30px}.has-success .checkbox,.has-success .checkbox-inline,.has-success.checkbox-inline label,.has-success.checkbox label,.has-success .control-label,.has-success .help-block,.has-success .radio,.has-success .radio-inline,.has-success.radio-inline label,.has-success.radio label{color:#3c763d}.has-success .form-control{border-color:#3c763d;box-shadow:inset 0 1px 1px rgba(0,0,0,.075)}.has-success .form-control:focus{border-color:#2b542c;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168}.has-success .input-group-addon{color:#3c763d;border-color:#3c763d;background-color:#dff0d8}.has-success .form-control-feedback{color:#3c763d}.has-warning .checkbox,.has-warning .checkbox-inline,.has-warning.checkbox-inline label,.has-warning.checkbox label,.has-warning .control-label,.has-warning .help-block,.has-warning .radio,.has-warning .radio-inline,.has-warning.radio-inline label,.has-warning.radio label{color:#8a6d3b}.has-warning .form-control{border-color:#8a6d3b;box-shadow:inset 0 1px 1px rgba(0,0,0,.075)}.has-warning .form-control:focus{border-color:#66512c;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #c0a16b}.has-warning .input-group-addon{color:#8a6d3b;border-color:#8a6d3b;background-color:#fcf8e3}.has-warning .form-control-feedback{color:#8a6d3b}.has-error .checkbox,.has-error .checkbox-inline,.has-error.checkbox-inline label,.has-error.checkbox label,.has-error .control-label,.has-error .help-block,.has-error .radio,.has-error .radio-inline,.has-error.radio-inline label,.has-error.radio label{color:#a94442}.has-error .form-control{border-color:#a94442;box-shadow:inset 0 1px 1px rgba(0,0,0,.075)}.has-error .form-control:focus{border-color:#843534;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483}.has-error .input-group-addon{color:#a94442;border-color:#a94442;background-color:#f2dede}.has-error .form-control-feedback{color:#a94442}.has-feedback label~.form-control-feedback{top:25px}.has-feedback label.sr-only~.form-control-feedback{top:0}.help-block{display:block;margin-top:5px;margin-bottom:10px;color:#737373}.form-horizontal .checkbox,.form-horizontal .checkbox-inline,.form-horizontal .radio,.form-horizontal .radio-inline{margin-top:0;margin-bottom:0;padding-top:7px}.form-horizontal .checkbox,.form-horizontal .radio{min-height:27px}.form-horizontal .form-group{margin-left:-15px;margin-right:-15px}.form-horizontal .form-group:after,.form-horizontal .form-group:before{content:" ";display:table}.form-horizontal .form-group:after{clear:both}.form-horizontal .has-feedback .form-control-feedback{right:15px}.input-group{position:relative;display:table;border-collapse:separate}.input-group[class*=col-]{float:none;padding-left:0;padding-right:0}.input-group .form-control{position:relative;z-index:2;float:left;width:100%;margin-bottom:0}.input-group .form-control:focus{z-index:3}.input-group-addon,.input-group-btn,.input-group .form-control{display:table-cell}.input-group-addon:not(:first-child):not(:last-child),.input-group-btn:not(:first-child):not(:last-child),.input-group .form-control:not(:first-child):not(:last-child){border-radius:0}.input-group-addon,.input-group-btn{width:1%;white-space:nowrap;vertical-align:middle}.input-group-addon{padding:6px 12px;font-size:14px;font-weight:400;line-height:1;color:#555;text-align:center;background-color:#eee;border:1px solid #ccc;border-radius:4px}.input-group-addon.input-sm,.input-group-sm>.input-group-addon,.input-group-sm>.input-group-btn>.input-group-addon.btn{padding:5px 10px;font-size:12px;border-radius:3px}.input-group-addon.input-lg,.input-group-lg>.input-group-addon,.input-group-lg>.input-group-btn>.input-group-addon.btn{padding:10px 16px;font-size:18px;border-radius:6px}.input-group-addon input[type=checkbox],.input-group-addon input[type=radio]{margin-top:0}.input-group-addon:first-child,.input-group-btn:first-child>.btn,.input-group-btn:first-child>.btn-group>.btn,.input-group-btn:first-child>.dropdown-toggle,.input-group-btn:last-child>.btn-group:not(:last-child)>.btn,.input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle),.input-group .form-control:first-child{border-bottom-right-radius:0;border-top-right-radius:0}.input-group-addon:first-child{border-right:0}.input-group-addon:last-child,.input-group-btn:first-child>.btn-group:not(:first-child)>.btn,.input-group-btn:first-child>.btn:not(:first-child),.input-group-btn:last-child>.btn,.input-group-btn:last-child>.btn-group>.btn,.input-group-btn:last-child>.dropdown-toggle,.input-group .form-control:last-child{border-bottom-left-radius:0;border-top-left-radius:0}.input-group-addon:last-child{border-left:0}.input-group-btn{font-size:0;white-space:nowrap}.input-group-btn,.input-group-btn>.btn{position:relative}.input-group-btn>.btn+.btn{margin-left:-1px}.input-group-btn>.btn:active,.input-group-btn>.btn:focus,.input-group-btn>.btn:hover{z-index:2}.input-group-btn:first-child>.btn,.input-group-btn:first-child>.btn-group{margin-right:-1px}.input-group-btn:last-child>.btn,.input-group-btn:last-child>.btn-group{z-index:2;margin-left:-1px}.label{display:inline;padding:.2em .6em .3em;font-size:75%;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25em}.label:empty{display:none}.btn .label{position:relative;top:-1px}a.label:focus,a.label:hover{color:#fff;text-decoration:none;cursor:pointer}.label-default{background-color:#777}.label-default[href]:focus,.label-default[href]:hover{background-color:#5e5e5e}.label-primary{background-color:#337ab7}.label-primary[href]:focus,.label-primary[href]:hover{background-color:#286090}.label-success{background-color:#5cb85c}.label-success[href]:focus,.label-success[href]:hover{background-color:#449d44}.label-info{background-color:#5bc0de}.label-info[href]:focus,.label-info[href]:hover{background-color:#31b0d5}.label-warning{background-color:#f0ad4e}.label-warning[href]:focus,.label-warning[href]:hover{background-color:#ec971f}.label-danger{background-color:#d9534f}.label-danger[href]:focus,.label-danger[href]:hover{background-color:#c9302c}h1{font-size:2.2em}h2{font-size:1.6em;letter-spacing:2px;text-transform:uppercase}.product-grid__item:hover body.theme-color-water .product-grid__item__name,.product-grid__item:hover body.theme-color-water .product-grid__item__price,body.theme-color-water .bg-main-color,body.theme-color-water .button--border--solid,body.theme-color-water .mobile-nav,body.theme-color-water .product-grid__item:hover .product-grid__item__name,body.theme-color-water .product-grid__item:hover .product-grid__item__price,body.theme-color-water .section--themed{background-color:#362bdc;color:#fff}.hamburger.lines:hover.active body.theme-color-water span:after,.hamburger.lines:hover.active body.theme-color-water span:before,.hamburger body.theme-color-water span,.hamburger body.theme-color-water span:after,.hamburger body.theme-color-water span:before,body.theme-color-water .bg-secondary-color,body.theme-color-water .hamburger.lines:hover.active span:after,body.theme-color-water .hamburger.lines:hover.active span:before,body.theme-color-water .hamburger span,body.theme-color-water .hamburger span:after,body.theme-color-water .hamburger span:before,body.theme-color-water .nav-link--home__text:after{background-color:#fff;color:#362bdc}.blogposts-centered body.theme-color-water .blogpost-title,body.theme-color-water .blogposts-centered .blogpost-title,body.theme-color-water .button--border,body.theme-color-water .font-main-color,body.theme-color-water .nav-link,body.theme-color-water .section__hero-content,body.theme-color-water footer a,footer body.theme-color-water a{color:#fff}article body.theme-color-water a,article body.theme-color-water a:visited,body.theme-color-water .employee-grid__item__email,body.theme-color-water .font-link-color,body.theme-color-water article a,body.theme-color-water article a:visited{color:#362bdc}body.theme-color-water --active.nav-link:visited,body.theme-color-water .border-main-color,body.theme-color-water .button--border,body.theme-color-water .nav-link--active,body.theme-color-water .nav-link:hover{border-color:#fff}.product-grid__item:hover body.theme-color-sun .product-grid__item__name,.product-grid__item:hover body.theme-color-sun .product-grid__item__price,body.theme-color-sun .bg-main-color,body.theme-color-sun .button--border--solid,body.theme-color-sun .mobile-nav,body.theme-color-sun .product-grid__item:hover .product-grid__item__name,body.theme-color-sun .product-grid__item:hover .product-grid__item__price,body.theme-color-sun .section--themed{background-color:#f8ea88;color:#000}.hamburger.lines:hover.active body.theme-color-sun span:after,.hamburger.lines:hover.active body.theme-color-sun span:before,.hamburger body.theme-color-sun span,.hamburger body.theme-color-sun span:after,.hamburger body.theme-color-sun span:before,body.theme-color-sun .bg-secondary-color,body.theme-color-sun .hamburger.lines:hover.active span:after,body.theme-color-sun .hamburger.lines:hover.active span:before,body.theme-color-sun .hamburger span,body.theme-color-sun .hamburger span:after,body.theme-color-sun .hamburger span:before,body.theme-color-sun .nav-link--home__text:after{background-color:#000;color:#f8ea88}.blogposts-centered body.theme-color-sun .blogpost-title,body.theme-color-sun .blogposts-centered .blogpost-title,body.theme-color-sun .button--border,body.theme-color-sun .font-main-color,body.theme-color-sun .nav-link,body.theme-color-sun .section__hero-content,body.theme-color-sun footer a,footer body.theme-color-sun a{color:#000}article body.theme-color-sun a,article body.theme-color-sun a:visited,body.theme-color-sun .employee-grid__item__email,body.theme-color-sun .font-link-color,body.theme-color-sun article a,body.theme-color-sun article a:visited{color:#b0a55b}body.theme-color-sun --active.nav-link:visited,body.theme-color-sun .border-main-color,body.theme-color-sun .button--border,body.theme-color-sun .nav-link--active,body.theme-color-sun .nav-link:hover{border-color:#000}.product-grid__item:hover body.theme-color-earth .product-grid__item__name,.product-grid__item:hover body.theme-color-earth .product-grid__item__price,body.theme-color-earth .bg-main-color,body.theme-color-earth .button--border--solid,body.theme-color-earth .mobile-nav,body.theme-color-earth .product-grid__item:hover .product-grid__item__name,body.theme-color-earth .product-grid__item:hover .product-grid__item__price,body.theme-color-earth .section--themed{background-color:#e7afa3;color:#000}.hamburger.lines:hover.active body.theme-color-earth span:after,.hamburger.lines:hover.active body.theme-color-earth span:before,.hamburger body.theme-color-earth span,.hamburger body.theme-color-earth span:after,.hamburger body.theme-color-earth span:before,body.theme-color-earth .bg-secondary-color,body.theme-color-earth .hamburger.lines:hover.active span:after,body.theme-color-earth .hamburger.lines:hover.active span:before,body.theme-color-earth .hamburger span,body.theme-color-earth .hamburger span:after,body.theme-color-earth .hamburger span:before,body.theme-color-earth .nav-link--home__text:after{background-color:#000;color:#e7afa3}.blogposts-centered body.theme-color-earth .blogpost-title,body.theme-color-earth .blogposts-centered .blogpost-title,body.theme-color-earth .button--border,body.theme-color-earth .font-main-color,body.theme-color-earth .nav-link,body.theme-color-earth .section__hero-content,body.theme-color-earth footer a,footer body.theme-color-earth a{color:#000}article body.theme-color-earth a,article body.theme-color-earth a:visited,body.theme-color-earth .employee-grid__item__email,body.theme-color-earth .font-link-color,body.theme-color-earth article a,body.theme-color-earth article a:visited{color:#90514c}body.theme-color-earth --active.nav-link:visited,body.theme-color-earth .border-main-color,body.theme-color-earth .button--border,body.theme-color-earth .nav-link--active,body.theme-color-earth .nav-link:hover{border-color:#000}.product-grid__item:hover body.theme-color-freaky .product-grid__item__name,.product-grid__item:hover body.theme-color-freaky .product-grid__item__price,body.theme-color-freaky .bg-main-color,body.theme-color-freaky .button--border--solid,body.theme-color-freaky .mobile-nav,body.theme-color-freaky .product-grid__item:hover .product-grid__item__name,body.theme-color-freaky .product-grid__item:hover .product-grid__item__price,body.theme-color-freaky .section--themed{background-color:#77f3d9;color:#000}.hamburger.lines:hover.active body.theme-color-freaky span:after,.hamburger.lines:hover.active body.theme-color-freaky span:before,.hamburger body.theme-color-freaky span,.hamburger body.theme-color-freaky span:after,.hamburger body.theme-color-freaky span:before,body.theme-color-freaky .bg-secondary-color,body.theme-color-freaky .hamburger.lines:hover.active span:after,body.theme-color-freaky .hamburger.lines:hover.active span:before,body.theme-color-freaky .hamburger span,body.theme-color-freaky .hamburger span:after,body.theme-color-freaky .hamburger span:before,body.theme-color-freaky .nav-link--home__text:after{background-color:#000;color:#77f3d9}.blogposts-centered body.theme-color-freaky .blogpost-title,article body.theme-color-freaky a,article body.theme-color-freaky a:visited,body.theme-color-freaky .blogposts-centered .blogpost-title,body.theme-color-freaky .button--border,body.theme-color-freaky .employee-grid__item__email,body.theme-color-freaky .font-link-color,body.theme-color-freaky .font-main-color,body.theme-color-freaky .nav-link,body.theme-color-freaky .section__hero-content,body.theme-color-freaky article a,body.theme-color-freaky article a:visited,body.theme-color-freaky footer a,footer body.theme-color-freaky a{color:#000}body.theme-color-freaky --active.nav-link:visited,body.theme-color-freaky .border-main-color,body.theme-color-freaky .button--border,body.theme-color-freaky .nav-link--active,body.theme-color-freaky .nav-link:hover{border-color:#000}.montserrat,body.theme-font-standard .nav-link.nav-link--home,body.theme-font-standard h1,body.theme-font-standard h2,body.theme-font-standard h3,body.theme-font-standard h4,body.theme-font-standard h5,body.theme-font-standard h6{font-family:Montserrat,sans-serif}.source-sans-pro,body.theme-font-standard,body.theme-font-standard .nav-link{font-family:Source Sans Pro,sans-serif}body.theme-font-standard p{line-height:1.6em;margin-bottom:30px}.lato,body.theme-font-mono .nav-link.nav-link--home,body.theme-font-mono h1,body.theme-font-mono h2,body.theme-font-mono h3,body.theme-font-mono h4,body.theme-font-mono h5,body.theme-font-mono h6{font-family:Lato,sans-serif}.roboto-mono,body.theme-font-mono,body.theme-font-mono .nav-link{font-family:Roboto Mono,monospace}body.theme-font-mono{font-weight:400;font-size:14px}body.theme-font-mono .nav-link.nav-link--home,body.theme-font-mono h1,body.theme-font-mono h2,body.theme-font-mono h3,body.theme-font-mono h4,body.theme-font-mono h5,body.theme-font-mono h6{font-weight:900}body.theme-font-mono p{line-height:1.6em;margin-bottom:30px}.playfair,body.theme-font-serif .nav-link.nav-link--home,body.theme-font-serif h1,body.theme-font-serif h2,body.theme-font-serif h3,body.theme-font-serif h4,body.theme-font-serif h5,body.theme-font-serif h6{font-family:Playfair Display,serif}.noto,body.theme-font-serif,body.theme-font-serif .nav-link{font-family:Noto Sans,sans-serif}body.theme-font-serif p{line-height:1.6em;margin-bottom:30px}.product-image-container{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center;-ms-flex-align:start;align-items:flex-start}.product-image{max-width:100%;max-height:600px}.product-price{font-size:30px;margin-bottom:20px}.product-teaser{font-size:18px;line-height:1.6em;margin-bottom:20px}.product-button{margin-bottom:40px}.product-advantages{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column}.product-advantage{padding:15px 0;font-weight:700;border-top:1px solid #f2f2f2}.product-advantage:last-child{border-bottom:1px solid #f2f2f2}.product-grid{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;overflow:hidden}.product-grid__item{height:300px;position:relative;overflow:hidden;-ms-flex:1 1 100%;flex:1 1 100%;max-width:100%;background-size:cover;background-repeat:no-repeat;background-position:50%}.product-grid__item:hover{cursor:pointer}.product-grid__item__overlay{position:absolute;bottom:0;padding:20px;width:100%;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;-ms-flex-align:start;align-items:flex-start}.product-grid__item-image{max-width:100%}.product-grid__item__name,.product-grid__item__price{color:#fff;text-transform:uppercase;font-size:14px;margin-bottom:5px;letter-spacing:5px;background-color:rgba(0,0,0,.35);padding:2px 5px;display:inline-block}.header{padding-top:50px;padding-bottom:50px;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;position:absolute;width:100%;z-index:4}.header--fixed{padding-top:20px;padding-bottom:20px;background:#fff;transition:padding .2s cubic-bezier(.694,.0482,.335,1),background .2s cubic-bezier(.694,.0482,.335,1);left:0;position:fixed}.header--fixed .nav-bar{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}.header--fixed .nav-link{color:#000!important}.header--fixed .nav-link--active,.header--fixed .nav-link:hover{border-bottom-color:#000!important}.header--fixed .hamburger span,.header--fixed .hamburger span:after,.header--fixed .hamburger span:before{background-color:#000!important}body.frontpage .header:not(.header--fixed) .nav-link--home__text:after{background-color:#fff}body.frontpage .header:not(.header--fixed) .nav-link{color:#fff}body.frontpage .header:not(.header--fixed) .nav-link--active,body.frontpage .header:not(.header--fixed) .nav-link:hover{border-bottom-color:#fff}body.frontpage .header:not(.header--fixed) .hamburger span,body.frontpage .header:not(.header--fixed) .hamburger span:after,body.frontpage .header:not(.header--fixed) .hamburger span:before{background-color:#fff}body.fixed .top-nav.-open{position:fixed;top:0;bottom:0;left:0;transform:translate(0)}footer{padding-top:60px;padding-bottom:60px}.logo{padding-left:20px}.logo-image{max-width:180px;max-height:100px;height:auto;margin-left:20px;display:block}.nav-bar{display:-ms-inline-flexbox;display:inline-flex;-ms-flex-align:center;align-items:center;-ms-flex-direction:row;flex-direction:row}.nav-bar--list{-ms-flex-direction:column;flex-direction:column;-ms-flex-align:start;align-items:flex-start}.nav-bar--center,.nav-bar--list{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center}.nav-bar--air-bottom{margin-bottom:40px}.nav-link,.nav-link:visited{text-decoration:none;margin:10px 15px;font-size:14px;text-transform:uppercase;font-weight:600;letter-spacing:2px;border-bottom:2px solid transparent}.nav-link--air-bottom{margin-bottom:5px}a.nav-link.nav-link--black{color:#000}a.nav-link.nav-link--black:hover{border-color:#000}.nav-link--black.nav-link--active{box-shadow:inset 0 -2px 0 #000}.nav-link--home{font-size:24px;font-weight:900;margin-right:40px;color:#f4f4f0}.nav-link--home:hover{box-shadow:none}.nav-link--home__text{position:relative}.nav-link--home__text:after{position:absolute;right:0;display:block;content:"";height:3px;width:200%}.section{padding:90px 20px}.section--sand{background-color:#f4f4f0}.section--stroke-bottom{border-bottom:1px solid #f2f2f2}.section--full-height{min-height:100vh}.section--header{min-height:320px;padding-top:130px}.section--content-center{-ms-flex-align:center;align-items:center;text-align:center}.section--content-center,.section--content-center-bottom{display:-ms-flexbox;display:flex;-ms-flex-pack:center;justify-content:center}.section--content-center-bottom{-ms-flex-align:end;align-items:flex-end}.section--thick-border{border:20px solid #fff}body.frontpage .section__hero-content{color:#fff}.section__hero-content{max-width:760px;padding:0 20px}.section__description{font-size:18px;line-height:1.5;margin-bottom:60px}.background-image-full{background-repeat:no-repeat;background-size:cover;background-position:50%}.overlay{position:relative}.overlay:after{content:"";z-index:0;position:absolute;top:0;left:0;width:100%;height:100%}.overlay--dark:after{background:rgba(37,33,33,.6)}.overlay--light:after{background:hsla(0,0%,88%,.6)}.overlay *{position:relative;z-index:1}.button,.button--small{display:-ms-inline-flexbox;display:inline-flex;max-width:100%;padding:10px 40px;text-align:center;text-decoration:none;letter-spacing:2px;text-transform:uppercase;color:#fff;font-size:16px;font-weight:700;border:2px solid #000;outline:none}.button--small:hover,.button:hover{opacity:.7}.button--small{padding:8px 40px;font-size:14px}.button--border--light{background:none;border-color:#fff;color:#fff}.button--border--light:hover{background:#fff;color:#000;opacity:1}.button--border--light_solid{background:#fff;border-color:#fff;color:#000}.button--border--light_solid:hover{opacity:.7}.button--border--dark{background:none;border-color:#000;color:#000}.button--border--dark:hover{background:#000;color:#fff;opacity:1}.button--border--dark_solid{background:#000;border-color:#000;color:#fff}.button--border--dark_solid:hover{opacity:.7}.button--border{background:none}.button--border:hover{opacity:1}.button--border--solid{border-color:transparent}.button--border--solid:hover{opacity:.7}.blogposts{margin-left:auto;margin-right:auto}.blogpost{text-decoration:none;color:#000;display:block;padding:30px 20px}.blogpost.blogpost-with-image{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column}.blogpost:last-child{margin-bottom:60px}.blogpost:hover .blogpost-title{text-decoration:underline}.blogpost-image{-ms-flex:1 0 100%;flex:1 0 100%;margin-left:40px;border-radius:50%}.blogpost-info{-ms-flex:1 1 auto;flex:1 1 auto}.blogpost-meta{display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:start;justify-content:flex-start;margin-bottom:10px}.blogpost-date{display:block;opacity:1;margin-right:10px}.blogpost-cat{opacity:.5}.blogpost-image{height:160px;width:160px;background-size:cover;margin-left:auto;margin-right:auto;margin-top:15px}.blogpost-title{font-size:22px;letter-spacing:1px;margin:0 0 10px}.blogpost-excerpt{font-size:16px;line-height:1.5;opacity:.8}.blogpost-link{margin-top:25px;display:-ms-inline-flexbox;display:inline-flex;padding-bottom:2px;border-bottom:2px solid rgba(0,0,0,.15);color:#000;text-decoration:none;font-size:18px}.blogpost-link:hover{border-bottom-color:#000}.blogposts-centered{text-align:center}.blogposts-centered .blogpost{margin:30px 0;padding:30px 30px 0}.blogposts-centered .blogpost:hover{background:none}.blogposts-centered .blogpost+.blogpost{border-top:1px solid #f4f4f0}.blogposts-centered .blogpost-title{margin-bottom:30px}.blogposts-centered .blogpost-excerpt{font-size:18px}.blogposts-centered .blogpost-meta{-ms-flex-pack:center;justify-content:center}.blogposts-centered .blogpost-title{font-size:30px;line-height:1.3}.testimonial{text-decoration:none;color:#000;display:block;background:#f4f4f0;margin-bottom:30px}.testimonial-image{width:100%;height:200px;background-size:cover;background-position:50%}.testimonial-content{padding:30px}.testimonial-title{letter-spacing:1px;margin:0 0 10px}p.testimonial-text{margin-top:0;margin-bottom:0!important}.testimonial-link{color:rgba(0,0,0,.3);text-decoration:none;display:inline-block;margin-top:20px}.testimonial-link:hover{color:#000}.employee-grid{display:-ms-flexbox;display:flex;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;overflow:hidden}.employee-grid__item{-ms-flex:1 1 100%;flex:1 1 100%;max-width:100%;padding-top:10px;padding-bottom:10px}.employee-grid__item__image{height:300px;background-size:cover;background-repeat:no-repeat;background-position:50%}.employee-grid__item__details{padding:30px;background:#f4f4f0}.employee-grid__item__name{color:#000;letter-spacing:1px;margin-top:0;margin-bottom:5px}.employee-grid__item__email{text-decoration:none;margin-bottom:15px;display:inline-block}.employee-grid__item__contact-item{color:rgba(0,0,0,.3);text-decoration:none;display:inline-block;margin-right:10px}.employee-grid__item__contact-item:hover{color:#000}label{margin-bottom:10px;font-size:12px;text-transform:uppercase}.form-group{margin-bottom:25px}.form-control{border-radius:0;box-shadow:none;transition:none;padding:20px 15px}.form-control:focus{border-color:#362bdc;box-shadow:none}.mobile-nav-handler{margin-left:auto;margin-right:40px}.hamburger{position:relative;cursor:pointer;z-index:5;width:40px;height:40px;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center}.hamburger span,.hamburger span:after,.hamburger span:before{display:block;transition-property:all;transition-duration:.1s}.hamburger span{margin:0 auto;position:relative}.hamburger span:after,.hamburger span:before{position:absolute;content:''}.hamburger.lines span,.hamburger.lines span:after,.hamburger.lines span:before{width:20px;height:2px}.hamburger.lines span:before{transform:translateY(-5px)}.hamburger.lines span:after{transform:translateY(5px)}.hamburger.lines:hover span:before{transform:translateY(-7px)}.hamburger.lines:hover span:after{transform:translateY(7px)}.hamburger.lines:hover.active span:before{transform:rotate(45deg)}.hamburger.lines:hover.active span:after{transform:rotate(-45deg)}.hamburger.lines.active span{background-color:transparent!important}.hamburger.lines.active span:after,.hamburger.lines.active span:before{transform:translateY(0)}.hamburger.lines.active span:before{transform:rotate(45deg)}.hamburger.lines.active span:after{transform:rotate(-45deg)}article{max-width:700px;margin:0 auto}article a,article a:visited{text-decoration:none;text-decoration:underline}article a:hover,article a:visited:hover{text-decoration:none}article li,article p{font-weight:400;font-style:normal;font-size:18px;line-height:1.5}article li{padding:5px 0}article ol,article ul{margin:20px;padding:0}article img{max-width:100%}article iframe,article img{margin:0 0 20px}.mobile-nav{width:100%;height:auto;z-index:4;left:0;top:0;right:0;bottom:0;display:-ms-flexbox;display:flex;position:fixed;-ms-flex-pack:center;justify-content:center;-ms-flex-align:center;align-items:center;opacity:0;height:0}.mobile-nav--open{opacity:1;height:100vh}.mobile-nav .nav-link{transition:transform .6s cubic-bezier(.23,1,.32,1);transform:translateY(999px);opacity:0;font-size:18px;margin:15px}.mobile-nav .nav-link:nth-child(1){transition-delay:60ms}.mobile-nav .nav-link:nth-child(2){transition-delay:80ms}.mobile-nav .nav-link:nth-child(3){transition-delay:.1s}.mobile-nav .nav-link:nth-child(4){transition-delay:.12s}.mobile-nav .nav-link:nth-child(5){transition-delay:.14s}.mobile-nav .nav-link:nth-child(6){transition-delay:.16s}.mobile-nav .nav-link:nth-child(7){transition-delay:.18s}.mobile-nav .nav-link:nth-child(8){transition-delay:.2s}.mobile-nav .nav-link:nth-child(9){transition-delay:.22s}.mobile-nav .nav-link:nth-child(10){transition-delay:.24s}.mobile-nav .nav-link:nth-child(11){transition-delay:.26s}.mobile-nav--open .nav-link{transform:translate(0);opacity:1}.ta-center{text-align:center}.mw-640{max-width:640px}.ma-h-auto{margin-left:auto;margin-right:auto}.no-air{margin:0}.no-scroll{overflow:hidden}@media screen and (-webkit-min-device-pixel-ratio:0){input[type=date].form-control,input[type=datetime-local].form-control,input[type=month].form-control,input[type=time].form-control{line-height:34px}.input-group-sm>.input-group-btn>input[type=date].btn,.input-group-sm>.input-group-btn>input[type=datetime-local].btn,.input-group-sm>.input-group-btn>input[type=month].btn,.input-group-sm>.input-group-btn>input[type=time].btn,.input-group-sm>input[type=date].form-control,.input-group-sm>input[type=date].input-group-addon,.input-group-sm>input[type=datetime-local].form-control,.input-group-sm>input[type=datetime-local].input-group-addon,.input-group-sm>input[type=month].form-control,.input-group-sm>input[type=month].input-group-addon,.input-group-sm>input[type=time].form-control,.input-group-sm>input[type=time].input-group-addon,.input-group-sm input[type=date],.input-group-sm input[type=datetime-local],.input-group-sm input[type=month],.input-group-sm input[type=time],input[type=date].input-sm,input[type=datetime-local].input-sm,input[type=month].input-sm,input[type=time].input-sm{line-height:30px}.input-group-lg>.input-group-btn>input[type=date].btn,.input-group-lg>.input-group-btn>input[type=datetime-local].btn,.input-group-lg>.input-group-btn>input[type=month].btn,.input-group-lg>.input-group-btn>input[type=time].btn,.input-group-lg>input[type=date].form-control,.input-group-lg>input[type=date].input-group-addon,.input-group-lg>input[type=datetime-local].form-control,.input-group-lg>input[type=datetime-local].input-group-addon,.input-group-lg>input[type=month].form-control,.input-group-lg>input[type=month].input-group-addon,.input-group-lg>input[type=time].form-control,.input-group-lg>input[type=time].input-group-addon,.input-group-lg input[type=date],.input-group-lg input[type=datetime-local],.input-group-lg input[type=month],.input-group-lg input[type=time],input[type=date].input-lg,input[type=datetime-local].input-lg,input[type=month].input-lg,input[type=time].input-lg{line-height:46px}}@media (min-width:768px){.container{width:750px}.col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11,.col-sm-12{float:left}.col-sm-1{width:8.333333%}.col-sm-2{width:16.666667%}.col-sm-3{width:25%}.col-sm-4{width:33.333333%}.col-sm-5{width:41.666667%}.col-sm-6{width:50%}.col-sm-7{width:58.333333%}.col-sm-8{width:66.666667%}.col-sm-9{width:75%}.col-sm-10{width:83.333333%}.col-sm-11{width:91.666667%}.col-sm-12{width:100%}.col-sm-pull-0{right:auto}.col-sm-pull-1{right:8.333333%}.col-sm-pull-2{right:16.666667%}.col-sm-pull-3{right:25%}.col-sm-pull-4{right:33.333333%}.col-sm-pull-5{right:41.666667%}.col-sm-pull-6{right:50%}.col-sm-pull-7{right:58.333333%}.col-sm-pull-8{right:66.666667%}.col-sm-pull-9{right:75%}.col-sm-pull-10{right:83.333333%}.col-sm-pull-11{right:91.666667%}.col-sm-pull-12{right:100%}.col-sm-push-0{left:auto}.col-sm-push-1{left:8.333333%}.col-sm-push-2{left:16.666667%}.col-sm-push-3{left:25%}.col-sm-push-4{left:33.333333%}.col-sm-push-5{left:41.666667%}.col-sm-push-6{left:50%}.col-sm-push-7{left:58.333333%}.col-sm-push-8{left:66.666667%}.col-sm-push-9{left:75%}.col-sm-push-10{left:83.333333%}.col-sm-push-11{left:91.666667%}.col-sm-push-12{left:100%}.col-sm-offset-0{margin-left:0}.col-sm-offset-1{margin-left:8.333333%}.col-sm-offset-2{margin-left:16.666667%}.col-sm-offset-3{margin-left:25%}.col-sm-offset-4{margin-left:33.333333%}.col-sm-offset-5{margin-left:41.666667%}.col-sm-offset-6{margin-left:50%}.col-sm-offset-7{margin-left:58.333333%}.col-sm-offset-8{margin-left:66.666667%}.col-sm-offset-9{margin-left:75%}.col-sm-offset-10{margin-left:83.333333%}.col-sm-offset-11{margin-left:91.666667%}.col-sm-offset-12{margin-left:100%}.form-inline .form-group{display:inline-block;margin-bottom:0;vertical-align:middle}.form-inline .form-control{display:inline-block;width:auto;vertical-align:middle}.form-inline .form-control-static{display:inline-block}.form-inline .input-group{display:inline-table;vertical-align:middle}.form-inline .input-group .form-control,.form-inline .input-group .input-group-addon,.form-inline .input-group .input-group-btn{width:auto}.form-inline .input-group>.form-control{width:100%}.form-inline .control-label{margin-bottom:0;vertical-align:middle}.form-inline .checkbox,.form-inline .radio{display:inline-block;margin-top:0;margin-bottom:0;vertical-align:middle}.form-inline .checkbox label,.form-inline .radio label{padding-left:0}.form-inline .checkbox input[type=checkbox],.form-inline .radio input[type=radio]{position:relative;margin-left:0}.form-inline .has-feedback .form-control-feedback{top:0}.form-horizontal .control-label{text-align:right;margin-bottom:0;padding-top:7px}.form-horizontal .form-group-lg .control-label{padding-top:11px;font-size:18px}.form-horizontal .form-group-sm .control-label{padding-top:6px;font-size:12px}.employee-grid__item,.product-grid__item{-ms-flex:1 1 50%;flex:1 1 50%;max-width:50%}.employee-grid__item{padding:10px}}@media (min-width:992px){.container{width:970px}.col-md-1,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-10,.col-md-11,.col-md-12{float:left}.col-md-1{width:8.333333%}.col-md-2{width:16.666667%}.col-md-3{width:25%}.col-md-4{width:33.333333%}.col-md-5{width:41.666667%}.col-md-6{width:50%}.col-md-7{width:58.333333%}.col-md-8{width:66.666667%}.col-md-9{width:75%}.col-md-10{width:83.333333%}.col-md-11{width:91.666667%}.col-md-12{width:100%}.col-md-pull-0{right:auto}.col-md-pull-1{right:8.333333%}.col-md-pull-2{right:16.666667%}.col-md-pull-3{right:25%}.col-md-pull-4{right:33.333333%}.col-md-pull-5{right:41.666667%}.col-md-pull-6{right:50%}.col-md-pull-7{right:58.333333%}.col-md-pull-8{right:66.666667%}.col-md-pull-9{right:75%}.col-md-pull-10{right:83.333333%}.col-md-pull-11{right:91.666667%}.col-md-pull-12{right:100%}.col-md-push-0{left:auto}.col-md-push-1{left:8.333333%}.col-md-push-2{left:16.666667%}.col-md-push-3{left:25%}.col-md-push-4{left:33.333333%}.col-md-push-5{left:41.666667%}.col-md-push-6{left:50%}.col-md-push-7{left:58.333333%}.col-md-push-8{left:66.666667%}.col-md-push-9{left:75%}.col-md-push-10{left:83.333333%}.col-md-push-11{left:91.666667%}.col-md-push-12{left:100%}.col-md-offset-0{margin-left:0}.col-md-offset-1{margin-left:8.333333%}.col-md-offset-2{margin-left:16.666667%}.col-md-offset-3{margin-left:25%}.col-md-offset-4{margin-left:33.333333%}.col-md-offset-5{margin-left:41.666667%}.col-md-offset-6{margin-left:50%}.col-md-offset-7{margin-left:58.333333%}.col-md-offset-8{margin-left:66.666667%}.col-md-offset-9{margin-left:75%}.col-md-offset-10{margin-left:83.333333%}.col-md-offset-11{margin-left:91.666667%}.col-md-offset-12{margin-left:100%}.nav-link,.nav-link:visited{margin-left:15px;margin-right:15px}.button,.button--small{padding:10px 80px}.blogposts{max-width:800px}.blogpost{padding:30px;margin:20px 0}.blogpost.blogpost-with-image{-ms-flex-direction:row;flex-direction:row}.blogpost-image{height:160px;max-width:160px;margin-top:0;margin-left:20px}.employee-grid{margin-left:20px;margin-right:20px}.mobile-nav-handler{display:none}}@media (min-width:1200px){.container{width:1170px}.col-lg-1,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-10,.col-lg-11,.col-lg-12{float:left}.col-lg-1{width:8.333333%}.col-lg-2{width:16.666667%}.col-lg-3{width:25%}.col-lg-4{width:33.333333%}.col-lg-5{width:41.666667%}.col-lg-6{width:50%}.col-lg-7{width:58.333333%}.col-lg-8{width:66.666667%}.col-lg-9{width:75%}.col-lg-10{width:83.333333%}.col-lg-11{width:91.666667%}.col-lg-12{width:100%}.col-lg-pull-0{right:auto}.col-lg-pull-1{right:8.333333%}.col-lg-pull-2{right:16.666667%}.col-lg-pull-3{right:25%}.col-lg-pull-4{right:33.333333%}.col-lg-pull-5{right:41.666667%}.col-lg-pull-6{right:50%}.col-lg-pull-7{right:58.333333%}.col-lg-pull-8{right:66.666667%}.col-lg-pull-9{right:75%}.col-lg-pull-10{right:83.333333%}.col-lg-pull-11{right:91.666667%}.col-lg-pull-12{right:100%}.col-lg-push-0{left:auto}.col-lg-push-1{left:8.333333%}.col-lg-push-2{left:16.666667%}.col-lg-push-3{left:25%}.col-lg-push-4{left:33.333333%}.col-lg-push-5{left:41.666667%}.col-lg-push-6{left:50%}.col-lg-push-7{left:58.333333%}.col-lg-push-8{left:66.666667%}.col-lg-push-9{left:75%}.col-lg-push-10{left:83.333333%}.col-lg-push-11{left:91.666667%}.col-lg-push-12{left:100%}.col-lg-offset-0{margin-left:0}.col-lg-offset-1{margin-left:8.333333%}.col-lg-offset-2{margin-left:16.666667%}.col-lg-offset-3{margin-left:25%}.col-lg-offset-4{margin-left:33.333333%}.col-lg-offset-5{margin-left:41.666667%}.col-lg-offset-6{margin-left:50%}.col-lg-offset-7{margin-left:58.333333%}.col-lg-offset-8{margin-left:66.666667%}.col-lg-offset-9{margin-left:75%}.col-lg-offset-10{margin-left:83.333333%}.col-lg-offset-11{margin-left:91.666667%}.col-lg-offset-12{margin-left:100%}.employee-grid__item,.product-grid__item{-ms-flex:1 1 33%;flex:1 1 33%;max-width:33%}.employee-grid__item{padding:20px}}@media (max-width:992px){.header .nav-bar{display:none}.nav-bar{-ms-flex-direction:column;flex-direction:column;-ms-flex-align:center;-ms-grid-row-align:center;align-items:center}}]]></Content>
+      <Properties />
+    </Stylesheet>
+  </Stylesheets>
+  <Macros>
+    <macro>
+      <name>Select Featured Products</name>
+      <alias>featuredProducts</alias>
+      <scriptType />
+      <scriptAssembly />
+      <scriptingFile>~/Views/MacroPartials/featuredProducts.cshtml</scriptingFile>
+      <xslt />
+      <useInEditor>True</useInEditor>
+      <dontRender>False</dontRender>
+      <refreshRate>0</refreshRate>
+      <cacheByMember>False</cacheByMember>
+      <cacheByPage>False</cacheByPage>
+      <properties>
+        <property name="Choose Products" alias="products" sortOrder="0" propertyType="contentType" />
+      </properties>
+    </macro>
+    <macro>
+      <name>Get Latest Blogposts</name>
+      <alias>latestBlogposts</alias>
+      <scriptType />
+      <scriptAssembly />
+      <scriptingFile>~/Views/MacroPartials/latestBlogposts.cshtml</scriptingFile>
+      <xslt />
+      <useInEditor>True</useInEditor>
+      <dontRender>False</dontRender>
+      <refreshRate>0</refreshRate>
+      <cacheByMember>False</cacheByMember>
+      <cacheByPage>False</cacheByPage>
+      <properties>
+        <property name="How many posts should be shown" alias="numberOfPosts" sortOrder="0" propertyType="Umbraco.Integer" />
+        <property name="Where to get blog posts from" alias="startNodeId" sortOrder="0" propertyType="Umbraco.ContentPicker2" />
+      </properties>
+    </macro>
+    <macro>
+      <name>Showcase Product</name>
+      <alias>featuredProduct</alias>
+      <scriptType />
+      <scriptAssembly />
+      <scriptingFile>~/Views/MacroPartials/featuredProducts.cshtml</scriptingFile>
+      <xslt />
+      <useInEditor>True</useInEditor>
+      <dontRender>False</dontRender>
+      <refreshRate>0</refreshRate>
+      <cacheByMember>False</cacheByMember>
+      <cacheByPage>False</cacheByPage>
+      <properties>
+        <property name="Choose Product" alias="product" sortOrder="0" propertyType="Umbraco.ContentPickerAlias" />
+      </properties>
+    </macro>
+  </Macros>
+  <DictionaryItems />
+  <Languages />
+  <DataTypes>
+    <DataType Name="Home - Description - Rich Text Editor" Id="Umbraco.TinyMCEv3" Definition="11ca5aeb-b315-4225-9cec-1130ee28ddea" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="16" Value="{&#xD;&#xA;  &quot;toolbar&quot;: [&#xD;&#xA;    &quot;code&quot;,&#xD;&#xA;    &quot;undo&quot;,&#xD;&#xA;    &quot;redo&quot;,&#xD;&#xA;    &quot;bold&quot;,&#xD;&#xA;    &quot;italic&quot;,&#xD;&#xA;    &quot;bullist&quot;,&#xD;&#xA;    &quot;numlist&quot;,&#xD;&#xA;    &quot;outdent&quot;,&#xD;&#xA;    &quot;indent&quot;,&#xD;&#xA;    &quot;link&quot;&#xD;&#xA;  ],&#xD;&#xA;  &quot;stylesheets&quot;: [],&#xD;&#xA;  &quot;dimensions&quot;: {&#xD;&#xA;    &quot;height&quot;: 500&#xD;&#xA;  },&#xD;&#xA;  &quot;maxImageSize&quot;: 500&#xD;&#xA;}" Alias="editor" SortOrder="0" />
+        <PreValue Id="17" Value="" Alias="hideLabel" SortOrder="1" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Home - Call To Action Link - Content Picker" Id="Umbraco.ContentPicker2" Definition="e449f1bd-2664-4e0d-a7b8-439196b96eda" DatabaseType="Nvarchar">
+      <PreValues>
+        <PreValue Id="165" Value="0" Alias="showOpenButton" SortOrder="0" />
+        <PreValue Id="166" Value="-1" Alias="startNodeId" SortOrder="1" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Home - Design - Media Picker" Id="Umbraco.MediaPicker2" Definition="f5264d17-afc1-4070-a0b6-c0b205890bfe" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="167" Value="" Alias="multiPicker" SortOrder="0" />
+        <PreValue Id="168" Value="1" Alias="onlyImages" SortOrder="1" />
+        <PreValue Id="169" Value="1" Alias="disableFolderSelect" SortOrder="2" />
+        <PreValue Id="170" Value="umb://media/b6f11172373f4473af0f0b0e5aefd21c" Alias="startNodeId" SortOrder="3" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Content Base - Content - Grid layout" Id="Umbraco.Grid" Definition="1cd1f7c5-f2ed-4aa2-ac7c-fb2ab363a743" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="28" Value="{&#xD;&#xA;  &quot;styles&quot;: [],&#xD;&#xA;  &quot;config&quot;: [],&#xD;&#xA;  &quot;columns&quot;: 12,&#xD;&#xA;  &quot;templates&quot;: [&#xD;&#xA;    {&#xD;&#xA;      &quot;name&quot;: &quot;1 column layout&quot;,&#xD;&#xA;      &quot;sections&quot;: [&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 12&#xD;&#xA;        }&#xD;&#xA;      ]&#xD;&#xA;    }&#xD;&#xA;  ],&#xD;&#xA;  &quot;layouts&quot;: [&#xD;&#xA;    {&#xD;&#xA;      &quot;name&quot;: &quot;Full Width&quot;,&#xD;&#xA;      &quot;areas&quot;: [&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 12,&#xD;&#xA;          &quot;editors&quot;: [&#xD;&#xA;            &quot;headline&quot;&#xD;&#xA;          ],&#xD;&#xA;          &quot;allowAll&quot;: false,&#xD;&#xA;          &quot;allowed&quot;: [&#xD;&#xA;            &quot;media&quot;,&#xD;&#xA;            &quot;embed&quot;,&#xD;&#xA;            &quot;headline&quot;,&#xD;&#xA;            &quot;rte&quot;,&#xD;&#xA;            &quot;macro&quot;&#xD;&#xA;          ]&#xD;&#xA;        }&#xD;&#xA;      ]&#xD;&#xA;    },&#xD;&#xA;    {&#xD;&#xA;      &quot;name&quot;: &quot;Article&quot;,&#xD;&#xA;      &quot;areas&quot;: [&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 4,&#xD;&#xA;          &quot;allowAll&quot;: false,&#xD;&#xA;          &quot;allowed&quot;: [&#xD;&#xA;            &quot;quote&quot;,&#xD;&#xA;            &quot;embed&quot;,&#xD;&#xA;            &quot;macro&quot;,&#xD;&#xA;            &quot;media&quot;,&#xD;&#xA;            &quot;rte&quot;&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 8,&#xD;&#xA;          &quot;allowAll&quot;: false,&#xD;&#xA;          &quot;allowed&quot;: [&#xD;&#xA;            &quot;rte&quot;,&#xD;&#xA;            &quot;media&quot;,&#xD;&#xA;            &quot;macro&quot;,&#xD;&#xA;            &quot;embed&quot;,&#xD;&#xA;            &quot;headline&quot;,&#xD;&#xA;            &quot;quote&quot;&#xD;&#xA;          ]&#xD;&#xA;        }&#xD;&#xA;      ]&#xD;&#xA;    },&#xD;&#xA;    {&#xD;&#xA;      &quot;name&quot;: &quot;Three Columns&quot;,&#xD;&#xA;      &quot;areas&quot;: [&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 4,&#xD;&#xA;          &quot;allowAll&quot;: true&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 4&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 4&#xD;&#xA;        }&#xD;&#xA;      ]&#xD;&#xA;    }&#xD;&#xA;  ]&#xD;&#xA;}" Alias="items" SortOrder="0" />
+        <PreValue Id="29" Value="{&#xD;&#xA;  &quot;toolbar&quot;: [&#xD;&#xA;    &quot;code&quot;,&#xD;&#xA;    &quot;undo&quot;,&#xD;&#xA;    &quot;redo&quot;,&#xD;&#xA;    &quot;styleselect&quot;,&#xD;&#xA;    &quot;bold&quot;,&#xD;&#xA;    &quot;italic&quot;,&#xD;&#xA;    &quot;strikethrough&quot;,&#xD;&#xA;    &quot;alignleft&quot;,&#xD;&#xA;    &quot;aligncenter&quot;,&#xD;&#xA;    &quot;alignright&quot;,&#xD;&#xA;    &quot;bullist&quot;,&#xD;&#xA;    &quot;numlist&quot;,&#xD;&#xA;    &quot;outdent&quot;,&#xD;&#xA;    &quot;indent&quot;,&#xD;&#xA;    &quot;link&quot;,&#xD;&#xA;    &quot;table&quot;&#xD;&#xA;  ],&#xD;&#xA;  &quot;stylesheets&quot;: [],&#xD;&#xA;  &quot;dimensions&quot;: {&#xD;&#xA;    &quot;height&quot;: 500&#xD;&#xA;  },&#xD;&#xA;  &quot;maxImageSize&quot;: 500&#xD;&#xA;}" Alias="rte" SortOrder="1" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Products - Default Currency - Dropdown list" Id="Umbraco.DropDown" Definition="4d7ef8eb-0e2f-4847-8025-9570aae43544" DatabaseType="Nvarchar">
+      <PreValues>
+        <PreValue Id="30" Value="€" Alias="0" SortOrder="0" />
+        <PreValue Id="31" Value="£" Alias="1" SortOrder="1" />
+        <PreValue Id="32" Value="$" Alias="2" SortOrder="2" />
+        <PreValue Id="33" Value="DKK" Alias="3" SortOrder="3" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Person - Photo - Media Picker" Id="Umbraco.MediaPicker2" Definition="c63ba300-f879-40e9-86cb-2e9401f64e16" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="171" Value="" Alias="multiPicker" SortOrder="0" />
+        <PreValue Id="172" Value="1" Alias="onlyImages" SortOrder="1" />
+        <PreValue Id="173" Value="1" Alias="disableFolderSelect" SortOrder="2" />
+        <PreValue Id="174" Value="umb://media/1fd2ecaff3714c009306867fa4585e7a" Alias="startNodeId" SortOrder="3" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Contact - Contact Intro - Rich Text Editor" Id="Umbraco.TinyMCEv3" Definition="6cb46f55-a79a-43b9-adf4-324eded44723" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="41" Value="{&#xD;&#xA;  &quot;toolbar&quot;: [&#xD;&#xA;    &quot;undo&quot;,&#xD;&#xA;    &quot;redo&quot;,&#xD;&#xA;    &quot;styleselect&quot;,&#xD;&#xA;    &quot;bold&quot;,&#xD;&#xA;    &quot;italic&quot;,&#xD;&#xA;    &quot;alignleft&quot;,&#xD;&#xA;    &quot;aligncenter&quot;,&#xD;&#xA;    &quot;alignright&quot;,&#xD;&#xA;    &quot;bullist&quot;,&#xD;&#xA;    &quot;numlist&quot;,&#xD;&#xA;    &quot;outdent&quot;,&#xD;&#xA;    &quot;indent&quot;,&#xD;&#xA;    &quot;link&quot;&#xD;&#xA;  ],&#xD;&#xA;  &quot;stylesheets&quot;: [],&#xD;&#xA;  &quot;dimensions&quot;: {&#xD;&#xA;    &quot;height&quot;: 500&#xD;&#xA;  },&#xD;&#xA;  &quot;maxImageSize&quot;: 500&#xD;&#xA;}" Alias="editor" SortOrder="0" />
+        <PreValue Id="42" Value="" Alias="hideLabel" SortOrder="1" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Contact - Your Address - Terratype" Id="Terratype" Definition="018e0ec8-d804-4874-a655-91cb72d5efb2" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="196" Value="{&#xD;&#xA;  &quot;config&quot;: {&#xD;&#xA;    &quot;height&quot;: 400,&#xD;&#xA;    &quot;gridHeight&quot;: 400,&#xD;&#xA;    &quot;debug&quot;: 0,&#xD;&#xA;    &quot;icon&quot;: {&#xD;&#xA;      &quot;id&quot;: &quot;redmarker&quot;,&#xD;&#xA;      &quot;url&quot;: &quot;https://mt.google.com/vt/icon/name=icons/spotlight/spotlight-poi.png&quot;,&#xD;&#xA;      &quot;size&quot;: {&#xD;&#xA;        &quot;width&quot;: 22,&#xD;&#xA;        &quot;height&quot;: 40&#xD;&#xA;      },&#xD;&#xA;      &quot;anchor&quot;: {&#xD;&#xA;        &quot;horizontal&quot;: &quot;center&quot;,&#xD;&#xA;        &quot;vertical&quot;: &quot;bottom&quot;&#xD;&#xA;      }&#xD;&#xA;    },&#xD;&#xA;    &quot;label&quot;: {&#xD;&#xA;      &quot;enable&quot;: false,&#xD;&#xA;      &quot;editPosition&quot;: &quot;0&quot;,&#xD;&#xA;      &quot;id&quot;: &quot;standard&quot;&#xD;&#xA;    },&#xD;&#xA;    &quot;provider&quot;: {&#xD;&#xA;      &quot;id&quot;: &quot;Terratype.GoogleMapsV3&quot;,&#xD;&#xA;      &quot;version&quot;: 3,&#xD;&#xA;      &quot;forceHttps&quot;: true,&#xD;&#xA;      &quot;language&quot;: &quot;&quot;,&#xD;&#xA;      &quot;predefineStyling&quot;: &quot;hotel&quot;,&#xD;&#xA;      &quot;showRoads&quot;: true,&#xD;&#xA;      &quot;showLandmarks&quot;: true,&#xD;&#xA;      &quot;showLabels&quot;: true,&#xD;&#xA;      &quot;variety&quot;: {&#xD;&#xA;        &quot;basic&quot;: true,&#xD;&#xA;        &quot;satellite&quot;: false,&#xD;&#xA;        &quot;terrain&quot;: false,&#xD;&#xA;        &quot;selector&quot;: {&#xD;&#xA;          &quot;type&quot;: 1,&#xD;&#xA;          &quot;position&quot;: 0&#xD;&#xA;        }&#xD;&#xA;      },&#xD;&#xA;      &quot;streetView&quot;: {&#xD;&#xA;        &quot;enable&quot;: false,&#xD;&#xA;        &quot;position&quot;: 0&#xD;&#xA;      },&#xD;&#xA;      &quot;fullscreen&quot;: {&#xD;&#xA;        &quot;enable&quot;: false,&#xD;&#xA;        &quot;position&quot;: 0&#xD;&#xA;      },&#xD;&#xA;      &quot;scale&quot;: {&#xD;&#xA;        &quot;enable&quot;: false,&#xD;&#xA;        &quot;position&quot;: 0&#xD;&#xA;      },&#xD;&#xA;      &quot;zoomControl&quot;: {&#xD;&#xA;        &quot;enable&quot;: true,&#xD;&#xA;        &quot;position&quot;: 0&#xD;&#xA;      },&#xD;&#xA;      &quot;panControl&quot;: {&#xD;&#xA;        &quot;enable&quot;: false&#xD;&#xA;      },&#xD;&#xA;      &quot;draggable&quot;: true,&#xD;&#xA;      &quot;styles&quot;: [&#xD;&#xA;        {&#xD;&#xA;          &quot;featureType&quot;: &quot;landscape.man_made&quot;,&#xD;&#xA;          &quot;elementType&quot;: &quot;geometry.fill&quot;,&#xD;&#xA;          &quot;stylers&quot;: [&#xD;&#xA;            {&#xD;&#xA;              &quot;lightness&quot;: &quot;-5&quot;&#xD;&#xA;            }&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;featureType&quot;: &quot;landscape.man_made&quot;,&#xD;&#xA;          &quot;elementType&quot;: &quot;labels.text.fill&quot;,&#xD;&#xA;          &quot;stylers&quot;: [&#xD;&#xA;            {&#xD;&#xA;              &quot;saturation&quot;: &quot;21&quot;&#xD;&#xA;            }&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;featureType&quot;: &quot;landscape.natural&quot;,&#xD;&#xA;          &quot;elementType&quot;: &quot;geometry.fill&quot;,&#xD;&#xA;          &quot;stylers&quot;: [&#xD;&#xA;            {&#xD;&#xA;              &quot;saturation&quot;: &quot;1&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;color&quot;: &quot;#eae2d3&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;lightness&quot;: &quot;20&quot;&#xD;&#xA;            }&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;featureType&quot;: &quot;road.highway&quot;,&#xD;&#xA;          &quot;elementType&quot;: &quot;labels.icon&quot;,&#xD;&#xA;          &quot;stylers&quot;: [&#xD;&#xA;            {&#xD;&#xA;              &quot;saturation&quot;: &quot;39&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;lightness&quot;: &quot;7&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;gamma&quot;: &quot;1.06&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;hue&quot;: &quot;#00b8ff&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;weight&quot;: &quot;1.44&quot;&#xD;&#xA;            }&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;featureType&quot;: &quot;road.arterial&quot;,&#xD;&#xA;          &quot;elementType&quot;: &quot;geometry.stroke&quot;,&#xD;&#xA;          &quot;stylers&quot;: [&#xD;&#xA;            {&#xD;&#xA;              &quot;lightness&quot;: &quot;100&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;weight&quot;: &quot;1.16&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;color&quot;: &quot;#e0e0e0&quot;&#xD;&#xA;            }&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;featureType&quot;: &quot;road.arterial&quot;,&#xD;&#xA;          &quot;elementType&quot;: &quot;labels.icon&quot;,&#xD;&#xA;          &quot;stylers&quot;: [&#xD;&#xA;            {&#xD;&#xA;              &quot;saturation&quot;: &quot;-16&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;lightness&quot;: &quot;28&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;gamma&quot;: &quot;0.87&quot;&#xD;&#xA;            }&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;featureType&quot;: &quot;water&quot;,&#xD;&#xA;          &quot;elementType&quot;: &quot;geometry.fill&quot;,&#xD;&#xA;          &quot;stylers&quot;: [&#xD;&#xA;            {&#xD;&#xA;              &quot;saturation&quot;: &quot;-75&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;lightness&quot;: &quot;-15&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;gamma&quot;: &quot;1.35&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;weight&quot;: &quot;1.45&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;hue&quot;: &quot;#00dcff&quot;&#xD;&#xA;            }&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;featureType&quot;: &quot;water&quot;,&#xD;&#xA;          &quot;elementType&quot;: &quot;labels.text.fill&quot;,&#xD;&#xA;          &quot;stylers&quot;: [&#xD;&#xA;            {&#xD;&#xA;              &quot;color&quot;: &quot;#626262&quot;&#xD;&#xA;            }&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;featureType&quot;: &quot;water&quot;,&#xD;&#xA;          &quot;elementType&quot;: &quot;labels.text.stroke&quot;,&#xD;&#xA;          &quot;stylers&quot;: [&#xD;&#xA;            {&#xD;&#xA;              &quot;saturation&quot;: &quot;19&quot;&#xD;&#xA;            },&#xD;&#xA;            {&#xD;&#xA;              &quot;weight&quot;: &quot;1.84&quot;&#xD;&#xA;            }&#xD;&#xA;          ]&#xD;&#xA;        }&#xD;&#xA;      ],&#xD;&#xA;      &quot;apiKey&quot;: &quot;AIzaSyBSjIm2tkaskXtivVDbvlXcWkP6JDCoqA4&quot;&#xD;&#xA;    },&#xD;&#xA;    &quot;grid&quot;: {&#xD;&#xA;      &quot;enable&quot;: true,&#xD;&#xA;      &quot;name&quot;: &quot;Default Map&quot;&#xD;&#xA;    },&#xD;&#xA;    &quot;search&quot;: {&#xD;&#xA;      &quot;enable&quot;: 0,&#xD;&#xA;      &quot;limit&quot;: {&#xD;&#xA;        &quot;countries&quot;: []&#xD;&#xA;      }&#xD;&#xA;    }&#xD;&#xA;  },&#xD;&#xA;  &quot;position&quot;: {&#xD;&#xA;    &quot;id&quot;: &quot;WGS84&quot;,&#xD;&#xA;    &quot;precision&quot;: 6,&#xD;&#xA;    &quot;datum&quot;: &quot;55.406321,10.387015&quot;&#xD;&#xA;  },&#xD;&#xA;  &quot;zoom&quot;: 12&#xD;&#xA;}" Alias="definition" SortOrder="0" />
+      </PreValues>
+    </DataType>
+    <DataType Name="People - Featured People - Multinode Treepicker" Id="Umbraco.MultiNodeTreePicker2" Definition="dfab9a27-67d3-4dba-ac91-3a70f9faadfe" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="175" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;id&quot;: &quot;umb://document/5582ae2fefa8422fa9c97ff1c9e8dd85&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
+        <PreValue Id="176" Value="" Alias="filter" SortOrder="1" />
+        <PreValue Id="177" Value="1" Alias="minNumber" SortOrder="2" />
+        <PreValue Id="178" Value="9" Alias="maxNumber" SortOrder="3" />
+        <PreValue Id="179" Value="1" Alias="showOpenButton" SortOrder="4" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Home - Color Theme - Radio button list" Id="Umbraco.RadioButtonList" Definition="14f884bf-e8f7-481b-a0ba-88b132ab97e8" DatabaseType="Integer">
+      <PreValues>
+        <PreValue Id="50" Value="water" Alias="0" SortOrder="0" />
+        <PreValue Id="51" Value="earth" Alias="1" SortOrder="1" />
+        <PreValue Id="52" Value="sun" Alias="2" SortOrder="2" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Home - Font - Radio button list" Id="Umbraco.RadioButtonList" Definition="28e0c92d-3547-4346-99c4-8287d8a541b9" DatabaseType="Integer">
+      <PreValues>
+        <PreValue Id="53" Value="standard" Alias="0" SortOrder="0" />
+        <PreValue Id="54" Value="serif" Alias="1" SortOrder="1" />
+        <PreValue Id="55" Value="mono" Alias="2" SortOrder="2" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Home - Content - Grid layout" Id="Umbraco.Grid" Definition="f4084ca6-fc6c-40c7-ab0e-64888d7d869c" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="56" Value="{&#xD;&#xA;  &quot;styles&quot;: [],&#xD;&#xA;  &quot;config&quot;: [],&#xD;&#xA;  &quot;columns&quot;: 12,&#xD;&#xA;  &quot;templates&quot;: [&#xD;&#xA;    {&#xD;&#xA;      &quot;name&quot;: &quot;1 column layout&quot;,&#xD;&#xA;      &quot;sections&quot;: [&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 12&#xD;&#xA;        }&#xD;&#xA;      ]&#xD;&#xA;    }&#xD;&#xA;  ],&#xD;&#xA;  &quot;layouts&quot;: [&#xD;&#xA;    {&#xD;&#xA;      &quot;name&quot;: &quot;Full Width&quot;,&#xD;&#xA;      &quot;areas&quot;: [&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 12,&#xD;&#xA;          &quot;editors&quot;: [&#xD;&#xA;            &quot;headline&quot;&#xD;&#xA;          ],&#xD;&#xA;          &quot;allowAll&quot;: false,&#xD;&#xA;          &quot;allowed&quot;: [&#xD;&#xA;            &quot;media&quot;,&#xD;&#xA;            &quot;macro&quot;,&#xD;&#xA;            &quot;embed&quot;,&#xD;&#xA;            &quot;headline&quot;&#xD;&#xA;          ]&#xD;&#xA;        }&#xD;&#xA;      ]&#xD;&#xA;    },&#xD;&#xA;    {&#xD;&#xA;      &quot;name&quot;: &quot;Half and half&quot;,&#xD;&#xA;      &quot;areas&quot;: [&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 6,&#xD;&#xA;          &quot;allowAll&quot;: false,&#xD;&#xA;          &quot;allowed&quot;: [&#xD;&#xA;            &quot;rte&quot;,&#xD;&#xA;            &quot;media&quot;,&#xD;&#xA;            &quot;macro&quot;,&#xD;&#xA;            &quot;embed&quot;,&#xD;&#xA;            &quot;headline&quot;,&#xD;&#xA;            &quot;quote&quot;&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 6,&#xD;&#xA;          &quot;allowAll&quot;: false,&#xD;&#xA;          &quot;allowed&quot;: [&#xD;&#xA;            &quot;rte&quot;,&#xD;&#xA;            &quot;media&quot;,&#xD;&#xA;            &quot;macro&quot;,&#xD;&#xA;            &quot;embed&quot;,&#xD;&#xA;            &quot;headline&quot;,&#xD;&#xA;            &quot;quote&quot;&#xD;&#xA;          ]&#xD;&#xA;        }&#xD;&#xA;      ]&#xD;&#xA;    },&#xD;&#xA;    {&#xD;&#xA;      &quot;name&quot;: &quot;Testimonials&quot;,&#xD;&#xA;      &quot;areas&quot;: [&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 4,&#xD;&#xA;          &quot;allowAll&quot;: true,&#xD;&#xA;          &quot;allowed&quot;: [&#xD;&#xA;            &quot;docType&quot;&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 4,&#xD;&#xA;          &quot;allowAll&quot;: true,&#xD;&#xA;          &quot;allowed&quot;: [&#xD;&#xA;            &quot;docType&quot;&#xD;&#xA;          ]&#xD;&#xA;        },&#xD;&#xA;        {&#xD;&#xA;          &quot;grid&quot;: 4,&#xD;&#xA;          &quot;allowAll&quot;: true,&#xD;&#xA;          &quot;allowed&quot;: [&#xD;&#xA;            &quot;docType&quot;&#xD;&#xA;          ]&#xD;&#xA;        }&#xD;&#xA;      ]&#xD;&#xA;    }&#xD;&#xA;  ]&#xD;&#xA;}" Alias="items" SortOrder="0" />
+        <PreValue Id="57" Value="{&#xD;&#xA;  &quot;toolbar&quot;: [&#xD;&#xA;    &quot;code&quot;,&#xD;&#xA;    &quot;styleselect&quot;,&#xD;&#xA;    &quot;bold&quot;,&#xD;&#xA;    &quot;italic&quot;,&#xD;&#xA;    &quot;alignleft&quot;,&#xD;&#xA;    &quot;aligncenter&quot;,&#xD;&#xA;    &quot;alignright&quot;,&#xD;&#xA;    &quot;bullist&quot;,&#xD;&#xA;    &quot;numlist&quot;,&#xD;&#xA;    &quot;outdent&quot;,&#xD;&#xA;    &quot;indent&quot;,&#xD;&#xA;    &quot;link&quot;&#xD;&#xA;  ],&#xD;&#xA;  &quot;stylesheets&quot;: [],&#xD;&#xA;  &quot;dimensions&quot;: {&#xD;&#xA;    &quot;height&quot;: 500&#xD;&#xA;  },&#xD;&#xA;  &quot;maxImageSize&quot;: 500&#xD;&#xA;}" Alias="rte" SortOrder="1" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Employee - Department - Tags" Id="Umbraco.Tags" Definition="71e1e182-da10-4280-aa35-800a8de19a32" DatabaseType="Nvarchar">
+      <PreValues>
+        <PreValue Id="58" Value="department" Alias="group" SortOrder="0" />
+        <PreValue Id="59" Value="Csv" Alias="storageType" SortOrder="1" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Product - Features - Nested Content" Id="Our.Umbraco.NestedContent" Definition="2b806d03-d9f7-41a3-8226-4abc870585c4" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="108" Value="[&#xD;&#xA;  {&#xD;&#xA;    &quot;ncAlias&quot;: &quot;feature&quot;,&#xD;&#xA;    &quot;ncTabAlias&quot;: &quot;Feature&quot;,&#xD;&#xA;    &quot;nameTemplate&quot;: &quot;{{featureName}}&quot;&#xD;&#xA;  }&#xD;&#xA;]" Alias="contentTypes" SortOrder="0" />
+        <PreValue Id="109" Value="0" Alias="minItems" SortOrder="1" />
+        <PreValue Id="110" Value="0" Alias="maxItems" SortOrder="2" />
+        <PreValue Id="111" Value="1" Alias="confirmDeletes" SortOrder="3" />
+        <PreValue Id="112" Value="1" Alias="showIcons" SortOrder="4" />
+        <PreValue Id="113" Value="" Alias="hideLabel" SortOrder="5" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Product - Price - Decimal" Id="Umbraco.Decimal" Definition="68e8fef5-9761-426e-b7d4-f4d5435cf41f" DatabaseType="Decimal">
+      <PreValues>
+        <PreValue Id="66" Value="" Alias="min" SortOrder="0" />
+        <PreValue Id="67" Value="" Alias="step" SortOrder="1" />
+        <PreValue Id="68" Value="" Alias="max" SortOrder="2" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Blog - How many posts should be shown - Slider" Id="Umbraco.Slider" Definition="889bac09-6ea1-428e-914e-80f0b0dd9ee9" DatabaseType="Nvarchar">
+      <PreValues>
+        <PreValue Id="69" Value="" Alias="enableRange" SortOrder="0" />
+        <PreValue Id="70" Value="horizontal" Alias="orientation" SortOrder="1" />
+        <PreValue Id="71" Value="3" Alias="initVal1" SortOrder="2" />
+        <PreValue Id="72" Value="" Alias="initVal2" SortOrder="3" />
+        <PreValue Id="73" Value="1" Alias="minVal" SortOrder="4" />
+        <PreValue Id="74" Value="20" Alias="maxVal" SortOrder="5" />
+        <PreValue Id="75" Value="1" Alias="step" SortOrder="6" />
+        <PreValue Id="76" Value="" Alias="precision" SortOrder="7" />
+        <PreValue Id="77" Value="round" Alias="handle" SortOrder="8" />
+        <PreValue Id="78" Value="always" Alias="tooltip" SortOrder="9" />
+        <PreValue Id="79" Value="" Alias="tooltipSplit" SortOrder="10" />
+        <PreValue Id="80" Value="" Alias="tooltipFormat" SortOrder="11" />
+        <PreValue Id="81" Value="" Alias="tooltipPosition" SortOrder="12" />
+        <PreValue Id="82" Value="" Alias="reversed" SortOrder="13" />
+        <PreValue Id="83" Value="" Alias="ticks" SortOrder="14" />
+        <PreValue Id="84" Value="" Alias="ticksPositions" SortOrder="15" />
+        <PreValue Id="85" Value="" Alias="ticksLabels" SortOrder="16" />
+        <PreValue Id="86" Value="" Alias="ticksSnapBounds" SortOrder="17" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Products - Featured Products - Multinode Treepicker" Id="Umbraco.MultiNodeTreePicker2" Definition="d865637a-829e-47b9-a9ca-b19a0bb4d3ee" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="180" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;id&quot;: &quot;umb://document/485343b1d99c4789a676e9b4c98a38d4&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
+        <PreValue Id="181" Value="" Alias="filter" SortOrder="1" />
+        <PreValue Id="182" Value="1" Alias="minNumber" SortOrder="2" />
+        <PreValue Id="183" Value="9" Alias="maxNumber" SortOrder="3" />
+        <PreValue Id="184" Value="1" Alias="showOpenButton" SortOrder="4" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Product - Photos - Media Picker" Id="Umbraco.MediaPicker2" Definition="67758eb3-51c7-4742-9958-97bc66e4e635" DatabaseType="Ntext">
+      <PreValues>
+        <PreValue Id="185" Value="1" Alias="multiPicker" SortOrder="0" />
+        <PreValue Id="186" Value="1" Alias="onlyImages" SortOrder="1" />
+        <PreValue Id="187" Value="1" Alias="disableFolderSelect" SortOrder="2" />
+        <PreValue Id="188" Value="umb://media/6d5bf746cb8245c5bd15dd3798209b87" Alias="startNodeId" SortOrder="3" />
+      </PreValues>
+    </DataType>
+    <DataType Name="List View - products" Id="Umbraco.ListView" Definition="ca547f1f-e30a-420a-8e3b-81b661cf0f49" DatabaseType="Nvarchar">
+      <PreValues>
+        <PreValue Id="189" Value="1" Alias="displayAtTabNumber" SortOrder="0" />
+        <PreValue Id="190" Value="10" Alias="pageSize" SortOrder="1" />
+        <PreValue Id="191" Value="[&#xD;&#xA;  {&#xD;&#xA;    &quot;name&quot;: &quot;Grid&quot;,&#xD;&#xA;    &quot;path&quot;: &quot;views/propertyeditors/listview/layouts/grid/grid.html&quot;,&#xD;&#xA;    &quot;icon&quot;: &quot;icon-thumbnails-small&quot;,&#xD;&#xA;    &quot;isSystem&quot;: 1,&#xD;&#xA;    &quot;selected&quot;: true&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;name&quot;: &quot;List&quot;,&#xD;&#xA;    &quot;path&quot;: &quot;views/propertyeditors/listview/layouts/list/list.html&quot;,&#xD;&#xA;    &quot;icon&quot;: &quot;icon-list&quot;,&#xD;&#xA;    &quot;isSystem&quot;: 1,&#xD;&#xA;    &quot;selected&quot;: true&#xD;&#xA;  }&#xD;&#xA;]" Alias="layouts" SortOrder="2" />
+        <PreValue Id="192" Value="[&#xD;&#xA;  {&#xD;&#xA;    &quot;alias&quot;: &quot;photos&quot;,&#xD;&#xA;    &quot;isSystem&quot;: 0,&#xD;&#xA;    &quot;header&quot;: &quot;Photo&quot;&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;alias&quot;: &quot;updateDate&quot;,&#xD;&#xA;    &quot;header&quot;: &quot;Last edited&quot;,&#xD;&#xA;    &quot;isSystem&quot;: 1&#xD;&#xA;  },&#xD;&#xA;  {&#xD;&#xA;    &quot;alias&quot;: &quot;owner&quot;,&#xD;&#xA;    &quot;header&quot;: &quot;Created by&quot;,&#xD;&#xA;    &quot;isSystem&quot;: 1&#xD;&#xA;  }&#xD;&#xA;]" Alias="includeProperties" SortOrder="3" />
+        <PreValue Id="193" Value="sortOrder" Alias="orderBy" SortOrder="4" />
+        <PreValue Id="194" Value="asc" Alias="orderDirection" SortOrder="5" />
+        <PreValue Id="195" Value="{&#xD;&#xA;  &quot;allowBulkPublish&quot;: true,&#xD;&#xA;  &quot;allowBulkUnpublish&quot;: true,&#xD;&#xA;  &quot;allowBulkCopy&quot;: true,&#xD;&#xA;  &quot;allowBulkMove&quot;: true,&#xD;&#xA;  &quot;allowBulkDelete&quot;: true&#xD;&#xA;}" Alias="bulkActionPermissions" SortOrder="6" />
+      </PreValues>
+    </DataType>
+    <DataType Name="Contact - Pick a Contact Form - Form Picker" Id="UmbracoForms.FormPicker" Definition="c535b55f-78dc-48c5-ac18-52f47e6d09af" DatabaseType="Nvarchar">
+      <PreValues>
+        <PreValue Id="148" Value="[]" Alias="allowedForms" SortOrder="0" />
+      </PreValues>
+    </DataType>
+  </DataTypes>
+  <Actions>
+    <Action runat="install" undo="false" alias="SampleSiteInitialContent">
+      <mediaItem folder="design" name="Umbraco Campari Meeting Room" path="/media/1030/16403439029_f500be349b_o.jpg" key="3d758b1f-24ec-47b0-a75c-225b0444991b" updateDocPath="//home" updatePropertyAlias="heroBackgroundImage" />
+      <mediaItem folder="products" name="Biker Jacket" path="/media/1001/4730684907_8a7f8759cb_b.jpg" key="208abda1-63b5-4ba1-bc2a-3d40fe156bb6" updateDocPath="//product [@nodeName = 'Biker Jacket']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Tattoo" path="/media/1012/7371127652_e01b6ab56f_b.jpg" key="ce075369-df3d-426f-972a-36b355fd535f" updateDocPath="//product [@nodeName = 'Tattoo']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Unicorn" path="/media/1016/14272036539_469ca21d5c_h.jpg" key="7239dc96-6ea1-418e-9a6e-4caa9a8014fa" updateDocPath="//product [@nodeName = 'Unicorn']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Ping Pong Ball" path="/media/1011/5852022211_9028df67c0_b.jpg" key="57643398-d917-4b93-bc71-e9c3038a0abc" updateDocPath="//product [@nodeName = 'Ping Pong Ball']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Bowling Ball" path="/media/1010/5852022091_87c5d045ab_b.jpg" key="dbce2b92-a00a-4aa2-9e16-ca9bb4c2c712" updateDocPath="//product [@nodeName = 'Bowling Ball']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Jumpsuit" path="/media/1015/7377957524_347859faac_b.jpg" key="e415f0b7-5dcd-4a99-ab99-82eba3a1cc00" updateDocPath="//product [@nodeName = 'Jumpsuit']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Banjo" path="/media/1014/7373036290_5e8420bf36_b.jpg" key="10d1d7ab-3774-482f-b621-a6ef396104bc" updateDocPath="//product [@nodeName = 'Banjo']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Knitted West" path="/media/1013/7373036208_30257976a0_b.jpg" key="f450c238-accb-42b3-9532-473407359a24" updateDocPath="//product [@nodeName = 'Knitted West']" updatePropertyAlias="photos" />
+      <mediaItem folder="people" name="Jan Skovgaard" path="/media/1006/18720470241_ff77768544_h.jpg" key="c28e5b4b-54af-44d8-9eb9-7eff7253f546" updateDocPath="//person [@nodeName = 'Jan Skovgaard']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Matt Brailsford" path="/media/1003/18531852339_981b067419_h.jpg" key="8319cfa9-910a-4100-8064-a1c3b648cb60" updateDocPath="//person [@nodeName = 'Matt Brailsford']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Lee Kelleher" path="/media/1004/18531854019_351c579559_h.jpg" key="def8b962-2107-486d-b2d6-5be3639a6c31" updateDocPath="//person [@nodeName = 'Lee Kelleher']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Jeavon Leopold" path="/media/1002/18095416144_44a566a5f4_h.jpg" key="981014a4-f0b9-46db-aa91-87cf2027f6e0" updateDocPath="//person [@nodeName = 'Jeavon Leopold']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Jeroen Breuer" path="/media/1005/18530280048_459b8b61b2_h.jpg" key="fcc18600-8f9b-4995-8954-3cb0d335faf1" updateDocPath="//person [@nodeName = 'Jeroen Breuer']" updatePropertyAlias="photo" />
+    </Action>
+  </Actions>
+</umbPackage>
