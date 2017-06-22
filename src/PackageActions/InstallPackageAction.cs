@@ -78,13 +78,15 @@ namespace Umbraco.SampleSite
                 // update default design 
                 contentHome.SetValue("colorTheme", GetPreValueId(dataTypeService, "Home - Color Theme - Radio button list", "earth"));
                 contentHome.SetValue("font", GetPreValueId(dataTypeService, "Home - Font - Radio button list", "serif"));
+                contentService.Save(contentHome);
             }
 
             // update default currency pre value
             IContent productContent = contentService.GetById(new Guid("485343b1-d99c-4789-a676-e9b4c98a38d4"));
             if (productContent != null)
             {
-                productContent.SetValue("defaultCurrency", (object)this.GetPreValueId(dataTypeService, "Products - Default Currency - Dropdown list", "€"));
+                productContent.SetValue("defaultCurrency", GetPreValueId(dataTypeService, "Products - Default Currency - Dropdown list", "€"));
+                contentService.Save(productContent);
             }
 
             // create media folders
@@ -149,7 +151,7 @@ namespace Umbraco.SampleSite
         private int GetPreValueId(IDataTypeService dts, string dataTypeName, string preValueText)
         {
             IDataTypeDefinition dataTypeDefinition = dts.GetAllDataTypeDefinitions().First<IDataTypeDefinition>((Func<IDataTypeDefinition, bool>)(x => x.Name == dataTypeName));
-            return dts.GetPreValuesCollectionByDataTypeId(dataTypeDefinition.Id).PreValuesAsDictionary.Where<KeyValuePair<string, PreValue>>((Func<KeyValuePair<string, PreValue>, bool>)(d => d.Value.Value == preValueText)).Select<KeyValuePair<string, PreValue>, int>((Func<KeyValuePair<string, PreValue>, int>)(f => f.Value.Id)).First<int>();
+            return dts.GetPreValuesCollectionByDataTypeId(dataTypeDefinition.Id).PreValuesAsDictionary.Where(d => d.Value.Value == preValueText).Select(f => f.Value.Id).First();
         }
 
         private int CreateMediaItem(IMediaService service, int parentFolder, string nodeTypeAlias, Guid key, string nodeName, string mediaPath, bool checkForDuplicate = false)
