@@ -77,9 +77,9 @@
       <orgName>16403439029_f500be349b_o.jpg</orgName>
     </file>
     <file>
-      <guid>categoryLinks.cshtml</guid>
+      <guid>CategoryLinks.cshtml</guid>
       <orgPath>/Views/Partials</orgPath>
-      <orgName>categoryLinks.cshtml</orgName>
+      <orgName>CategoryLinks.cshtml</orgName>
     </file>
     <file>
       <guid>SectionHeader.cshtml</guid>
@@ -87,14 +87,14 @@
       <orgName>SectionHeader.cshtml</orgName>
     </file>
     <file>
-      <guid>featuredProducts.cshtml</guid>
+      <guid>FeaturedProducts.cshtml</guid>
       <orgPath>/Views/MacroPartials</orgPath>
-      <orgName>featuredProducts.cshtml</orgName>
+      <orgName>FeaturedProducts.cshtml</orgName>
     </file>
     <file>
-      <guid>latestBlogposts.cshtml</guid>
+      <guid>LatestBlogposts.cshtml</guid>
       <orgPath>/Views/MacroPartials</orgPath>
-      <orgName>latestBlogposts.cshtml</orgName>
+      <orgName>LatestBlogposts.cshtml</orgName>
     </file>
     <file>
       <guid>SubNavigation.cshtml</guid>
