@@ -5,11 +5,13 @@
 }
 @helper SocialLink(string content, string service)
 {
-if (!String.IsNullOrEmpty(content))
-{
+    if (!string.IsNullOrEmpty(content))
+    {
         <a class="employee-grid__item__contact-item" href="http://@(service).com/@content">@service</a>
-}
-}            @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+    }
+}       
+
+@Html.Partial("~/Views/Partials/SectionHeader.cshtml")
 
 <section class="section">
 
@@ -32,7 +34,7 @@ if (!String.IsNullOrEmpty(content))
                     <div class="employee-grid__item__image" style="background-image: url('@person.Photo.Url')"></div>
                     <div class="employee-grid__item__details">
                         <h3 class="employee-grid__item__name">@person.Name</h3>
-                        @if (!String.IsNullOrEmpty(person.Email))
+                        @if (!string.IsNullOrEmpty(person.Email))
                         {
                             <a href="mailto:@person.Email" class="employee-grid__item__email">@person.Email</a>
                         }
