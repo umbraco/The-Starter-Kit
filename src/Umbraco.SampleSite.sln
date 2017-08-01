@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.SampleSite", "PackageActions\Umbraco.SampleSite.csproj", "{AD6618CC-4DD7-414D-9050-39652566833E}"
 EndProject
@@ -28,6 +28,14 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "http://localhost
 		StartServerOnDebug = "false"
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{28F8A6EA-1613-4AF3-BFCB-9B330BDC455C}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\build.ps1 = ..\build\build.ps1
+		..\build\package.xml = ..\build\package.xml
+		..\README.md = ..\README.md
+		SolutionInfo.cs = SolutionInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,7 +47,6 @@ Global
 		{AD6618CC-4DD7-414D-9050-39652566833E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD6618CC-4DD7-414D-9050-39652566833E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3819A550-DCEC-4153-91B4-8BA9F7F0B9B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3819A550-DCEC-4153-91B4-8BA9F7F0B9B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3819A550-DCEC-4153-91B4-8BA9F7F0B9B4}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{3819A550-DCEC-4153-91B4-8BA9F7F0B9B4}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection

@@ -337,7 +337,7 @@
       <requirements type="strict">
         <major>7</major>
         <minor>6</minor>
-        <patch>4</patch>
+        <patch>5</patch>
       </requirements>
     </package>
     <author>
