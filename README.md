@@ -10,3 +10,22 @@ Password: 1234567890
 
 Don't use the website in this project, but instead ask to be a part of this Umbraco Cloud project:
 https://umbraco-starter-kit.s1.umbraco.io
+
+# Building the package
+
+The build script is: /build/build.ps1 run it in the powershell cli: `.\build\build.ps1`
+
+It will prompt you for the version number and pre-release. Example, enter `1.0.0` for the build number and 
+if it's a pre-release enter `-beta-01` (be sure to enter the hyphen prefix). 
+If it's not a pre-release just press enter to skip that step.
+
+The package output will be `/build/Releases/(VersionNumber)/Umbraco.SampleSite.zip`
+
+# Maintaining the package
+
+If changes are made to the package, the package manifest file will need to be updated:
+
+* Save the package in the back office - this will update the /App_Data/packages/created/createdPackages.config
+* Publish the package in the back office and press the download button to download the .zip file
+* Open the zip file and find the package.xml file, copy it's contents to the /build/packageManifest.xml file
+
