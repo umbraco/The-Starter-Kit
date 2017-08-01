@@ -139,3 +139,6 @@ _[Ss]cripts
 
 # ImageProcessor DiskCache 
 **/App_Data/cache/
+/build/Releases/*
+/src/PrecompiledWeb/*
+/build/tmp/*
