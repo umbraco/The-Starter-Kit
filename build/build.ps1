@@ -6,14 +6,17 @@ param (
 	[Parameter(Mandatory=$true)]
 	[string]
 	[AllowEmptyString()]
-	$PreReleaseName
+	$PreReleaseName,
+	[Parameter(Mandatory=$false)]
+	[int]
+	$IsBuildServer = 0
 )
 
 $PSScriptFilePath = Get-Item $MyInvocation.MyCommand.Path
 $RepoRoot = $PSScriptFilePath.Directory.Parent.FullName
 $BuildFolder = Join-Path -Path $RepoRoot -ChildPath "build";
 $WebProjFolder = Join-Path -Path $RepoRoot -ChildPath "src\Website";
-$ReleaseFolder = Join-Path -Path $BuildFolder -ChildPath "Releases\v$ReleaseVersionNumber$PreReleaseName";
+$ReleaseFolder = Join-Path -Path $BuildFolder -ChildPath "Releases";
 $TempFolder = Join-Path -Path $ReleaseFolder -ChildPath "Temp";
 $SolutionRoot = Join-Path -Path $RepoRoot "src";
 
