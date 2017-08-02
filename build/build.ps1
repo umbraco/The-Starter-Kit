@@ -26,6 +26,28 @@ $ReleaseFolder = Join-Path -Path $BuildFolder -ChildPath "Releases";
 $TempFolder = Join-Path -Path $ReleaseFolder -ChildPath "Temp";
 $SolutionRoot = Join-Path -Path $RepoRoot "src";
 
+if(( [string]::IsNullOrEmpty($ReleaseVersionNumber)))
+{
+	# Read XML
+	$buildXmlFile = (Join-Path $BuildFolder "build.xml")
+	[xml]$buildXml = Get-Content $buildXmlFile
+	[System.Xml.XmlElement] $root = $buildXml.get_DocumentElement()
+	$ReleaseVersionNumber = $root.version;
+	if( $ReleaseVersionNumber.Contains("-"))
+	{	
+		$parts = $ReleaseVersionNumber.Split("-")
+		$ReleaseVersionNumber = $parts[0]
+		$PreReleaseName = $parts[1]
+		Write-Host "Version parts split: ($ReleaseVersionNumber) and ($PreReleaseName)"
+	}
+}
+
+$FullVersionName = $ReleaseVersionNumber
+if(( -not [string]::IsNullOrEmpty($PreReleaseName)))
+{	
+	$FullVersionName = "$ReleaseVersionNumber-$PreReleaseName"
+}
+
 # Go get nuget.exe if we don't have it
 $NuGet = "$BuildFolder\nuget.exe"
 $FileExists = Test-Path $NuGet 
@@ -61,21 +83,6 @@ if ((Get-Item $ReleaseFolder -ErrorAction SilentlyContinue) -ne $null)
 	Remove-Item $ReleaseFolder -Recurse
 }
 
-if(( [string]::IsNullOrEmpty($ReleaseVersionNumber)))
-{
-	# Read XML
-	$buildXmlFile = (Join-Path $BuildFolder "build.xml")
-	[xml]$buildXml = Get-Content $buildXmlFile
-	[System.Xml.XmlElement] $root = $buildXml.get_DocumentElement()
-	$ReleaseVersionNumber = $root.version;
-	if( $ReleaseVersionNumber.Contains("-"))
-	{	
-		$parts = $ReleaseVersionNumber.Split("-")
-		$ReleaseVersionNumber = $parts[0]
-		$PreReleaseName = $parts[1]
-		Write-Host "Version parts split: ($ReleaseVersionNumber) and ($PreReleaseName)"
-	}
-}
 
 ####### DO THE SLN BUILD PART #############
 
@@ -85,7 +92,7 @@ $SolutionInfoPath = Join-Path -Path $SolutionRoot -ChildPath "SolutionInfo.cs"
 	-replace "(?<=Version\(`")[.\d]*(?=`"\))", $ReleaseVersionNumber |
 	sc -Path $SolutionInfoPath -Encoding UTF8
 (gc -Path $SolutionInfoPath) `
-	-replace "(?<=AssemblyInformationalVersion\(`")[.\w-]*(?=`"\))", "$ReleaseVersionNumber-$PreReleaseName" |
+	-replace "(?<=AssemblyInformationalVersion\(`")[.\w-]*(?=`"\))", $FullVersionName |
 	sc -Path $SolutionInfoPath -Encoding UTF8
 # Set the copyright
 $Copyright = "Copyright © Umbraco " + (Get-Date).year;
@@ -122,7 +129,7 @@ if (-not $?)
 # Set the version number in createdPackages.config
 $CreatedPackagesConfig = Join-Path -Path $WebProjFolder -ChildPath "App_Data\packages\created\createdPackages.config"
 $CreatedPackagesConfigXML = [xml](Get-Content $CreatedPackagesConfig)
-$CreatedPackagesConfigXML.packages.package.version = "$ReleaseVersionNumber-$PreReleaseName"
+$CreatedPackagesConfigXML.packages.package.version = $FullVersionName
 $CreatedPackagesConfigXML.Save($CreatedPackagesConfig)
 
 #copy the orig manifest to temp location to be updated to be used for the package
@@ -133,7 +140,7 @@ $PackageManifest = (Join-Path -Path $TempFolder -ChildPath "package.xml")
 
 # Set the data in packageManifest.config
 $PackageManifestXML = [xml](Get-Content $PackageManifest)
-$PackageManifestXML.umbPackage.info.package.version = "$ReleaseVersionNumber-$PreReleaseName"
+$PackageManifestXML.umbPackage.info.package.version = $FullVersionName
 $PackageManifestXML.umbPackage.info.package.name = $CreatedPackagesConfigXML.packages.package.name
 $PackageManifestXML.umbPackage.info.package.license.set_InnerXML($CreatedPackagesConfigXML.packages.package.license.get_InnerXML())
 $PackageManifestXML.umbPackage.info.package.license.url = $CreatedPackagesConfigXML.packages.package.license.url
