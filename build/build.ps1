@@ -102,16 +102,16 @@ Write-Host "Restoring nuget packages..."
 & $NuGet restore $SolutionPath
 
 # clean sln for all deploys
-& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount /t:Clean
-#& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount /t:Clean
+#& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount /t:Clean
+& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount /t:Clean
 if (-not $?)
 {
 	throw "The MSBuild process returned an error code."
 }
 
 #build
-& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount
-#& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount
+#& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount
+& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount
 if (-not $?)
 {
 	throw "The MSBuild process returned an error code."

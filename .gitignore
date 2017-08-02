@@ -142,3 +142,4 @@ _[Ss]cripts
 /build/Releases/*
 /src/PrecompiledWeb/*
 /build/tmp/*
+/src/PackageActions/App_Plugins/*
