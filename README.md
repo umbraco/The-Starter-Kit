@@ -16,7 +16,7 @@ https://umbraco-starter-kit.s1.umbraco.io
 The build script is: /build/build.ps1 run it in the powershell cli: `.\build\build.ps1`
 
 It will prompt you for the version number and pre-release. Example, enter `1.0.0` for the build number and 
-if it's a pre-release enter `-beta-01` (be sure to enter the hyphen prefix). 
+if it's a pre-release enter `beta-01` (be sure to enter the hyphen prefix). 
 If it's not a pre-release just press enter to skip that step.
 
 The package output will be `/build/Releases/(VersionNumber)/Umbraco.SampleSite.zip`

@@ -1,13 +1,22 @@
 param (
-	[Parameter(Mandatory=$true)]
-	[ValidatePattern("^\d\.\d\.(?:\d\.\d$|\d$)")]
+	[Parameter(Mandatory=$false)]
+	[ValidatePattern("^\d+\.\d+\.(?:\d+\.\d+$|\d+$)|^\d+\.\d+\.\d+-(\w|-|\.)+$")]
 	[string]
 	$ReleaseVersionNumber,
-	[Parameter(Mandatory=$true)]
+	[Parameter(Mandatory=$false)]
 	[string]
 	[AllowEmptyString()]
 	$PreReleaseName
 )
+
+# NOTE, the $ReleaseVersionNumber can be used for nightlies otherwise the xml is used
+if(( -not [string]::IsNullOrEmpty($ReleaseVersionNumber)) -And [string]::IsNullOrEmpty($PreReleaseName) -And $ReleaseVersionNumber.Contains("-"))
+{	
+	$parts = $ReleaseVersionNumber.Split("-")
+	$ReleaseVersionNumber = $parts[0]
+	$PreReleaseName = $parts[1]
+	Write-Host "Version parts split: ($ReleaseVersionNumber) and ($PreReleaseName)"
+}
 
 $PSScriptFilePath = Get-Item $MyInvocation.MyCommand.Path
 $RepoRoot = $PSScriptFilePath.Directory.Parent.FullName
@@ -52,6 +61,22 @@ if ((Get-Item $ReleaseFolder -ErrorAction SilentlyContinue) -ne $null)
 	Remove-Item $ReleaseFolder -Recurse
 }
 
+if(( [string]::IsNullOrEmpty($ReleaseVersionNumber)))
+{
+	# Read XML
+	$buildXmlFile = (Join-Path $BuildFolder "build.xml")
+	[xml]$buildXml = Get-Content $buildXmlFile
+	[System.Xml.XmlElement] $root = $buildXml.get_DocumentElement()
+	$ReleaseVersionNumber = $root.version;
+	if( $ReleaseVersionNumber.Contains("-"))
+	{	
+		$parts = $ReleaseVersionNumber.Split("-")
+		$ReleaseVersionNumber = $parts[0]
+		$PreReleaseName = $parts[1]
+		Write-Host "Version parts split: ($ReleaseVersionNumber) and ($PreReleaseName)"
+	}
+}
+
 ####### DO THE SLN BUILD PART #############
 
 # Set the version number in SolutionInfo.cs
@@ -60,7 +85,7 @@ $SolutionInfoPath = Join-Path -Path $SolutionRoot -ChildPath "SolutionInfo.cs"
 	-replace "(?<=Version\(`")[.\d]*(?=`"\))", $ReleaseVersionNumber |
 	sc -Path $SolutionInfoPath -Encoding UTF8
 (gc -Path $SolutionInfoPath) `
-	-replace "(?<=AssemblyInformationalVersion\(`")[.\w-]*(?=`"\))", "$ReleaseVersionNumber$PreReleaseName" |
+	-replace "(?<=AssemblyInformationalVersion\(`")[.\w-]*(?=`"\))", "$ReleaseVersionNumber-$PreReleaseName" |
 	sc -Path $SolutionInfoPath -Encoding UTF8
 # Set the copyright
 $Copyright = "Copyright © Umbraco " + (Get-Date).year;
@@ -77,16 +102,16 @@ Write-Host "Restoring nuget packages..."
 & $NuGet restore $SolutionPath
 
 # clean sln for all deploys
-#& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount /t:Clean
-& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount /t:Clean
+& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount /t:Clean
+#& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount /t:Clean
 if (-not $?)
 {
 	throw "The MSBuild process returned an error code."
 }
 
 #build
-#& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount
-& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount
+& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount
+#& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount
 if (-not $?)
 {
 	throw "The MSBuild process returned an error code."

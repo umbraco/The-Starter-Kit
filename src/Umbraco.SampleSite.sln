@@ -31,6 +31,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{28F8A6EA-1613-4AF3-BFCB-9B330BDC455C}"
 	ProjectSection(SolutionItems) = preProject
 		..\build\build.ps1 = ..\build\build.ps1
+		..\build\build.xml = ..\build\build.xml
 		..\build\packageManifest.xml = ..\build\packageManifest.xml
 		..\README.md = ..\README.md
 		SolutionInfo.cs = SolutionInfo.cs
