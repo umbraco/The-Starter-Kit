@@ -70,23 +70,23 @@ $Copyright = "Copyright © Umbraco " + (Get-Date).year;
 
 # Build the solution in release mode
 $SolutionPath = Join-Path -Path $SolutionRoot -ChildPath "Umbraco.SampleSite.sln";
-#$ProjectPath = Join-Path -Path $SolutionRoot -ChildPath "PackageActions\Umbraco.SampleSite.csproj";
+$ProjectPath = Join-Path -Path $SolutionRoot -ChildPath "PackageActions\Umbraco.SampleSite.csproj";
 
 #restore nuget packages
 Write-Host "Restoring nuget packages..."
 & $NuGet restore $SolutionPath
 
 # clean sln for all deploys
-& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount /t:Clean
-#& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount /t:Clean
+#& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount /t:Clean
+& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount /t:Clean
 if (-not $?)
 {
 	throw "The MSBuild process returned an error code."
 }
 
 #build
-& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount
-#& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount
+#& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount
+& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount
 if (-not $?)
 {
 	throw "The MSBuild process returned an error code."
