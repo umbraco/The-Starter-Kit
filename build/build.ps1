@@ -122,7 +122,7 @@ if (-not $?)
 # Set the version number in createdPackages.config
 $CreatedPackagesConfig = Join-Path -Path $WebProjFolder -ChildPath "App_Data\packages\created\createdPackages.config"
 $CreatedPackagesConfigXML = [xml](Get-Content $CreatedPackagesConfig)
-$CreatedPackagesConfigXML.packages.package.version = "$ReleaseVersionNumber"
+$CreatedPackagesConfigXML.packages.package.version = "$ReleaseVersionNumber-$PreReleaseName"
 $CreatedPackagesConfigXML.Save($CreatedPackagesConfig)
 
 #copy the orig manifest to temp location to be updated to be used for the package
@@ -133,7 +133,7 @@ $PackageManifest = (Join-Path -Path $TempFolder -ChildPath "package.xml")
 
 # Set the data in packageManifest.config
 $PackageManifestXML = [xml](Get-Content $PackageManifest)
-$PackageManifestXML.umbPackage.info.package.version = "$ReleaseVersionNumber"
+$PackageManifestXML.umbPackage.info.package.version = "$ReleaseVersionNumber-$PreReleaseName"
 $PackageManifestXML.umbPackage.info.package.name = $CreatedPackagesConfigXML.packages.package.name
 $PackageManifestXML.umbPackage.info.package.license.set_InnerXML($CreatedPackagesConfigXML.packages.package.license.get_InnerXML())
 $PackageManifestXML.umbPackage.info.package.license.url = $CreatedPackagesConfigXML.packages.package.license.url
