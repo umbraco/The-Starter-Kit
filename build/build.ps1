@@ -30,7 +30,7 @@ $SolutionRoot = Join-Path -Path $RepoRoot "src";
 $NuGet = "$BuildFolder\nuget.exe"
 $FileExists = Test-Path $NuGet 
 If ($FileExists -eq $False) {
-	$SourceNugetExe = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
+	$SourceNugetExe = "http://nuget.org/nuget.exe"
 	Invoke-WebRequest $SourceNugetExe -OutFile $NuGet
 }
 
