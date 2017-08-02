@@ -28,7 +28,7 @@ If ($FileExists -eq $False) {
 	Invoke-WebRequest $SourceNugetExe -OutFile $NuGet
 }
 
-if ($BuildServer -eq 1) {
+if ($IsBuildServer -eq 1) {
 	$MSBuild = "MSBuild.exe";
 }
 else {
