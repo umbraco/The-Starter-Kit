@@ -6,10 +6,7 @@ param (
 	[Parameter(Mandatory=$true)]
 	[string]
 	[AllowEmptyString()]
-	$PreReleaseName,
-	[Parameter(Mandatory=$false)]
-	[int]
-	$IsBuildServer = 0
+	$PreReleaseName
 )
 
 $PSScriptFilePath = Get-Item $MyInvocation.MyCommand.Path
@@ -28,30 +25,25 @@ If ($FileExists -eq $False) {
 	Invoke-WebRequest $SourceNugetExe -OutFile $NuGet
 }
 
-if ($IsBuildServer -eq 1) {
-	$MSBuild = "MSBuild.exe";
-}
-else {
-	# ensure we have vswhere
-	New-Item "$BuildFolder\vswhere" -type directory -force
-	$vswhere = "$BuildFolder\vswhere.exe"
-	if (-not (test-path $vswhere))
-	{
-	   Write-Host "Download VsWhere..."
-	   $path = "$BuildFolder\tmp"
-	   &$nuget install vswhere -OutputDirectory $path -Verbosity quiet
-	   $dir = ls "$path\vswhere.*" | sort -property Name -descending | select -first 1
-	   $file = ls -path "$dir" -name vswhere.exe -recurse
-	   mv "$dir\$file" $vswhere   
-	 }
+# ensure we have vswhere
+New-Item "$BuildFolder\vswhere" -type directory -force
+$vswhere = "$BuildFolder\vswhere.exe"
+if (-not (test-path $vswhere))
+{
+   Write-Host "Download VsWhere..."
+   $path = "$BuildFolder\tmp"
+   &$nuget install vswhere -OutputDirectory $path -Verbosity quiet
+   $dir = ls "$path\vswhere.*" | sort -property Name -descending | select -first 1
+   $file = ls -path "$dir" -name vswhere.exe -recurse
+   mv "$dir\$file" $vswhere   
+ }
 
-	$MSBuild = &$vswhere -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
-	if ($MSBuild) {
-	  $MSBuild = join-path $MSBuild 'MSBuild\15.0\Bin\MSBuild.exe'
-	  if (-not (test-path $msbuild)) {
-		throw "MSBuild not found!"
-	  }
-	}
+$MSBuild = &$vswhere -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
+if ($MSBuild) {
+  $MSBuild = join-path $MSBuild 'MSBuild\15.0\Bin\MSBuild.exe'
+  if (-not (test-path $msbuild)) {
+	throw "MSBuild not found!"
+  }
 }
 
 if ((Get-Item $ReleaseFolder -ErrorAction SilentlyContinue) -ne $null)
@@ -79,6 +71,10 @@ $Copyright = "Copyright © Umbraco " + (Get-Date).year;
 # Build the solution in release mode
 $SolutionPath = Join-Path -Path $SolutionRoot -ChildPath "Umbraco.SampleSite.sln";
 #$ProjectPath = Join-Path -Path $SolutionRoot -ChildPath "PackageActions\Umbraco.SampleSite.csproj";
+
+#restore nuget packages
+Write-Host "Restoring nuget packages..."
+& $NuGet restore $SolutionPath
 
 # clean sln for all deploys
 & $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount /t:Clean
