@@ -28,17 +28,8 @@ namespace Umbraco.SampleSite
         {
             if (sender.Data.Name == "Umbraco Forms" && sender.Data.Files.Count > 20)
             {
-                var fileService = ApplicationContext.Current.Services.FileService;
-
-                // update contact template
-                var contactView = fileService.GetTemplate("contact");
-                if (contactView != null)
-                {
-                    var templateContent = contactView.Content;
-                    templateContent = InstallPackageAction.PostInstallContactFormHtmlPattern.Replace(templateContent, InstallPackageAction.PreInstallContactFormHtml);                    
-                    contactView.Content = templateContent;
-                    fileService.SaveTemplate(contactView);
-                }
+                var formsInstallHelper = new FormsInstallationHelper(ApplicationContext.Current.Services);
+                formsInstallHelper.UpdateUmbracoDataForFormsInstallation();                
             }
         }
     }

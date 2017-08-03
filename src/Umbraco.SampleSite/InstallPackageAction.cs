@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml;
 using umbraco.interfaces;
 using Umbraco.Core;
@@ -13,62 +12,18 @@ namespace Umbraco.SampleSite
 {
     public class InstallPackageAction : IPackageAction
     {
-        public static Regex PreInstallContactFormHtmlPattern = new Regex(@"@Umbraco\.RenderMacro\(\""renderUmbracoForm\""\,[\.\w\{\}\=\(\)\s]+\)", RegexOptions.Compiled);
-        public static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.Content.ContactForm.ToString() })";
-
-        public static Regex PostInstallContactFormHtmlPattern = new Regex(@"\<p class=\""compat-msg\""\>.+?\<\/p\>", RegexOptions.Compiled | RegexOptions.Singleline);
-        public static string PostInstallContactFormHtml = @"<p class=""compat-msg"">
-        <em>Umbraco Forms</em> is required to render this form.It's a breeze to install, all you have to do is
-        go to the<em> Umbraco Forms</em> section in the back office and click Install, that's it! :) 
-        <br /><br />
-        <a href=""/umbraco/#/forms"" class=""button button--border--solid"">Go to Back Office and install Forms</a>
-        <!-- When Umbraco Forms is installed, uncomment this line -->
-        @* @Umbraco.RenderMacro(""renderUmbracoForm"", new {FormGuid=Model.Content.ContactForm.ToString()}) *@
-        </p>";
+        
 
         public bool Execute(string packageName, XmlNode xmlData)
         {
             var contentService = ApplicationContext.Current.Services.ContentService;
             var mediaService = ApplicationContext.Current.Services.MediaService;
-            var dataTypeService = ApplicationContext.Current.Services.DataTypeService;
-            var macroService = ApplicationContext.Current.Services.MacroService;
+            var dataTypeService = ApplicationContext.Current.Services.DataTypeService;            
             var fileService = ApplicationContext.Current.Services.FileService;
-            var doctypeService = ApplicationContext.Current.Services.ContentTypeService;
+         
+            var formsInstallHelper = new FormsInstallationHelper(ApplicationContext.Current.Services);
+            formsInstallHelper.UpdateUmbracoDataForNonFormsInstallation();
             
-            // check if forms is installed
-            var formMacro = macroService.GetByAlias("renderUmbracoForm");
-            if (formMacro == null)
-            {
-                // find the doctype and change the form chooser property type
-                
-                var contactFormType = doctypeService.GetContentType("contact");
-                if (contactFormType != null)
-                {
-                    var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == "contactForm");
-                    var labelDataType = dataTypeService.GetDataTypeDefinitionByName("Label");
-                    if (labelDataType != null && formPicker != null)
-                    {
-                        formPicker.DataTypeDefinitionId = labelDataType.Id;
-                        doctypeService.Save(contactFormType);
-                    }
-                }
-
-                // update the template
-                var contactView = fileService.GetTemplate("contact");
-                if (contactView != null)
-                {
-                    var templateContent = contactView.Content;
-                    if (string.IsNullOrWhiteSpace(templateContent) == false)
-                    {
-                        //do the replacement
-                        templateContent = PreInstallContactFormHtmlPattern.Replace(templateContent, PostInstallContactFormHtml);
-                        
-                        contactView.Content = templateContent;
-                        fileService.SaveTemplate(contactView);
-                    }
-                }
-            }
-
             // update master view for all templates (packager doesn't support this)
             var master = fileService.GetTemplate("master");
             if (master != null)
