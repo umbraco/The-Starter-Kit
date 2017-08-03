@@ -21,7 +21,7 @@ if(( -not [string]::IsNullOrEmpty($ReleaseVersionNumber)) -And [string]::IsNullO
 $PSScriptFilePath = Get-Item $MyInvocation.MyCommand.Path
 $RepoRoot = $PSScriptFilePath.Directory.Parent.FullName
 $BuildFolder = Join-Path -Path $RepoRoot -ChildPath "build";
-$WebProjFolder = Join-Path -Path $RepoRoot -ChildPath "src\Website";
+$WebProjFolder = Join-Path -Path $RepoRoot -ChildPath "src\Umbraco.SampleSite.Website";
 $ReleaseFolder = Join-Path -Path $BuildFolder -ChildPath "Releases";
 $TempFolder = Join-Path -Path $ReleaseFolder -ChildPath "Temp";
 $SolutionRoot = Join-Path -Path $RepoRoot "src";
@@ -102,23 +102,20 @@ $Copyright = "Copyright © Umbraco " + (Get-Date).year;
 
 # Build the solution in release mode
 $SolutionPath = Join-Path -Path $SolutionRoot -ChildPath "Umbraco.SampleSite.sln";
-$ProjectPath = Join-Path -Path $SolutionRoot -ChildPath "PackageActions\Umbraco.SampleSite.csproj";
 
 #restore nuget packages
 Write-Host "Restoring nuget packages..."
 & $NuGet restore $SolutionPath
 
 # clean sln for all deploys
-#& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount /t:Clean
-& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount /t:Clean
+& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount /t:Clean
 if (-not $?)
 {
 	throw "The MSBuild process returned an error code."
 }
 
 #build
-#& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount
-& $MSBuild "$ProjectPath" /p:Configuration=Release /maxcpucount
+& $MSBuild "$SolutionPath" /p:Configuration=Release /maxcpucount
 if (-not $?)
 {
 	throw "The MSBuild process returned an error code."
