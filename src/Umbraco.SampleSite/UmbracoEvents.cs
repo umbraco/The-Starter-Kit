@@ -35,7 +35,7 @@ namespace Umbraco.SampleSite
                 if (contactView != null)
                 {
                     var templateContent = contactView.Content;
-                    templateContent = templateContent.Replace(InstallPackageAction.PostInstallContactFormHtml, InstallPackageAction.PreInstallContactFormHtml);
+                    templateContent = InstallPackageAction.PostInstallContactFormHtmlPattern.Replace(templateContent, InstallPackageAction.PreInstallContactFormHtml);                    
                     contactView.Content = templateContent;
                     fileService.SaveTemplate(contactView);
                 }

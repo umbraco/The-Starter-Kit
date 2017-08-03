@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using umbraco.interfaces;
 using Umbraco.Core;
@@ -12,8 +13,18 @@ namespace Umbraco.SampleSite
 {
     public class InstallPackageAction : IPackageAction
     {
-        public static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()})";
-        public static string PostInstallContactFormHtml = "<p>You can get a contact form appearing here by installing Umbraco Forms.<br /> <a href=\"/umbraco/#/forms\" class=\"button button--border--solid\">Go to Back Office and install Forms</a>" + Environment.NewLine + "<!-- When Umbraco Forms is installed, uncomment this line -->" + Environment.NewLine + "@* @Umbraco.RenderMacro(\"renderUmbracoForm\", new {FormGuid=Model.Content.ContactForm.ToString()}) *@";
+        public static Regex PreInstallContactFormHtmlPattern = new Regex(@"@Umbraco\.RenderMacro\(\""renderUmbracoForm\""\,[\.\w\{\}\=\(\)\s]+\)", RegexOptions.Compiled);
+        public static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.Content.ContactForm.ToString() })";
+
+        public static Regex PostInstallContactFormHtmlPattern = new Regex(@"\<p class=\""compat-msg\""\>.+?\<\/p\>", RegexOptions.Compiled | RegexOptions.Singleline);
+        public static string PostInstallContactFormHtml = @"<p class=""compat-msg"">
+        <em>Umbraco Forms</em> is required to render this form.It's a breeze to install, all you have to do is
+        go to the<em> Umbraco Forms</em> section in the back office and click Install, that's it! :) 
+        <br /><br />
+        <a href=""/ umbraco/#/forms"" class=""button button--border--solid"">Go to Back Office and install Forms</a>
+        <!-- When Umbraco Forms is installed, uncomment this line -->
+        @* @Umbraco.RenderMacro(""renderUmbracoForm"", new {FormGuid=Model.Content.ContactForm.ToString()}) *@
+        </p>";
 
         public bool Execute(string packageName, XmlNode xmlData)
         {
@@ -49,7 +60,9 @@ namespace Umbraco.SampleSite
                     var templateContent = contactView.Content;
                     if (string.IsNullOrWhiteSpace(templateContent) == false)
                     {
-                        templateContent = templateContent.Replace(PreInstallContactFormHtml, PostInstallContactFormHtml);
+                        //do the replacement
+                        templateContent = PreInstallContactFormHtmlPattern.Replace(templateContent, PostInstallContactFormHtml);
+                        
                         contactView.Content = templateContent;
                         fileService.SaveTemplate(contactView);
                     }
@@ -115,6 +128,7 @@ namespace Umbraco.SampleSite
                             string.IsNullOrWhiteSpace(selectNode.Attributes["key"].Value) == false
                             ? Guid.Parse(selectNode.Attributes["key"].Value)
                             : Guid.Empty;
+                        
                         int mediaItem = CreateMediaItem(mediaService, media1.Id, "image", key, selectNode.Attributes["name"].Value, selectNode.Attributes["path"].Value, false);
                     }
                 }

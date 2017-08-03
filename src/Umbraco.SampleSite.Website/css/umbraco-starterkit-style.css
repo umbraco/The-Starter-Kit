@@ -1080,7 +1080,7 @@ article body.theme-color-water a, article body.theme-color-water a:visited, body
     color: #362bdc
 }
 
-body.theme-color-water --active.nav-link:visited, body.theme-color-water .border-main-color, body.theme-color-water .button--border, body.theme-color-water .nav-link--active, body.theme-color-water .nav-link:hover {
+body.theme-color-water--active.nav-link:visited, body.theme-color-water .border-main-color, body.theme-color-water .button--border, body.theme-color-water .nav-link--active, body.theme-color-water .nav-link:hover {
     border-color: #fff
 }
 
@@ -1102,7 +1102,7 @@ article body.theme-color-sun a, article body.theme-color-sun a:visited, body.the
     color: #b0a55b
 }
 
-body.theme-color-sun --active.nav-link:visited, body.theme-color-sun .border-main-color, body.theme-color-sun .button--border, body.theme-color-sun .nav-link--active, body.theme-color-sun .nav-link:hover {
+body.theme-color-sun--active.nav-link:visited, body.theme-color-sun .border-main-color, body.theme-color-sun .button--border, body.theme-color-sun .nav-link--active, body.theme-color-sun .nav-link:hover {
     border-color: #000
 }
 
@@ -1124,7 +1124,7 @@ article body.theme-color-earth a, article body.theme-color-earth a:visited, body
     color: #90514c
 }
 
-body.theme-color-earth --active.nav-link:visited, body.theme-color-earth .border-main-color, body.theme-color-earth .button--border, body.theme-color-earth .nav-link--active, body.theme-color-earth .nav-link:hover {
+body.theme-color-earth--active.nav-link:visited, body.theme-color-earth .border-main-color, body.theme-color-earth .button--border, body.theme-color-earth .nav-link--active, body.theme-color-earth .nav-link:hover {
     border-color: #000
 }
 
@@ -1142,7 +1142,7 @@ body.theme-color-earth --active.nav-link:visited, body.theme-color-earth .border
     color: #000
 }
 
-    body.theme-color-freaky --active.nav-link:visited, body.theme-color-freaky .border-main-color, body.theme-color-freaky .button--border, body.theme-color-freaky .nav-link--active, body.theme-color-freaky .nav-link:hover {
+    body.theme-color-freaky--active.nav-link:visited, body.theme-color-freaky .border-main-color, body.theme-color-freaky .button--border, body.theme-color-freaky .nav-link--active, body.theme-color-freaky .nav-link:hover {
         border-color: #000
     }
 
