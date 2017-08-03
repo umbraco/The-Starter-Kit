@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.SampleSite", "PackageActions\Umbraco.SampleSite.csproj", "{AD6618CC-4DD7-414D-9050-39652566833E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.SampleSite", "Umbraco.SampleSite\Umbraco.SampleSite.csproj", "{AD6618CC-4DD7-414D-9050-39652566833E}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "http://localhost:3966", "{3819A550-DCEC-4153-91B4-8BA9F7F0B9B4}"
 	ProjectSection(WebsiteProperties) = preProject

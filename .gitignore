@@ -143,3 +143,4 @@ _[Ss]cripts
 /src/PrecompiledWeb/*
 /build/tmp/*
 /src/PackageActions/App_Plugins/*
+/src/Umbraco.SampleSite/App_Plugins/*
