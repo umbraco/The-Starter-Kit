@@ -21,7 +21,7 @@ namespace Umbraco.SampleSite
         <em>Umbraco Forms</em> is required to render this form.It's a breeze to install, all you have to do is
         go to the<em> Umbraco Forms</em> section in the back office and click Install, that's it! :) 
         <br /><br />
-        <a href=""/ umbraco/#/forms"" class=""button button--border--solid"">Go to Back Office and install Forms</a>
+        <a href=""/umbraco/#/forms"" class=""button button--border--solid"">Go to Back Office and install Forms</a>
         <!-- When Umbraco Forms is installed, uncomment this line -->
         @* @Umbraco.RenderMacro(""renderUmbracoForm"", new {FormGuid=Model.Content.ContactForm.ToString()}) *@
         </p>";

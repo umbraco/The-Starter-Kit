@@ -350,11 +350,9 @@
             <website>https://umbraco.com</website>
         </author>
         <readme>
-            <![CDATA[Starter Kit. 
+            <![CDATA[This is the default starter kit for Umbraco 7.6+.
 
-Todo: 
-- Review implementation code
-- Update copy]]>
+It's only compatible with Umbraco 7.6.4+, it will not install or work on older versions.]]>
         </readme>
     </info>
     <Documents>
@@ -1805,17 +1803,7 @@ Todo:
             <div class="col-md-6">
                 <h2>@Model.Content.ContactFormHeader</h2>
                 @Model.Content.ContactIntro
-                @if (ApplicationContext.Services.MacroService.GetByAlias("renderUmbracoForm") == null)
-                {
-                    <p class="compat-msg">
-                        <strong>Umbraco Forms is required</strong> to render this form. It's a breeze to install, all you have to do is
-                        go to the <em>Umbraco Forms</em> section in the back office and click Install, that's it! :) 
-                    </p>
-                }
-                else
-                {
-                    @Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.Content.ContactForm.ToString() })    
-                }
+                @Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.Content.ContactForm.ToString() })
             </div>
         </div>
     </div>
