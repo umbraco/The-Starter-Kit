@@ -192,6 +192,6 @@ $PackageManifestXML.umbPackage.ReplaceChild($NewFilesXML, $PackageManifestXML.Se
 $PackageManifestXML.Save($PackageManifest)
 
 #finally zip the package
-$DestZIP = "$ReleaseFolder\Umbraco.SampleSite.zip" 
+$DestZIP = "$ReleaseFolder\Starter_Kit_$FullVersionName.zip"
 Add-Type -assembly "system.io.compression.filesystem"
 [io.compression.zipfile]::CreateFromDirectory($TempFolder, $DestZIP) 
