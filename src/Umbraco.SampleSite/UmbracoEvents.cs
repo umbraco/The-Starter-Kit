@@ -16,20 +16,20 @@ namespace Umbraco.SampleSite
     {
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            InstalledPackage.AfterSave += InstalledPackage_AfterSave;
+            PackagingService.ImportedPackage += PackagingService_ImportedPackage;            
         }
 
         /// <summary>
-        /// This will update the Contact template 
+        ///  When the Umbraco Forms package is installed this will update the contact template and the forms picker property type
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void InstalledPackage_AfterSave(InstalledPackage sender, EventArgs e)
+        private void PackagingService_ImportedPackage(IPackagingService sender, Core.Events.ImportPackageEventArgs<Core.Packaging.Models.InstallationSummary> e)
         {
-            if (sender.Data.Name == "Umbraco Forms" && sender.Data.Files.Count > 20)
+            if (e.PackageMetaData.Name == "Umbraco Forms")
             {
                 var formsInstallHelper = new FormsInstallationHelper(ApplicationContext.Current.Services);
-                formsInstallHelper.UpdateUmbracoDataForFormsInstallation();                
+                formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
             }
         }
     }
