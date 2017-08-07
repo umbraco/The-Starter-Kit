@@ -19,12 +19,12 @@ namespace Umbraco.SampleSite
             var contentService = ApplicationContext.Current.Services.ContentService;
             var contentTypeService = ApplicationContext.Current.Services.ContentTypeService;
             var mediaService = ApplicationContext.Current.Services.MediaService;
-            var dataTypeService = ApplicationContext.Current.Services.DataTypeService;            
+            var dataTypeService = ApplicationContext.Current.Services.DataTypeService;
             var fileService = ApplicationContext.Current.Services.FileService;
-         
+
             var formsInstallHelper = new FormsInstallationHelper(ApplicationContext.Current.Services);
             formsInstallHelper.UpdateUmbracoDataForNonFormsInstallation();
-            
+
             // update master view for all templates (packager doesn't support this)
             var master = fileService.GetTemplate("master");
             if (master != null)
@@ -33,14 +33,14 @@ namespace Umbraco.SampleSite
                 {
                     // we'll update the master template for all templates that doesn't have one already
                     if (template.Alias != master.Alias && (
-                         template.IsMasterTemplate == false && string.IsNullOrWhiteSpace(template.MasterTemplateAlias)))
+                            template.IsMasterTemplate == false && string.IsNullOrWhiteSpace(template.MasterTemplateAlias)))
                     {
                         template.SetMasterTemplate(master);
                         fileService.SaveTemplate(template);
                     }
                 }
             }
-            
+
             var contentHome = contentService.GetRootContent().FirstOrDefault(x => x.ContentType.Alias == "home");
             if (contentHome != null)
             {
@@ -58,63 +58,41 @@ namespace Umbraco.SampleSite
                 contentService.Save(productContent);
             }
 
-            //create media, but we need to ensure the correct media types exist first!
-            var folderMediaType = contentTypeService.GetMediaType("folder");
-            var imageMediaType = contentTypeService.GetMediaType("image");
-            if (folderMediaType == null || imageMediaType == null)
-            {
-                foreach (var missingMediaTypes in new []{folderMediaType, imageMediaType}.Where(x => x == null))
-                {
-                    LogHelper.Warn<InstallPackageAction>(
-                        $"Could not create media, the '{missingMediaTypes.Alias}' media type is missing, the Starter Kit package will not function correctly");
-                }
-            }
-            else
-            {
-                // create media folders (if they don't exist - example, if this package is uninstalled and reinstalled)
-                var ids = new[]
-                {
-                    new Guid("b6f11172-373f-4473-af0f-0b0e5aefd21c"),
-                    new Guid("1fd2ecaf-f371-4c00-9306-867fa4585e7a"),
-                    new Guid("6d5bf746-cb82-45c5-bd15-dd3798209b87")
-                };
-                if (mediaService.GetById(ids[0]) == null)
-                    this.CreateMediaItem(mediaService, -1, folderMediaType.Alias, ids[0], "Design", string.Empty, true);
-                if (mediaService.GetById(ids[1]) == null)
-                    this.CreateMediaItem(mediaService, -1, folderMediaType.Alias, ids[1], "People", string.Empty, true);
-                if (mediaService.GetById(ids[2]) == null)
-                    this.CreateMediaItem(mediaService, -1, folderMediaType.Alias, ids[2], "Products", string.Empty, true);
+            // create media folders
+           
+            this.CreateMediaItem(mediaService, contentTypeService, -1, "folder", new Guid("b6f11172-373f-4473-af0f-0b0e5aefd21c"), "Design", string.Empty, true);
+            this.CreateMediaItem(mediaService, contentTypeService, -1, "folder", new Guid("1fd2ecaf-f371-4c00-9306-867fa4585e7a"), "People", string.Empty, true);
+            this.CreateMediaItem(mediaService, contentTypeService, -1, "folder", new Guid("6d5bf746-cb82-45c5-bd15-dd3798209b87"), "Products", string.Empty, true);
 
-                // create media
-                IMedia mediaRoot = mediaService.GetById(-1);
-                IEnumerable<IMedia> rootMedia = mediaService.GetRootMedia().ToArray();
-                try
+            // create media
+            IMedia mediaRoot = mediaService.GetById(-1);
+            IEnumerable<IMedia> rootMedia = mediaService.GetRootMedia().ToArray();
+            try
+            {
+                if (xmlData.HasChildNodes)
                 {
-                    if (xmlData.HasChildNodes)
+                    foreach (XmlNode selectNode in xmlData.SelectNodes("./mediaItem"))
                     {
-                        foreach (XmlNode selectNode in xmlData.SelectNodes("./mediaItem"))
+                        IMedia media1 = mediaRoot;
+                        foreach (IMedia media2 in rootMedia)
                         {
-                            IMedia media1 = mediaRoot;
-                            foreach (IMedia media2 in rootMedia)
-                            {
-                                if (media2.Name.InvariantEquals(selectNode.Attributes["folder"].Value))
-                                    media1 = media2;
-                            }
-
-                            // add UDI support
-                            var key = selectNode.Attributes["key"] != null &&
-                                      string.IsNullOrWhiteSpace(selectNode.Attributes["key"].Value) == false
-                                ? Guid.Parse(selectNode.Attributes["key"].Value)
-                                : Guid.Empty;
-
-                            int mediaItem = CreateMediaItem(mediaService, media1.Id, imageMediaType.Alias, key, selectNode.Attributes["name"].Value, selectNode.Attributes["path"].Value, false);
+                            if (media2.Name.InvariantEquals(selectNode.Attributes["folder"].Value))
+                                media1 = media2;
                         }
+
+                        // add UDI support
+                        var key = selectNode.Attributes["key"] != null &&
+                                  string.IsNullOrWhiteSpace(selectNode.Attributes["key"].Value) == false
+                            ? Guid.Parse(selectNode.Attributes["key"].Value)
+                            : Guid.Empty;
+
+                        int mediaItem = CreateMediaItem(mediaService, contentTypeService, media1.Id, "image", key, selectNode.Attributes["name"].Value, selectNode.Attributes["path"].Value, false);
                     }
                 }
-                catch (Exception ex)
-                {
-                    LogHelper.Error<InstallPackageAction>("Error during post processing of Starter Kit", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error<InstallPackageAction>("Error during post processing of Starter Kit", ex);
             }
 
             if (contentHome != null)
@@ -147,34 +125,72 @@ namespace Umbraco.SampleSite
             return dts.GetPreValuesCollectionByDataTypeId(dataTypeDefinition.Id).PreValuesAsDictionary.Where(d => d.Value.Value == preValueText).Select(f => f.Value.Id).First();
         }
 
-        private int CreateMediaItem(IMediaService service, int parentFolder, string nodeTypeAlias, Guid key, string nodeName, string mediaPath, bool checkForDuplicate = false)
+        private int CreateMediaItem(IMediaService service, IContentTypeService contentTypeService,
+            int parentFolderId, string nodeTypeAlias, Guid key, string nodeName, string mediaPath, bool checkForDuplicateName = false)
         {
-            bool flag = false;
-            IMedia media1 = (IMedia)null;
-            if (checkForDuplicate)
+            //if the item with the exact id exists we cannot install it (the package was probably already installed)
+            if (service.GetById(key) != null)
+                return -1;
+
+            //cannot continue if the media type doesn't exist
+            var mediaType = contentTypeService.GetMediaType(nodeTypeAlias);
+            if (mediaType == null)
             {
-                foreach (IMedia media2 in parentFolder == -1 ? service.GetRootMedia() : service.GetById(parentFolder).Children())
+                LogHelper.Warn<InstallPackageAction>(
+                    $"Could not create media, the '{nodeTypeAlias}' media type is missing, the Starter Kit package will not function correctly");
+                return -1;
+            }
+
+            var isDuplicate = false;
+
+            if (checkForDuplicateName)
+            {
+                IEnumerable<IMedia> children;
+                if (parentFolderId == -1)
                 {
-                    if (media2.Name == nodeName)
+                    children = service.GetRootMedia();
+                }
+                else
+                {
+                    var parentFolder = service.GetById(parentFolderId);
+                    if (parentFolder == null)
                     {
-                        media1 = media2;
-                        flag = true;
+                        LogHelper.Warn<InstallPackageAction>("No media parent found by Id " + parentFolderId + " the media item " + nodeName + " cannot be installed");
+                        return -1;
+                    }
+                    children = service.GetChildren(parentFolderId);
+                }
+                foreach (var m in children)
+                {
+                    if (m.Name == nodeName)
+                    {
+                        isDuplicate = true;
                         break;
                     }
                 }
             }
-            if (!flag)
+
+            if (isDuplicate) return -1;
+
+            if (parentFolderId != -1)
             {
-                media1 = service.CreateMedia(nodeName, parentFolder, nodeTypeAlias, 0);
-                if (nodeTypeAlias != "folder")
-                    media1.SetValue("umbracoFile", (object)mediaPath);
-                if (key != Guid.Empty)
+                var parentFolder = service.GetById(parentFolderId);
+                if (parentFolder == null)
                 {
-                    media1.Key = key;
+                    LogHelper.Warn<InstallPackageAction>("No media parent found by Id " + parentFolderId + " the media item " + nodeName + " cannot be installed");
+                    return -1;
                 }
-                service.Save(media1, 0, true);
             }
-            return media1.Id;
+
+            var media = service.CreateMedia(nodeName, parentFolderId, nodeTypeAlias);
+            if (nodeTypeAlias != "folder")
+                media.SetValue("umbracoFile", mediaPath);
+            if (key != Guid.Empty)
+            {
+                media.Key = key;
+            }
+            service.Save(media);
+            return media.Id;
         }
     }
 }
