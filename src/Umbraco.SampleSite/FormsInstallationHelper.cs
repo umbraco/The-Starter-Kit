@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Umbraco.Core.Services;
@@ -49,7 +50,8 @@ namespace Umbraco.SampleSite
                 if (contactFormType != null)
                 {
                     var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == "contactForm");
-                    var labelDataType = dataTypeService.GetDataTypeDefinitionByPropertyEditorAlias("Umbraco.NoEdit").First();
+                    var labelDataType = dataTypeService.GetDataTypeDefinitionByPropertyEditorAlias("Umbraco.NoEdit")
+                        .First();
                     if (labelDataType != null && formPicker != null)
                     {
                         formPicker.DataTypeDefinitionId = labelDataType.Id;
@@ -65,12 +67,19 @@ namespace Umbraco.SampleSite
                     if (string.IsNullOrWhiteSpace(templateContent) == false)
                     {
                         //do the replacement
-                        templateContent = PreInstallContactFormHtmlPattern.Replace(templateContent, PostInstallContactFormHtml);
+                        templateContent =
+                            PreInstallContactFormHtmlPattern.Replace(templateContent, PostInstallContactFormHtml);
 
                         contactView.Content = templateContent;
                         fileService.SaveTemplate(contactView);
                     }
                 }
+
+            }
+            else
+            {
+                // form is installed
+                CheckForDeployFile();
             }
         }
 
@@ -116,6 +125,27 @@ namespace Umbraco.SampleSite
                         contactView.Content = templateContent;
                         fileService.SaveTemplate(contactView);
                     }
+                }
+
+                CheckForDeployFile();
+            }
+        }
+
+        private static void CheckForDeployFile()
+        {
+// copy the uda file if a data folder exist
+            var deployRevisionDirPath =
+                Core.IO.IOHelper.MapPath("~/data" + Core.IO.IOHelper.DirSepChar + "revision");
+            var formsMarkerFile = "forms-form__adf160f139f544c0b01d9e2da32bf093.uda";
+            var formsTempDirectory = Core.IO.IOHelper.MapPath(Core.IO.SystemDirectories.Data + Core.IO.IOHelper.DirSepChar + "TEMP");
+            if (Directory.Exists(deployRevisionDirPath) &&
+                File.Exists(deployRevisionDirPath + Core.IO.IOHelper.DirSepChar + formsMarkerFile) == false)
+            {
+                // copy the file
+                if (File.Exists(formsTempDirectory + Core.IO.IOHelper.DirSepChar + formsMarkerFile))
+                {
+                    File.Copy(formsTempDirectory + Core.IO.IOHelper.DirSepChar + formsMarkerFile,
+                        deployRevisionDirPath + Core.IO.IOHelper.DirSepChar + formsMarkerFile, true);
                 }
             }
         }
