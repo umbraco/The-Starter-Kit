@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using Newtonsoft.Json;
+using umbraco;
 using umbraco.interfaces;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
@@ -95,6 +97,10 @@ namespace Umbraco.SampleSite
                 LogHelper.Error<InstallPackageAction>("Error during post processing of Starter Kit", ex);
             }
 
+            // we need to update the references for the photo used in the grid in a blog post and about us page
+            replaceMediaGridValues(new Guid("a4174f42-86fb-47ee-a376-c3366597c5fc"), new Guid("208abda1-63b5-4ba1-bc2a-3d40fe156bb6"), "BlogPost", contentService, mediaService);
+            replaceMediaGridValues(new Guid("d62f0f1d-e4a9-4093-94ae-4efce18872ee"), new Guid("981014a4-f0b9-46db-aa91-87cf2027f6e0"), "AboutUs", contentService, mediaService);
+
             if (contentHome != null)
             {
                 // publish everything (moved here due to Deploy dependency checking)
@@ -102,6 +108,31 @@ namespace Umbraco.SampleSite
             }
 
             return true;
+        }
+
+        private static void replaceMediaGridValues(Guid contentGuid, Guid mediaGuid, string searchForKey, IContentService contentService, IMediaService mediaService)
+        {
+            var contentItem = contentService.GetById(contentGuid);
+            var mediaItem = mediaService.GetById(mediaGuid);
+            if (contentItem != null && mediaItem != null)
+            {
+                var blogGridContent = contentItem.GetValue<string>("bodyText");
+                var bikerJacketPath = mediaItem.GetValue<string>("umbracoFile");
+                // check if the path is in json
+                if (bikerJacketPath.Contains("{"))
+                {
+                    // we need to parse the media path from the json
+                    var def = new {Src = "", Crops = new string[] {""}};
+                    var mediaJson = JsonConvert.DeserializeAnonymousType(bikerJacketPath, def);
+                    bikerJacketPath = mediaJson.Src;
+                }
+                var bikerJacketId = mediaItem.Id.ToString();
+
+                blogGridContent = blogGridContent.Replace($"#pathToMediaIn{searchForKey}", bikerJacketPath)
+                    .Replace($"#mediaIdIn{searchForKey}", bikerJacketId);
+                contentItem.SetValue("bodyText", blogGridContent);
+                contentService.Save(contentItem);
+            }
         }
 
         public string Alias()
