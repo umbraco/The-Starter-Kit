@@ -146,15 +146,15 @@ namespace Umbraco.SampleSite
             //deserialize the form from the json file
             var form = JsonConvert.DeserializeObject(FormsDefinitions.ContactForm, formsType);
 
-            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Data.Storage");
+            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Data.Storage.FormStorage");
             if (formsStorageType == null)
-                throw new InvalidOperationException("Could not find type Umbraco.Forms.Data.Storage in assembly " + formsAssembly);
+                throw new InvalidOperationException("Could not find type Umbraco.Forms.Data.Storage.FormStorage in assembly " + formsAssembly);
 
             //create a FormsStorage instance and Insert it, then dispose the FormsStorage
             var formsStorageInstance = Activator.CreateInstance(formsStorageType);
             try
             {
-                CallMethod(formsStorageInstance, "InsertForm", form);
+                CallMethod(formsStorageInstance, "InsertForm", form, string.Empty, false);
             }
             finally
             {
@@ -172,32 +172,27 @@ namespace Umbraco.SampleSite
             if (obj == null)
                 throw new ArgumentNullException(nameof(obj));
             var type = obj.GetType();
-            var methodInfo = GetMethodInfo(type, methodName);
+            var methodInfo = GetMethodInfo(type, methodName, parameters);
             if (methodInfo == null)
                 throw new ArgumentOutOfRangeException(nameof(methodName), $"Couldn't find method {methodName} in type {type.FullName}");
             return methodInfo.Invoke(obj, parameters);
         }
 
-        private static MethodInfo GetMethodInfo(Type type, string methodName)
+        private static MethodInfo GetMethodInfo(Type type, string methodName, object[] parameters)
         {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
             if (string.IsNullOrWhiteSpace(methodName))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(methodName));
-            return MethodInfoCache.GetOrAdd(new Tuple<Type, string>(type, methodName), tuple =>
-            {
-                MethodInfo method;
-                do
-                {
-                    method = type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-                    type = type.BaseType;
-                }
-                while (method == null && type != null);
-                return method;
-            });
-        }
 
-        private static readonly ConcurrentDictionary<Tuple<Type, string>, MethodInfo> MethodInfoCache = new ConcurrentDictionary<Tuple<Type, string>, MethodInfo>(); 
+            var method = type.GetMethod(methodName, 
+                BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic,
+                null, 
+                parameters.Select(x => x.GetType()).ToArray(), 
+                null);            
+            return method;
+        }
+        
         #endregion
     }
 }

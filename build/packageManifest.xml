@@ -317,11 +317,6 @@
             <orgName>Terratype.dll</orgName>
         </file>
         <file>
-            <guid>adf160f1-39f5-44c0-b01d-9e2da32bf093.json</guid>
-            <orgPath>/App_Data/UmbracoForms/Data/forms</orgPath>
-            <orgName>adf160f1-39f5-44c0-b01d-9e2da32bf093.json</orgName>
-        </file>
-        <file>
             <guid>umbraco-starterkit-style.css</guid>
             <orgPath>/css</orgPath>
             <orgName>umbraco-starterkit-style.css</orgName>
