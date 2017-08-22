@@ -317,11 +317,6 @@
             <orgName>Terratype.dll</orgName>
         </file>
         <file>
-            <guid>adf160f1-39f5-44c0-b01d-9e2da32bf093.json</guid>
-            <orgPath>/App_Data/UmbracoForms/Data/forms</orgPath>
-            <orgName>adf160f1-39f5-44c0-b01d-9e2da32bf093.json</orgName>
-        </file>
-        <file>
             <guid>umbraco-starterkit-style.css</guid>
             <orgPath>/css</orgPath>
             <orgName>umbraco-starterkit-style.css</orgName>
@@ -330,12 +325,7 @@
         <guid>umbraco-starterkit-app.js</guid>
         <orgPath>/scripts</orgPath>
         <orgName>umbraco-starterkit-app.js</orgName>
-      </file>
-      <file>
-        <guid>forms-form__adf160f139f544c0b01d9e2da32bf093.uda</guid>
-        <orgPath>/App_Data/TEMP</orgPath>
-        <orgName>forms-form__adf160f139f544c0b01d9e2da32bf093.uda</orgName>
-      </file>
+      </file>      
     </files>
     <info>
         <package>

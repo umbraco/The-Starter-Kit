@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using Umbraco.Core.Services;
 
 namespace Umbraco.SampleSite
@@ -79,7 +82,7 @@ namespace Umbraco.SampleSite
             else
             {
                 // form is installed
-                CheckForDeployFile();
+                CreateFormsDefinition();
             }
         }
 
@@ -127,27 +130,69 @@ namespace Umbraco.SampleSite
                     }
                 }
 
-                CheckForDeployFile();
+                CreateFormsDefinition();
             }
         }
 
-        private static void CheckForDeployFile()
+        private static void CreateFormsDefinition()
         {
-// copy the uda file if a data folder exist
-            var deployRevisionDirPath =
-                Core.IO.IOHelper.MapPath("~/data" + Core.IO.IOHelper.DirSepChar + "revision");
-            var formsMarkerFile = "forms-form__adf160f139f544c0b01d9e2da32bf093.uda";
-            var formsTempDirectory = Core.IO.IOHelper.MapPath(Core.IO.SystemDirectories.Data + Core.IO.IOHelper.DirSepChar + "TEMP");
-            if (Directory.Exists(deployRevisionDirPath) &&
-                File.Exists(deployRevisionDirPath + Core.IO.IOHelper.DirSepChar + formsMarkerFile) == false)
+            var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
+            if (formsAssembly == null)
+                throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
+            var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Form");
+            if (formsType == null) 
+                throw new InvalidOperationException("Could not find type Umbraco.Forms.Core.Form in assembly " + formsAssembly);
+
+            //deserialize the form from the json file
+            var form = JsonConvert.DeserializeObject(FormsDefinitions.ContactForm, formsType);
+
+            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Data.Storage.FormStorage");
+            if (formsStorageType == null)
+                throw new InvalidOperationException("Could not find type Umbraco.Forms.Data.Storage.FormStorage in assembly " + formsAssembly);
+
+            //create a FormsStorage instance and Insert it, then dispose the FormsStorage
+            var formsStorageInstance = Activator.CreateInstance(formsStorageType);
+            try
             {
-                // copy the file
-                if (File.Exists(formsTempDirectory + Core.IO.IOHelper.DirSepChar + formsMarkerFile))
+                CallMethod(formsStorageInstance, "InsertForm", form, string.Empty, false);
+            }
+            finally
+            {
+                if (formsStorageInstance != null)
                 {
-                    File.Copy(formsTempDirectory + Core.IO.IOHelper.DirSepChar + formsMarkerFile,
-                        deployRevisionDirPath + Core.IO.IOHelper.DirSepChar + formsMarkerFile, true);
+                    CallMethod(formsStorageInstance, "Dispose");
                 }
             }
         }
+
+
+        #region Reflection Helpers
+        private static object CallMethod(object obj, string methodName, params object[] parameters)
+        {
+            if (obj == null)
+                throw new ArgumentNullException(nameof(obj));
+            var type = obj.GetType();
+            var methodInfo = GetMethodInfo(type, methodName, parameters);
+            if (methodInfo == null)
+                throw new ArgumentOutOfRangeException(nameof(methodName), $"Couldn't find method {methodName} in type {type.FullName}");
+            return methodInfo.Invoke(obj, parameters);
+        }
+
+        private static MethodInfo GetMethodInfo(Type type, string methodName, object[] parameters)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+            if (string.IsNullOrWhiteSpace(methodName))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(methodName));
+
+            var method = type.GetMethod(methodName, 
+                BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic,
+                null, 
+                parameters.Select(x => x.GetType()).ToArray(), 
+                null);            
+            return method;
+        }
+        
+        #endregion
     }
 }
