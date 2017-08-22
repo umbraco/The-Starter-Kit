@@ -267,12 +267,22 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="FormsDefinitions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormsDefinitions.resx</DependentUpon>
+    </Compile>
     <Compile Include="FormsInstallationHelper.cs" />
     <Compile Include="InstallPackageAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UmbracoEvents.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ContactForm.json" />
+    <EmbeddedResource Include="FormsDefinitions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormsDefinitions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

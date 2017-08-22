@@ -330,12 +330,7 @@
         <guid>umbraco-starterkit-app.js</guid>
         <orgPath>/scripts</orgPath>
         <orgName>umbraco-starterkit-app.js</orgName>
-      </file>
-      <file>
-        <guid>forms-form__adf160f139f544c0b01d9e2da32bf093.uda</guid>
-        <orgPath>/App_Data/TEMP</orgPath>
-        <orgName>forms-form__adf160f139f544c0b01d9e2da32bf093.uda</orgName>
-      </file>
+      </file>      
     </files>
     <info>
         <package>
