@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using Newtonsoft.Json;
-using umbraco;
 using umbraco.interfaces;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
@@ -14,8 +13,6 @@ namespace Umbraco.SampleSite
 {
     public class InstallPackageAction : IPackageAction
     {
-        
-
         public bool Execute(string packageName, XmlNode xmlData)
         {
             var contentService = ApplicationContext.Current.Services.ContentService;

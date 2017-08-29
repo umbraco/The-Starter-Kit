@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -165,8 +163,8 @@ namespace Umbraco.SampleSite
             }
         }
 
-
         #region Reflection Helpers
+
         private static object CallMethod(object obj, string methodName, params object[] parameters)
         {
             if (obj == null)
