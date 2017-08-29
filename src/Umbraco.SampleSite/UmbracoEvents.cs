@@ -7,7 +7,7 @@ namespace Umbraco.SampleSite
     {
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            PackagingService.ImportedPackage += PackagingService_ImportedPackage;            
+            PackagingService.ImportedPackage += PackagingService_ImportedPackage;
         }
 
         /// <summary>
@@ -17,7 +17,7 @@ namespace Umbraco.SampleSite
         /// <param name="e"></param>
         private void PackagingService_ImportedPackage(IPackagingService sender, Core.Events.ImportPackageEventArgs<Core.Packaging.Models.InstallationSummary> e)
         {
-            if (e.PackageMetaData.Name == "Umbraco Forms")
+            if (e != null && e.PackageMetaData != null && e.PackageMetaData.Name == "Umbraco Forms")
             {
                 var formsInstallHelper = new FormsInstallationHelper(ApplicationContext.Current.Services);
                 formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
