@@ -136,19 +136,19 @@ namespace Umbraco.SampleSite
         /// <summary>
         /// Will delete the form that is installed by the starter kit if it exists using reflection to invoke the forms API to do so
         /// </summary>
+        /// <remarks>
+        /// This will not throw any exceptions if the forms types are not found, it will just exit
+        /// </remarks>
         public static void RemoveStarterKitForm()
         {
             LogHelper.Info<FormsInstallationHelper>("Deleting Form created from Starter Kit...");
 
             var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
-            if (formsAssembly == null)
-                throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
+            if (formsAssembly == null) return;
             var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Form");
-            if (formsType == null)
-                throw new InvalidOperationException("Could not find type Umbraco.Forms.Core.Form in assembly " + formsAssembly);
+            if (formsType == null) return;
             var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Data.Storage.FormStorage");
-            if (formsStorageType == null)
-                throw new InvalidOperationException("Could not find type Umbraco.Forms.Data.Storage.FormStorage in assembly " + formsAssembly);
+            if (formsStorageType == null) return;
 
             //this is the form id that is installed
             var formId = new Guid("adf160f1-39f5-44c0-b01d-9e2da32bf093");
