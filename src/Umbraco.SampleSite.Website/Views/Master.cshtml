@@ -1,11 +1,9 @@
-﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
-@using Umbraco.Core
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits UmbracoTemplatePage
 @{
     Layout = null;
 
     // Get basic design settings from the homepage
-    ContentModels.Home home = Model.Content.Site() as ContentModels.Home;
+    var home = (Home)Model.Content.Site();
     var colorTheme = Umbraco.GetPreValueAsString(home.ColorTheme);
     var font = Umbraco.GetPreValueAsString(home.Font);
 }
