@@ -2357,7 +2357,7 @@ It's only compatible with Umbraco 7.6.4+, it will not install or work on older v
         </DataType>
     </DataTypes>
     <Actions>
-        <Action runat="install" undo="false" alias="SampleSiteInitialContent">
+        <Action runat="install" undo="true" alias="SampleSiteInitialContent">
             <mediaItem folder="design" name="Umbraco Campari Meeting Room" path="/media/1030/16403439029_f500be349b_o.jpg" key="3d758b1f-24ec-47b0-a75c-225b0444991b" updateDocPath="//home" updatePropertyAlias="heroBackgroundImage" />
             <mediaItem folder="products" name="Biker Jacket" path="/media/1001/4730684907_8a7f8759cb_b.jpg" key="208abda1-63b5-4ba1-bc2a-3d40fe156bb6" updateDocPath="//product [@nodeName = 'Biker Jacket']" updatePropertyAlias="photos" />
             <mediaItem folder="products" name="Tattoo" path="/media/1012/7371127652_e01b6ab56f_b.jpg" key="ce075369-df3d-426f-972a-36b355fd535f" updateDocPath="//product [@nodeName = 'Tattoo']" updatePropertyAlias="photos" />

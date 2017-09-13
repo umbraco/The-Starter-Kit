@@ -95,8 +95,8 @@ namespace Umbraco.SampleSite
             }
 
             // we need to update the references for the photo used in the grid in a blog post and about us page
-            replaceMediaGridValues(new Guid("a4174f42-86fb-47ee-a376-c3366597c5fc"), new Guid("208abda1-63b5-4ba1-bc2a-3d40fe156bb6"), "BlogPost", contentService, mediaService);
-            replaceMediaGridValues(new Guid("d62f0f1d-e4a9-4093-94ae-4efce18872ee"), new Guid("981014a4-f0b9-46db-aa91-87cf2027f6e0"), "AboutUs", contentService, mediaService);
+            ReplaceMediaGridValues(new Guid("a4174f42-86fb-47ee-a376-c3366597c5fc"), new Guid("208abda1-63b5-4ba1-bc2a-3d40fe156bb6"), "BlogPost", contentService, mediaService);
+            ReplaceMediaGridValues(new Guid("d62f0f1d-e4a9-4093-94ae-4efce18872ee"), new Guid("981014a4-f0b9-46db-aa91-87cf2027f6e0"), "AboutUs", contentService, mediaService);
 
             if (contentHome != null)
             {
@@ -107,7 +107,7 @@ namespace Umbraco.SampleSite
             return true;
         }
 
-        private static void replaceMediaGridValues(Guid contentGuid, Guid mediaGuid, string searchForKey, IContentService contentService, IMediaService mediaService)
+        private static void ReplaceMediaGridValues(Guid contentGuid, Guid mediaGuid, string searchForKey, IContentService contentService, IMediaService mediaService)
         {
             var contentItem = contentService.GetById(contentGuid);
             var mediaItem = mediaService.GetById(mediaGuid);
@@ -137,9 +137,18 @@ namespace Umbraco.SampleSite
             return "SampleSiteInitialContent";
         }
 
+        /// <summary>
+        /// This occurs on package uninstall
+        /// </summary>
+        /// <param name="packageName"></param>
+        /// <param name="xmlData"></param>
+        /// <returns>
+        /// The return value doesn't make any difference
+        /// </returns>
         public bool Undo(string packageName, XmlNode xmlData)
         {
-            return false;
+            FormsInstallationHelper.RemoveStarterKitForm();
+            return true;
         }
 
         public XmlNode SampleXml()

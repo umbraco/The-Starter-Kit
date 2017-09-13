@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Umbraco.Core.Logging;
 using Umbraco.Core.Services;
 
 namespace Umbraco.SampleSite
@@ -80,7 +81,7 @@ namespace Umbraco.SampleSite
             else
             {
                 // form is installed
-                CreateFormsDefinition();
+                CreateStarterKitForm();
             }
         }
 
@@ -128,12 +129,64 @@ namespace Umbraco.SampleSite
                     }
                 }
 
-                CreateFormsDefinition();
+                CreateStarterKitForm();
             }
         }
 
-        private static void CreateFormsDefinition()
+        /// <summary>
+        /// Will delete the form that is installed by the starter kit if it exists using reflection to invoke the forms API to do so
+        /// </summary>
+        public static void RemoveStarterKitForm()
         {
+            LogHelper.Info<FormsInstallationHelper>("Deleting Form created from Starter Kit...");
+
+            var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
+            if (formsAssembly == null)
+                throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
+            var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Form");
+            if (formsType == null)
+                throw new InvalidOperationException("Could not find type Umbraco.Forms.Core.Form in assembly " + formsAssembly);
+            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Data.Storage.FormStorage");
+            if (formsStorageType == null)
+                throw new InvalidOperationException("Could not find type Umbraco.Forms.Data.Storage.FormStorage in assembly " + formsAssembly);
+
+            //this is the form id that is installed
+            var formId = new Guid("adf160f1-39f5-44c0-b01d-9e2da32bf093");
+
+            //create a FormsStorage instance
+            object formsStorageInstance;
+            try
+            {
+                formsStorageInstance = Activator.CreateInstance(formsStorageType);
+            }
+            catch (Exception)
+            {
+                //If we cannot create it then there's nothing we can do
+                return;
+            }
+
+            try
+            {
+                var form = CallMethod(formsStorageInstance, "GetForm", formId);
+                if (form == null) return;
+
+                var deleteResult = CallMethod(formsStorageInstance, "DeleteForm", form);
+            }
+            finally
+            {
+                CallMethod(formsStorageInstance, "Dispose");
+            }
+
+            LogHelper.Info<FormsInstallationHelper>("Deleted Form created from Starter Kit");
+        }
+
+        /// <summary>
+        /// Creates a Form by importing it via a serialized version of the form and using reflection to invoke the forms API
+        /// </summary>
+        private static void CreateStarterKitForm()
+        {
+            LogHelper.Info<FormsInstallationHelper>("Creating Form for Starter Kit...");
+
             var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
             if (formsAssembly == null)
                 throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
@@ -148,19 +201,29 @@ namespace Umbraco.SampleSite
             if (formsStorageType == null)
                 throw new InvalidOperationException("Could not find type Umbraco.Forms.Data.Storage.FormStorage in assembly " + formsAssembly);
 
-            //create a FormsStorage instance and Insert it, then dispose the FormsStorage
-            var formsStorageInstance = Activator.CreateInstance(formsStorageType);
+            //create a FormsStorage instance
+            object formsStorageInstance;
+            try
+            {
+                formsStorageInstance = Activator.CreateInstance(formsStorageType);
+            }
+            catch (Exception)
+            {
+                //If we cannot create it then there's nothing we can do
+                return;
+            }
+
+            //Insert the form, then dispose the FormsStorage
             try
             {
                 CallMethod(formsStorageInstance, "InsertForm", form, string.Empty, false);
             }
             finally
             {
-                if (formsStorageInstance != null)
-                {
-                    CallMethod(formsStorageInstance, "Dispose");
-                }
+                CallMethod(formsStorageInstance, "Dispose");
             }
+
+            LogHelper.Info<FormsInstallationHelper>("Created Form for Starter Kit");
         }
 
         #region Reflection Helpers
