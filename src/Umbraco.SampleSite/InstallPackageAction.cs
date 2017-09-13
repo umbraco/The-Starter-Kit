@@ -147,7 +147,8 @@ namespace Umbraco.SampleSite
         /// </returns>
         public bool Undo(string packageName, XmlNode xmlData)
         {
-            FormsInstallationHelper.RemoveStarterKitForm();
+            //see https://github.com/umbraco/7.6-Starter-Kit/issues/26 - perhaps it's not a good idea to remove the form
+            //FormsInstallationHelper.RemoveStarterKitForm();
             return true;
         }
 
