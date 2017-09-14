@@ -335,6 +335,10 @@
     <Content Include="Views\MacroPartials\LatestBlogposts.cshtml" />
     <Content Include="Views\MacroPartials\RenderUmbracoFormScripts.cshtml" />
     <Content Include="App_Data\packages\created\createdPackages.config" />
+    <Content Include="Views\Partials\Navigation\SubNavigation.cshtml" />
+    <Content Include="Views\Partials\Navigation\TopNavigation.cshtml" />
+    <Content Include="Views\Partials\CategoryLinks.cshtml" />
+    <Content Include="Views\Partials\SectionHeader.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
