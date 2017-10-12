@@ -356,8 +356,8 @@
             <url>https://umbraco.com</url>
             <requirements type="strict">
                 <major>7</major>
-                <minor>6</minor>
-                <patch>4</patch>
+                <minor>8</minor>
+                <patch>0</patch>
             </requirements>
         </package>
         <author>
