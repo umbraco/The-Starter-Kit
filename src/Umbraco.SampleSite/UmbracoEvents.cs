@@ -57,7 +57,7 @@ namespace Umbraco.SampleSite
 
             //Add to 'Umbraco.Sys.ServerVariables.umbracoUrls.lessonsApiBaseUrl' global JS object
             //The URL/route for this API endpoint to be consumed by the Lessons AngularJS Service
-            umbracoUrls["lessonsApiBaseUrl"] = urlHelper.GetUmbracoApiServiceBaseUrl<LessonsController>(controller => controller.GetLessons("", ""));
+            umbracoUrls["lessonsApiBaseUrl"] = urlHelper.GetUmbracoApiServiceBaseUrl<LessonsController>(controller => controller.GetLessons(""));
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using System.Web.Http;
 using Newtonsoft.Json;
 using Umbraco.Core;
 using Umbraco.Core.Cache;
@@ -24,18 +22,10 @@ namespace Umbraco.SampleSite.Controllers
         /// Fetches available lessons for a given section from our.umbaco.org
         /// </summary>
         /// <param name="path">Name of the documentation section to fetch from, ex: "getting-started", "Tutorials/Starter-kit/Lessons" </param>
-        /// <param name="baseUrl">The url to retrieve from, by default https://our.umbraco.org</param>
         /// <returns></returns>
         [ValidateAngularAntiForgeryToken]
-        public async Task<IEnumerable<Lesson>> GetLessons(string path, string baseUrl = "https://our.umbraco.org")
+        public async Task<IEnumerable<Lesson>> GetLessons(string path)
         {
-            //We need the umbraco context to fetch the currrent user and version
-            var context = UmbracoContext;
-
-            //this only works in the context of a umbraco backoffice request
-            if (context == null)
-                throw new HttpResponseException(HttpStatusCode.InternalServerError);
-
             //information for the request, so we could in the future filter by user, allowed sections, langugae and user-type
             var user = Security.CurrentUser;
             var userType = user.UserType.Alias;
@@ -44,7 +34,7 @@ namespace Umbraco.SampleSite.Controllers
             var version = UmbracoVersion.GetSemanticVersion().ToSemanticString();
 
             //construct the url and cache key
-            var url = string.Format(baseUrl + "/Umbraco/Documentation/Lessons/GetDocsForPath?path={0}&userType={1}&allowedSections={2}&lang={3}&version={4}", path, userType, allowedSections, language, version);
+            var url = string.Format("https://our.umbraco.org/Umbraco/Documentation/Lessons/GetDocsForPath?path={0}&userType={1}&allowedSections={2}&lang={3}&version={4}", path, userType, allowedSections, language, version);
             var key = "umbraco-lessons-" + userType + language + allowedSections.Replace(",", "-") + path;
 
             //try and find an already cached version of this request
@@ -89,12 +79,11 @@ namespace Umbraco.SampleSite.Controllers
         /// This gets the steps that make up a specific lesson
         /// </summary>
         /// <param name="path"></param>
-        /// <param name="baseUrl">The url to retrieve from, by default https://our.umbraco.org</param>
         /// <returns></returns>
         [ValidateAngularAntiForgeryToken]
-        public async Task<IEnumerable<LessonStep>> GetLessonSteps(string path, string baseUrl = "https://our.umbraco.org")
+        public async Task<IEnumerable<LessonStep>> GetLessonSteps(string path)
         {
-            var url = string.Format(baseUrl + "/Umbraco/Documentation/Lessons/GetStepsForPath?path={0}", path);
+            var url = string.Format("https://our.umbraco.org/Umbraco/Documentation/Lessons/GetStepsForPath?path={0}", path);
             using (var web = new HttpClient())
             {
                 //fetch dashboard json and parse to JObject

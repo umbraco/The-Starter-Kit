@@ -2,28 +2,15 @@
        
     var service = {
             
-        getLessons: function (path, baseurl) {
-
-            //build request values with optional params
+        getLessons: function (path) {
             var qs = "?path=" + path;
-            if (baseurl) {
-                qs += "&baseurl=" + encodeURIComponent(baseurl);
-            }
-
             var url = umbRequestHelper.getApiUrl("lessonsApiBaseUrl", "GetLessons" + qs);
-
             return umbRequestHelper.resourcePromise($http.get(url), "Failed to get lessons content");
         },
 
-        getLessonSteps: function (path, baseurl) {
-
+        getLessonSteps: function (path) {
             var qs = "?path=" + path;
-            if (baseurl) {
-                qs += "&baseurl=" + encodeURIComponent(baseurl);
-            }
-
             var url = umbRequestHelper.getApiUrl("lessonsApiBaseUrl", "GetLessonSteps" + qs);
-
             return umbRequestHelper.resourcePromise($http.get(url), "Failed to get lessons content");
         }
     };
