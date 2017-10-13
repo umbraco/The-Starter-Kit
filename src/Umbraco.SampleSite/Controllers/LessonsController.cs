@@ -37,39 +37,33 @@ namespace Umbraco.SampleSite.Controllers
             var url = string.Format("https://our.umbraco.org/Umbraco/Documentation/Lessons/GetDocsForPath?path={0}&userType={1}&allowedSections={2}&lang={3}&version={4}", path, userType, allowedSections, language, version);
             var key = "umbraco-lessons-" + userType + language + allowedSections.Replace(",", "-") + path;
 
-            //try and find an already cached version of this request
-            var content = ApplicationContext.ApplicationCache.RuntimeCache.GetCacheItem<List<Lesson>>(key);
-
             var result = new List<Lesson>();
-            if (content != null)
+
+            Func<List<Lesson>> fetchLesson = () =>
             {
-                //Return it from the cache
-                result = content;
-            }
-            else
-            {
-                //content is null, go get it
                 try
                 {
                     using (var web = new HttpClient())
                     {
                         //fetch dashboard json and parse to JObject
-                        var json = await web.GetStringAsync(url);
-                        result = JsonConvert.DeserializeObject<IEnumerable<Lesson>>(json).ToList();
+                        var json = web.GetStringAsync(url);
+                        result = JsonConvert.DeserializeObject<IEnumerable<Lesson>>(json.Result).ToList();
                     }
-
-                    //Cache the request for 30 minutes
-                    ApplicationContext.ApplicationCache.RuntimeCache.InsertCacheItem<List<Lesson>>(key, () => result, new TimeSpan(0, 30, 0));
                 }
                 catch (HttpRequestException ex)
                 {
+                    //Log it so we are aware there was an issue
                     LogHelper.Debug<LessonsController>(string.Format("Error getting lesson content from '{0}': {1}\n{2}", url, ex.Message, ex.InnerException));
 
-                    //The result is still a new/empty JObject() - we return it like this to avoid error codes which triggers UI warnings
-                    //And cache this empty result for 5 minutes as our.umb may have newtworking issues
-                    ApplicationContext.ApplicationCache.RuntimeCache.InsertCacheItem<List<Lesson>>(key, () => result, new TimeSpan(0, 5, 0));
+                    //The result is still a new/empty JObject() - So we will return it like this to avoid error codes which triggers UI warnings
+                    //So this will cache an empty response until cache expires
                 }
-            }
+
+                return result;
+            };
+
+            //Get cache item or add new cache item with func
+            result = ApplicationContext.ApplicationCache.RuntimeCache.GetCacheItem<List<Lesson>>(key, fetchLesson, new TimeSpan(0, 30, 0));
 
             return result;
         }
