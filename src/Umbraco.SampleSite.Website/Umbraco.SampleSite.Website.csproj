@@ -281,6 +281,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\StarterKit\lessons.service.js" />
+    <Content Include="App_Plugins\StarterKit\starterkithelp.controller.js" />
+    <Content Include="App_Plugins\StarterKit\starterkithelp.html" />
     <Content Include="css\umbraco-starterkit-style.css" />
     <Content Include="packages.config" />
     <Content Include="config\imageprocessor\security.config" />
@@ -336,6 +339,7 @@
     <Content Include="Views\Partials\CategoryLinks.cshtml" />
     <Content Include="Views\Partials\SectionHeader.cshtml" />
     <Content Include="App_Data\packages\installed\installedPackages.config" />
+    <Content Include="App_Plugins\StarterKit\package.manifest" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -382,7 +386,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\TEMP\" />
-    <Folder Include="App_Plugins\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

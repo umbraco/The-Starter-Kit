@@ -325,7 +325,27 @@
         <guid>umbraco-starterkit-app.js</guid>
         <orgPath>/scripts</orgPath>
         <orgName>umbraco-starterkit-app.js</orgName>
-      </file>      
+      </file>
+      <file>
+        <guid>lessons.service.js</guid>
+        <orgPath>/App_Plugins/StarterKit</orgPath>
+        <orgName>lessons.service.js</orgName>
+      </file>
+      <file>
+        <guid>b6a19e6c-6276-4fb3-ba6e-6e83d85a9c89_package.manifest</guid>
+        <orgPath>/App_Plugins/StarterKit</orgPath>
+        <orgName>package.manifest</orgName>
+      </file>
+      <file>
+        <guid>StarterKitHelp.Controller.js</guid>
+        <orgPath>/App_Plugins/StarterKit</orgPath>
+        <orgName>StarterKitHelp.Controller.js</orgName>
+      </file>
+      <file>
+        <guid>starterkithelp.html</guid>
+        <orgPath>/App_Plugins/StarterKit</orgPath>
+        <orgName>starterkithelp.html</orgName>
+      </file>
     </files>
     <info>
         <package>
@@ -336,8 +356,8 @@
             <url>https://umbraco.com</url>
             <requirements type="strict">
                 <major>7</major>
-                <minor>6</minor>
-                <patch>4</patch>
+                <minor>8</minor>
+                <patch>0</patch>
             </requirements>
         </package>
         <author>
@@ -2372,6 +2392,18 @@ It's only compatible with Umbraco 7.6.4+, it will not install or work on older v
             <mediaItem folder="people" name="Lee Kelleher" path="/media/1004/18531854019_351c579559_h.jpg" key="def8b962-2107-486d-b2d6-5be3639a6c31" updateDocPath="//person [@nodeName = 'Lee Kelleher']" updatePropertyAlias="photo" />
             <mediaItem folder="people" name="Jeavon Leopold" path="/media/1002/18095416144_44a566a5f4_h.jpg" key="981014a4-f0b9-46db-aa91-87cf2027f6e0" updateDocPath="//person [@nodeName = 'Jeavon Leopold']" updatePropertyAlias="photo" />
             <mediaItem folder="people" name="Jeroen Breuer" path="/media/1005/18530280048_459b8b61b2_h.jpg" key="fcc18600-8f9b-4995-8954-3cb0d335faf1" updateDocPath="//person [@nodeName = 'Jeroen Breuer']" updatePropertyAlias="photo" />
+        </Action>
+        <Action runat="install" undo="false" alias="addDashboardSection" dashboardAlias="StarterKitLessons">
+          <section>
+            <areas>
+              <area>user-help</area>
+            </areas>
+            <tab caption="Lessons">
+              <control showOnce="true" addPanel="true" panelCaption="">
+                /App_Plugins/StarterKit/starterkithelp.html
+              </control>
+            </tab>
+          </section>
         </Action>
     </Actions>
 </umbPackage>
