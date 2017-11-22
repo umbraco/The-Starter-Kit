@@ -284,6 +284,11 @@
     <Content Include="App_Plugins\StarterKit\lessons.service.js" />
     <Content Include="App_Plugins\StarterKit\starterkithelp.controller.js" />
     <Content Include="App_Plugins\StarterKit\starterkithelp.html" />
+    <Content Include="App_Plugins\StarterKit\tours\tours.init.js" />
+    <Content Include="App_Plugins\StarterKit\tours\views\medialibrary\uploadimages.controller.js" />
+    <Content Include="App_Plugins\StarterKit\tours\views\medialibrary\uploadimages.html" />
+    <Content Include="App_Plugins\StarterKit\tours\views\validatetext.controller.js" />
+    <Content Include="App_Plugins\StarterKit\tours\views\validatetext.html" />
     <Content Include="css\umbraco-starterkit-style.css" />
     <Content Include="packages.config" />
     <Content Include="config\imageprocessor\security.config" />
