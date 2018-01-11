@@ -367,7 +367,7 @@
         <readme>
             <![CDATA[This is the default starter kit for Umbraco 7.6+.
 
-It's only compatible with Umbraco 7.6.4+, it will not install or work on older versions.]]>
+It contains a simple website that contains many basic features to help get you started including a home page, a blog, a product catalogue, contact page and more.]]>
         </readme>
     </info>
     <Documents>
@@ -1597,7 +1597,7 @@ It's only compatible with Umbraco 7.6.4+, it will not install or work on older v
                 <GenericProperty>
                     <Name>Features</Name>
                     <Alias>features</Alias>
-                    <Type>Our.Umbraco.NestedContent</Type>
+                    <Type>Umbraco.NestedContent</Type>
                     <Definition>2b806d03-d9f7-41a3-8226-4abc870585c4</Definition>
                     <Tab>Features</Tab>
                     <SortOrder>0</SortOrder>
@@ -2303,7 +2303,7 @@ It's only compatible with Umbraco 7.6.4+, it will not install or work on older v
                 <PreValue Id="59" Value="Csv" Alias="storageType" SortOrder="1" />
             </PreValues>
         </DataType>
-        <DataType Name="Product - Features - Nested Content" Id="Our.Umbraco.NestedContent" Definition="2b806d03-d9f7-41a3-8226-4abc870585c4" DatabaseType="Ntext">
+        <DataType Name="Product - Features - Nested Content" Id="Umbraco.NestedContent" Definition="2b806d03-d9f7-41a3-8226-4abc870585c4" DatabaseType="Ntext">
             <PreValues>
                 <PreValue Id="108" Value="[&#xD;&#xA;  {&#xD;&#xA;    &quot;ncAlias&quot;: &quot;feature&quot;,&#xD;&#xA;    &quot;ncTabAlias&quot;: &quot;Feature&quot;,&#xD;&#xA;    &quot;nameTemplate&quot;: &quot;{{featureName}}&quot;&#xD;&#xA;  }&#xD;&#xA;]" Alias="contentTypes" SortOrder="0" />
                 <PreValue Id="109" Value="0" Alias="minItems" SortOrder="1" />
