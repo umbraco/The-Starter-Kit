@@ -7,7 +7,7 @@
         "steps": [
             {
                 "title": "The Content section",
-                "content": "<p>In this tour you will get a short introduction to the Content section in Umbraco.</p><p>The content section is where all the pages and content for the website lives.</p><p>You will learn how to navigate the content, update some content, and preview the website.</p>",
+                "content": "<p>In this tour you will get a short introduction to the <b>Content section</b> in Umbraco.</p><p>The <b>Content section</b> is where all the pages and content for the website lives.</p><p>You will learn how to navigate the content, update some content, and preview the website.</p>",
                 "type": "intro"
             },
             {
@@ -21,7 +21,7 @@
                 "element": "#tree [data-element='tree-item-Home']",
                 "title": "The Home page",
                 "event": "click",
-                "content": "<p>The first node you will see in the content tree is the <b>Home</b> page.</p><p><b>Click</b> on the <b>small triangle</b> on the left of the Home page to see the pages underneath the Home page.</p>",
+                "content": "<p>The first node you will see in the content tree is the <b>Home</b> page.</p><p><b>Click</b> on the <b>down arrow</b> on the left of the Home page to see the pages underneath the Home page.</p>",
                 "eventElement": "#tree [data-element='tree-item-Home'] [data-element='tree-item-expand']"
             },
             {
@@ -40,42 +40,42 @@
                 "element": "[data-element='editor-name-field']",
                 "elementPreventClick": true,
                 "title": "The page name",
-                "content": "<p>On the top of the page you will find the page name.</p>"
+                "content": "<p>At the top of the page you will find the name of the content you are editing.</p>"
             },
             {
                 "element": "[data-element='property-heroHeader']",
                 "title": "Properties",
-                "content": "<p>In the center of the page you will find the page <b>Properties</b>.</p><p>These are all the pieces of information the page consist of. Properties can vary depending on wich <b>Document type</b> the current item belongs to.</p>"
+                "content": "<p>In the center of the page you will find the content <b>Properties</b>.</p><p>These are all the pieces of information the content consist of. Properties can vary depending on wich <b>Document type</b> the current item is based on.</p>"
             },
             {
                 "element": "[data-element='editor-tabs']",
                 "elementPreventClick": true,
                 "title": "Organise with tabs",
-                "content": "<p>The properties of a page can be organised into <b>tabs</b> so it is easy to find the right place to update the content.</p>"
+                "content": "<p>The properties of a page is organised in <b>tabs</b> making it is easy to find the right place to update the content.</p>"
             },
             {
                 "element": "[data-element='button-preview']",
                 "title": "Preview content",
-                "content": "<p>Before a page is published to your website you can preview any changes you have made to the page.</p><p><b>Click</b> the preview to see how the website looks like now.</p>",
+                "content": "<p>Before a page is published to your website you can preview any changes you have made to the page.</p><p><b>Click</b> the Preview button to see how the page looks now.</p>",
                 "event": "click"
             },
             {
                 "element": "[data-element='property-heroHeader']",
                 "title": "Update the header",
-                "content": "<p>Let's make an update to the content in the <b>Header</b> field.</p><p>It could be: <pre>Welcome to my website</pre></p>"
+                "content": "<p>Let's make an update to the content in the <b>Header</b> property.</p><p>Try changing it to: <pre>Welcome to my website</pre></p>"
             },
             {
                 "element": "[data-element='button-preview']",
                 "title": "Preview update",
-                "content": "<p><b>Click</b> the preview button to preview the changes we just made.</p>",
+                "content": "<p><b>Click</b> the preview button to see the changes you've just made.</p>",
                 "event": "click"
             },
-            {
-                "element": "[data-element='button-saveAndPublish']",
-                "title": "Save and Publish",
-                "content": "<p><b>Click</b> on <b>Save and Publish</b> button to publish the changes and make the change visible to the public.</p>",
-                "event": "click"
-            }
+          {
+            "element": "[data-element='button-saveAndPublish']",
+            "title": "Save and Publish",
+            "content": "<p><b>Click</b> on <b>Save and Publish</b> button to publish the changes and make them visible to the public.</p>",
+            "event": "click"
+          }
         ]
     },
     {
