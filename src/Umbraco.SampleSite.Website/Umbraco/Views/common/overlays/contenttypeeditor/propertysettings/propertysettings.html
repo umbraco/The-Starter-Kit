@@ -69,13 +69,12 @@
       </label>
 
       <select class="umb-dropdown" ng-options="validationType.name for validationType in vm.validationTypes" ng-model="vm.selectedValidationType" ng-change="vm.changeValidationType(vm.selectedValidationType)">
-         <option value=""><localize key="validation_validation">Validation</localize></option>
+         <option value="">Validation</option>
       </select>
 
       <textarea
          class="editor-validation-pattern"
-         localize="placeholder"
-         placeholder="@validation_validationRegExp"
+         placeholder="Enter a regular expression"
          ng-model="model.property.validation.pattern"
          ng-change="vm.changeValidationPattern()"
          ng-if="vm.showValidationPattern"

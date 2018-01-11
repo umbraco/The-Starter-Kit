@@ -1,4 +1,3 @@
-@using Umbraco.Web
 @inherits Umbraco.Web.Macros.PartialViewMacroPage
 
 @*
@@ -16,15 +15,12 @@
 @{ var propertyAlias = Model.MacroParameters["propertyAlias"]; }
 @if (propertyAlias != null)
 {
-    var selection = Model.Content.Children.Where(x => x.IsVisible()).OrderBy(x => x.GetPropertyValue(propertyAlias.ToString())).ToArray();
+    var selection = CurrentPage.Children.Where("Visible").OrderBy(propertyAlias);
 
-    if (selection.Length > 0)
-    {
-        <ul>
-            @foreach (var item in selection)
-            {
-                <li><a href="@item.Url">@item.Name</a></li>
-            }
-        </ul>
-    }
+    <ul>
+        @foreach (var item in selection)
+        {
+            <li><a href="@item.Url">@item.Name</a></li>
+        }
+    </ul>
 }

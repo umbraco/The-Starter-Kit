@@ -1,4 +1,4 @@
-if (typeof Umbraco == 'undefined') var Umbraco = {};
+﻿if (typeof Umbraco == 'undefined') var Umbraco = {};
 if (!Umbraco.Sys) Umbraco.Sys = {};
 
 Umbraco.Sys.registerNamespace = function(namespace) {
