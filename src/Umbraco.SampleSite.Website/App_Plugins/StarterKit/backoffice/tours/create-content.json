@@ -3,6 +3,7 @@
         "name": "The Content section",
         "alias": "theStarterKitTheContentSection",
         "group": "Create content",
+        "groupOrder": 110,
         "steps": [
             {
                 "title": "The Content section",
@@ -81,6 +82,7 @@
         "name": "Creating Content",
         "alias": "theStarterKitCreatingContent",
         "group": "Create content",
+        "groupOrder": 110,
         "steps": [
             {
                 "title": "Creating your first content page",
@@ -151,6 +153,7 @@
         "name": "The Media Library",
         "alias": "theStarterKitTheMediaLibrary",
         "group": "Create content",
+        "groupOrder": 110,
         "steps": [
             {
                 "title": "How to use the media library",
@@ -238,6 +241,7 @@
         "name": "Adding media to content",
         "alias": "theStarterKitAddingMediaToContent",
         "group": "Create content",
+        "groupOrder": 110,
         "steps": [
             {
                 "title": "Adding media to content",
