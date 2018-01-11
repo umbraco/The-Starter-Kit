@@ -86,7 +86,7 @@
         "steps": [
             {
                 "title": "Creating your first content page",
-                "content": "<p>In this tour you will learn how to create a new page for your website.</p>",
+                "content": "<p>In this tour you will learn how to create new content for your website.</p>",
                 "type": "intro"
             },
             {
@@ -105,8 +105,8 @@
             },
             {
                 "element": "#dialog [data-element='action-create-contentPage']",
-                "title": "Create new content page",
-                "content": "<p>Select the <b>Content Page</b> option to create a new page of that type.</p>",
+                "title": "Create new Content Page",
+                "content": "<p>Now you can see all the options you have for creating content in this part of the site.</p><p>Select the <b>Content Page</b> option to create a new page of that type.</p>",
                 "event": "click"
             },
             {
@@ -119,8 +119,8 @@
             {
                 "element": "[data-element='editor-content'] [data-element='property-pageTitle'] input",
                 "title": "Add a page title",
-                "content": "<p>On this page we are also required to fill out the <b>Page Title</b> property.</p><p><b>Enter</b> <code>My Page</code> in the field and click <b>Next</b></p>",
-                "validateText": "My Page",
+                "content": "<p>On this page we are also required to fill out the <b>Page Title</b> property.</p><p><b>Enter</b> <code>Welcome to My Page</code> in the field and click <b>Next</b></p>",
+                "validateText": "Welcome to My Page",
                 "view": "/App_Plugins/StarterKit/Tours/views/validateText.html"
             },
             {
@@ -132,7 +132,7 @@
             {
                 "element": "[data-element='editor-footer'] [data-element='button-save']",
                 "title": "Save as draft",
-                "content": "<p><b>Click</b> the <b>Save</b> option to save the page.</p>",
+                "content": "<p>You can save your changes without making them public</p><p><b>Click</b> the <b>Save</b> option to save the page.</p>",
                 "event": "click"
             },
             {
@@ -141,12 +141,12 @@
                 "content": "<p><b>Click</b> the <b>Preview</b>-button to preview the new page before publishing it.</p>",
                 "event": "click"
             },
-            {
-                "element": "[data-element='editor-container']",
-                "title": "Go explore",
-                "content": "<p>The page still looks a bit empty. You can now try and fill out some of the other properties on the page.</p>",
-                "event": "click"
-            }
+          {
+            "element": "[data-element='editor-container']",
+            "title": "Go explore",
+            "content": "<p>The page still looks a bit empty. You can now try and fill out some of the other properties on the page.</p>",
+            "event": "click"
+          }
         ]
     },
     {
