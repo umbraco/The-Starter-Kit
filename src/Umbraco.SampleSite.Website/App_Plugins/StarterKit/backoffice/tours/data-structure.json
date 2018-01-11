@@ -3,6 +3,7 @@
         "name": "Document types",
         "alias": "theStarterKitDocumentTypes",
         "group": "Data structure",
+        "groupOrder": 120,
         "steps": [
             {
                 "title": "Document types = content structure",
@@ -132,6 +133,7 @@
         "name": "Templating",
         "alias": "theStarterKitTemplates",
         "group": "Data structure",
+        "groupOrder": 120,
         "steps": [
             {
                 "title": "Render your content in a template",
