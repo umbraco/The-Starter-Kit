@@ -208,7 +208,7 @@
             {
                 "element": "[data-element='editor-templates'] [data-element='editor-container']",
                 "title": "Edit template",
-                "content": '<p>To render the field <b>About</b> from the Home document type add the following code on <b>line 19</b> underneath the first <b>section</b>:<br/> <pre>&#60;section class="section section--themed"&#62;@Model.Content.About&#60;/section&#62;</pre></p>'
+                "content": "<p>To render the field <b>Welcome Text</b> from the Home document type copy/paste the following code on <b>line 19</b> underneath the first <b>section</b>:<br/> <pre>&#60;section class=\"section section--themed section--content-center\"&#62;&#60;h1&#62;@Model.Content.WelcomeText&#60;/h1&#62;&#60;/section&#62;</pre></p>"
             },
             {
                 "element": "[data-element='editor-templates'] [data-element='button-save']",
