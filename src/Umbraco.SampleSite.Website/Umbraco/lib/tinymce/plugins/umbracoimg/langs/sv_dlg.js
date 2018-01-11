@@ -1,4 +1,4 @@
-﻿tinyMCE.addI18n('sv.umbimage_dlg', {
+tinyMCE.addI18n('sv.umbimage_dlg', {
     tab_general: 'Generellt',
     tab_appearance: 'Utseende',
     tab_advanced: 'Avancerat',

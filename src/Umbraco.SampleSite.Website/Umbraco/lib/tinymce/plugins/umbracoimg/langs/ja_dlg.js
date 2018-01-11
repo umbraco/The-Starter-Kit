@@ -1,4 +1,4 @@
-﻿tinyMCE.addI18n('ja.umbimage_dlg', {
+tinyMCE.addI18n('ja.umbimage_dlg', {
     tab_general: '一般',
     tab_appearance: '表示',
     tab_advanced: '高度な設定',

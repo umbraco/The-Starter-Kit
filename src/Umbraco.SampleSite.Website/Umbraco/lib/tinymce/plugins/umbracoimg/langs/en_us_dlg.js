@@ -1,4 +1,4 @@
-﻿tinyMCE.addI18n('en_us.umbimage_dlg', {
+tinyMCE.addI18n('en_us.umbimage_dlg', {
     tab_general: 'General',
     tab_appearance: 'Appearance',
     tab_advanced: 'Advanced',

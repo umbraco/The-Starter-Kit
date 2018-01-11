@@ -1,4 +1,4 @@
-﻿tinyMCE.addI18n('ru.umbimage_dlg', {
+tinyMCE.addI18n('ru.umbimage_dlg', {
     tab_general: 'Общее',
     tab_appearance: 'Вид',
     tab_advanced: 'Дополнительно',

@@ -1,4 +1,4 @@
-﻿/**
+/**
 * editor_plugin_src.js
 *
 * Copyright 2012, Umbraco

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.SampleSite", "Umbraco.SampleSite\Umbraco.SampleSite.csproj", "{AD6618CC-4DD7-414D-9050-39652566833E}"
 EndProject
@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{28F8A6EA
 	ProjectSection(SolutionItems) = preProject
 		..\build\build.ps1 = ..\build\build.ps1
 		..\build\build.xml = ..\build\build.xml
+		NuGet.config = NuGet.config
 		..\build\packageManifest.xml = ..\build\packageManifest.xml
 		..\README.md = ..\README.md
 		SolutionInfo.cs = SolutionInfo.cs
@@ -33,5 +34,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21A662E6-2F38-495B-AA33-A5828C300B39}
 	EndGlobalSection
 EndGlobal
