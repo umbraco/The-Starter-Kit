@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -7,12 +8,19 @@ using Umbraco.Core;
 using Umbraco.Core.Services;
 using Umbraco.SampleSite.Controllers;
 using Umbraco.Web;
+using Umbraco.Web.Models;
 using Umbraco.Web.UI.JavaScript;
 
 namespace Umbraco.SampleSite
 {
     public class UmbracoEvents : ApplicationEventHandler
     {
+        protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        {
+            //disable some of the default core tours since they don't make sense to have when the starter kit is installed
+            TourFilterResolver.Current.AddFilter(BackOfficeTourFilter.FilterAlias(new Regex("umbIntroCreateDocType|umbIntroCreateContent|umbIntroRenderInTemplate|umbIntroViewHomePage|umbIntroMediaSection")));
+        }
+
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
             PackagingService.ImportedPackage += PackagingService_ImportedPackage;
