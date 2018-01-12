@@ -5,7 +5,7 @@
         
         var vm = this;
         var element = angular.element($scope.model.currentStep.element);
-        var validateText = $scope.model.currentStep.validateText ? $scope.model.currentStep.validateText : "";
+        var validateText = $scope.model.currentStep.customProperties.validateText ? $scope.model.currentStep.customProperties.validateText : "";
 
         vm.error = false;
         

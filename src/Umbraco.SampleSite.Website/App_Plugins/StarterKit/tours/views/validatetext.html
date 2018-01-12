@@ -9,8 +9,8 @@
         <umb-tour-step-content
             content="model.currentStep.content">
             <div ng-if="vm.error" class="color-red" style="margin-top: 5px;">
-                <span ng-if="!model.currentStep.validateText">Please fill out the field</span>
-                <span ng-if="model.currentStep.validateText">Please enter <span class="bold">{{ model.currentStep.validateText }}</span> in the field</span>
+                <span ng-if="!model.currentStep.customProperties.validateText">Please fill out the field</span>
+                <span ng-if="model.currentStep.customProperties.validateText">Please enter <span class="bold">{{ model.currentStep.customProperties.validateText }}</span> in the field</span>
             </div>
         </umb-tour-step-content>
 

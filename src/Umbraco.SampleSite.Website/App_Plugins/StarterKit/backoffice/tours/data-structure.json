@@ -20,7 +20,7 @@
             {
                 "element": "#tree [data-element='tree-item-documentTypes']",
                 "title": "Document types tree",
-                "content": "<p>To see all the document types click the <b>small triangle</b> to the left of the <b>Document Types</b> node.</p>",
+                "content": "<p>To see all the document types click the <b>arrow</b> to the left of the <b>Document Types</b> node.</p>",
                 "event": "click",
                 "eventElement": "#tree [data-element='tree-item-documentTypes'] [data-element='tree-item-expand']"
             },
@@ -33,7 +33,7 @@
             {
                 "element": "#tree [data-element='tree-item-documentTypes'] [data-element='tree-item-Home']",
                 "title": "Home document type",
-                "content": "<p>We wan't to add a new piece of text on our <b>Home page</b>.</p><p>Let's have a look at how a Document type is set up. <b>Click</b> on the <b>Home</b> document type to open the document typ eeditor.</p>",
+                "content": "<p>We want to add a new piece of text on our <b>Home page</b>.</p><p>Let's have a look at how a Document type is set up. <b>Click</b> on the <b>Home</b> document type to open the document type editor.</p>",
                 "event": "click",
                 "eventElement": "#tree [data-element='tree-item-documentTypes'] [data-element='tree-item-Home'] a.umb-tree-item__label"
             },
@@ -83,8 +83,10 @@
                 "element": "[data-element~='overlay-property-settings'] [data-element='property-name']",
                 "title": "Enter a name",
                 "content": "Enter <code>Welcome Text</code> as name for the property.",
-                "validateText": "Welcome Text",
-                "view": "/App_Plugins/StarterKit/Tours/views/validateText.html"
+                "view": "/App_Plugins/StarterKit/Tours/views/validateText.html",
+                "customProperties": {
+                    "validateText": "Welcome Text"
+                }
             },
             {
                 "element": "[data-element~='overlay-property-settings'] [data-element='property-description']",
@@ -145,7 +147,7 @@
                 "title": "The Home page",
                 "event": "click",
                 "content": "<p>Click the <b>Home</b> node.</p>",
-                "eventElement": "#tree [data-element='tree-item-Home'] [data-element='tree-item-expand']"
+                "eventElement": "#tree [data-element='tree-item-Home'] a.umb-tree-item__label"
             },
             {
                 "element": "[data-element='editor-content'] [data-element='tab-Content']",
@@ -161,7 +163,7 @@
             {
                 "element": "[data-element='button-saveAndPublish']",
                 "title": "Save and Publish",
-                "content": "<p><b>Click</b> on <b>Save and Publish</b> button to publish the changes and make them visible to the public.</p>",
+                "content": "<p><b>Click</b> on <b>Save and Publish</b> button to publish the changes and make them visible to the public.</p><p>In the next tour you will learn how to update the template to render content from the new <b>Welcome Text</b> property.</p>",
                 "event": "click"
             }
         ]
@@ -187,14 +189,14 @@
             {
                 "element": "#tree [data-element='tree-item-templates']",
                 "title": "Expand the Templates node",
-                "content": "<p>To see all our templates click the <b>small triangle</b> to the left of the templates node.</p>",
+                "content": "<p>To see all our templates click the <b>arrow</b> to the left of the templates node.</p>",
                 "event": "click",
                 "eventElement": "#tree [data-element='tree-item-templates'] [data-element='tree-item-expand']"
             },
             {
                 "element": "#tree [data-element='tree-item-templates'] [data-element='tree-item-Master']",
                 "title": "Master templates",
-                "content": "<p>The first template you will see is the <b>Master template</b>.</p><p>When creating new templates we don't want to duplicate header, footer etc. across all our templates so they get inherited from the Master.</p><p><b>Click</b> the <b>small triangle</b> to the left of the Master template node to see the child templates.</p>",
+                "content": "<p>The first template you will see is the <b>Master template</b>.</p><p>When creating new templates we don't want to duplicate header, footer etc. across all our templates so they get inherited from the Master.</p><p><b>Click</b> the <b>arrow</b> to the left of the Master template node to see the child templates.</p>",
                 "event": "click",
                 "eventElement": "#tree [data-element='tree-item-templates'] [data-element='tree-item-Master'] [data-element='tree-item-expand']"
             },
@@ -219,8 +221,8 @@
             {
                 "element": "[data-element='editor-container']",
                 "elementPreventClick": true,
-                "title": "Update Home content",
-                "content": "<p>The Document type and template is now ready for the new content.</p><p>You can now go to the <b>Home</b> page in the content section and update the page the way you learned in the content tours.</p>"
+                "title": "Preview Home pae",
+                "content": "<p>The Document type, template and content is now ready to preview.</p><p>You can now go back to you <b>Home page</b> and preview your new content.</p>"
             }
         ]
     }
