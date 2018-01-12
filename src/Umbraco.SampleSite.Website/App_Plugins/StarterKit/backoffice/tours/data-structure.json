@@ -7,7 +7,7 @@
         "steps": [
             {
                 "title": "Document types = content structure",
-                "content": "<p>Step 1 of any site is to create a <strong>Document Type</strong>.<br> A Document Type is a template for content. For each <em>type</em> of content you want to create you'll create a Document Type. This will define where content based on this Document Type can be created, how many properties it holds and what the input method should be for these properties.</p><p>When you have at least one Document type in place you can start creating content and this content can the be used in a template.</p><p>In this tour you will get an introduction to the starterkits data structure and learn how to add a property to a document type.</p>",
+                "content": "<p>The first thing you do with a new Umbraco installation is to create a <strong>Document Type</strong>. A Document Type is a template for content. For each <em>type</em> of content you want to create, you'll create a Document Type.</p><p>The document type defines where content can be created, how many properties it holds and what the input method should be for these properties.</p><p>When you have at least one Document type in place you can start creating content</p><p>In this tour you will get an introduction to the starter kits data structure and learn how to add a new property to a document type.</p>",
                 "type": "intro"
             },
             {
@@ -33,9 +33,15 @@
             {
                 "element": "#tree [data-element='tree-item-documentTypes'] [data-element='tree-item-Home']",
                 "title": "Home document type",
-                "content": "<p>We wan't to add a new piece of text on our <b>Home page</b>.</p><p>Let's have a look at how a Document type is set up. <b>Click</b> on the <b>Home</b> document type to open it.</p>",
+                "content": "<p>We wan't to add a new piece of text on our <b>Home page</b>.</p><p>Let's have a look at how a Document type is set up. <b>Click</b> on the <b>Home</b> document type to open the document typ eeditor.</p>",
                 "event": "click",
                 "eventElement": "#tree [data-element='tree-item-documentTypes'] [data-element='tree-item-Home'] a.umb-tree-item__label"
+            },
+            {
+                "element": "[data-element='editor-document-types'] .umb-editor-wrapper",
+                "elementPreventClick": true,
+                "title": "The Document Type Editor",
+                "content": "In the document type editor you can manage all the settings for a document type."
             },
             {
                 "element": "[data-element='editor-icon']",
@@ -59,7 +65,7 @@
                 "element": "[data-element='group-Hero']",
                 "elementPreventClick": true,
                 "title": "Tabs to structure properties",
-                "content": "<p>Properties can be organised in tabs.</p><p>Use tabs to group your properties so it is easy to find the right place to update a piece of content.</p>"
+                "content": "<p>Properties are organised in tabs.</p><p>Use tabs to group your properties so it is easy to find the right place to update a piece of content.</p>"
             },
             {
                 "element": "[data-element='group-Hero'] [data-element='property-heroHeader']",
@@ -70,25 +76,25 @@
             {
                 "element": "[data-element='group-Content'] [data-element='property-add']",
                 "title": "Add new property",
-                "content": "<p>Let's add a new property to the <b>Content</b>-tab where we can add an About text to our Home page.</p>",
+                "content": "<p>Let's add a new property to the <b>Content</b> tab where we can add an About text to our Home page.</p>",
                 "event": "click"
             },
             {
                 "element": "[data-element~='overlay-property-settings'] [data-element='property-name']",
                 "title": "Enter a name",
-                "content": "Enter <code>About</code> as name for the property.",
-                "validateText": "About",
+                "content": "Enter <code>Welcome Text</code> as name for the property.",
+                "validateText": "Welcome Text",
                 "view": "/App_Plugins/StarterKit/Tours/views/validateText.html"
             },
             {
                 "element": "[data-element~='overlay-property-settings'] [data-element='property-description']",
                 "title": "Enter a description",
-                "content": "<p>A description will help to fill in the right content.</p><p>Enter a description for the property editor. It could be:<br/> <pre>Write a nice introduction so the visitors feel welcome</pre></p>"
+                "content": "<p>A description will help to fill in the right content.</p><p>Enter a description for the property. It could be:<br/> <pre>Write a nice introduction so the visitors feel welcome</pre></p>"
             },
             {
                 "element": "[data-element~='overlay-property-settings'] [data-element='editor-add']",
                 "title": "Add editor",
-                "content": "The editor defines what data type the property is. Click <b>Add editor</b> to open the editor picker dialog.",
+                "content": "The editor defines what data type the property is based on. Click <b>Add editor</b> to open the editor picker dialog.",
                 "event": "click"
             },
             {
@@ -125,6 +131,37 @@
                 "element": "[data-element='button-save']",
                 "title": "Save the document type",
                 "content": "All we need now is to save the document type. Click <b>Save</b> to save the document type.",
+                "event": "click"
+            },
+            {
+                "element": "#applications [data-element='section-content']",
+                "title": "Navigate to the Content section",
+                "content": "To see the property we just added, let's head back to the <b>Content</b> section.",
+                "event": "click",
+                "backdropOpacity": 0.6
+            },
+            {
+                "element": "#tree [data-element='tree-item-Home']",
+                "title": "The Home page",
+                "event": "click",
+                "content": "<p>Click the <b>Home</b> node.</p>",
+                "eventElement": "#tree [data-element='tree-item-Home'] [data-element='tree-item-expand']"
+            },
+            {
+                "element": "[data-element='editor-content'] [data-element='tab-Content']",
+                "title": "The Content tab",
+                "content": "<p>Under the Content tab you will find the new property.</p><p><b>Click</b> the tab to open it.</p>",
+                "event": "click"
+            },
+            {
+                "element": "[data-element='property-welcomeText']",
+                "title": "Add an About text",
+                "content": "<p>Here you can see the textarea you added. Try entering some text. This could be</p><p><pre>This is the Home page!</pre></p>"
+            },
+            {
+                "element": "[data-element='button-saveAndPublish']",
+                "title": "Save and Publish",
+                "content": "<p><b>Click</b> on <b>Save and Publish</b> button to publish the changes and make them visible to the public.</p>",
                 "event": "click"
             }
         ]
@@ -171,7 +208,7 @@
             {
                 "element": "[data-element='editor-templates'] [data-element='editor-container']",
                 "title": "Edit template",
-                "content": '<p>To render the field <b>About</b> from the Home document type add the following code on <b>line 19</b> underneath the first <b>section</b>:<br/> <pre>&#60;section class="section section--themed"&#62;@Model.Content.About&#60;/section&#62;</pre></p>'
+                "content": "<p>To render the field <b>Welcome Text</b> from the Home document type copy/paste the following code on <b>line 19</b> underneath the first <b>section</b>:<br/> <pre>&#60;section class=\"section section--themed section--content-center\"&#62;&#60;h1&#62;@Model.Content.WelcomeText&#60;/h1&#62;&#60;/section&#62;</pre></p>"
             },
             {
                 "element": "[data-element='editor-templates'] [data-element='button-save']",
