@@ -4,6 +4,15 @@
         "alias": "theStarterKitTheContentSection",
         "group": "Create content",
         "groupOrder": 110,
+        "requiredSections": [
+            "content",
+            "media",
+            "settings",
+            "developer",
+            "users",
+            "member",
+            "forms"
+        ],
         "steps": [
             {
                 "title": "The Content section",
@@ -85,6 +94,15 @@
         "alias": "theStarterKitCreatingContent",
         "group": "Create content",
         "groupOrder": 110,
+        "requiredSections": [
+            "content",
+            "media",
+            "settings",
+            "developer",
+            "users",
+            "member",
+            "forms"
+        ],
         "steps": [
             {
                 "title": "Creating your first content page",
@@ -156,11 +174,20 @@
         ]
     },
     {
-      "name": "The Media Library",
-      "alias": "theStarterKitTheMediaLibrary",
-      "group": "Create content",
-      "groupOrder": 110,
-      "steps": [
+        "name": "The Media Library",
+        "alias": "theStarterKitTheMediaLibrary",
+        "group": "Create content",
+        "groupOrder": 110,
+        "requiredSections": [
+            "content",
+            "media",
+            "settings",
+            "developer",
+            "users",
+            "member",
+            "forms"
+        ],
+        "steps": [
             {
                 "title": "How to use the media library",
                 "content": "<p>A website would be boring without media content. In Umbraco you can manage all your images, documents, videos etc. in the <b>Media section</b>. Here you can upload and organise your media items and see details about each item.</p><p>In this tour you will learn how to upload and organise your Media library in Umbraco. It will also show you how to view details about a specific media item.</p>",
@@ -248,6 +275,15 @@
         "alias": "theStarterKitAddingMediaToContent",
         "group": "Create content",
         "groupOrder": 110,
+        "requiredSections": [
+            "content",
+            "media",
+            "settings",
+            "developer",
+            "users",
+            "member",
+            "forms"
+        ],
         "steps": [
             {
                 "title": "Adding media to content",

@@ -4,6 +4,15 @@
         "alias": "theStarterKitDocumentTypes",
         "group": "Data structure",
         "groupOrder": 120,
+        "requiredSections": [
+            "content",
+            "media",
+            "settings",
+            "developer",
+            "users",
+            "member",
+            "forms"
+        ],
         "steps": [
             {
                 "title": "Document types = content structure",
@@ -173,6 +182,15 @@
         "alias": "theStarterKitTemplates",
         "group": "Data structure",
         "groupOrder": 120,
+        "requiredSections": [
+            "content",
+            "media",
+            "settings",
+            "developer",
+            "users",
+            "member",
+            "forms"
+        ],
         "steps": [
             {
                 "title": "Render your content in a template",
