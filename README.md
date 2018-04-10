@@ -1,6 +1,6 @@
 # 7.6-Starter-Kit
 
-# This Github project is _solely_ used to manage the final build of the Starter Kit and is _not_ meant to be used as the Starter kit itself.
+# This Github project is used to manage the final build of the Starter Kit and is _not_ meant to be used as the Starter kit itself as far as the content goes.
 
 TODO: We need to merge this repo: https://github.com/umbraco/Starterkit-TheUmbracoCommunity into this one and remove the css/js one, they should exist in this one only.
 
@@ -10,8 +10,10 @@ Default Back Office user is:
 Email: 	mail@me.com
 Password: 1234567890
 
-Don't use the website in this project, but instead ask to be a part of this Umbraco Cloud project:
+Get in touch if you wish to have access to this Umbraco Cloud project which contains the master content for the starter kit.
 https://umbraco-starter-kit.s1.umbraco.io
+
+Alternatively if you are doing development for the starter kit, you can launch the website project contained in this repo.
 
 # Building the package
 
