@@ -1,8 +1,8 @@
 # 7.6-Starter-Kit
 
-# This Github project is used to manage the final build of the Starter Kit and is _not_ meant to be used as the Starter kit itself as far as the content goes.
+This Github project is used to manage the final build of the Starter Kit and is _not_ meant to be used as the Starter kit content source.
 
-TODO: We need to merge this repo: https://github.com/umbraco/Starterkit-TheUmbracoCommunity into this one and remove the css/js one, they should exist in this one only.
+_TODO_: We need to merge this repo: https://github.com/umbraco/Starterkit-TheUmbracoCommunity into this one and remove the css/js one, they should exist in this one only.
 
 You can find the Starter Kit as the default option in Umbraco 7.6.4+ as well as in the package repository on Our Umbraco.
 
