@@ -29,5 +29,5 @@ If changes are made to the package, the package manifest file will need to be up
 
 * Save the package in the back office - this will update the /App_Data/packages/created/createdPackages.config
 * Publish the package in the back office and press the download button to download the .zip file
-* Open the zip file and find the package.xml file, copy it's contents to the /build/packageManifest.xml file
+* Open the zip file and find the package.xml file, copy it's contents to the /build/packageManifest.xml file. Alternatively you can manually edit the /build/packageManifest.xml file if you know what needs to be changed.
 
