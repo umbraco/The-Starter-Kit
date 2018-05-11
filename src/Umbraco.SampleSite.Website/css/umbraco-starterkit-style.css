@@ -1146,6 +1146,11 @@ body.theme-color-earth--active.nav-link:visited, body.theme-color-earth .border-
         border-color: #000
     }
 
+.nav-link--disabled, .nav-link--disabled:hover {
+    border-color: transparent !important;
+    cursor: not-allowed;
+}
+
 .montserrat, body.theme-font-standard .nav-link.nav-link--home, body.theme-font-standard h1, body.theme-font-standard h2, body.theme-font-standard h3, body.theme-font-standard h4, body.theme-font-standard h5, body.theme-font-standard h6 {
     font-family: Montserrat,sans-serif
 }
