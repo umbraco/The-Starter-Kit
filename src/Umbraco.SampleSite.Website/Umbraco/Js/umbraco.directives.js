@@ -1297,6 +1297,190 @@ Use this directive to render drawer view
         };
     }
     angular.module('umbraco.directives').directive('umbSections', sectionsDirective);
+    /**
+@ngdoc directive
+@name umbraco.directives.directive:umbTour
+@restrict E
+@scope
+
+@description
+<b>Added in Umbraco 7.8</b>. The tour component is a global component and is already added to the umbraco markup. 
+In the Umbraco UI the tours live in the "Help drawer" which opens when you click the Help-icon in the bottom left corner of Umbraco. 
+You can easily add you own tours to the Help-drawer or show and start tours from 
+anywhere in the Umbraco backoffice. To see a real world example of a custom tour implementation, install <a href="https://our.umbraco.org/projects/starter-kits/the-starter-kit/">The Starter Kit</a> in Umbraco 7.8
+
+<h1><b>Extending the help drawer with custom tours</b></h1>
+The easiet way to add new tours to Umbraco is through the Help-drawer. All it requires is a my-tour.json file. 
+Place the file in <i>App_Plugins/{MyPackage}/backoffice/tours/{my-tour}.json</i> and it will automatically be 
+picked up by Umbraco and shown in the Help-drawer.
+
+<h3><b>The tour object</b></h3>
+The tour object consist of two parts - The overall tour configuration and a list of tour steps. We have split up the tour object for a better overview.
+<pre>
+// The tour config object
+{
+    "name": "My Custom Tour", // (required)
+    "alias": "myCustomTour", // A unique tour alias (required)
+    "group": "My Custom Group" // Used to group tours in the help drawer
+    "groupOrder": 200 // Control the order of tour groups
+    "allowDisable": // Adds a "Don't" show this tour again"-button to the intro step
+    "requiredSections":["content", "media", "mySection"] // Sections that the tour will access while running, if the user does not have access to the required tour sections, the tour will not load.   
+    "steps": [] // tour steps - see next example
+}
+</pre>
+<pre>
+// A tour step object
+{
+    "title": "Title",
+    "content": "<p>Step content</p>",
+    "type": "intro" // makes the step an introduction step,
+    "element": "[data-element='my-table-row']", // the highlighted element
+    "event": "click" // forces the user to click the UI to go to next step
+    "eventElement": "[data-element='my-table-row'] [data-element='my-tour-button']" // specify an element to click inside a highlighted element
+    "elementPreventClick": false // prevents user interaction in the highlighted element
+    "backdropOpacity": 0.4 // the backdrop opacity
+    "view": "" // add a custom view
+    "customProperties" : {} // add any custom properties needed for the custom view
+}
+</pre>
+
+<h1><b>Adding tours to other parts of the Umbraco backoffice</b></h1>
+It is also possible to add a list of custom tours to other parts of the Umbraco backoffice, 
+as an example on a Dashboard in a Custom section. You can then use the {@link umbraco.services.tourService tourService} to start and stop tours but you don't have to register them as part of the tour service.
+
+<h1><b>Using the tour service</b></h1>
+<h3>Markup example - show custom tour</h3>
+<pre>
+    <div ng-controller="My.TourController as vm">
+
+        <div>{{vm.tour.name}}</div>
+        <button type="button" ng-click="vm.startTour()">Start tour</button>
+
+        <!-- This button will be clicked in the tour -->
+        <button data-element="my-tour-button" type="button">Click me</button>
+
+    </div>
+</pre>
+
+<h3>Controller example - show custom tour</h3>
+<pre>
+    (function () {
+        "use strict";
+
+        function TourController(tourService) {
+
+            var vm = this;
+
+            vm.tour = {
+                "name": "My Custom Tour",
+                "alias": "myCustomTour",
+                "steps": [
+                    {
+                        "title": "Welcome to My Custom Tour",
+                        "content": "",
+                        "type": "intro"
+                    },
+                    {
+                        "element": "[data-element='my-tour-button']",
+                        "title": "Click the button",
+                        "content": "Click the button",
+                        "event": "click"
+                    }
+                ]
+            };
+
+            vm.startTour = startTour;
+
+            function startTour() {
+                tourService.startTour(vm.tour);
+            }
+
+        }
+
+        angular.module("umbraco").controller("My.TourController", TourController);
+
+    })();
+</pre>
+
+<h1><b>Custom step views</b></h1>
+In some cases you will need a custom view for one of your tour steps. 
+This could be for validation or for running any other custom logic for that step. 
+We have added a couple of helper components to make it easier to get the step scaffolding to look like a regular tour step. 
+In the following example you see how to run some custom logic before a step goes to the next step.
+
+<h3>Markup example - custom step view</h3>
+<pre>
+    <div ng-controller="My.TourStep as vm">
+
+        <umb-tour-step on-close="model.endTour()">
+                
+            <umb-tour-step-header
+                title="model.currentStep.title">
+            </umb-tour-step-header>
+            
+            <umb-tour-step-content
+                content="model.currentStep.content">
+
+                <!-- Add any custom content here  -->
+
+            </umb-tour-step-content>
+
+            <umb-tour-step-footer class="flex justify-between items-center">
+
+                <umb-tour-step-counter
+                    current-step="model.currentStepIndex + 1"
+                    total-steps="model.steps.length">
+                </umb-tour-step-counter>
+
+                <div>
+                    <umb-button 
+                        size="xs" 
+                        button-style="success" 
+                        type="button" 
+                        action="vm.initNextStep()" 
+                        label="Next">
+                    </umb-button>
+                </div>
+
+            </umb-tour-step-footer>
+
+        </umb-tour-step>
+
+    </div>
+</pre>
+
+<h3>Controller example - custom step view</h3>
+<pre>
+    (function () {
+        "use strict";
+
+        function StepController() {
+
+            var vm = this;
+            
+            vm.initNextStep = initNextStep;
+
+            function initNextStep() {
+                // run logic here before going to the next step
+                $scope.model.nextStep();
+            }
+
+        }
+
+        angular.module("umbraco").controller("My.TourStep", StepController);
+
+    })();
+</pre>
+
+
+<h3>Related services</h3>
+<ul>
+    <li>{@link umbraco.services.tourService tourService}</li>
+</ul>
+
+@param {string} model (<code>binding</code>): Tour object
+
+**/
     (function () {
         'use strict';
         function TourDirective($timeout, $http, $q, tourService, backdropService) {
@@ -2090,6 +2274,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                 });
             }
             function createButtons(content) {
+                $scope.page.buttonGroupState = 'init';
                 var buttons = contentEditingHelper.configureContentEditorButtons({
                     create: $scope.page.isNew,
                     content: content,
@@ -2193,6 +2378,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                         init($scope.content);
                         syncTreeNode($scope.content, data.path);
                         $scope.page.buttonGroupState = 'success';
+                    }, function (err) {
+                        $scope.page.buttonGroupState = 'error';
                     });
                 }
             };
@@ -2332,11 +2519,12 @@ Use this directive to render a button with a dropdown of alternative actions.
     }());
     (function () {
         'use strict';
-        function ContentNodeInfoDirective($timeout, $location, logResource, eventsService, userService, localizationService) {
+        function ContentNodeInfoDirective($timeout, $location, logResource, eventsService, userService, localizationService, dateHelper) {
             function link(scope, element, attrs, ctrl) {
                 var evts = [];
                 var isInfoTab = false;
                 scope.publishStatus = {};
+                scope.disableTemplates = Umbraco.Sys.ServerVariables.features.disabledFeatures.disableTemplates;
                 function onInit() {
                     scope.allowOpen = true;
                     scope.datePickerConfig = {
@@ -2366,7 +2554,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                 };
                 scope.openDocumentType = function (documentType) {
                     var url = '/settings/documenttypes/edit/' + documentType.id;
-                    $location.path(url);
+                    $location.url(url);
                 };
                 scope.updateTemplate = function (templateAlias) {
                     // update template value
@@ -2391,7 +2579,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                         // get current backoffice user and format dates
                         userService.getCurrentUser().then(function (currentUser) {
                             angular.forEach(data.items, function (item) {
-                                item.timestampFormatted = getLocalDate(item.timestamp, currentUser.locale, 'LLL');
+                                item.timestampFormatted = dateHelper.getLocalDate(item.timestamp, currentUser.locale, 'LLL');
                             });
                         });
                         scope.auditTrail = data.items;
@@ -2441,8 +2629,14 @@ Use this directive to render a button with a dropdown of alternative actions.
                     }
                 }
                 function setPublishDate(date) {
+                    if (!date) {
+                        return;
+                    }
+                    //The date being passed in here is the user's local date/time that they have selected
+                    //we need to convert this date back to the server date on the model.
+                    var serverTime = dateHelper.convertToServerStringTime(moment(date), Umbraco.Sys.ServerVariables.application.serverTimeOffset);
                     // update publish value
-                    scope.node.releaseDate = date;
+                    scope.node.releaseDate = serverTime;
                     // make sure dates are formatted to the user's locale
                     formatDatesToLocal();
                     // emit event
@@ -2463,8 +2657,14 @@ Use this directive to render a button with a dropdown of alternative actions.
                     eventsService.emit('editors.content.changePublishDate', args);
                 }
                 function setUnpublishDate(date) {
+                    if (!date) {
+                        return;
+                    }
+                    //The date being passed in here is the user's local date/time that they have selected
+                    //we need to convert this date back to the server date on the model.
+                    var serverTime = dateHelper.convertToServerStringTime(moment(date), Umbraco.Sys.ServerVariables.application.serverTimeOffset);
                     // update publish value
-                    scope.node.removeDate = date;
+                    scope.node.removeDate = serverTime;
                     // make sure dates are formatted to the user's locale
                     formatDatesToLocal();
                     // emit event
@@ -2487,28 +2687,20 @@ Use this directive to render a button with a dropdown of alternative actions.
                 function ucfirst(string) {
                     return string.charAt(0).toUpperCase() + string.slice(1);
                 }
-                function getLocalDate(date, culture, format) {
-                    if (date) {
-                        var dateVal;
-                        var serverOffset = Umbraco.Sys.ServerVariables.application.serverTimeOffset;
-                        var localOffset = new Date().getTimezoneOffset();
-                        var serverTimeNeedsOffsetting = -serverOffset !== localOffset;
-                        if (serverTimeNeedsOffsetting) {
-                            dateVal = dateHelper.convertToLocalMomentTime(date, serverOffset);
-                        } else {
-                            dateVal = moment(date, 'YYYY-MM-DD HH:mm:ss');
-                        }
-                        return dateVal.locale(culture).format(format);
-                    }
-                }
                 function formatDatesToLocal() {
                     // get current backoffice user and format dates
                     userService.getCurrentUser().then(function (currentUser) {
-                        scope.node.createDateFormatted = getLocalDate(scope.node.createDate, currentUser.locale, 'LLL');
-                        scope.node.releaseDateMonth = scope.node.releaseDate ? ucfirst(getLocalDate(scope.node.releaseDate, currentUser.locale, 'MMMM')) : null;
-                        scope.node.releaseDateDay = scope.node.releaseDate ? ucfirst(getLocalDate(scope.node.releaseDate, currentUser.locale, 'dddd')) : null;
-                        scope.node.removeDateMonth = scope.node.removeDate ? ucfirst(getLocalDate(scope.node.removeDate, currentUser.locale, 'MMMM')) : null;
-                        scope.node.removeDateDay = scope.node.removeDate ? ucfirst(getLocalDate(scope.node.removeDate, currentUser.locale, 'dddd')) : null;
+                        scope.node.createDateFormatted = dateHelper.getLocalDate(scope.node.createDate, currentUser.locale, 'LLL');
+                        scope.node.releaseDateYear = scope.node.releaseDate ? ucfirst(dateHelper.getLocalDate(scope.node.releaseDate, currentUser.locale, 'YYYY')) : null;
+                        scope.node.releaseDateMonth = scope.node.releaseDate ? ucfirst(dateHelper.getLocalDate(scope.node.releaseDate, currentUser.locale, 'MMMM')) : null;
+                        scope.node.releaseDateDayNumber = scope.node.releaseDate ? ucfirst(dateHelper.getLocalDate(scope.node.releaseDate, currentUser.locale, 'DD')) : null;
+                        scope.node.releaseDateDay = scope.node.releaseDate ? ucfirst(dateHelper.getLocalDate(scope.node.releaseDate, currentUser.locale, 'dddd')) : null;
+                        scope.node.releaseDateTime = scope.node.releaseDate ? ucfirst(dateHelper.getLocalDate(scope.node.releaseDate, currentUser.locale, 'HH:mm')) : null;
+                        scope.node.removeDateYear = scope.node.removeDate ? ucfirst(dateHelper.getLocalDate(scope.node.removeDate, currentUser.locale, 'YYYY')) : null;
+                        scope.node.removeDateMonth = scope.node.removeDate ? ucfirst(dateHelper.getLocalDate(scope.node.removeDate, currentUser.locale, 'MMMM')) : null;
+                        scope.node.removeDateDayNumber = scope.node.removeDate ? ucfirst(dateHelper.getLocalDate(scope.node.removeDate, currentUser.locale, 'DD')) : null;
+                        scope.node.removeDateDay = scope.node.removeDate ? ucfirst(dateHelper.getLocalDate(scope.node.removeDate, currentUser.locale, 'dddd')) : null;
+                        scope.node.removeDateTime = scope.node.removeDate ? ucfirst(dateHelper.getLocalDate(scope.node.removeDate, currentUser.locale, 'HH:mm')) : null;
                     });
                 }
                 // load audit trail when on the info tab
@@ -4544,7 +4736,9 @@ will override element type to textarea and add own attribute ngModel tied to jso
                                 toolbar: toolbar,
                                 content_css: stylesheets,
                                 style_formats: styleFormats,
-                                autoresize_bottom_margin: 0
+                                autoresize_bottom_margin: 0,
+                                //see http://archive.tinymce.com/wiki.php/Configuration:cache_suffix
+                                cache_suffix: '?umb__rnd=' + Umbraco.Sys.ServerVariables.application.cacheBuster
                             };
                             if (tinyMceConfig.customConfig) {
                                 //if there is some custom config, we need to see if the string value of each item might actually be json and if so, we need to
@@ -4566,6 +4760,12 @@ will override element type to textarea and add own attribute ngModel tied to jso
                                             } catch (e) {
                                             }
                                         }
+                                    }
+                                    if (val === 'true') {
+                                        tinyMceConfig.customConfig[i] = true;
+                                    }
+                                    if (val === 'false') {
+                                        tinyMceConfig.customConfig[i] = false;
                                     }
                                 }
                                 angular.extend(baseLineConfigObj, tinyMceConfig.customConfig);
@@ -5422,20 +5622,46 @@ Use this directive to construct a title. Recommended to use it inside an {@link 
     });
     (function () {
         'use strict';
-        function MediaNodeInfoDirective($timeout, $location) {
+        function MediaNodeInfoDirective($timeout, $location, eventsService, userService, dateHelper) {
             function link(scope, element, attrs, ctrl) {
+                var evts = [];
                 function onInit() {
                     scope.allowOpenMediaType = true;
                     // get document type details
                     scope.mediaType = scope.node.contentType;
                     // get node url
                     scope.nodeUrl = scope.node.mediaLink;
+                    // make sure dates are formatted to the user's locale
+                    formatDatesToLocal();
+                }
+                function formatDatesToLocal() {
+                    // get current backoffice user and format dates
+                    userService.getCurrentUser().then(function (currentUser) {
+                        scope.node.createDateFormatted = dateHelper.getLocalDate(scope.node.createDate, currentUser.locale, 'LLL');
+                        scope.node.updateDateFormatted = dateHelper.getLocalDate(scope.node.updateDate, currentUser.locale, 'LLL');
+                    });
                 }
                 scope.openMediaType = function (mediaType) {
                     // remove first "#" from url if it is prefixed else the path won't work
                     var url = '/settings/mediaTypes/edit/' + mediaType.id;
                     $location.path(url);
                 };
+                // watch for content updates - reload content when node is saved, published etc.
+                scope.$watch('node.updateDate', function (newValue, oldValue) {
+                    if (!newValue) {
+                        return;
+                    }
+                    if (newValue === oldValue) {
+                        return;
+                    }
+                    formatDatesToLocal();
+                });
+                //ensure to unregister from all events!
+                scope.$on('$destroy', function () {
+                    for (var e in evts) {
+                        eventsService.unsubscribe(evts[e]);
+                    }
+                });
                 onInit();
             }
             var directive = {
@@ -5536,7 +5762,6 @@ Use this directive to construct a title. Recommended to use it inside an {@link 
 </pre>
 
 <h1>General Options</h1>
-Lorem ipsum dolor sit amet..
 <table>
     <thead>
         <tr>
@@ -5551,7 +5776,7 @@ Lorem ipsum dolor sit amet..
         <td>Set the title of the overlay.</td>
     </tr>
     <tr>
-        <td>model.subTitle</td>
+        <td>model.subtitle</td>
         <td>String</td>
         <td>Set the subtitle of the overlay.</td>
     </tr>
@@ -5941,10 +6166,12 @@ Opens an overlay to show a custom YSOD. </br>
                                     'BUTTON'
                                 ];
                                 var submitOnEnter = document.activeElement.hasAttribute('overlay-submit-on-enter');
+                                var submitOnEnterValue = submitOnEnter ? document.activeElement.getAttribute('overlay-submit-on-enter') : '';
                                 if (clickableElements.indexOf(activeElementType) === 0) {
                                     document.activeElement.click();
                                     event.preventDefault();
                                 } else if (activeElementType === 'TEXTAREA' && !submitOnEnter) {
+                                } else if (submitOnEnter && submitOnEnterValue === 'false') {
                                 } else {
                                     scope.$apply(function () {
                                         scope.submitForm(scope.model);
@@ -6121,7 +6348,7 @@ Opens an overlay to show a custom YSOD. </br>
 * @name umbraco.directives.directive:umbProperty
 * @restrict E
 **/
-    angular.module('umbraco.directives').directive('umbProperty', function (umbPropEditorHelper) {
+    angular.module('umbraco.directives').directive('umbProperty', function (umbPropEditorHelper, userService) {
         return {
             scope: { property: '=' },
             transclude: true,
@@ -6129,7 +6356,10 @@ Opens an overlay to show a custom YSOD. </br>
             replace: true,
             templateUrl: 'views/components/property/umb-property.html',
             link: function (scope) {
-                scope.propertyAlias = Umbraco.Sys.ServerVariables.isDebuggingEnabled === true ? scope.property.alias : null;
+                userService.getCurrentUser().then(function (u) {
+                    var isAdmin = u.userGroups.indexOf('admin') !== -1;
+                    scope.propertyAlias = Umbraco.Sys.ServerVariables.isDebuggingEnabled === true || isAdmin ? scope.property.alias : null;
+                });
             },
             //Define a controller for this directive to expose APIs to other directives
             controller: function ($scope, $timeout) {
@@ -7144,7 +7374,7 @@ Opens an overlay to show a custom YSOD. </br>
                 assetsService.load([
                     'lib/ace-builds/src-min-noconflict/ace.js',
                     'lib/ace-builds/src-min-noconflict/ext-language_tools.js'
-                ]).then(function () {
+                ], scope).then(function () {
                     if (angular.isUndefined(window.ace)) {
                         throw new Error('ui-ace need ace to work... (o rly?)');
                     } else {
@@ -7758,7 +7988,7 @@ Use this directive to render a ui component for selecting child items to a paren
             function link(scope, element, attrs, ctrl) {
                 var clipboard;
                 var target = element[0];
-                assetsService.loadJs('lib/clipboard/clipboard.min.js').then(function () {
+                assetsService.loadJs('lib/clipboard/clipboard.min.js', scope).then(function () {
                     if (scope.umbClipboardTarget) {
                         target.setAttribute('data-clipboard-target', scope.umbClipboardTarget);
                     }
@@ -8149,9 +8379,9 @@ Use this directive to render a date time picker
                     // check for transcluded content so we can hide the defualt markup
                     scope.hasTranscludedContent = element.find('.js-datePicker__transcluded-content')[0].children.length > 0;
                     // load css file for the date picker
-                    assetsService.loadCss('lib/datetimepicker/bootstrap-datetimepicker.min.css');
+                    assetsService.loadCss('lib/datetimepicker/bootstrap-datetimepicker.min.css', scope);
                     // load the js file for the date picker
-                    assetsService.loadJs('lib/datetimepicker/bootstrap-datetimepicker.js').then(function () {
+                    assetsService.loadJs('lib/datetimepicker/bootstrap-datetimepicker.js', scope).then(function () {
                         // init date picker
                         initDatePicker();
                     });
@@ -9125,7 +9355,7 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
                     scope.editPropertyTypeSettings(property, group);
                 };
                 scope.editPropertyTypeSettings = function (property, group) {
-                    if (!property.inherited && !property.locked) {
+                    if (!property.inherited) {
                         scope.propertySettingsDialogModel = {};
                         scope.propertySettingsDialogModel.title = 'Property settings';
                         scope.propertySettingsDialogModel.property = property;
@@ -9170,6 +9400,7 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
                             property.validation.pattern = oldModel.property.validation.pattern;
                             property.showOnMemberProfile = oldModel.property.showOnMemberProfile;
                             property.memberCanEdit = oldModel.property.memberCanEdit;
+                            property.isSensitiveValue = oldModel.property.isSensitiveValue;
                             // because we set state to active, to show a preview, we have to check if has been filled out
                             // label is required so if it is not filled we know it is a placeholder
                             if (oldModel.property.editor === undefined || oldModel.property.editor === null || oldModel.property.editor === '') {
@@ -11990,9 +12221,15 @@ Use this directive to render a user group preview, where you can see the permiss
             restrict: 'A',
             require: 'ngModel',
             link: function (scope, elm, attrs, ctrl) {
-                elm.focus(function () {
-                    ctrl.$pristine = false;
-                });
+                var alwaysFalse = {
+                    get: function () {
+                        return false;
+                    },
+                    set: function () {
+                    }
+                };
+                Object.defineProperty(ctrl, '$pristine', alwaysFalse);
+                Object.defineProperty(ctrl, '$dirty', alwaysFalse);
             }
         };
     }

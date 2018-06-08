@@ -580,14 +580,12 @@
                     asset.state = 'loading';
                     LazyLoad.css(appendRnd(path), function () {
                         if (!scope) {
-                            asset.state = 'loaded';
-                            asset.deferred.resolve(true);
-                        } else {
-                            asset.state = 'loaded';
-                            angularHelper.safeApply(scope, function () {
-                                asset.deferred.resolve(true);
-                            });
+                            scope = $rootScope;
                         }
+                        asset.state = 'loaded';
+                        angularHelper.safeApply(scope, function () {
+                            asset.deferred.resolve(true);
+                        });
                     });
                 } else if (asset.state === 'loaded') {
                     asset.deferred.resolve(true);
@@ -618,14 +616,12 @@
                     asset.state = 'loading';
                     LazyLoad.js(appendRnd(path), function () {
                         if (!scope) {
-                            asset.state = 'loaded';
-                            asset.deferred.resolve(true);
-                        } else {
-                            asset.state = 'loaded';
-                            angularHelper.safeApply(scope, function () {
-                                asset.deferred.resolve(true);
-                            });
+                            scope = $rootScope;
                         }
+                        asset.state = 'loaded';
+                        angularHelper.safeApply(scope, function () {
+                            asset.deferred.resolve(true);
+                        });
                     });
                 } else if (asset.state === 'loaded') {
                     asset.deferred.resolve(true);
@@ -673,8 +669,7 @@
                             asset.state = 'loading';
                             assets.push(asset);
                         }
-                        //we need to always push to the promises collection to monitor correct
-                        //execution
+                        //we need to always push to the promises collection to monitor correct execution
                         promises.push(asset.deferred.promise);
                     }
                 });
@@ -682,16 +677,15 @@
                 promise = $q.all(promises);
                 // Split into css and js asset arrays, and use LazyLoad on each array
                 var cssAssets = _.filter(assets, function (asset) {
-                    return asset.path.match(/(\.css$|\.css\?)/gi);
+                    return asset.path.match(/(\.css$|\.css\?)/ig);
                 });
                 var jsAssets = _.filter(assets, function (asset) {
-                    return asset.path.match(/(\.js$|\.js\?)/gi);
+                    return asset.path.match(/(\.js$|\.js\?)/ig);
                 });
                 function assetLoaded(asset) {
                     asset.state = 'loaded';
                     if (!scope) {
-                        asset.deferred.resolve(true);
-                        return;
+                        scope = $rootScope;
                     }
                     angularHelper.safeApply(scope, function () {
                         asset.deferred.resolve(true);
@@ -3214,6 +3208,27 @@
         };
     }
     angular.module('umbraco.services').factory('imageHelper', imageHelper);
+    (function () {
+        'use strict';
+        function javascriptLibraryService($q, $http, umbRequestHelper) {
+            var existingLocales = [];
+            function getSupportedLocalesForMoment() {
+                var deferred = $q.defer();
+                if (existingLocales.length === 0) {
+                    umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('backOfficeAssetsApiBaseUrl', 'GetSupportedMomentLocales')), 'Failed to get cultures').then(function (locales) {
+                        existingLocales = locales;
+                        deferred.resolve(existingLocales);
+                    });
+                } else {
+                    deferred.resolve(existingLocales);
+                }
+                return deferred.promise;
+            }
+            var service = { getSupportedLocalesForMoment: getSupportedLocalesForMoment };
+            return service;
+        }
+        angular.module('umbraco.services').factory('javascriptLibraryService', javascriptLibraryService);
+    }());
     // This service was based on OpenJS library available in BSD License
     // http://www.openjs.com/scripts/events/keyboard_shortcuts/index.php
     function keyboardService($window, $timeout) {
@@ -4834,8 +4849,20 @@
  * @description
  * Defines the methods that are called when menu items declare only an action to execute
  */
-    function umbracoMenuActions($q, treeService, $location, navigationService, appState) {
+    function umbracoMenuActions($q, treeService, $location, navigationService, appState, umbRequestHelper, notificationsService, localizationService) {
         return {
+            'ExportMember': function (args) {
+                var url = umbRequestHelper.getApiUrl('memberApiBaseUrl', 'ExportMemberData', [{ key: args.entity.id }]);
+                umbRequestHelper.downloadFile(url).then(function () {
+                    localizationService.localize('speechBubbles_memberExportedSuccess').then(function (value) {
+                        notificationsService.success(value);
+                    });
+                }, function (data) {
+                    localizationService.localize('speechBubbles_memberExportedError').then(function (value) {
+                        notificationsService.error(value);
+                    });
+                });
+            },
             /**
          * @ngdoc method
          * @name umbraco.services.umbracoMenuActions#RefreshNode
@@ -5207,8 +5234,10 @@
                     throw 'args.tree cannot be null';
                 }
                 if (mainTreeEventHandler) {
-                    //returns a promise
-                    return mainTreeEventHandler.syncTree(args);
+                    if (mainTreeEventHandler.syncTree) {
+                        //returns a promise,
+                        return mainTreeEventHandler.syncTree(args);
+                    }
                 }
                 //couldn't sync
                 return angularHelper.rejectedPromise();
@@ -7431,76 +7460,6 @@
                 });
             }
             /**
-         * @ngdoc method
-         * @name umbraco.services.tourService#registerTour
-         * @methodOf umbraco.services.tourService
-         *
-         * @description
-         * Registers a tour in the service
-		 * @param {Object} tour The tour you want to register in the service
-         * @param {String} tour.name The tour name
-         * @param {String} tour.alias The tour alias
-         * @param {Array} tour.steps Array of tour steps
-         * @param {String} tour.step.title Step title
-         * @param {DomElement} tour.step.content Step content (pass in any HTML markup)
-         * @param {DomElement} tour.step.element Highlight a DOM-element
-         * @param {Boolean} tour.step.elementPreventClick Adds invisible layer on top of highligted element to prevent all clicks and interaction with it
-         * @param {Number} tour.step.backdropOpacity Sets the backdrop opacity (default 0.4)
-		 */
-            function registerTour(newTour) {
-                validateTour(newTour);
-                validateTourRegistration(newTour);
-                tours.push(newTour);
-                eventsService.emit('appState.tour.updatedTours', tours);
-            }
-            /**
-         * @ngdoc method
-         * @name umbraco.services.tourService#registerTours
-         * @methodOf umbraco.services.tourService
-         *
-         * @description
-         * Registers an array of tours in the service
-		 * @param {Array} tours The tours to register in the service
-		 */
-            function registerTours(newTours) {
-                angular.forEach(newTours, function (newTour) {
-                    validateTour(newTour);
-                    validateTourRegistration(newTour);
-                    tours.push(newTour);
-                });
-                eventsService.emit('appState.tour.updatedTours', tours);
-            }
-            /**
-         * @ngdoc method
-         * @name umbraco.services.tourService#unregisterTour
-         * @methodOf umbraco.services.tourService
-         *
-         * @description
-         * Unregisters a tour in the service
-		 * @param {String} tourAlias The tour alias of the tour you want to unregister
-		 */
-            function unregisterTour(tourAlias) {
-                tours = tours.filter(function (obj) {
-                    return obj.alias !== tourAlias;
-                });
-                eventsService.emit('appState.tour.updatedTours', tours);
-            }
-            /**
-         * @ngdoc method
-         * @name umbraco.services.tourService#unregisterTourGroup
-         * @methodOf umbraco.services.tourService
-         *
-         * @description
-         * Unregisters a tour in the service
-		 * @param {String} tourGroupName The name of the tour group you want to unregister
-		 */
-            function unregisterTourGroup(tourGroup) {
-                tours = tours.filter(function (obj) {
-                    return obj.group !== tourGroup;
-                });
-                eventsService.emit('appState.tour.updatedTours', tours);
-            }
-            /**
          * Method to return all of the tours as a new instance
          */
             function getTours() {
@@ -7513,8 +7472,8 @@
          *
          * @description
          * Raises an event to start a tour
-		 * @param {Object} tour The tour which should be started
-		 */
+         * @param {Object} tour The tour which should be started
+         */
             function startTour(tour) {
                 validateTour(tour);
                 eventsService.emit('appState.tour.start', tour);
@@ -7527,7 +7486,7 @@
          *
          * @description
          * Raises an event to end the current tour
-		 */
+         */
             function endTour(tour) {
                 eventsService.emit('appState.tour.end', tour);
                 currentTour = null;
@@ -7558,7 +7517,7 @@
          * @description
          * Completes a tour for the user, raises an event and returns a promise
          * @param {Object} tour The tour which should be completed
-		 */
+         */
             function completeTour(tour) {
                 var deferred = $q.defer();
                 tour.completed = true;
@@ -7581,23 +7540,10 @@
          * @description
          * Returns the current tour
          * @returns {Object} Returns the current tour
-		 */
+         */
             function getCurrentTour() {
                 //TODO: This should be reset if a new user logs in
                 return currentTour;
-            }
-            /**
-         * @ngdoc method
-         * @name umbraco.services.tourService#getAllTours
-         * @methodOf umbraco.services.tourService
-         *
-         * @description
-         * Returns a promise of all tours with the current user statuses
-         * @returns {Array} All registered tours
-		 */
-            function getAllTours() {
-                var tours = getTours();
-                return setTourStatuses(tours);
             }
             /**
          * @ngdoc method
@@ -7607,7 +7553,7 @@
          * @description
          * Returns a promise of grouped tours with the current user statuses
          * @returns {Array} All registered tours grouped by tour group
-		 */
+         */
             function getGroupedTours() {
                 var deferred = $q.defer();
                 var tours = getTours();
@@ -7652,43 +7598,13 @@
          * Returns a promise of the tour found by alias with the current user statuses
          * @param {Object} tourAlias The tour alias of the tour which should be returned
          * @returns {Object} Tour object
-		 */
+         */
             function getTourByAlias(tourAlias) {
                 var deferred = $q.defer();
                 var tours = getTours();
                 setTourStatuses(tours).then(function () {
                     var tour = _.findWhere(tours, { alias: tourAlias });
                     deferred.resolve(tour);
-                });
-                return deferred.promise;
-            }
-            /**
-         * @ngdoc method
-         * @name umbraco.services.tourService#getCompletedTours
-         * @methodOf umbraco.services.tourService
-         *
-         * @description
-         * Returns a promise of completed tours for the user
-         * @returns {Array} Array of completed tour aliases
-		 */
-            function getCompletedTours() {
-                var deferred = $q.defer();
-                currentUserResource.getTours().then(function (storedTours) {
-                    var completedTours = _.where(storedTours, { completed: true });
-                    var aliases = _.pluck(completedTours, 'alias');
-                    deferred.resolve(aliases);
-                });
-                return deferred.promise;
-            }
-            /**
-         * Returns a promise of disabled tours for the user
-         */
-            function getDisabledTours() {
-                var deferred = $q.defer();
-                currentUserResource.getTours().then(function (storedTours) {
-                    var disabledTours = _.where(storedTours, { disabled: true });
-                    var aliases = _.pluck(disabledTours, 'alias');
-                    deferred.resolve(aliases);
                 });
                 return deferred.promise;
             }
@@ -7709,6 +7625,9 @@
                 }
                 if (tour.steps && tour.steps.length === 0) {
                     throw 'Tour ' + tour.alias + ' is missing tour steps';
+                }
+                if (tour.requiredSections.length === 0) {
+                    throw 'Tour ' + tour.alias + ' is missing the required sections';
                 }
             }
             /**
@@ -7750,53 +7669,15 @@
                 });
                 return deferred.promise;
             }
-            function saveInLocalStorage(tour) {
-                var storedTours = [];
-                var tourFound = false;
-                // check if something exists in local storage
-                if (localStorageService.get(localStorageKey)) {
-                    storedTours = localStorageService.get(localStorageKey);
-                }
-                // update existing tour in localstorage if it's already there
-                if (storedTours.length > 0) {
-                    angular.forEach(storedTours, function (storedTour) {
-                        if (storedTour.alias === tour.alias) {
-                            storedTour.completed = storedTour.completed ? storedTour.completed : tour.completed;
-                            storedTour.disabled = storedTour.disabled ? storedTour.disabled : tour.disabled;
-                            tourFound = true;
-                        }
-                    });
-                }
-                // create new entry in local storage
-                if (!tourFound) {
-                    var storageObject = {
-                        'alias': tour.alias,
-                        'completed': tour.completed,
-                        'disabled': tour.disabled
-                    };
-                    storedTours.push(storageObject);
-                }
-                localStorageService.set(localStorageKey, storedTours);
-            }
             var service = {
                 registerAllTours: registerAllTours,
-                registerTour: registerTour,
-                registerTours: registerTours,
-                unregisterTour: unregisterTour,
-                unregisterTourGroup: unregisterTourGroup,
                 startTour: startTour,
                 endTour: endTour,
                 disableTour: disableTour,
                 completeTour: completeTour,
                 getCurrentTour: getCurrentTour,
-                //TODO: Not used
-                getAllTours: getAllTours,
                 getGroupedTours: getGroupedTours,
-                getTourByAlias: getTourByAlias,
-                //TODO: Not used
-                getCompletedTours: getCompletedTours,
-                //TODO: Not used
-                getDisabledTours: getDisabledTours
+                getTourByAlias: getTourByAlias
             };
             return service;
         }
@@ -8536,7 +8417,7 @@
                             return p.propertyState === 'init' || p.inherited === true;
                         });
                         var saveProperties = _.map(realProperties, function (p) {
-                            var saveProperty = _.pick(p, 'id', 'alias', 'description', 'validation', 'label', 'sortOrder', 'dataTypeId', 'groupId', 'memberCanEdit', 'showOnMemberProfile');
+                            var saveProperty = _.pick(p, 'id', 'alias', 'description', 'validation', 'label', 'sortOrder', 'dataTypeId', 'groupId', 'memberCanEdit', 'showOnMemberProfile', 'isSensitiveData');
                             return saveProperty;
                         });
                         saveGroup.properties = saveProperties;
@@ -8720,10 +8601,10 @@
                                 // by looking at the key
                                 switch (foundAlias[0]) {
                                 case 'umbracoMemberLockedOut':
-                                    saveModel.isLockedOut = prop.value.toString() === '1' ? true : false;
+                                    saveModel.isLockedOut = prop.value ? prop.value.toString() === '1' ? true : false : false;
                                     break;
                                 case 'umbracoMemberApproved':
-                                    saveModel.isApproved = prop.value.toString() === '1' ? true : false;
+                                    saveModel.isApproved = prop.value ? prop.value.toString() === '1' ? true : false : true;
                                     break;
                                 case 'umbracoMemberComments':
                                     saveModel.comments = prop.value;
@@ -8750,7 +8631,8 @@
                     _.each(displayModel.tabs, function (tab) {
                         _.each(tab.properties, function (prop) {
                             //don't include the custom generic tab properties
-                            if (!prop.alias.startsWith('_umb_')) {
+                            //don't include a property that is marked readonly
+                            if (!prop.alias.startsWith('_umb_') && !prop.readonly) {
                                 saveModel.properties.push({
                                     id: prop.id,
                                     alias: prop.alias,
@@ -9079,11 +8961,108 @@
                         ]);
                     }
                 });
+            },
+            /**
+         * Downloads a file to the client using AJAX/XHR
+         * Based on an implementation here: web.student.tuwien.ac.at/~e0427417/jsdownload.html
+         * See https://stackoverflow.com/a/24129082/694494
+         */
+            downloadFile: function (httpPath) {
+                var deferred = $q.defer();
+                // Use an arraybuffer
+                $http.get(httpPath, { responseType: 'arraybuffer' }).success(function (data, status, headers) {
+                    var octetStreamMime = 'application/octet-stream';
+                    var success = false;
+                    // Get the headers
+                    headers = headers();
+                    // Get the filename from the x-filename header or default to "download.bin"
+                    var filename = headers['x-filename'] || 'download.bin';
+                    // Determine the content type from the header or default to "application/octet-stream"
+                    var contentType = headers['content-type'] || octetStreamMime;
+                    try {
+                        // Try using msSaveBlob if supported
+                        console.log('Trying saveBlob method ...');
+                        var blob = new Blob([data], { type: contentType });
+                        if (navigator.msSaveBlob)
+                            navigator.msSaveBlob(blob, filename);
+                        else {
+                            // Try using other saveBlob implementations, if available
+                            var saveBlob = navigator.webkitSaveBlob || navigator.mozSaveBlob || navigator.saveBlob;
+                            if (saveBlob === undefined)
+                                throw 'Not supported';
+                            saveBlob(blob, filename);
+                        }
+                        console.log('saveBlob succeeded');
+                        success = true;
+                    } catch (ex) {
+                        console.log('saveBlob method failed with the following exception:');
+                        console.log(ex);
+                    }
+                    if (!success) {
+                        // Get the blob url creator
+                        var urlCreator = window.URL || window.webkitURL || window.mozURL || window.msURL;
+                        if (urlCreator) {
+                            // Try to use a download link
+                            var link = document.createElement('a');
+                            if ('download' in link) {
+                                // Try to simulate a click
+                                try {
+                                    // Prepare a blob URL
+                                    console.log('Trying download link method with simulated click ...');
+                                    var blob = new Blob([data], { type: contentType });
+                                    var url = urlCreator.createObjectURL(blob);
+                                    link.setAttribute('href', url);
+                                    // Set the download attribute (Supported in Chrome 14+ / Firefox 20+)
+                                    link.setAttribute('download', filename);
+                                    // Simulate clicking the download link
+                                    var event = document.createEvent('MouseEvents');
+                                    event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+                                    link.dispatchEvent(event);
+                                    console.log('Download link method with simulated click succeeded');
+                                    success = true;
+                                } catch (ex) {
+                                    console.log('Download link method with simulated click failed with the following exception:');
+                                    console.log(ex);
+                                }
+                            }
+                            if (!success) {
+                                // Fallback to window.location method
+                                try {
+                                    // Prepare a blob URL
+                                    // Use application/octet-stream when using window.location to force download
+                                    console.log('Trying download link method with window.location ...');
+                                    var blob = new Blob([data], { type: octetStreamMime });
+                                    var url = urlCreator.createObjectURL(blob);
+                                    window.location = url;
+                                    console.log('Download link method with window.location succeeded');
+                                    success = true;
+                                } catch (ex) {
+                                    console.log('Download link method with window.location failed with the following exception:');
+                                    console.log(ex);
+                                }
+                            }
+                        }
+                    }
+                    if (!success) {
+                        // Fallback to window.open method
+                        console.log('No methods worked for saving the arraybuffer, using last resort window.open');
+                        window.open(httpPath, '_blank', '');
+                    }
+                    deferred.resolve();
+                }).error(function (data, status) {
+                    console.log('Request failed with status: ' + status);
+                    deferred.reject({
+                        errorMsg: 'An error occurred downloading the file',
+                        data: data,
+                        status: status
+                    });
+                });
+                return deferred.promise;
             }
         };
     }
     angular.module('umbraco.services').factory('umbRequestHelper', umbRequestHelper);
-    angular.module('umbraco.services').factory('userService', function ($rootScope, eventsService, $q, $location, $log, securityRetryQueue, authResource, dialogService, $timeout, angularHelper, $http) {
+    angular.module('umbraco.services').factory('userService', function ($rootScope, eventsService, $q, $location, $log, securityRetryQueue, authResource, assetsService, dialogService, $timeout, angularHelper, $http, javascriptLibraryService) {
         var currentUser = null;
         var lastUserId = null;
         var loginDialog = null;
@@ -9114,10 +9093,10 @@
             }
         }
         /**
-    This methods will set the current user when it is resolved and
-    will then start the counter to count in-memory how many seconds they have
-    remaining on the auth session
-    */
+        This methods will set the current user when it is resolved and
+        will then start the counter to count in-memory how many seconds they have
+        remaining on the auth session
+        */
         function setCurrentUser(usr) {
             if (!usr.remainingAuthSeconds) {
                 throw 'The user object is invalid, the remainingAuthSeconds is required.';
@@ -9128,10 +9107,10 @@
             countdownUserTimeout();
         }
         /**
-    Method to count down the current user's timeout seconds,
-    this will continually count down their current remaining seconds every 5 seconds until
-    there are no more seconds remaining.
-    */
+        Method to count down the current user's timeout seconds,
+        this will continually count down their current remaining seconds every 5 seconds until
+        there are no more seconds remaining.
+        */
         function countdownUserTimeout() {
             $timeout(function () {
                 if (currentUser) {
@@ -9257,7 +9236,7 @@
                 return result;
             },
             /** Logs the user out
-       */
+             */
             logout: function () {
                 return authResource.performLogout().then(function (data) {
                     userAuthExpired();
@@ -9308,6 +9287,38 @@
                     deferred.resolve(currentUser);
                 }
                 return deferred.promise;
+            },
+            /** Loads the Moment.js Locale for the current user. */
+            loadMomentLocaleForCurrentUser: function () {
+                function loadLocales(currentUser, supportedLocales) {
+                    var locale = currentUser.locale.toLowerCase();
+                    if (locale !== 'en-us') {
+                        var localeUrls = [];
+                        if (supportedLocales.indexOf(locale + '.js') > -1) {
+                            localeUrls.push('lib/moment/' + locale + '.js');
+                        }
+                        if (locale.indexOf('-') > -1) {
+                            var majorLocale = locale.split('-')[0] + '.js';
+                            if (supportedLocales.indexOf(majorLocale) > -1) {
+                                localeUrls.push('lib/moment/' + majorLocale);
+                            }
+                        }
+                        return assetsService.load(localeUrls, $rootScope);
+                    } else {
+                        //return a noop promise
+                        var deferred = $q.defer();
+                        var promise = deferred.promise;
+                        deferred.resolve(true);
+                        return promise;
+                    }
+                }
+                var promises = {
+                    currentUser: this.getCurrentUser(),
+                    supportedLocales: javascriptLibraryService.getSupportedLocalesForMoment()
+                };
+                return $q.all(promises).then(function (values) {
+                    return loadLocales(values.currentUser, values.supportedLocales);
+                });
             },
             /** Called whenever a server request is made that contains a x-umb-user-seconds response header for which we can update the user's remaining timeout seconds */
             setUserTimeout: function (newTimeout) {
@@ -9455,11 +9466,33 @@
             convertToLocalMomentTime: function (strVal, serverOffsetMinutes) {
                 //get the formatted offset time in HH:mm (server time offset is in minutes)
                 var formattedOffset = (serverOffsetMinutes > 0 ? '+' : '-') + moment().startOf('day').minutes(Math.abs(serverOffsetMinutes)).format('HH:mm');
-                //convert to the iso string format
-                var isoFormat = moment(strVal).format('YYYY-MM-DDTHH:mm:ss') + formattedOffset;
+                //if the string format already denotes that it's in "Roundtrip UTC" format (i.e. "2018-02-07T00:20:38.173Z")
+                //otherwise known as https://en.wikipedia.org/wiki/ISO_8601. This is the default format returned from the server
+                //since that is the default formatter for newtonsoft.json. When it is in this format, we need to tell moment
+                //to load the date as UTC so it's not changed, otherwise load it normally
+                var isoFormat;
+                if (strVal.indexOf('T') > -1 && strVal.endsWith('Z')) {
+                    isoFormat = moment.utc(strVal).format('YYYY-MM-DDTHH:mm:ss') + formattedOffset;
+                } else {
+                    isoFormat = moment(strVal).format('YYYY-MM-DDTHH:mm:ss') + formattedOffset;
+                }
                 //create a moment with the iso format which will include the offset with the correct time
                 // then convert it to local time
                 return moment.parseZone(isoFormat).local();
+            },
+            getLocalDate: function (date, culture, format) {
+                if (date) {
+                    var dateVal;
+                    var serverOffset = Umbraco.Sys.ServerVariables.application.serverTimeOffset;
+                    var localOffset = new Date().getTimezoneOffset();
+                    var serverTimeNeedsOffsetting = -serverOffset !== localOffset;
+                    if (serverTimeNeedsOffsetting) {
+                        dateVal = this.convertToLocalMomentTime(date, serverOffset);
+                    } else {
+                        dateVal = moment(date, 'YYYY-MM-DD HH:mm:ss');
+                    }
+                    return dateVal.locale(culture).format(format);
+                }
             }
         };
     }
@@ -9540,14 +9573,14 @@
                 return maxRowWidth - (imgsPerRow - 1) * margin;
             },
             /** 
-        This will determine the row/image height for the next collection of images which takes into account the 
-        ideal image count per row. It will check if a row can be filled with this ideal count and if not - if there
-        are additional images available to fill the row it will keep calculating until they fit.
-
-        It will return the calculated height and the number of images for the row.
-
-        targetHeight = optional;
-    */
+            This will determine the row/image height for the next collection of images which takes into account the 
+            ideal image count per row. It will check if a row can be filled with this ideal count and if not - if there
+            are additional images available to fill the row it will keep calculating until they fit.
+    
+            It will return the calculated height and the number of images for the row.
+    
+            targetHeight = optional;
+        */
             getRowHeightForImages: function (imgs, maxRowHeight, minDisplayHeight, maxRowWidth, idealImgPerRow, margin, targetHeight) {
                 var idealImages = imgs.slice(0, idealImgPerRow);
                 //get the target row width without margin
@@ -9756,20 +9789,20 @@
     function umbModelMapper() {
         return {
             /**
-     * @ngdoc function
-     * @name umbraco.services.umbModelMapper#convertToEntityBasic
-     * @methodOf umbraco.services.umbModelMapper
-     * @function
-     *
-     * @description
-     * Converts the source model to a basic entity model, it will throw an exception if there isn't enough data to create the model.
-     * @param {Object} source The source model
-     * @param {Number} source.id The node id of the model
-     * @param {String} source.name The node name
-     * @param {String} source.icon The models icon as a css class (.icon-doc)
-     * @param {Number} source.parentId The parentID, if no parent, set to -1
-     * @param {path} source.path comma-separated string of ancestor IDs (-1,1234,1782,1234)
-     */
+         * @ngdoc function
+         * @name umbraco.services.umbModelMapper#convertToEntityBasic
+         * @methodOf umbraco.services.umbModelMapper
+         * @function
+         *
+         * @description
+         * Converts the source model to a basic entity model, it will throw an exception if there isn't enough data to create the model.
+         * @param {Object} source The source model
+         * @param {Number} source.id The node id of the model
+         * @param {String} source.name The node name
+         * @param {String} source.icon The models icon as a css class (.icon-doc)
+         * @param {Number} source.parentId The parentID, if no parent, set to -1
+         * @param {path} source.path comma-separated string of ancestor IDs (-1,1234,1782,1234)
+         */
             /** This converts the source model to a basic entity model, it will throw an exception if there isn't enough data to create the model */
             convertToEntityBasic: function (source) {
                 var required = [
@@ -9830,15 +9863,15 @@
     function updateChecker($http, umbRequestHelper) {
         return {
             /**
-     * @ngdoc function
-     * @name umbraco.services.updateChecker#check
-     * @methodOf umbraco.services.updateChecker
-     * @function
-     *
-     * @description
-     * Called to load in the legacy tree js which is required on startup if a user is logged in or 
-     * after login, but cannot be called until they are authenticated which is why it needs to be lazy loaded. 
-     */
+         * @ngdoc function
+         * @name umbraco.services.updateChecker#check
+         * @methodOf umbraco.services.updateChecker
+         * @function
+         *
+         * @description
+         * Called to load in the legacy tree js which is required on startup if a user is logged in or 
+         * after login, but cannot be called until they are authenticated which is why it needs to be lazy loaded. 
+         */
             check: function () {
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('updateCheckApiBaseUrl', 'GetCheck')), 'Failed to retrieve update status');
             }
@@ -9853,16 +9886,16 @@
     function umbPropEditorHelper() {
         return {
             /**
-     * @ngdoc function
-     * @name getImagePropertyValue
-     * @methodOf umbraco.services.umbPropertyEditorHelper
-     * @function    
-     *
-     * @description
-     * Returns the correct view path for a property editor, it will detect if it is a full virtual path but if not then default to the internal umbraco one
-     * 
-     * @param {string} input the view path currently stored for the property editor
-     */
+         * @ngdoc function
+         * @name getImagePropertyValue
+         * @methodOf umbraco.services.umbPropertyEditorHelper
+         * @function    
+         *
+         * @description
+         * Returns the correct view path for a property editor, it will detect if it is a full virtual path but if not then default to the internal umbraco one
+         * 
+         * @param {string} input the view path currently stored for the property editor
+         */
             getViewPath: function (input, isPreValue) {
                 var path = String(input);
                 if (path.startsWith('/')) {
