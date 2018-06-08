@@ -5,9 +5,14 @@
         <!-- TODO: make render types directive so the RenderTypes don't rely a "field" model -->
         <div class="umb-control-group" ng-repeat="detail in entry.details">
             <label class="control-label">{{ detail.name }}</label>
-            <umb-forms-render-type
-                field="detail.value"
-                view="detail.view">
+
+            <small class="" ng-if="detail.containsSensitiveData">
+                <i class="icon-lock umb-group-builder__property-tag-icon"></i>
+                <localize key="contentTypeEditor_isSensitiveData">Is sensitive data</localize>
+            </small>
+
+            <umb-forms-render-type field="detail.value"
+                                   view="detail.view" sensitive="detail.containsSensitiveData" has-access="sensitiveDataAccess">
             </umb-forms-render-type>
         </div>
 

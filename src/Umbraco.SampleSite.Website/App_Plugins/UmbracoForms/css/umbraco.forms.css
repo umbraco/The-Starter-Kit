@@ -325,6 +325,10 @@ select.-full-width {
   display: inline-block;
   min-width: 0;
 }
+.umb-forms-dashboard .green-link {
+  color: #1fb572;
+  text-decoration: underline;
+}
 .umb-forms-card {
   background: #f3f3f5;
   display: block;
@@ -422,6 +426,7 @@ select.-full-width {
   color: #000000;
   padding: 100px 40px 40px;
   text-align: center;
+  z-index: 99;
 }
 .umb-forms-install-overlay .succes {
   background: url('../images/succes-green.png');
@@ -1697,6 +1702,10 @@ a.umb-forms-workflow-preview__item:hover {
   display: block;
   width: 100%;
   margin-bottom: 5px;
+}
+.umb-forms__store-records-disabled {
+  margin-top: -30px;
+  /* Used to help remove top whitespace between the date filter */
 }
 .umb-forms-button {
   display: inline-flex;

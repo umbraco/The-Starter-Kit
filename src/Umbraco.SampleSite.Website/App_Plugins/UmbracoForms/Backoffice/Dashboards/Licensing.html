@@ -1,4 +1,4 @@
-<div ng-controller="UmbracoForms.Dashboards.LicensingController">
+<div class="umb-forms-dashboard" ng-controller="UmbracoForms.Dashboards.LicensingController">
 
     <div class="umb-forms-install-overlay" ng-show="overlay.show">
         <a href class="close" ng-click="overlay.show = false">Close</a>
@@ -11,11 +11,10 @@
 
             <div class="divider"></div>
 
-            <umb-button
-                button-style="success"
-                type="button"
-                action="create()"
-                label="Create a form">
+            <umb-button button-style="success"
+                        type="button"
+                        action="create()"
+                        label="Create a form">
             </umb-button>
 
         </div>
@@ -31,12 +30,11 @@
                 </p>
             </div>
             <div class="span4 umb-db-form-action">
-                <umb-button
-                    ng-if="!installing"
-                    button-style="success"
-                    type="button"
-                    action="upgrade()"
-                    label="Upgrade now">
+                <umb-button ng-if="!installing"
+                            button-style="success"
+                            type="button"
+                            action="upgrade()"
+                            label="Upgrade now">
                 </umb-button>
             </div>
         </div>
@@ -49,7 +47,6 @@
 
         <hr />
     </div>
-
 
     <div ng-if="status.isTrial || status.isInValid === true">
 
@@ -68,12 +65,11 @@
             </div>
 
             <div class="span4 umb-db-form-action">
-                <umb-button
-                    style="display: block;"
-                    button-style="success"
-                    type="button"
-                    action="status.state = 'buy'"
-                    label="Buy license">
+                <umb-button style="display: block;"
+                            button-style="success"
+                            type="button"
+                            action="status.state = 'buy'"
+                            label="Buy license">
                 </umb-button>
                 <a class="btn btn-link btn-tiny" ng-click="status.state = 'use'">Configure existing license</a>
             </div>
@@ -84,36 +80,59 @@
 
             <h3>Buying a license</h3>
             <p>
-                Its really easy to buy a license on Umbraco.com, simply pick your license from our license page, swipe your
-                creditcard, and you will instantly have a license, ready to use, when you have completed your purchase, return to
-                this page and configure it.
+                It only takes <strong>a few minutes to buy a license</strong> for Umbraco Forms and your <strong>license is instantly delivered</strong>.
+            </p><p>
+                The steps are:
+                <ol>
+                    <li>Click the buy button below</li>
+                    <li>Checkout with Credit Card (or invoice)</li>
+                    <li>Configure the license inside Umbraco Forms and you're up and running</li>
+                </ol>
             </p>
-
-            <a href="https://umbraco.com/products/umbraco-forms/?utm_source=core&utm_medium=dashboard&utm_content=topic-link&utm_campaign=formslicensing" target="_blank" class="btn btn-primart">Go to umbraco.com/products/umbraco-forms</a> <a class="btn btn-link" ng-click="status.state = undefined">Back</a>
+            <a href="https://shop.umbraco.com/shop/cart/?p=6201&direct=true&utm_source=core&utm_medium=dashboard&utm_content=topic-link&utm_campaign=formslicensing" target="_blank" class="btn btn-primary">Buy Umbraco Forms</a><a class="btn btn-link" ng-click="status.state = undefined">Back</a>
+            <hr />
+            <h4>FAQ:</h4>
+            <h5>What does it cost?</h5>
+            <p>Pricing starts at &euro;149 / $199 and is a one time fee (no subscription).</p>
+            <h5>What does a license cover?</h5>
+            <p>A license covers a single domain and will also work on all subdomains. It also includes two additional development domains.</p>
+            <h5>Can I add additional domains to the license?</h5>
+            <p>Yes, additional domains can be added. You can purchase additional domains to your license from your account on Umbraco.com.</p>
+            <h5>More questions?</h5>
+            <p>Don't worry, there's <a class="green-link" href="https://our.umbraco.org/documentation/Add-ons/UmbracoForms/Installation/license?utm_source=core&utm_medium=dashboard&utm_content=buy-faq-link&utm_campaign=formslicensing">more details in the documentation</a> and you're also more than welcome to <a class="green-link" href="https://umbraco.com/contact-us?utm_source=core&utm_medium=dashboard&utm_content=contact-us-link&utm_campaign=formslicensing">get in touch with us</a>. We usually respond within a couple of hours.</p>
         </div>
 
 
         <div ng-if="status.state === 'use'">
-            <h3>Configure a Umbraco Forms license</h3>
+            <h3>Configure an Umbraco Forms license</h3>
             <p>
-                Great! you already have a license, simply enter the umbraco.com credentials used to purchase it - <a class="btn btn-link" ng-click="status.state = undefined">No wait, I actually don't have a license</a>.
+                If you've already bought Umbraco Forms, you can automatically retrieve and configure your license here. Simply enter your umbraco.com credentials below and we'll 
+                find your license.
             </p>
+            
+            <div ng-show="isLoading">
+                <umb-load-indicator></umb-load-indicator>
+            </div>
 
-            <umb-control-group label="Email">
-                <input type="text" ng-model="configuration.email" />
-            </umb-control-group>
-
-            <umb-control-group label="Password">
-                <input type="password" ng-model="configuration.password" />
-            </umb-control-group>
-
-            <umb-control-group>
-                <button class="btn" ng-click="getLicenses(configuration)">Find licenses</button>
+            <div ng-hide="hasLicenses || isLoading">
+            <p>
+                <strong>Email:</strong><br />
+                <input type="text" ng-model="configuration.email" /><br />
+                <strong>Password:</strong><br/>
+                <input type="password" ng-model="configuration.password" /><br/>
+                <button class="btn btn-primary" ng-click="getLicenses(configuration)">Find licenses</button> <a class="btn btn-link" ng-click="status.state = undefined">Back</a>
                 <span ng-if="loginError" class="red"><i class="icon icon-alert red" title="Invalid email or password"></i> Invalid email or password</span>
                 <span ng-if="hasLicenses === false" class="red"><i class="icon icon-alert red" title="No licenses found"></i> No Umbraco Forms licenses available on this account</span>
-            </umb-control-group>
-
-            <umb-control-group label="Licenses" ng-if="hasLicenses">
+            </p>
+            <hr />
+            <h4>FAQ:</h4>
+            <h5>I don't know what my credentials are?</h5>
+            <p>It's a combination of your e-mail and password from when you placed your order. You can always <a class="green-link" href="https://shop.umbraco.com/profile/retrieve-your-password/">reset your password here</a>.</p>
+            <h5>How do I buy a license?</h5>
+            <p>If you don't have a license, you can <a class="btn-link green-link" ng-click="status.state = 'buy'">get one from here and only takes a few minutes</a>.</p>
+            </div>
+            <div ng-if="hasLicenses" ng-hide="isLoading">
+                <h5>Available Licenses</h5>
                 <p>
                     Found <strong>{{openLicenses.length + configuredLicenses.length}}</strong> licenses on the <strong>{{configuration.email}}</strong> account
                 </p>
@@ -123,34 +142,34 @@
                         <li ng-repeat="license in openLicenses" style="max-width: 600px">
                             <i class="icon icon-certificate blue"></i>
 
-                            <a href ng-click="status.selectedLicense = license; configuration.license = license.id">{{license.label}}</a><br />
+                            <a href ng-click="status.selectedLicense = license; configuration.license = license.id">{{license.label}}</a><br/>
                             <small>Has no domains assigned</small>
 
                             <div ng-if="license === status.selectedLicense">
                                 <p>Please set a domain on this license:</p>
-                                <input type="text" ng-model="configuration.domain" />
-                                <button class="btn" ng-click="configure(configuration)">Configure and Install</button>
+                                <input type="text" ng-model="configuration.domain"/>
+                                <button class="btn btn-primary" ng-click="configure(configuration)">Configure and Install</button>
                             </div>
                         </li>
                     </ul>
-                    <hr />
+                    <hr/>
                 </div>
 
                 <ul class="unstyled list-icons">
                     <li ng-repeat="license in configuredLicenses">
                         <i class="icon icon-certificate"></i>
 
-                        <a href ng-click="status.selectedLicense = license; configuration.license = license.id">{{license.label}}</a><br />
+                        <a href ng-click="status.selectedLicense = license; configuration.license = license.id">{{license.label}}</a><br/>
                         <small>
-                            <i class="icon icon-alert red" ng-hide="license.currentDomainMatch" title="This license is not valid on the curent domain"></i> Valid domains: {{license.bindings.join()}}
+                            <i class="icon icon-check color-green" ng-show="license.currentDomainMatch" title="This license is valid on the curent domain"></i><i class="icon icon-alert red" ng-hide="license.currentDomainMatch" title="This license is not valid on the curent domain"></i> Valid domains: {{license.bindings.join()}}
                         </small>
 
                         <div ng-if="license === status.selectedLicense">
-                            <button class="btn" ng-click="configure(configuration)">Install this license</button>
+                            <button class="btn btn-primary" ng-click="configure(configuration)">Install this license</button>
                         </div>
                     </li>
                 </ul>
-            </umb-control-group>
+            </div>
         </div>
 
         <hr />
@@ -158,6 +177,36 @@
 
     <div ng-if="currentVersion">
         <small>Current installed version of Umbraco Forms: {{ currentVersion }}</small>
+    </div>
+
+    <div ng-if="savePlainTextPasswords && isAdminUser">
+        <div class="row-fluid">
+            <style>
+                .warnblock {
+                    background-color: #f1f1f1;
+                    padding: 4px;
+                }
+
+                .warning {
+                    color: red;
+                    font-weight: bold;
+                }
+
+                .code {
+                    color: crimson;
+                    background-color: #f1f1f1;
+                    padding-left: 4px;
+                    padding-right: 4px;
+                }
+            </style>
+            <div class="span8 warnblock">
+                <h3 class="warning">Warning: your configuration settings are set to save plain text passwords!</h3>
+                <p>When you use a password field on any of your forms, the data your visitors will enter in that field will be stored in plain text. This is a security issue and should be avoided.</p>
+                <p>To fix this issue, you can go in to your <span class="code">~/App_Plugins/UmbracoForms/UmbracoForms.config</span> file and set the key <span class="code">SavePlainTextPasswords</span> to <span class="code">False</span>.</p>
+                <p>After updating this setting, make sure to recycle the application pool for the site for the new setting to become active.</p>
+                <p>Note: password values will still be passed on to workflows, regardless of the setting in <span class="code">UmbracoForms.config</span></p>
+            </div>
+        </div>
     </div>
 
 </div>

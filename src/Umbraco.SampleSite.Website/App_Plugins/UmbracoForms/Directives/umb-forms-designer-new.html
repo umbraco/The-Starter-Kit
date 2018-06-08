@@ -125,6 +125,11 @@
                                         </div>
 
                                         <div class="umb-forms__field-wrapper">
+                                            
+                                            <div class="umb-group-builder__property-tag -white" ng-if="field.containsSensitiveData">
+                                                <i class="icon-lock umb-group-builder__property-tag-icon"></i>
+                                                <localize key="contentTypeEditor_isSensitiveData">Is sensitive data</localize>
+                                            </div>
 
                                             <div class="umb-forms__field-condition" ng-if="field.condition.enabled">
                                                 {{ field.condition.actionType }} this question if {{ field.condition.logicType }} of the following match:

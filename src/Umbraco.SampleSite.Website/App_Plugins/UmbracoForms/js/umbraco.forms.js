@@ -487,6 +487,7 @@ angular.module("umbraco")
 
             $scope.loginError = false;
             $scope.hasLicenses = undefined;
+            $scope.isLoading = true;
 
             licensingResource.getAvailableLicenses(config).then(function (response) {
                 var licenses = response.data;
@@ -499,22 +500,25 @@ angular.module("umbraco")
                     }
                 });
 
-                $scope.configuredLicenses = _.filter(licenses, function (license) { return license.configured; });
-                $scope.openLicenses = _.filter(licenses, function (license) { return license.configured === false; });
+                $scope.configuredLicenses = _.sortBy(_.filter(licenses, function (license) { return license.configured; }), 'currentDomainMatch');
+                $scope.openLicenses = _.filter(licenses, function(license) { return license.configured === false; });
+                $scope.isLoading = false;
 
             }, function (err) {
                 $scope.loginError = true;
                 $scope.hasLicenses = undefined;
+                $scope.isLoading = false;
             });
+
         };
 
 
         $scope.configure = function (config) {
+            $scope.isLoading = true;
             licensingResource.configureLicense(config).then(function (response) {
                 $scope.configuredLicenses.length = 0;
                 $scope.openLicenses.length = 0;
                 $scope.loadStatus();
-
                 notificationsService.success("License configured", "Umbraco forms have been configured to be used on this website");
             });
         };
@@ -522,6 +526,7 @@ angular.module("umbraco")
         $scope.loadStatus = function () {
             licensingResource.getLicenseStatus().then(function (response) {
                 $scope.status = response.data;
+                $scope.isLoading = false;
             });
 
             updatesResource.getUpdateStatus().then(function (response) {
@@ -530,6 +535,10 @@ angular.module("umbraco")
 
             updatesResource.getVersion().then(function (response) {
                 $scope.currentVersion = response.data;
+            });
+
+            updatesResource.getSavePlainTextPasswordsConfiguration().then(function (response) {
+                $scope.savePlainTextPasswords = response.data.toString() === "true";
             });
 
 
@@ -1287,6 +1296,8 @@ angular.module("umbraco").controller("UmbracoForms.Editors.Form.EntriesControlle
     vm.prevEntryDetails = prevEntryDetails;
     vm.datePickerChange = datePickerChange;
     vm.toggleRecordState = toggleRecordState;
+    vm.canEditSensitiveData = false;
+    
 
     vm.keyboardShortcutsOverview = [
 
@@ -1328,6 +1339,9 @@ angular.module("umbraco").controller("UmbracoForms.Editors.Form.EntriesControlle
     userService.getCurrentUser().then(function (response) {
         currentUserId = response.id;
         vm.userLocale = response.locale;
+
+        //Set the API controller response on the Angular ViewModel
+        vm.canEditSensitiveData = response.userGroups.indexOf("sensitiveData") !== -1;
 
         //Now we can make a call to form securityResource
         securityResource.getByUserId(currentUserId).then(function (response) {
@@ -1503,7 +1517,8 @@ angular.module("umbraco").controller("UmbracoForms.Editors.Form.EntriesControlle
                     name: schemaItem.name,
                     value: valueItem,
                     viewName: schemaItem.view,
-                    view: '/app_plugins/umbracoforms/Backoffice/common/rendertypes/' + schemaItem.view + '.html'
+                    view: '/app_plugins/umbracoforms/Backoffice/common/rendertypes/' + schemaItem.view + '.html',
+                    containsSensitiveData: schemaItem.containsSensitiveData
                 };
 
                 var excludeItems = ["member", "state", "created", "updated"];
@@ -2309,13 +2324,15 @@ angular.module("umbraco").controller("UmbracoForms.Editors.Form.Dialogs.Workflow
 (function() {
     "use strict";
 
-    function FieldSettingsOverlay($scope, localizationService, formService) {
+    function FieldSettingsOverlay($scope, localizationService, formService, userService) {
 
         var vm = this;
 
         vm.showValidationPattern = false;
         vm.focusOnPatternField = false;
         vm.focusOnMandatoryField = false;
+        vm.canEditSensitiveData = false; //Default to false - until we check with the server for this user to see if they have rights to edit/set this property
+        vm.loading = true;  //We need to do a serverside call lookup at init/active to check is user has access to sensitive data
         vm.selectedValidationType = {};
         vm.actionTypes = [];
         vm.logicTypes = [];
@@ -2351,6 +2368,7 @@ angular.module("umbraco").controller("UmbracoForms.Editors.Form.Dialogs.Workflow
         vm.addConditionRule = addConditionRule;
         vm.getPrevalues = getPrevalues;
         vm.conditionFieldSelected = conditionFieldSelected;
+        
 
         //Creating duplicate of the fields array on the model
         //As the select for the conditions needs to ensure it does not include itself
@@ -2374,6 +2392,17 @@ angular.module("umbraco").controller("UmbracoForms.Editors.Form.Dialogs.Workflow
             vm.logicTypes = formService.getLogicTypes();
             vm.operators = formService.getOperators();
 
+
+            //Verify that the current user is allowed to view & change the property 'containsSensitiveData'
+            userService.getCurrentUser().then(function(user) {
+
+                //Set the API controller response on the Angular ViewModel
+                vm.canEditSensitiveData = user.userGroups.indexOf("sensitiveData") !== -1;
+
+                //Got a response back from promise - so lets load up the UI
+                vm.loading = false;
+            });
+            
             if(!$scope.model.field.condition) {
                 $scope.model.field.condition = {};
                 $scope.model.field.condition.actionType = vm.actionTypes[0].value;
@@ -3025,6 +3054,77 @@ angular.module("umbraco").controller("UmbracoForms.Editors.Security.EditControll
     };
 
 });
+
+angular.module("umbraco")
+    .controller("Umbraco.Forms.GridEditors.FormPickerController",
+    function ($scope, $rootScope, $timeout, dialogService, macroResource, macroService, $routeParams) {
+
+        $scope.title = "Click to insert form";
+        $scope.macroAlias = "renderUmbracoForm";
+        $scope.state = "init";
+
+        $scope.setForm = function () {
+
+            var dialogData = {
+                richTextEditor: true,
+                macroData: $scope.control.value || {
+                    macroAlias: $scope.macroAlias
+                }
+            };
+
+            $scope.formPickerOverlay = {};
+            $scope.formPickerOverlay.view = "macropicker";
+            $scope.formPickerOverlay.dialogData = dialogData;
+            $scope.formPickerOverlay.show = true;
+            $scope.formPickerOverlay.title = "Select form";
+
+            $scope.formPickerOverlay.submit = function (model) {
+
+                var macroObject = macroService.collectValueData(model.selectedMacro, model.macroParams, dialogData.renderingEngine);
+
+                $scope.control.value = {
+                    macroAlias: macroObject.macroAlias,
+                    macroParamsDictionary: macroObject.macroParamsDictionary
+                };
+
+                $scope.setPreview($scope.control.value);
+
+                $scope.formPickerOverlay.show = false;
+                $scope.formPickerOverlay = null;
+            };
+
+            $scope.formPickerOverlay.close = function (oldModel) {
+                $scope.formPickerOverlay.show = false;
+                $scope.formPickerOverlay = null;
+            };
+        };
+
+        $scope.setPreview = function (macro) {
+            var contentId = $routeParams.id;
+
+            $scope.title = macro.macroAlias;
+            $scope.state = "loading";
+
+            macroResource.getMacroResultAsHtmlForEditor(macro.macroAlias, contentId, macro.macroParamsDictionary)
+            .then(function (htmlResult) {
+                
+                if (htmlResult.trim().length > 0 && htmlResult.indexOf("Macro:") < 0) {
+                    $scope.preview = htmlResult;
+                    $scope.state = "loaded";
+                } else {
+                    $scope.state = "init";
+                }
+            });
+        };
+
+        $timeout(function () {
+            if ($scope.control.$initializing) {
+                $scope.setForm();
+            } else if ($scope.control.value) {
+                $scope.setPreview($scope.control.value);
+            }
+        }, 200);
+    });
 
 angular.module("umbraco")
 .controller("UmbracoForms.Editors.PreValueSource.DeleteController",
@@ -3767,6 +3867,7 @@ function securityResource($http) {
         getByUserId: function (userId) {
             return $http.get(apiRoot + "GetByUserId?userId=" + userId);
         },
+
         save: function (userSecurity) {
             return $http.post(apiRoot + "PostSave", userSecurity);
         }
@@ -3818,6 +3919,10 @@ function updatesResource($http) {
 
         getVersion: function() {
             return $http.get(apiRoot + "GetVersion");
+        },
+
+        getSavePlainTextPasswordsConfiguration: function() {
+            return $http.get(apiRoot + "GetSavePlainTextPasswordsConfiguration");
         }
     };
 }
@@ -4821,7 +4926,8 @@ angular.module("umbraco.directives")
             replace: true,
             templateUrl: '/App_Plugins/UmbracoForms/directives/umb-forms-entry-detail.html',
             scope: {
-                entry: '='
+                entry: '=',
+                sensitiveDataAccess: '='
             },
             link: link
         };
@@ -5014,8 +5120,10 @@ angular.module("umbraco.directives")
             replace: true,
             templateUrl: '/App_Plugins/UmbracoForms/directives/umb-forms-render-type.html',
             scope: {
-                view: "=",
-                field: '='
+                view: '=',
+                field: '=',
+                sensitive: '=',
+                hasAccess: '='
             }
         };
 

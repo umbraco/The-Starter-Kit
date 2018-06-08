@@ -112,15 +112,22 @@
                     </umb-editor-sub-header-content-right>
 
                 </umb-editor-sub-header>
+                
+                <!-- Regardless of number of entries (if storeRecordsLocally is disabled) show warning -->
+                <div class="umb-forms__no-fields umb-forms__store-records-disabled" ng-if="!loading && !form.storeRecordsLocally">
+                    <p class="umb-forms__no-fields-text">
+                        <strong>Currently submissions are not stored in the database</strong>
+                    </p>
+                    <p class="-faded">To enable this, go to form settings and activate the "Store Records" feature</p>
+                </div>
 
-                 <!-- If no entires exist, show this empty state -->
-                <div class="umb-forms__no-fields umb-forms-no-entries" ng-if="records.totalNumberOfResults === 0 && !filter.filter && !loading">
+                <!-- If no entires exist, show this empty state -->
+                <div class="umb-forms__no-fields umb-forms-no-entries" ng-if="records.totalNumberOfResults === 0 && !filter.filter && !loading && form.storeRecordsLocally">
                     <p class="umb-forms__no-fields-text">
                         <strong>No submissions added yet in this date range</strong>
                     </p>
                     <p class="-faded">We couldn't find any submissions, are you sure you published the form? Or try expanding the date range</p>
                 </div>
-
 
                 <!-- If no entries matches search, show this empty state -->
                 <div class="umb-forms__no-fields umb-forms-no-entries" ng-if="records.totalNumberOfResults === 0 && filter.filter && !loading">
@@ -240,7 +247,7 @@
                 </umb-editor-sub-header>
 
                 <umb-forms-entry-detail
-                    entry="vm.selectedEntry">
+                    entry="vm.selectedEntry" sensitive-data-access="vm.canEditSensitiveData">
                 </umb-forms-entry-detail>
 
             </umb-editor-container>

@@ -5,7 +5,7 @@
       "name": "Form Picker",
       "isParameterEditor": true,
       "group": "Pickers",
-      "icon": "icon-autofill",
+      "icon": "icon-umb-contour",
       "editor": {
         "view": "~/App_Plugins/UmbracoForms/Backoffice/PropertyEditors/formpicker.html"
       },
@@ -30,10 +30,22 @@
         "view": "~/App_Plugins/UmbracoForms/Backoffice/PropertyEditors/themepicker.html"
       }
     }
-  ],  
+  ],
+
+  "gridEditors": [
+    {
+      "name": "Form",
+      "alias": "umbraco_form_picker",
+      "view": "/App_Plugins/UmbracoForms/Backoffice/GridEditors/formpicker.html",
+      "render": "macro",
+      "icon": "icon-umb-contour"
+    }
+  ],
+
   "css": [
     "~/App_Plugins/UmbracoForms/css/umbraco.forms.css"
   ],
+
   "javascript": [
     "~/App_Plugins/UmbracoForms/js/umbraco.forms.js"
   ]

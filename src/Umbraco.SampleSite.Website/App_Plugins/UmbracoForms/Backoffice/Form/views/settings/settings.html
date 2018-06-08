@@ -1,4 +1,26 @@
 <div class="sub-view-columns">
+    <div class="sub-view-column-left">
+        <h5>Store Records</h5>
+        <small>
+            Check this box to save submitted records in a database. 
+            This will allow you to view and export them from the queries overview. 
+            If you don't want to store data (due to policies in your organisation), leave the box un-checked.
+        </small>
+    </div>
+
+    <div class="sub-view-column-right">
+        <div class="control-group umb-control-group">
+            <div class="control-row">
+                <label class="checkbox no-indent">
+                    <input type="checkbox" ng-model="model.storeRecordsLocally" />
+                    Yes, keep submitted records in a database so they can be viewed and exported later
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sub-view-columns">
 
     <div class="sub-view-column-left">
         <h5>Captions</h5>
@@ -151,7 +173,7 @@
 
         <div class="control-group umb-control-group">
 
-             <div class="control-row">
+            <div class="control-row">
                 <label class="checkbox no-indent" >
                     <input type="checkbox" ng-model="model.manualApproval" />
                     Enable Post Moderation

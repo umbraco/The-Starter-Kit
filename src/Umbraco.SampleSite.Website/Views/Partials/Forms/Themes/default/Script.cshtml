@@ -32,12 +32,12 @@
 
             var form = $('#umbraco_form_' + formId + ' .umbraco-forms-page');
             var conditions = new umbracoForms.conditions(form, fieldSetConditions, fieldConditions, recordvalues);
-            conditions.watch();", 
-            
-            dateFormat, 
-            formId, 
-            fieldSetConditions, 
-            fieldConditions, 
+            conditions.watch();",
+
+            dateFormat,
+            formId,
+            fieldSetConditions,
+            fieldConditions,
             recordValues);
 
 
@@ -45,7 +45,7 @@
     Html.AddFormThemeScriptFile(Model, "~/App_Plugins/UmbracoForms/Assets/Themes/Default/umbracoforms-dependencies.js");
     Html.AddFormThemeScriptFile(Model, "~/App_Plugins/UmbracoForms/Assets/Themes/Default/umbracoforms.js");
     Html.AddFormThemeScriptFile(Model, "~/App_Plugins/UmbracoForms/Assets/Themes/Default/umbracoforms-conditions.js");
-
+    
     Html.AddFormThemeScriptCommand(Model, jsCommand);
 }
 
@@ -61,14 +61,14 @@
     {
         foreach (var partial in Model.CurrentPage.PartialViewFiles)
         {
-            @Html.Partial(partial.Value)
+                @Html.Partial(partial.Value)
         }
     }
 
 
-    @* Render references to javascript files needed by fields on the current page*@
-    foreach (var script in Model.CurrentPage.JavascriptFiles)
-    {
+   @* Render references to javascript files needed by fields on the current page*@
+   foreach (var script in Html.GetThemeScriptFiles(Model))
+   {
         if (Model.UseClientDependency)
         {
             Html.RequiresJs(script.Value);
@@ -78,18 +78,20 @@
             <script type="text/javascript" src="@Url.Content(script.Value)"></script>
         }
     }
+    
 
+    var commands = Html.GetFormThemeScriptCommands(Model);
+   
     @* Render javascript commands to initialise fields *@
-    if (Model.CurrentPage.JavascriptCommands.Any())
+    if (commands.Count > 0)
     {
         <script type="text/javascript">
-    (function () {
-    @foreach (var cmd in Model.CurrentPage.JavascriptCommands)
-        {
-    <text>@Html.Raw(cmd)</text>
-        }
-    }());
+            (function () {
+            @foreach (var cmd in commands.Values)
+            {
+          <text>@Html.Raw(cmd)</text>
+            }
+            }());
         </script>
     }
 }
-

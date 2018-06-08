@@ -1,1 +1,5 @@
-<div ng-include="view"></div>
+<div>
+    <div ng-if="sensitive && !hasAccess" class="sensitive-data">{{field}}</div>
+    <div ng-if="!sensitive || hasAccess" ng-include="view"></div>
+</div>
+

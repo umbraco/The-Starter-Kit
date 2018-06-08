@@ -1,5 +1,5 @@
 ﻿var umbracoForms = umbracoForms || {};
-umbracoForms.conditions = function (form, fieldsetConditions, fieldConditions, values) {
+umbracoForms.conditions = function(form, fieldsetConditions, fieldConditions, values) {
 
     //our conditions "class" - must always be newed to work as it uses a form instance to operate on
     //load all the information from the dom and serverside info and then the class will take care of the rest
@@ -13,15 +13,20 @@ umbracoForms.conditions = function (form, fieldsetConditions, fieldConditions, v
     //Iterates through all the form elements found on the page to update the registered value
     function PopulateFieldValues(page, formValues) {
 
-        $("select", page).each(function () {
+        $("select", page).each(function() {
             formValues[$(this).attr("id")] = $("option[value='" + $(this).val() + "']", $(this)).text();
         });
 
-        $("textarea", page).each(function () {
+        $("textarea", page).each(function() {
             formValues[$(this).attr("id")] = $(this).val();
         });
 
-        $("input", page).each(function () {
+        // clear out all saved checkbox values to we can safely append
+        $('input[type=checkbox]', page).each(function() {
+            formValues[$(this).attr("name")] = null;
+        });
+
+        $("input", page).each(function() {
 
             if ($(this).attr('type') == "text" || $(this).attr("type") == "hidden") {
                 formValues[$(this).attr("id")] = $(this).val();
@@ -34,62 +39,69 @@ umbracoForms.conditions = function (form, fieldsetConditions, fieldConditions, v
             }
 
             if ($(this).attr('type') == "checkbox") {
-
                 if ($(this).attr('id') != $(this).attr('name')) {
                     if ($(this).is(':checked')) {
                         if (formValues[$(this).attr("name")] == null) {
                             formValues[$(this).attr("name")] = $(this).val();
-                        }
-                        else {
+                        } else {
                             formValues[$(this).attr("name")] += "," + $(this).val();
                         }
                     }
                 } else {
-
                     formValues[$(this).attr("name")] = $(this).is(':checked').toString();
                 }
             }
-
         });
     }
-
 
     /* Public api */
 
     _this.operators = {
-        Is: function (value, expected) {
-            return (value || "") === expected;
+        Is: function(value, expected) {
+            if ((value || "") === expected) {
+                return true;
+            }
+            var values = value.split(',');
+            var matchingExpected = $.grep(values,
+                function(o) {
+                    return o === expected;
+                });
+            return matchingExpected.length > 0;
         },
-        IsNot: function (value, unexpected) {
-            return (value || "") !== unexpected;
+        IsNot: function(value, unexpected) {
+            var values = value.split(',');
+            var matchingUnexpected = $.grep(values,
+                function(o) {
+                    return o === unexpected;
+                });
+            return (value || "") !== unexpected && matchingUnexpected.length === 0;
         },
-        GreaterThen: function (value, limit) {
+        GreaterThen: function(value, limit) {
             return parseInt(value) > parseInt(limit);
         },
-        LessThen: function (value, limit) {
+        LessThen: function(value, limit) {
             return parseInt(value) < parseInt(limit);
         },
-        StartsWith: function (value, criteria) {
+        StartsWith: function(value, criteria) {
             return value && value.indexOf(criteria) === 0;
         },
-        EndsWith: function (value, criteria) {
+        EndsWith: function(value, criteria) {
             return value && value.indexOf(criteria) === value.length - criteria.length;
         },
-        Contains: function (value, criteria) {
+        Contains: function(value, criteria) {
             return value && value.indexOf(criteria) > -1;
         }
     };
 
-    _this.watch = function () {
+    _this.watch = function() {
 
         //subscribe to change events
-        $("input, textarea, select", _this.form).change(function () {
+        $("input, textarea, select", _this.form).change(function() {
             PopulateFieldValues(_this.form, _this.values);
 
             //process the conditions
             _this.run();
         });
-
 
         //register all values from the current fields on the page
         PopulateFieldValues(_this.form, this.values);
@@ -98,7 +110,7 @@ umbracoForms.conditions = function (form, fieldsetConditions, fieldConditions, v
         _this.run();
     };
 
-    _this.run = function () {
+    _this.run = function() {
         var fsId,
             fieldId,
 
@@ -109,13 +121,10 @@ umbracoForms.conditions = function (form, fieldsetConditions, fieldConditions, v
 
             cachedResults = {};
 
-
         function evaluateRuleInstance(rule) {
             var value = _this.values[rule.field],
                 func = _this.operators[rule.operator],
                 result = value !== null && func(value, rule.value);
-            console.log(rule.field + ": " + value + " " + rule.operator + " " + rule.value + " = " + result + "\n");
-
             return result;
         }
 
@@ -157,7 +166,8 @@ umbracoForms.conditions = function (form, fieldsetConditions, fieldConditions, v
 
                 if (_this.fieldsetConditions[rule.fieldsetId]) {
 
-                    fieldsetVisibilities[rule.fieldsetId] = isVisible(rule.fieldsetId, _this.fieldsetConditions[rule.fieldsetId]);
+                    fieldsetVisibilities[rule.fieldsetId] =
+                        isVisible(rule.fieldsetId, _this.fieldsetConditions[rule.fieldsetId]);
 
                     if (!fieldsetVisibilities[rule.fieldsetId]) {
                         hasHiddenFieldset = true;
@@ -200,7 +210,6 @@ umbracoForms.conditions = function (form, fieldsetConditions, fieldConditions, v
             return visible;
         }
 
-
         function isVisible(id, condition) {
             if (condition) {
                 return evaluateConditionVisibility(id, condition);
@@ -208,15 +217,11 @@ umbracoForms.conditions = function (form, fieldsetConditions, fieldConditions, v
             return true;
         }
 
-
         function handleCondition(element, id, condition, type) {
-            console.log(type + " " + id);
             var shouldShow = isVisible(id, condition);
             if (shouldShow) {
-                console.log("showing " + id + "\n");
                 element.show();
             } else {
-                console.log("hiding " + id + "\n");
                 element.hide();
             }
         }
@@ -226,9 +231,11 @@ umbracoForms.conditions = function (form, fieldsetConditions, fieldConditions, v
         }
 
         for (fieldId in _this.fieldConditions) {
-            handleCondition($("#" + fieldId).closest(".umbraco-forms-field"), fieldId, _this.fieldConditions[fieldId], "Field");
+            handleCondition($("#" + fieldId).closest(".umbraco-forms-field"),
+                fieldId,
+                _this.fieldConditions[fieldId],
+                "Field");
         }
-
     }
 
     return _this;
