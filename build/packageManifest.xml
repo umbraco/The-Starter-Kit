@@ -105,57 +105,7 @@
             <guid>TopNavigation.cshtml</guid>
             <orgPath>/Views/Partials/Navigation</orgPath>
             <orgName>TopNavigation.cshtml</orgName>
-        </file>
-        <file>
-            <guid>package.manifest</guid>
-            <orgPath>/App_Plugins/NestedContent</orgPath>
-            <orgName>package.manifest</orgName>
-        </file>
-        <file>
-            <guid>nestedcontent.css</guid>
-            <orgPath>/App_Plugins/NestedContent/Css</orgPath>
-            <orgName>nestedcontent.css</orgName>
-        </file>
-        <file>
-            <guid>nestedcontent.controllers.js</guid>
-            <orgPath>/App_Plugins/NestedContent/Js</orgPath>
-            <orgName>nestedcontent.controllers.js</orgName>
-        </file>
-        <file>
-            <guid>nestedcontent.directives.js</guid>
-            <orgPath>/App_Plugins/NestedContent/Js</orgPath>
-            <orgName>nestedcontent.directives.js</orgName>
-        </file>
-        <file>
-            <guid>nestedcontent.filters.js</guid>
-            <orgPath>/App_Plugins/NestedContent/Js</orgPath>
-            <orgName>nestedcontent.filters.js</orgName>
-        </file>
-        <file>
-            <guid>nestedcontent.resources.js</guid>
-            <orgPath>/App_Plugins/NestedContent/Js</orgPath>
-            <orgName>nestedcontent.resources.js</orgName>
-        </file>
-        <file>
-            <guid>nestedcontent.services.js</guid>
-            <orgPath>/App_Plugins/NestedContent/Js</orgPath>
-            <orgName>nestedcontent.services.js</orgName>
-        </file>
-        <file>
-            <guid>nestedcontent.doctypepicker.html</guid>
-            <orgPath>/App_Plugins/NestedContent/Views</orgPath>
-            <orgName>nestedcontent.doctypepicker.html</orgName>
-        </file>
-        <file>
-            <guid>nestedcontent.editor.html</guid>
-            <orgPath>/App_Plugins/NestedContent/Views</orgPath>
-            <orgName>nestedcontent.editor.html</orgName>
-        </file>
-        <file>
-            <guid>nestedcontent.html</guid>
-            <orgPath>/App_Plugins/NestedContent/Views</orgPath>
-            <orgName>nestedcontent.html</orgName>
-        </file>
+        </file>        
         <file>
             <guid>Umbraco.SampleSite.dll</guid>
             <orgPath>/bin</orgPath>
