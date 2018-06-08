@@ -2242,11 +2242,11 @@ It contains a simple website that contains many basic features to help get you s
         </DataType>
         <DataType Name="People - Featured People - Multinode Treepicker" Id="Umbraco.MultiNodeTreePicker2" Definition="dfab9a27-67d3-4dba-ac91-3a70f9faadfe" DatabaseType="Ntext">
             <PreValues>
-                <PreValue Id="175" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;id&quot;: &quot;umb://document/5582ae2fefa8422fa9c97ff1c9e8dd85&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
-                <PreValue Id="176" Value="" Alias="filter" SortOrder="1" />
-                <PreValue Id="177" Value="1" Alias="minNumber" SortOrder="2" />
-                <PreValue Id="178" Value="9" Alias="maxNumber" SortOrder="3" />
-                <PreValue Id="179" Value="1" Alias="showOpenButton" SortOrder="4" />
+                <PreValue Id="243" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;query&quot;: &quot;$current&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
+                <PreValue Id="244" Value="person" Alias="filter" SortOrder="1" />
+                <PreValue Id="245" Value="0" Alias="minNumber" SortOrder="2" />
+                <PreValue Id="246" Value="9" Alias="maxNumber" SortOrder="3" />
+                <PreValue Id="247" Value="1" Alias="showOpenButton" SortOrder="4" />
             </PreValues>
         </DataType>
         <DataType Name="Home - Color Theme - Radio button list" Id="Umbraco.RadioButtonList" Definition="14f884bf-e8f7-481b-a0ba-88b132ab97e8" DatabaseType="Integer">
@@ -2316,11 +2316,11 @@ It contains a simple website that contains many basic features to help get you s
         </DataType>
         <DataType Name="Products - Featured Products - Multinode Treepicker" Id="Umbraco.MultiNodeTreePicker2" Definition="d865637a-829e-47b9-a9ca-b19a0bb4d3ee" DatabaseType="Ntext">
             <PreValues>
-                <PreValue Id="180" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;id&quot;: &quot;umb://document/485343b1d99c4789a676e9b4c98a38d4&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
-                <PreValue Id="181" Value="" Alias="filter" SortOrder="1" />
-                <PreValue Id="182" Value="1" Alias="minNumber" SortOrder="2" />
-                <PreValue Id="183" Value="9" Alias="maxNumber" SortOrder="3" />
-                <PreValue Id="184" Value="1" Alias="showOpenButton" SortOrder="4" />
+                <PreValue Id="238" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;query&quot;: &quot;$current&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
+                <PreValue Id="239" Value="product" Alias="filter" SortOrder="1" />
+                <PreValue Id="240" Value="0" Alias="minNumber" SortOrder="2" />
+                <PreValue Id="241" Value="9" Alias="maxNumber" SortOrder="3" />
+                <PreValue Id="242" Value="1" Alias="showOpenButton" SortOrder="4" />
             </PreValues>
         </DataType>
         <DataType Name="Product - Photos - Media Picker" Id="Umbraco.MediaPicker2" Definition="67758eb3-51c7-4742-9958-97bc66e4e635" DatabaseType="Ntext">
