@@ -321,11 +321,11 @@
             <orgPath>/css</orgPath>
             <orgName>umbraco-starterkit-style.css</orgName>
         </file>
-      <file>
-        <guid>umbraco-starterkit-app.js</guid>
-        <orgPath>/scripts</orgPath>
-        <orgName>umbraco-starterkit-app.js</orgName>
-      </file>      
+        <file>
+            <guid>umbraco-starterkit-app.js</guid>
+            <orgPath>/scripts</orgPath>
+            <orgName>umbraco-starterkit-app.js</orgName>
+        </file>
     </files>
     <info>
         <package>
@@ -1675,7 +1675,9 @@ It contains a simple website that contains many basic features to help get you s
                 </AllowedTemplates>
                 <DefaultTemplate>Products</DefaultTemplate>
             </Info>
-            <Structure />
+            <Structure>
+                <DocumentType>product</DocumentType>
+            </Structure>
             <GenericProperties>
                 <GenericProperty>
                     <Name>Default Currency</Name>
@@ -1694,7 +1696,7 @@ It contains a simple website that contains many basic features to help get you s
                     <Definition>d865637a-829e-47b9-a9ca-b19a0bb4d3ee</Definition>
                     <Tab>Shop</Tab>
                     <SortOrder>1</SortOrder>
-                    <Mandatory>True</Mandatory>
+                    <Mandatory>False</Mandatory>
                 </GenericProperty>
             </GenericProperties>
             <Tabs>
@@ -1728,18 +1730,7 @@ It contains a simple website that contains many basic features to help get you s
                          numberOfPosts = Model.Content.HowManyPostsShouldBeShown,
                          startNodeId = Model.Content.Id
                      })
-        <!-- todo: implement paging -->
-        <!--
-        <nav class="nav-bar nav-bar--center">
-            <a class="nav-link nav-link--black" href="">Prev</a>
-            <a class="nav-link nav-link--black nav-link--active" href="">P1</a>
-            <a class="nav-link nav-link--black" href="">P2</a>
-            <a class="nav-link nav-link--black" href="">P3</a>
-            <a class="nav-link nav-link--black" href="">P4</a>
-            <a class="nav-link nav-link--black" href="">P5</a>
-            <a class="nav-link nav-link--black" href="">Next</a>
-        </nav>
-        -->
+       
     </div>
 
 </section>]]>
@@ -1800,6 +1791,7 @@ It contains a simple website that contains many basic features to help get you s
                 @Model.Content.ContactIntro
                 @Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.Content.ContactForm.ToString() })
             </div>
+
         </div>
     </div>
 </section>]]>
@@ -1852,10 +1844,12 @@ It contains a simple website that contains many basic features to help get you s
     <div class="section__hero-content">
         <h1>@Model.Content.HeroHeader</h1>
         <p class="section__description">@Model.Content.HeroDescription</p>
-        <a class="button button--border--solid" href="@Model.Content.HeroCtalink.Url">
-            @Model.Content.HeroCtacaption
-        </a>
-
+        @if (Model.Content.HeroCtalink != null)
+        {
+            <a class="button button--border--solid" href="@Model.Content.HeroCtalink.Url">
+                @Model.Content.HeroCtacaption
+            </a>
+        }
     </div>
 </section>
 
@@ -1889,14 +1883,12 @@ It contains a simple website that contains many basic features to help get you s
             <Name>Master</Name>
             <Alias>Master</Alias>
             <Design>
-                <![CDATA[@using ContentModels = Umbraco.Web.PublishedContentModels;
-@using Umbraco.Core
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+                <![CDATA[@inherits UmbracoTemplatePage
 @{
     Layout = null;
 
     // Get basic design settings from the homepage
-    ContentModels.Home home = Model.Content.Site() as ContentModels.Home;
+    var home = (Home)Model.Content.Site();
     var colorTheme = Umbraco.GetPreValueAsString(home.ColorTheme);
     var font = Umbraco.GetPreValueAsString(home.Font);
 }
@@ -2357,7 +2349,7 @@ It contains a simple website that contains many basic features to help get you s
         </DataType>
     </DataTypes>
     <Actions>
-        <Action runat="install" undo="true" alias="SampleSiteInitialContent">
+        <Action runat="install" undo="false" alias="SampleSiteInitialContent">
             <mediaItem folder="design" name="Umbraco Campari Meeting Room" path="/media/1030/16403439029_f500be349b_o.jpg" key="3d758b1f-24ec-47b0-a75c-225b0444991b" updateDocPath="//home" updatePropertyAlias="heroBackgroundImage" />
             <mediaItem folder="products" name="Biker Jacket" path="/media/1001/4730684907_8a7f8759cb_b.jpg" key="208abda1-63b5-4ba1-bc2a-3d40fe156bb6" updateDocPath="//product [@nodeName = 'Biker Jacket']" updatePropertyAlias="photos" />
             <mediaItem folder="products" name="Tattoo" path="/media/1012/7371127652_e01b6ab56f_b.jpg" key="ce075369-df3d-426f-972a-36b355fd535f" updateDocPath="//product [@nodeName = 'Tattoo']" updatePropertyAlias="photos" />
