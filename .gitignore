@@ -144,8 +144,4 @@ _[Ss]cripts
 /build/tmp/*
 /src/PackageActions/App_Plugins/*
 /src/Umbraco.SampleSite/App_Plugins/*
-src/.vs/config/applicationhost.config
-src/.vs/Umbraco.SampleSite/v15/Server/sqlite3/storage.ide-wal
-src/.vs/Umbraco.SampleSite/v15/Server/sqlite3/storage.ide
-src/.vs/Umbraco.SampleSite/v15/Server/sqlite3/db.lock
-src/.vs/Umbraco.SampleSite/v15/Server/sqlite3/storage.ide-shm
+/src/.vs/*
