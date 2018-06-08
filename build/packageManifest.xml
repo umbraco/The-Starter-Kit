@@ -1695,7 +1695,9 @@ It contains a simple website that contains many basic features to help get you s
                 </AllowedTemplates>
                 <DefaultTemplate>Products</DefaultTemplate>
             </Info>
-            <Structure />
+            <Structure>
+                <DocumentType>product</DocumentType>
+            </Structure>
             <GenericProperties>
                 <GenericProperty>
                     <Name>Default Currency</Name>
@@ -1714,7 +1716,7 @@ It contains a simple website that contains many basic features to help get you s
                     <Definition>d865637a-829e-47b9-a9ca-b19a0bb4d3ee</Definition>
                     <Tab>Shop</Tab>
                     <SortOrder>1</SortOrder>
-                    <Mandatory>True</Mandatory>
+                    <Mandatory>False</Mandatory>
                 </GenericProperty>
             </GenericProperties>
             <Tabs>
@@ -1748,18 +1750,7 @@ It contains a simple website that contains many basic features to help get you s
                          numberOfPosts = Model.Content.HowManyPostsShouldBeShown,
                          startNodeId = Model.Content.Id
                      })
-        <!-- todo: implement paging -->
-        <!--
-        <nav class="nav-bar nav-bar--center">
-            <a class="nav-link nav-link--black" href="">Prev</a>
-            <a class="nav-link nav-link--black nav-link--active" href="">P1</a>
-            <a class="nav-link nav-link--black" href="">P2</a>
-            <a class="nav-link nav-link--black" href="">P3</a>
-            <a class="nav-link nav-link--black" href="">P4</a>
-            <a class="nav-link nav-link--black" href="">P5</a>
-            <a class="nav-link nav-link--black" href="">Next</a>
-        </nav>
-        -->
+       
     </div>
 
 </section>]]>
@@ -1820,6 +1811,7 @@ It contains a simple website that contains many basic features to help get you s
                 @Model.Content.ContactIntro
                 @Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.Content.ContactForm.ToString() })
             </div>
+
         </div>
     </div>
 </section>]]>
@@ -1872,10 +1864,12 @@ It contains a simple website that contains many basic features to help get you s
     <div class="section__hero-content">
         <h1>@Model.Content.HeroHeader</h1>
         <p class="section__description">@Model.Content.HeroDescription</p>
-        <a class="button button--border--solid" href="@Model.Content.HeroCtalink.Url">
-            @Model.Content.HeroCtacaption
-        </a>
-
+        @if (Model.Content.HeroCtalink != null)
+        {
+            <a class="button button--border--solid" href="@Model.Content.HeroCtalink.Url">
+                @Model.Content.HeroCtacaption
+            </a>
+        }
     </div>
 </section>
 
@@ -1909,14 +1903,12 @@ It contains a simple website that contains many basic features to help get you s
             <Name>Master</Name>
             <Alias>Master</Alias>
             <Design>
-                <![CDATA[@using ContentModels = Umbraco.Web.PublishedContentModels;
-@using Umbraco.Core
-@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+                <![CDATA[@inherits UmbracoTemplatePage
 @{
     Layout = null;
 
     // Get basic design settings from the homepage
-    ContentModels.Home home = Model.Content.Site() as ContentModels.Home;
+    var home = (Home)Model.Content.Site();
     var colorTheme = Umbraco.GetPreValueAsString(home.ColorTheme);
     var font = Umbraco.GetPreValueAsString(home.Font);
 }
@@ -2270,11 +2262,11 @@ It contains a simple website that contains many basic features to help get you s
         </DataType>
         <DataType Name="People - Featured People - Multinode Treepicker" Id="Umbraco.MultiNodeTreePicker2" Definition="dfab9a27-67d3-4dba-ac91-3a70f9faadfe" DatabaseType="Ntext">
             <PreValues>
-                <PreValue Id="175" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;id&quot;: &quot;umb://document/5582ae2fefa8422fa9c97ff1c9e8dd85&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
-                <PreValue Id="176" Value="" Alias="filter" SortOrder="1" />
-                <PreValue Id="177" Value="1" Alias="minNumber" SortOrder="2" />
-                <PreValue Id="178" Value="9" Alias="maxNumber" SortOrder="3" />
-                <PreValue Id="179" Value="1" Alias="showOpenButton" SortOrder="4" />
+                <PreValue Id="243" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;query&quot;: &quot;$current&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
+                <PreValue Id="244" Value="person" Alias="filter" SortOrder="1" />
+                <PreValue Id="245" Value="0" Alias="minNumber" SortOrder="2" />
+                <PreValue Id="246" Value="9" Alias="maxNumber" SortOrder="3" />
+                <PreValue Id="247" Value="1" Alias="showOpenButton" SortOrder="4" />
             </PreValues>
         </DataType>
         <DataType Name="Home - Color Theme - Radio button list" Id="Umbraco.RadioButtonList" Definition="14f884bf-e8f7-481b-a0ba-88b132ab97e8" DatabaseType="Integer">
@@ -2344,11 +2336,11 @@ It contains a simple website that contains many basic features to help get you s
         </DataType>
         <DataType Name="Products - Featured Products - Multinode Treepicker" Id="Umbraco.MultiNodeTreePicker2" Definition="d865637a-829e-47b9-a9ca-b19a0bb4d3ee" DatabaseType="Ntext">
             <PreValues>
-                <PreValue Id="180" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;id&quot;: &quot;umb://document/485343b1d99c4789a676e9b4c98a38d4&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
-                <PreValue Id="181" Value="" Alias="filter" SortOrder="1" />
-                <PreValue Id="182" Value="1" Alias="minNumber" SortOrder="2" />
-                <PreValue Id="183" Value="9" Alias="maxNumber" SortOrder="3" />
-                <PreValue Id="184" Value="1" Alias="showOpenButton" SortOrder="4" />
+                <PreValue Id="238" Value="{&#xD;&#xA;  &quot;type&quot;: &quot;content&quot;,&#xD;&#xA;  &quot;query&quot;: &quot;$current&quot;&#xD;&#xA;}" Alias="startNode" SortOrder="0" />
+                <PreValue Id="239" Value="product" Alias="filter" SortOrder="1" />
+                <PreValue Id="240" Value="0" Alias="minNumber" SortOrder="2" />
+                <PreValue Id="241" Value="9" Alias="maxNumber" SortOrder="3" />
+                <PreValue Id="242" Value="1" Alias="showOpenButton" SortOrder="4" />
             </PreValues>
         </DataType>
         <DataType Name="Product - Photos - Media Picker" Id="Umbraco.MediaPicker2" Definition="67758eb3-51c7-4742-9958-97bc66e4e635" DatabaseType="Ntext">
@@ -2377,7 +2369,7 @@ It contains a simple website that contains many basic features to help get you s
         </DataType>
     </DataTypes>
     <Actions>
-        <Action runat="install" undo="true" alias="SampleSiteInitialContent">
+        <Action runat="install" undo="false" alias="SampleSiteInitialContent">
             <mediaItem folder="design" name="Umbraco Campari Meeting Room" path="/media/1030/16403439029_f500be349b_o.jpg" key="3d758b1f-24ec-47b0-a75c-225b0444991b" updateDocPath="//home" updatePropertyAlias="heroBackgroundImage" />
             <mediaItem folder="products" name="Biker Jacket" path="/media/1001/4730684907_8a7f8759cb_b.jpg" key="208abda1-63b5-4ba1-bc2a-3d40fe156bb6" updateDocPath="//product [@nodeName = 'Biker Jacket']" updatePropertyAlias="photos" />
             <mediaItem folder="products" name="Tattoo" path="/media/1012/7371127652_e01b6ab56f_b.jpg" key="ce075369-df3d-426f-972a-36b355fd535f" updateDocPath="//product [@nodeName = 'Tattoo']" updatePropertyAlias="photos" />

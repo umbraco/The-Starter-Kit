@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <language alias="en" intName="English (UK)" localName="English (UK)" lcid="" culture="en-GB">
     <creator>
         <name>The Umbraco community</name>
@@ -45,7 +45,7 @@
         <key alias="setPermissions">Set permissions</key>
         <key alias="unlock">Unlock</key>
         <key alias="createblueprint">Create Content Template</key>
-    </area>
+    <key alias="exportContourForm">Export form</key><key alias="importContourForm">Import form</key><key alias="archiveContourForm">Archive form</key><key alias="unarchiveContourForm">Unarchive form</key><key alias="defaultValue">Default value</key></area>
     <area alias="actionCategories">
         <key alias="content">Content</key>
         <key alias="administration">Administration</key>
@@ -1267,7 +1267,7 @@ To manage your website, simply open the Umbraco back office and start adding con
         <key alias="help" version="7.0">Help</key>
         <key alias="forms">Forms</key>
         <key alias="analytics">Analytics</key>
-    </area>
+    <key alias="forms">Forms</key></area>
     <area alias="help">
         <key alias="goTo">go to</key>
         <key alias="helpTopicsFor">Help topics for</key>
@@ -1471,7 +1471,7 @@ To manage your website, simply open the Umbraco back office and start adding con
 
         <key alias="iWant">I want</key>
         <key alias="allContent">all content</key>
-        <key alias="contentOfType">content of type &quot;%0%&quot;</key>
+        <key alias="contentOfType">content of type "%0%"</key>
         <key alias="from">from</key>
         <key alias="websiteRoot">my website</key>
         <key alias="where">where</key>

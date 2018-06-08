@@ -9,10 +9,12 @@
     <div class="section__hero-content">
         <h1>@Model.Content.HeroHeader</h1>
         <p class="section__description">@Model.Content.HeroDescription</p>
-        <a class="button button--border--solid" href="@Model.Content.HeroCtalink.Url">
-            @Model.Content.HeroCtacaption
-        </a>
-
+        @if (Model.Content.HeroCtalink != null)
+        {
+            <a class="button button--border--solid" href="@Model.Content.HeroCtalink.Url">
+                @Model.Content.HeroCtacaption
+            </a>
+        }
     </div>
 </section>
 
