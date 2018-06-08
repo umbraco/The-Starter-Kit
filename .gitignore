@@ -145,3 +145,6 @@ _[Ss]cripts
 /src/PackageActions/App_Plugins/*
 /src/Umbraco.SampleSite/App_Plugins/*
 /src/.vs/*
+/src/Umbraco.SampleSite.Website/App_Plugins/UmbracoForms/installed
+/src/Umbraco.SampleSite.Website/App_Plugins/UmbracoForms/version
+/src/Umbraco.SampleSite.Website/App_Data/umbraco.licensing.log.txt
