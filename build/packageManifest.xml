@@ -895,7 +895,7 @@ It contains a simple website that contains many basic features to help get you s
                     <Name>Categories (tags)</Name>
                     <Alias>categories</Alias>
                     <Type>Umbraco.Tags</Type>
-                    <Definition>b6b73142-b9c1-4bf8-a16d-e1c23320b549</Definition>
+                    <Definition>b25cef38-11c1-4b1c-8db6-234bd699621d</Definition>
                     <Tab>Content</Tab>
                     <SortOrder>1</SortOrder>
                     <Mandatory>False</Mandatory>
@@ -1367,7 +1367,7 @@ It contains a simple website that contains many basic features to help get you s
                     <Name>Keywords</Name>
                     <Alias>keywords</Alias>
                     <Type>Umbraco.Tags</Type>
-                    <Definition>b6b73142-b9c1-4bf8-a16d-e1c23320b549</Definition>
+                    <Definition>30a2a501-1978-4ddb-a57b-f7efed43ba3c</Definition>
                     <Tab>Navigation &amp; SEO</Tab>
                     <SortOrder>3</SortOrder>
                     <Mandatory>False</Mandatory>
@@ -1585,7 +1585,7 @@ It contains a simple website that contains many basic features to help get you s
                     <Name>Category</Name>
                     <Alias>category</Alias>
                     <Type>Umbraco.Tags</Type>
-                    <Definition>b6b73142-b9c1-4bf8-a16d-e1c23320b549</Definition>
+                    <Definition>613731e6-f82e-4e94-8d1c-34253019f03c</Definition>
                     <Tab>Product Details</Tab>
                     <SortOrder>3</SortOrder>
                     <Mandatory>True</Mandatory>
@@ -2239,10 +2239,28 @@ It contains a simple website that contains many basic features to help get you s
                 <PreValue Id="57" Value="{&#xD;&#xA;  &quot;toolbar&quot;: [&#xD;&#xA;    &quot;code&quot;,&#xD;&#xA;    &quot;styleselect&quot;,&#xD;&#xA;    &quot;bold&quot;,&#xD;&#xA;    &quot;italic&quot;,&#xD;&#xA;    &quot;alignleft&quot;,&#xD;&#xA;    &quot;aligncenter&quot;,&#xD;&#xA;    &quot;alignright&quot;,&#xD;&#xA;    &quot;bullist&quot;,&#xD;&#xA;    &quot;numlist&quot;,&#xD;&#xA;    &quot;outdent&quot;,&#xD;&#xA;    &quot;indent&quot;,&#xD;&#xA;    &quot;link&quot;&#xD;&#xA;  ],&#xD;&#xA;  &quot;stylesheets&quot;: [],&#xD;&#xA;  &quot;dimensions&quot;: {&#xD;&#xA;    &quot;height&quot;: 500&#xD;&#xA;  },&#xD;&#xA;  &quot;maxImageSize&quot;: 500&#xD;&#xA;}" Alias="rte" SortOrder="1" />
             </PreValues>
         </DataType>
+        <DataType Name="Blogpost - Categories - Tags" Id="Umbraco.Tags" Definition="4ec829ac-b986-4432-bc03-99649a4a552d" DatabaseType="Nvarchar">
+            <PreValues>
+                <PreValue Id="223" Value="default" Alias="group" SortOrder="0" />
+                <PreValue Id="224" Value="Csv" Alias="storageType" SortOrder="1" />
+            </PreValues>
+        </DataType>		
         <DataType Name="Employee - Department - Tags" Id="Umbraco.Tags" Definition="71e1e182-da10-4280-aa35-800a8de19a32" DatabaseType="Nvarchar">
             <PreValues>
                 <PreValue Id="58" Value="department" Alias="group" SortOrder="0" />
                 <PreValue Id="59" Value="Csv" Alias="storageType" SortOrder="1" />
+            </PreValues>
+        </DataType>
+        <DataType Name="Navigation Base - Keywords - Tags" Id="Umbraco.Tags" Definition="b25cef38-11c1-4b1c-8db6-234bd699621d" DatabaseType="Nvarchar">
+            <PreValues>
+                <PreValue Id="213" Value="default" Alias="group" SortOrder="0" />
+                <PreValue Id="214" Value="Csv" Alias="storageType" SortOrder="1" />
+            </PreValues>
+        </DataType>
+        <DataType Name="Product - Category - Tags" Id="Umbraco.Tags" Definition="613731e6-f82e-4e94-8d1c-34253019f03c" DatabaseType="Nvarchar">
+            <PreValues>
+                <PreValue Id="225" Value="default" Alias="group" SortOrder="0" />
+                <PreValue Id="226" Value="Csv" Alias="storageType" SortOrder="1" />
             </PreValues>
         </DataType>
         <DataType Name="Product - Features - Nested Content" Id="Umbraco.NestedContent" Definition="2b806d03-d9f7-41a3-8226-4abc870585c4" DatabaseType="Ntext">
