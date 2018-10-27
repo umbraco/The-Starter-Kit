@@ -8,13 +8,10 @@
                 switch (UmbClientMgr.mainWindow().location.hash.toLowerCase().substring(1).toLowerCase()) {
                     case "media":
                         return "Media";
-                        break;
                     case "content":
                         return "Content";
-                        break;
                     case "member":
                         return "Member";
-                        break;
                     default:
                         return "Content";
                 }

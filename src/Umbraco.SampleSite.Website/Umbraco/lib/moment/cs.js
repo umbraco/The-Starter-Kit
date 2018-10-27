@@ -27,7 +27,6 @@
             } else {
                 return result + 'minutami';
             }
-            break;
         case 'h':  // an hour / in an hour / an hour ago
             return withoutSuffix ? 'hodina' : (isFuture ? 'hodinu' : 'hodinou');
         case 'hh': // 9 hours / in 9 hours / 9 hours ago
@@ -36,7 +35,6 @@
             } else {
                 return result + 'hodinami';
             }
-            break;
         case 'd':  // a day / in a day / a day ago
             return (withoutSuffix || isFuture) ? 'den' : 'dnem';
         case 'dd': // 9 days / in 9 days / 9 days ago
@@ -45,7 +43,6 @@
             } else {
                 return result + 'dny';
             }
-            break;
         case 'M':  // a month / in a month / a month ago
             return (withoutSuffix || isFuture) ? 'měsíc' : 'měsícem';
         case 'MM': // 9 months / in 9 months / 9 months ago
@@ -54,7 +51,6 @@
             } else {
                 return result + 'měsíci';
             }
-            break;
         case 'y':  // a year / in a year / a year ago
             return (withoutSuffix || isFuture) ? 'rok' : 'rokem';
         case 'yy': // 9 years / in 9 years / 9 years ago
@@ -63,7 +59,6 @@
             } else {
                 return result + 'lety';
             }
-            break;
         }
     }
 
