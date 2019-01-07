@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Umbraco.Core.Composing;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Services;
 
@@ -48,15 +49,14 @@ namespace Umbraco.SampleSite
             {
                 // find the doctype and change the form chooser property type
 
-                var contactFormType = doctypeService.GetContentType("contact");
+                var contactFormType = doctypeService.Get("contact");
                 if (contactFormType != null)
                 {
                     var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == "contactForm");
-                    var labelDataType = dataTypeService.GetDataTypeDefinitionByPropertyEditorAlias("Umbraco.NoEdit")
-                        .First();
+                    var labelDataType = dataTypeService.GetByEditorAlias("Umbraco.NoEdit").First();
                     if (labelDataType != null && formPicker != null)
                     {
-                        formPicker.DataTypeDefinitionId = labelDataType.Id;
+                        formPicker.DataTypeId = labelDataType.Id;
                         doctypeService.Save(contactFormType);
                     }
                 }
@@ -102,14 +102,14 @@ namespace Umbraco.SampleSite
             {
                 // find the doctype and change the form chooser property type
 
-                var contactFormType = doctypeService.GetContentType("contact");
+                var contactFormType = doctypeService.Get("contact");
                 if (contactFormType != null)
                 {
                     var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == "contactForm");
-                    var formPickerDataType = dataTypeService.GetDataTypeDefinitionByPropertyEditorAlias("UmbracoForms.FormPicker").First();
+                    var formPickerDataType = dataTypeService.GetByEditorAlias("UmbracoForms.FormPicker").First();
                     if (formPickerDataType != null && formPicker != null)
                     {
-                        formPicker.DataTypeDefinitionId = formPickerDataType.Id;
+                        formPicker.DataTypeId = formPickerDataType.Id;
                         doctypeService.Save(contactFormType);
                     }
                 }
@@ -141,12 +141,14 @@ namespace Umbraco.SampleSite
         /// </remarks>
         public static void RemoveStarterKitForm()
         {
-            LogHelper.Info<FormsInstallationHelper>("Deleting Form created from Starter Kit...");
+            Current.Logger.Info<FormsInstallationHelper>("Deleting Form created from Starter Kit...");
 
             var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
             if (formsAssembly == null) return;
+
             var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Form");
             if (formsType == null) return;
+
             var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Data.Storage.FormStorage");
             if (formsStorageType == null) return;
 
@@ -177,7 +179,7 @@ namespace Umbraco.SampleSite
                 CallMethod(formsStorageInstance, "Dispose");
             }
 
-            LogHelper.Info<FormsInstallationHelper>("Deleted Form created from Starter Kit");
+            Current.Logger.Info<FormsInstallationHelper>("Deleted Form created from Starter Kit");
         }
 
         /// <summary>
@@ -185,11 +187,12 @@ namespace Umbraco.SampleSite
         /// </summary>
         private static void CreateStarterKitForm()
         {
-            LogHelper.Info<FormsInstallationHelper>("Creating Form for Starter Kit...");
+            Current.Logger.Info<FormsInstallationHelper>("Creating Form for Starter Kit...");
 
             var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
             if (formsAssembly == null)
                 throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
+
             var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Form");
             if (formsType == null) 
                 throw new InvalidOperationException("Could not find type Umbraco.Forms.Core.Form in assembly " + formsAssembly);
@@ -223,7 +226,7 @@ namespace Umbraco.SampleSite
                 CallMethod(formsStorageInstance, "Dispose");
             }
 
-            LogHelper.Info<FormsInstallationHelper>("Created Form for Starter Kit");
+            Current.Logger.Info<FormsInstallationHelper>("Created Form for Starter Kit");
         }
 
         #region Reflection Helpers
