@@ -45,7 +45,8 @@
     <Compile Include="FormsInstallationHelper.cs" />
     <Compile Include="InstallPackageAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UmbracoEvents.cs" />
+    <Compile Include="StarterKitComponent.cs" />
+    <Compile Include="StarterKitComposer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ContactForm.json" />

@@ -1,42 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Umbraco.Core;
+using Umbraco.Core.Components;
 using Umbraco.Core.Services;
+using Umbraco.Core.Services.Implement;
 using Umbraco.SampleSite.Controllers;
 using Umbraco.Web;
-using Umbraco.Web.Models;
+using Umbraco.Web.Composing;
 using Umbraco.Web.UI.JavaScript;
 
 namespace Umbraco.SampleSite
 {
-    public class UmbracoEvents : ApplicationEventHandler
+    public class StarterKitComponent : IComponent
     {
-        protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
-        {
-            //disable some of the default core tours since they don't make sense to have when the starter kit is installed
-            TourFilterResolver.Current.AddFilter(BackOfficeTourFilter.FilterAlias(new Regex("umbIntroCreateDocType|umbIntroCreateContent|umbIntroRenderInTemplate|umbIntroViewHomePage|umbIntroMediaSection")));
-        }
-
-        protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        public StarterKitComponent()
         {
             PackagingService.ImportedPackage += PackagingService_ImportedPackage;
             ServerVariablesParser.Parsing += ServerVariablesParser_Parsing;
-        }
+        }        
 
         /// <summary>
         ///  When the Umbraco Forms package is installed this will update the contact template and the forms picker property type
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PackagingService_ImportedPackage(IPackagingService sender, Core.Events.ImportPackageEventArgs<Core.Packaging.Models.InstallationSummary> e)
+        private void PackagingService_ImportedPackage(IPackagingService sender, Core.Events.ImportPackageEventArgs<Core.Models.Packaging.InstallationSummary> e)
         {
             if (e != null && e.PackageMetaData != null && e.PackageMetaData.Name == "Umbraco Forms")
             {
-                var formsInstallHelper = new FormsInstallationHelper(ApplicationContext.Current.Services);
+                var formsInstallHelper = new FormsInstallationHelper(Current.Services);
                 formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
             }
         }
