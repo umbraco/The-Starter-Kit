@@ -105,7 +105,7 @@
             <guid>TopNavigation.cshtml</guid>
             <orgPath>/Views/Partials/Navigation</orgPath>
             <orgName>TopNavigation.cshtml</orgName>
-        </file>        
+        </file>
         <file>
             <guid>Umbraco.SampleSite.dll</guid>
             <orgPath>/bin</orgPath>
@@ -305,8 +305,8 @@
             <license url="http://opensource.org/licenses/MIT">MIT License</license>
             <url>https://umbraco.com</url>
             <requirements type="strict">
-                <major>7</major>
-                <minor>8</minor>
+                <major>8</major>
+                <minor>0</minor>
                 <patch>0</patch>
             </requirements>
         </package>
@@ -1700,7 +1700,7 @@ It contains a simple website that contains many basic features to help get you s
                          numberOfPosts = Model.Content.HowManyPostsShouldBeShown,
                          startNodeId = Model.Content.Id
                      })
-       
+
     </div>
 
 </section>]]>
@@ -1952,7 +1952,7 @@ It contains a simple website that contains many basic features to help get you s
     {
         <a class="employee-grid__item__contact-item" href="http://@(service).com/@content">@service</a>
     }
-}       
+}
 
 @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
 
@@ -2244,7 +2244,7 @@ It contains a simple website that contains many basic features to help get you s
                 <PreValue Id="223" Value="default" Alias="group" SortOrder="0" />
                 <PreValue Id="224" Value="Csv" Alias="storageType" SortOrder="1" />
             </PreValues>
-        </DataType>		
+        </DataType>
         <DataType Name="Employee - Department - Tags" Id="Umbraco.Tags" Definition="71e1e182-da10-4280-aa35-800a8de19a32" DatabaseType="Nvarchar">
             <PreValues>
                 <PreValue Id="58" Value="department" Alias="group" SortOrder="0" />
