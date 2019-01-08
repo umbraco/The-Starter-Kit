@@ -370,12 +370,6 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Terratype, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Terratype.1.0.20\lib\net45\Terratype.dll</HintPath>
-    </Reference>
-    <Reference Include="Terratype.GoogleMapsV3, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Terratype.GoogleMapsV3.1.0.20\lib\net45\Terratype.GoogleMapsV3.dll</HintPath>
-    </Reference>
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.8.0.0-alpha.58.1490\lib\net472\Umbraco.Core.dll</HintPath>
     </Reference>
@@ -408,43 +402,6 @@
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.htm" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.resource.js" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Images\Example.png" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Images\Logo.png" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Images\m1.png" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Images\m2.png" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Images\m3.png" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Images\m4.png" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Images\m5.png" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Lang\en-us.xml" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\readme.txt" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Scripts\markerclusterer.js" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Scripts\markerclusterer.min.js" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Scripts\Terratype.GoogleMapsV3.js" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Scripts\Terratype.GoogleMapsV3.Renderer.bundle.js" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Scripts\Terratype.GoogleMapsV3.Renderer.bundle.min.js" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Scripts\Terratype.GoogleMapsV3.Renderer.js" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Scripts\Terratype.GoogleMapsV3.Renderer.min.js" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Views\config.appearance.html" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Views\config.definition.html" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Views\config.search.html" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Views\editor.appearance.html" />
-    <Content Include="App_Plugins\Terratype.GoogleMapsV3\Views\grid.appearance.html" />
-    <Content Include="App_Plugins\Terratype\Css\label.standard.css" />
-    <Content Include="App_Plugins\Terratype\Images\false.png" />
-    <Content Include="App_Plugins\Terratype\Images\loader.gif" />
-    <Content Include="App_Plugins\Terratype\Images\Terratype.png" />
-    <Content Include="App_Plugins\Terratype\Images\true.png" />
-    <Content Include="App_Plugins\Terratype\Lang\en-us.xml" />
-    <Content Include="App_Plugins\Terratype\readme.txt" />
-    <Content Include="App_Plugins\Terratype\Scripts\terratype.js" />
-    <Content Include="App_Plugins\Terratype\Scripts\terratype.min.js" />
-    <Content Include="App_Plugins\Terratype\Scripts\terratype.renderer.js" />
-    <Content Include="App_Plugins\Terratype\Scripts\terratype.renderer.min.js" />
-    <Content Include="App_Plugins\Terratype\Views\config.html" />
-    <Content Include="App_Plugins\Terratype\Views\editor.html" />
-    <Content Include="App_Plugins\Terratype\Views\grid.html" />
-    <Content Include="App_Plugins\Terratype\Views\grid.overlay.html" />
-    <Content Include="App_Plugins\Terratype\Views\label.standard.html" />
     <Content Include="config\grid.editors.config.js" />
     <Content Include="config\Lang\cs-CZ.user.xml" />
     <Content Include="config\Lang\da-DK.user.xml" />
@@ -496,8 +453,6 @@
     <Content Include="config\BackOfficeTours\getting-started.json" />
     <Content Include="config\applications.config" />
     <Content Include="config\404handlers.config" />
-    <Content Include="App_Plugins\Terratype\Views\grid.cshtml" />
-    <Content Include="App_Plugins\Terratype\package.manifest" />
     <None Include="packages.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
