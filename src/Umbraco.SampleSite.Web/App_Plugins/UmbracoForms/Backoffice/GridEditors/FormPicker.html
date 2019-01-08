@@ -1,0 +1,27 @@
+﻿<div ng-controller="Umbraco.Forms.GridEditors.FormPickerController">
+
+    <div class="umb-editor-placeholder" ng-click="setForm()" ng-switch="state">
+        
+        <div ng-switch-default>
+            <i class="icon icon-umb-contour"></i>
+            <div class="help-text">{{title}}</div>
+        </div>
+
+        <umb-load-indicator ng-switch-when="loading">
+        </umb-load-indicator>
+
+        <div ng-switch-when="loaded">
+            <div ng-if="preview" style="text-align: left; pointer-events: none; cursor: default;"
+                 ng-bind-html-unsafe="preview">
+            </div>
+        </div>
+
+    </div>
+
+    <umb-overlay ng-if="formPickerOverlay.show"
+                 model="formPickerOverlay"
+                 view="formPickerOverlay.view"
+                 position="right">
+    </umb-overlay>
+
+</div>
