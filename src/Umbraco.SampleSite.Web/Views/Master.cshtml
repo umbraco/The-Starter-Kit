@@ -1,11 +1,11 @@
-﻿@inherits UmbracoViewPage
+﻿@using Umbraco.Core.PropertyEditors
+@inherits UmbracoViewPage
 @{
     Layout = null;
-
     // Get basic design settings from the homepage
-    var home = (Home)Model.Site();
-    var colorTheme = Umbraco.GetPreValueAsString(home.ColorTheme);
-    var font = Umbraco.GetPreValueAsString(home.Font);
+    var home = (Home)Model.Root();
+    var font = home.Font;
+    var colorTheme = home.ColorTheme;
 }
 
 <!doctype html>
@@ -14,7 +14,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <title>@Model.Name - @home.Sitename</title>
     <meta name="description" content="">
     <meta name="author" content="">
@@ -23,7 +22,7 @@
     @RenderSection("Header", required: false)
 </head>
 
-<body class="frontpage theme-font-@font theme-color-@colorTheme">
+<body class="frontpage theme-font-serif theme-color-earth">
     <div class="mobile-nav">
         <nav class="nav-bar">
             @Html.Partial("~/views/partials/navigation/topNavigation.cshtml")

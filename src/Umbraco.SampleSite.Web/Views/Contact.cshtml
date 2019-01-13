@@ -1,6 +1,6 @@
 ﻿@inherits UmbracoViewPage<Contact>
 @using ContentModels = Umbraco.Web.PublishedModels;
-@using Terratype;
+@*using Terratype;*@
 @{
     Layout = "master.cshtml";
 }
@@ -13,13 +13,13 @@
 
             <div class="col-md-6">
                 <h2>@Model.MapHeader</h2>
-                @Html.Terratype(Model.Map)
+                @*Html.Terratype(Model.Map)*@
             </div>
 
             <div class="col-md-6">
                 <h2>@Model.ContactFormHeader</h2>
                 @Model.ContactIntro
-                @Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.ContactForm.ToString() })
+                @* <!--TODO: Uncomment when Macros are working *@  @*@Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.ContactForm.ToString() })*@
             </div>
 
         </div>
