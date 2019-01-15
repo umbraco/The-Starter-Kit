@@ -4,8 +4,13 @@
     Layout = null;
     // Get basic design settings from the homepage
     var home = (Home)Model.Root();
-    var font = home.Font;
-    var colorTheme = home.ColorTheme;
+    var font = "serif";
+    var colorTheme = "earth";
+
+
+    //uncomment when there is a partial class with these custom properties and delete the hard coded values 
+    //var font = home.FontString;
+    //var colorTheme = home.ColorThemeString;
 }
 
 <!doctype html>
@@ -22,7 +27,7 @@
     @RenderSection("Header", required: false)
 </head>
 
-<body class="frontpage theme-font-serif theme-color-earth">
+<body class="frontpage theme-font-@font theme-color-@colorTheme">
     <div class="mobile-nav">
         <nav class="nav-bar">
             @Html.Partial("~/views/partials/navigation/topNavigation.cshtml")
