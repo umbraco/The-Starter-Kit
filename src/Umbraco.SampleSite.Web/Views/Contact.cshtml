@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <h2>@Model.ContactFormHeader</h2>
                 @Model.ContactIntro
-                @* <!--TODO: Uncomment when Macros are working *@  @*@Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.ContactForm.ToString() })*@
+                @* <!--TODO: Uncomment when Macros are working *@  @*@Umbraco.RenderMacro("renderUmbracoForm", new {FormGuid=Model.Content.ContactForm.ToString(), ExcludeScripts="0"})*@
             </div>
 
         </div>
