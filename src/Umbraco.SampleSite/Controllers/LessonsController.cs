@@ -64,7 +64,7 @@ namespace Umbraco.SampleSite.Controllers
             };
 
             //Get cache item or add new cache item with func
-            result = ApplicationCache.RuntimeCache.GetCacheItem<List<Lesson>>(key, fetchLesson, new TimeSpan(0, 30, 0));
+            result = AppCaches.RuntimeCache.GetCacheItem<List<Lesson>>(key, fetchLesson, new TimeSpan(0, 30, 0));
 
             return result;
         }
@@ -86,7 +86,7 @@ namespace Umbraco.SampleSite.Controllers
                 return JsonConvert.DeserializeObject<List<LessonStep>>(json);
             }
         }
-        
+
     }
 
     /// <summary>

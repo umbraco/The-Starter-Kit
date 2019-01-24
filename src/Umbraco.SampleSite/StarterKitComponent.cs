@@ -17,9 +17,7 @@ namespace Umbraco.SampleSite
     {
         public StarterKitComponent()
         {
-            PackagingService.ImportedPackage += PackagingService_ImportedPackage;
-            ServerVariablesParser.Parsing += ServerVariablesParser_Parsing;
-        }        
+        }
 
         /// <summary>
         ///  When the Umbraco Forms package is installed this will update the contact template and the forms picker property type
@@ -60,6 +58,17 @@ namespace Umbraco.SampleSite
             //Add to 'Umbraco.Sys.ServerVariables.umbracoUrls.lessonsApiBaseUrl' global JS object
             //The URL/route for this API endpoint to be consumed by the Lessons AngularJS Service
             umbracoUrls["lessonsApiBaseUrl"] = urlHelper.GetUmbracoApiServiceBaseUrl<LessonsController>(controller => controller.GetLessons(""));
+        }
+
+        public void Initialize()
+        {
+            PackagingService.ImportedPackage += PackagingService_ImportedPackage;
+            ServerVariablesParser.Parsing += ServerVariablesParser_Parsing;
+        }
+
+        public void Terminate()
+        {
+            throw new NotImplementedException();
         }
     }
 }
