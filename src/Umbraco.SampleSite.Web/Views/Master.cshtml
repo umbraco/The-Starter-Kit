@@ -4,13 +4,8 @@
     Layout = null;
     // Get basic design settings from the homepage
     var home = (Home)Model.Root();
-    var font = "serif";
-    var colorTheme = "earth";
-
-
-    //uncomment when there is a partial class with these custom properties and delete the hard coded values 
-    //var font = home.FontString;
-    //var colorTheme = home.ColorThemeString;
+    var font = home.FontString;
+    var colorTheme = home.ColorThemeString;
 }
 
 <!doctype html>
