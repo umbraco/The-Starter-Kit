@@ -166,6 +166,11 @@ namespace Umbraco.SampleSite
             return true;
         }
 
+        public XmlNode SampleXml()
+        {
+            throw new NotImplementedException();
+        }
+
         private int GetPreValueId(IDataTypeService dts, string dataTypeName, string preValueText)
         {
             //var dataTypeDefinition = dts.GetAll().First<IDataType>((Func<IDataType, bool>)(x => x.Name == dataTypeName));
