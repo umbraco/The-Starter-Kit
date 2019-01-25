@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using Newtonsoft.Json;
 using Umbraco.Core;
 using Umbraco.Core._Legacy.PackageActions;
@@ -135,9 +136,19 @@ namespace Umbraco.SampleSite
             }
         }
 
+        public bool Execute(string packageName, XElement xmlData)
+        {
+            throw new NotImplementedException();
+        }
+
         public string Alias()
         {
             return "SampleSiteInitialContent";
+        }
+
+        public bool Undo(string packageName, XElement xmlData)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -153,11 +164,6 @@ namespace Umbraco.SampleSite
             //see https://github.com/umbraco/7.6-Starter-Kit/issues/26 - perhaps it's not a good idea to remove the form
             //FormsInstallationHelper.RemoveStarterKitForm();
             return true;
-        }
-
-        public XmlNode SampleXml()
-        {
-            return PackageHelper.ParseStringToXmlNode("<Action runat=\"install\" undo=\"false\" alias=\"SampleSiteInitialContent\"><mediaItem folder=\"\" name=\"\" path=\"\" updateDocPath=\"\" updatePropertyAlias=\"\" /></Action>");
         }
 
         private int GetPreValueId(IDataTypeService dts, string dataTypeName, string preValueText)

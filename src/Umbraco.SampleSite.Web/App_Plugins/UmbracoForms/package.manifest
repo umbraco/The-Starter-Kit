@@ -57,5 +57,12 @@
       "view": "~/app_plugins/umbracoforms/backoffice/dashboards/forms.html",
       "sections": [ "forms" ]
     }
-  ]
+  ],
+  
+  "sections": [
+    {
+      "alias": "forms",
+      "name":  "Forms"
+    }
+  ] 
 }
