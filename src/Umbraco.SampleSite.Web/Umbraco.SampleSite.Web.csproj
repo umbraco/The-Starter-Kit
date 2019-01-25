@@ -376,11 +376,9 @@
     </Reference>
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.8.0.0-alpha.58.1822\lib\net472\Umbraco.Core.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Umbraco.Examine, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Web.8.0.0-alpha.58.1822\lib\net472\Umbraco.Examine.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Umbraco.Forms.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoForms.Core.8.0.0-beta.10057\lib\net472\Umbraco.Forms.Core.dll</HintPath>
@@ -400,11 +398,9 @@
     </Reference>
     <Reference Include="Umbraco.Web, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Web.8.0.0-alpha.58.1822\lib\net472\Umbraco.Web.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Web.8.0.0-alpha.58.1822\lib\net472\Umbraco.Web.UI.dll</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -430,6 +426,7 @@
     <Content Include="config\Lang\ru-RU.user.xml" />
     <Content Include="config\Lang\sv-SE.user.xml" />
     <Content Include="config\Lang\zh-CN.user.xml" />
+    <Content Include="config\logviewer.searches.config.js" />
     <Content Include="css\umbraco-starterkit-style.css" />
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
@@ -446,18 +443,18 @@
     <Content Include="config\imageprocessor\processing.config" />
     <Content Include="config\imageprocessor\cache.config" />
     <Content Include="config\umbracoSettings.config" />
-    <Content Include="config\Dashboard.config" />
     <Content Include="App_Plugins\ModelsBuilder\package.manifest" />
-    <Content Include="Media\Web.config" />
-    <Content Include="config\tinyMceConfig.config" />
     <Content Include="config\serilog.user.config" />
     <Content Include="config\serilog.config" />
+    <Content Include="config\ClientDependency.config" />
+    <Content Include="Media\Web.config" />
+    <Content Include="config\tinyMceConfig.config" />
     <Content Include="config\scripting.config" />
     <Content Include="config\HealthChecks.config" />
     <Content Include="config\FileSystemProviders.config" />
     <Content Include="config\feedProxy.config" />
     <Content Include="config\EmbeddedMedia.config" />
-    <Content Include="config\ClientDependency.config" />
+    <Content Include="config\Dashboard.config" />
     <Content Include="config\BackOfficeTours\getting-started.json" />
     <Content Include="config\404handlers.config" />
     <None Include="packages.config" />

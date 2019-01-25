@@ -2248,7 +2248,6 @@ Use this directive to render a button with a dropdown of alternative actions.
 </pre>
 
 @param {boolean} checked Set to <code>true</code> or <code>false</code> to toggle the switch.
-@param {boolean} disabled Set to <code>true</code> or <code>false</code> to disable the switch.
 @param {callback} onClick The function which should be called when the toggle is clicked.
 @param {string=} showLabels Set to <code>true</code> or <code>false</code> to show a "On" or "Off" label next to the switch.
 @param {string=} labelOn Set a custom label for when the switched is turned on. It will default to "On".
@@ -2427,6 +2426,8 @@ Use this directive to render a button with a dropdown of alternative actions.
      * @param {any} app the active content app
      */
             function createButtons(content) {
+                // for trashed items, the save button is the primary action - otherwise it's a secondary action
+                $scope.page.saveButtonStyle = content.trashed ? 'primary' : 'info';
                 // only create the save/publish/preview buttons if the
                 // content app is "Conent"
                 if ($scope.app && $scope.app.alias !== 'umbContent' && $scope.app.alias !== 'umbInfo') {
@@ -2560,6 +2561,15 @@ Use this directive to render a button with a dropdown of alternative actions.
                     }
                 }
             }
+            function ensureDirtyIsSetIfAnyVariantIsDirty() {
+                $scope.contentForm.$dirty = false;
+                for (var i = 0; i < $scope.content.variants.length; i++) {
+                    if ($scope.content.variants[i].isDirty) {
+                        $scope.contentForm.$dirty = true;
+                        return;
+                    }
+                }
+            }
             // This is a helper method to reduce the amount of code repitition for actions: Save, Publish, SendToPublish
             function performSave(args) {
                 //Used to check validility of nested form - coming from Content Apps mostly
@@ -2584,6 +2594,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                         action: args.action
                     });
                     resetNestedFieldValiation(fieldsToRollback);
+                    ensureDirtyIsSetIfAnyVariantIsDirty();
                     return $q.when(data);
                 }, function (err) {
                     syncTreeNode($scope.content, $scope.content.path);
@@ -2631,33 +2642,6 @@ Use this directive to render a button with a dropdown of alternative actions.
                         }
                     }
                 }
-            }
-            function moveNode(node, target) {
-                contentResource.move({
-                    'parentId': target.id,
-                    'id': node.id
-                }).then(function (path) {
-                    // remove the node that we're working on
-                    if ($scope.page.menu.currentNode) {
-                        treeService.removeNode($scope.page.menu.currentNode);
-                    }
-                    // sync the destination node
-                    if (!infiniteMode) {
-                        navigationService.syncTree({
-                            tree: 'content',
-                            path: path,
-                            forceReload: true,
-                            activate: false
-                        });
-                    }
-                    $scope.page.buttonRestore = 'success';
-                    notificationsService.success('Successfully restored ' + node.name + ' to ' + target.name);
-                    // reload the node
-                    loadContent();
-                }, function (err) {
-                    $scope.page.buttonRestore = 'error';
-                    notificationsService.error('Cannot automatically restore this item', err);
-                });
             }
             if ($scope.page.isNew) {
                 $scope.page.loading = true;
@@ -2733,7 +2717,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                             //set a model property for the dialog
                             skipFormValidation: true,
                             //when submitting the overlay form, skip any client side validation
-                            submitButtonLabel: 'Send for approval',
+                            submitButtonLabelKey: 'buttons_saveToPublish',
                             submit: function submit(model) {
                                 model.submitButtonState = 'busy';
                                 clearNotifications($scope.content);
@@ -2791,7 +2775,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                             //set a model property for the dialog
                             skipFormValidation: true,
                             //when submitting the overlay form, skip any client side validation
-                            submitButtonLabel: 'Publish',
+                            submitButtonLabelKey: 'buttons_saveAndPublish',
                             submit: function submit(model) {
                                 model.submitButtonState = 'busy';
                                 clearNotifications($scope.content);
@@ -2853,7 +2837,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                             //set a model property for the dialog
                             skipFormValidation: true,
                             //when submitting the overlay form, skip any client side validation
-                            submitButtonLabel: 'Save',
+                            submitButtonLabelKey: 'buttons_save',
                             submit: function submit(model) {
                                 model.submitButtonState = 'busy';
                                 clearNotifications($scope.content);
@@ -2923,7 +2907,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                         //set a model property for the dialog
                         skipFormValidation: true,
                         //when submitting the overlay form, skip any client side validation
-                        submitButtonLabel: 'Schedule',
+                        submitButtonLabelKey: 'buttons_schedulePublish',
                         submit: function submit(model) {
                             model.submitButtonState = 'busy';
                             clearNotifications($scope.content);
@@ -3056,47 +3040,6 @@ Use this directive to render a button with a dropdown of alternative actions.
                     }
                 }
             };
-            $scope.restore = function (content) {
-                $scope.page.buttonRestore = 'busy';
-                relationResource.getByChildId(content.id, 'relateParentDocumentOnDelete').then(function (data) {
-                    var relation = null;
-                    var target = null;
-                    var error = {
-                        headline: 'Cannot automatically restore this item',
-                        content: 'Use the Move menu item to move it manually'
-                    };
-                    if (data.length === 0) {
-                        notificationsService.error(error.headline, 'There is no \'restore\' relation found for this node. Use the Move menu item to move it manually.');
-                        $scope.page.buttonRestore = 'error';
-                        return;
-                    }
-                    relation = data[0];
-                    if (relation.parentId === -1) {
-                        target = {
-                            id: -1,
-                            name: 'Root'
-                        };
-                        moveNode(content, target);
-                    } else {
-                        contentResource.getById(relation.parentId).then(function (data) {
-                            target = data;
-                            // make sure the target item isn't in the recycle bin
-                            if (target.path.indexOf('-20') !== -1) {
-                                notificationsService.error(error.headline, 'The item you want to restore it under (' + target.name + ') is in the recycle bin. Use the Move menu item to move the item manually.');
-                                $scope.page.buttonRestore = 'error';
-                                return;
-                            }
-                            moveNode(content, target);
-                        }, function (err) {
-                            $scope.page.buttonRestore = 'error';
-                            notificationsService.error(error.headline, error.content);
-                        });
-                    }
-                }, function (err) {
-                    $scope.page.buttonRestore = 'error';
-                    notificationsService.error(error.headline, error.content);
-                });
-            };
             /* publish method used in infinite editing */
             $scope.publishAndClose = function (content) {
                 $scope.publishAndCloseButtonState = 'busy';
@@ -3178,7 +3121,7 @@ Use this directive to render a button with a dropdown of alternative actions.
     (function () {
         'use strict';
         function ContentNodeInfoDirective($timeout, logResource, eventsService, userService, localizationService, dateHelper, editorService, redirectUrlsResource, overlayService) {
-            function link(scope, element, attrs, umbVariantContentCtrl) {
+            function link(scope, umbVariantContentCtrl) {
                 var evts = [];
                 var isInfoTab = false;
                 var auditTrailLoaded = false;
@@ -3194,16 +3137,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                     scope.currentVariant = _.find(scope.node.variants, function (v) {
                         return v.active;
                     });
-                    // find the urls for the currently selected language
-                    if (scope.node.variants.length > 1) {
-                        // nodes with variants
-                        scope.currentUrls = _.filter(scope.node.urls, function (url) {
-                            return scope.currentVariant.language.culture === url.culture;
-                        });
-                    } else {
-                        // invariant nodes
-                        scope.currentUrls = scope.node.urls;
-                    }
+                    updateCurrentUrls();
                     // if there are any infinite editors open we are in infinite editing
                     scope.isInfiniteMode = editorService.getNumberOfEditors() > 0 ? true : false;
                     userService.getCurrentUser().then(function (user) {
@@ -3266,11 +3200,11 @@ Use this directive to render a button with a dropdown of alternative actions.
                         scope.previewOpenUrl = '#/settings/documenttypes/edit/' + scope.documentType.id;
                     }
                     //load in the audit trail if we are currently looking at the INFO tab
-                    if (umbVariantContentCtrl) {
+                    if (umbVariantContentCtrl && umbVariantContentCtrl.editor) {
                         var activeApp = _.find(umbVariantContentCtrl.editor.content.apps, function (a) {
                             return a.active;
                         });
-                        if (activeApp.alias === 'umbInfo') {
+                        if (activeApp && activeApp.alias === 'umbInfo') {
                             isInfoTab = true;
                             loadAuditTrail();
                             loadRedirectUrls();
@@ -3436,6 +3370,18 @@ Use this directive to render a button with a dropdown of alternative actions.
                         scope.currentVariant.createDateFormatted = dateHelper.getLocalDate(scope.currentVariant.createDate, currentUser.locale, 'LLL');
                     });
                 }
+                function updateCurrentUrls() {
+                    // find the urls for the currently selected language
+                    if (scope.node.variants.length > 1) {
+                        // nodes with variants
+                        scope.currentUrls = _.filter(scope.node.urls, function (url) {
+                            return scope.currentVariant.language.culture === url.culture;
+                        });
+                    } else {
+                        // invariant nodes
+                        scope.currentUrls = scope.node.urls;
+                    }
+                }
                 // load audit trail and redirects when on the info tab
                 evts.push(eventsService.on('app.tabChange', function (event, args) {
                     $timeout(function () {
@@ -3461,6 +3407,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                         loadAuditTrail();
                         loadRedirectUrls();
                         setNodePublishStatus();
+                        updateCurrentUrls();
                     }
                 });
                 //ensure to unregister from all events!
@@ -3791,6 +3738,11 @@ Use this directive to render a button with a dropdown of alternative actions.
      */
             function openSplitView(selectedVariant) {
                 var selectedCulture = selectedVariant.language.culture;
+                //Find the whole variant model based on the culture that was chosen
+                var variant = _.find(vm.content.variants, function (v) {
+                    return v.language.culture === selectedCulture;
+                });
+                insertVariantEditor(vm.editors.length, initVariant(variant, vm.editors.length));
                 //only the content app can be selected since no other apps are shown, and because we copy all of these apps
                 //to the "editors" we need to update this across all editors
                 for (var e = 0; e < vm.editors.length; e++) {
@@ -3804,11 +3756,6 @@ Use this directive to render a button with a dropdown of alternative actions.
                         }
                     }
                 }
-                //Find the whole variant model based on the culture that was chosen
-                var variant = _.find(vm.content.variants, function (v) {
-                    return v.language.culture === selectedCulture;
-                });
-                insertVariantEditor(vm.editors.length, initVariant(variant, vm.editors.length));
                 //TODO: hacking animation states - these should hopefully be easier to do when we upgrade angular
                 editor.collapsed = true;
                 editor.loading = true;
@@ -3828,6 +3775,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                     vm.editors.splice(editorIndex, 1);
                     //remove variant from open variants
                     vm.openVariants.splice(editorIndex, 1);
+                    //update the current culture to reflect the last open variant (closing the split view corresponds to selecting the other variant)
+                    $location.search('cculture', vm.openVariants[0]);
                     splitViewChanged();
                 }, 400);
             }
@@ -6197,7 +6146,7 @@ will override element type to textarea and add own attribute ngModel tied to jso
                         //initialize the standard editor functionality for Umbraco
                         tinyMceService.initializeEditor({
                             editor: editor,
-                            value: scope.value,
+                            model: scope,
                             currentForm: angularHelper.getCurrentForm(scope)
                         });
                         //custom initialization for this editor within the grid
@@ -6206,7 +6155,7 @@ will override element type to textarea and add own attribute ngModel tied to jso
                             editor.getBody().style.overflow = 'hidden';
                             $timeout(function () {
                                 if (scope.value === null) {
-                                    editor.trigger('focus');
+                                    editor.focus();
                                 }
                             }, 400);
                         });
@@ -7986,8 +7935,7 @@ Use this directive to render a tabs navigation.
                 if (changes.value) {
                     if (!changes.value.isFirstChange() && changes.value.currentValue !== changes.value.previousValue) {
                         configureViewModel();
-                        //this is required to re-validate
-                        vm.tagEditorForm.tagCount.$setViewValue(vm.viewModel.length);
+                        reValidate();
                     }
                 }
             }
@@ -8028,13 +7976,14 @@ Use this directive to render a tabs navigation.
                 } else {
                     vm.onValueChanged({ value: [] });
                 }
+                reValidate();
             }
             /**
      * Method required by the valPropertyValidator directive (returns true if the property editor has at least one tag selected)
      */
             function validateMandatory() {
                 return {
-                    isValid: !vm.validation.mandatory || vm.viewModel != null && vm.viewModel.length > 0,
+                    isValid: !vm.validation.mandatory || vm.viewModel != null && vm.viewModel.length > 0 || vm.value != null && vm.value.length > 0,
                     errorMsg: 'Value cannot be empty',
                     errorKey: 'required'
                 };
@@ -8103,6 +8052,10 @@ Use this directive to render a tabs navigation.
                 return $.grep(suggestions, function (suggestion) {
                     return $.inArray(suggestion.value, vm.viewModel) === -1;
                 });
+            }
+            function reValidate() {
+                //this is required to re-validate
+                vm.tagEditorForm.tagCount.$setViewValue(vm.viewModel.length);
             }
         }
     }());
@@ -9622,10 +9575,11 @@ Use this directive to generate color swatches to pick from.
                 if (angular.isUndefined(scope.useColorClass)) {
                     scope.useColorClass = false;
                 }
-                scope.setColor = function (color) {
+                scope.setColor = function (color, $index, $event) {
                     scope.selectedColor = color;
                     if (scope.onSelect) {
-                        scope.onSelect(color);
+                        scope.onSelect(color, $index, $event);
+                        $event.stopPropagation();
                     }
                 };
             }
@@ -9638,7 +9592,7 @@ Use this directive to generate color swatches to pick from.
                     colors: '=?',
                     size: '@',
                     selectedColor: '=',
-                    onSelect: '&',
+                    onSelect: '=',
                     useLabel: '=',
                     useColorClass: '=?'
                 },
@@ -10545,6 +10499,7 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
 
 @param {string} alias (<code>binding</code>): The model where the alias is bound.
 @param {string} aliasFrom (<code>binding</code>): The model to generate the alias from.
+@param {string} validationPosition (<code>binding</code>): The position of the validation. Set to <code>'left'</code> or <code>'right'</code>.
 @param {boolean=} enableLock (<code>binding</code>): Set to <code>true</code> to add a lock next to the alias from where it can be unlocked and changed.
 **/
     angular.module('umbraco.directives').directive('umbGenerateAlias', function ($timeout, entityResource, localizationService) {
@@ -10556,6 +10511,7 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
                 alias: '=',
                 aliasFrom: '=',
                 enableLock: '=?',
+                validationPosition: '=?',
                 serverValidationField: '@'
             },
             link: function link(scope, element, attrs, ctrl) {
@@ -10588,6 +10544,7 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
                                 if (updateAlias) {
                                     scope.alias = safeAlias.alias;
                                 }
+                                scope.placeholderText = scope.labels.idle;
                             });
                         }, 500);
                     } else {
@@ -10604,13 +10561,15 @@ the directive will use {@link umbraco.directives.directive:umbLockedField umbLoc
                 }));
                 // validate custom entered alias
                 eventBindings.push(scope.$watch('alias', function (newValue, oldValue) {
-                    if (scope.alias === '' && bindWatcher === true || scope.alias === null && bindWatcher === true) {
-                        // add watcher
-                        eventBindings.push(scope.$watch('aliasFrom', function (newValue, oldValue) {
-                            if (bindWatcher) {
-                                generateAlias(newValue);
-                            }
-                        }));
+                    if (scope.alias === '' || scope.alias === null || scope.alias === undefined) {
+                        if (bindWatcher === true) {
+                            // add watcher
+                            eventBindings.push(scope.$watch('aliasFrom', function (newValue, oldValue) {
+                                if (bindWatcher) {
+                                    generateAlias(newValue);
+                                }
+                            }));
+                        }
                     }
                 }));
                 // clean up
@@ -11873,6 +11832,7 @@ Use this directive to render a value with a lock next to it. When the lock is cl
 @param {boolean=} locked (<code>binding</code>): <Code>true</code> by default. Set to <code>false</code> to unlock the text.
 @param {string=} placeholderText (<code>binding</code>): If ngModel is empty this text will be shown.
 @param {string=} regexValidation (<code>binding</code>): Set a regex expression for validation of the field.
+@param {string} validationPosition (<code>binding</code>): The position of the validation. Set to <code>'left'</code> or <code>'right'</code>.
 @param {string=} serverValidationField (<code>attribute</code>): Set a server validation field.
 **/
     (function () {
@@ -11896,6 +11856,9 @@ Use this directive to render a value with a lock next to it. When the lock is cl
                     if (scope.placeholderText === undefined || scope.placeholderText === null) {
                         scope.placeholderText = 'Enter value...';
                     }
+                    if (scope.validationPosition === undefined || scope.validationPosition === null) {
+                        scope.validationPosition = 'left';
+                    }
                 }
                 scope.lock = function () {
                     scope.locked = true;
@@ -11915,6 +11878,7 @@ Use this directive to render a value with a lock next to it. When the lock is cl
                     locked: '=?',
                     placeholderText: '=?',
                     regexValidation: '=?',
+                    validationPosition: '=?',
                     serverValidationField: '@'
                 },
                 link: link
@@ -14521,6 +14485,30 @@ Use this directive to render a user group preview, where you can see the permiss
         }
     ]);
     'use strict';
+    /**
+* @ngdoc directive
+* @name umbraco.directives.directive:no-password-manager
+* @attribte
+* @function
+* @description
+* Added attributes to block password manager elements should as LastPass
+
+* @example
+* <example module="umbraco.directives">
+*    <file name="index.html">
+*        <input type="text" no-password-manager />
+*    </file>
+* </example>
+**/
+    angular.module('umbraco.directives').directive('noPasswordManager', function () {
+        return {
+            restrict: 'A',
+            link: function link(scope, element, attrs) {
+                element.attr('data-lpignore', 'true');
+            }
+        };
+    });
+    'use strict';
     angular.module('umbraco.directives').directive('umbIsolateForm', function () {
         return {
             restrict: 'A',
@@ -14938,7 +14926,6 @@ Use this directive to render a user group preview, where you can see the permiss
                 var locationEvent = $rootScope.$on('$locationChangeStart', function (event, nextLocation, currentLocation) {
                     var infiniteEditors = editorService.getEditors();
                     if (!formCtrl.$dirty && infiniteEditors.length === 0 || isSavingNewItem && infiniteEditors.length === 0) {
-                        confirmed = true;
                         return;
                     }
                     var nextPath = nextLocation.split('#')[1];

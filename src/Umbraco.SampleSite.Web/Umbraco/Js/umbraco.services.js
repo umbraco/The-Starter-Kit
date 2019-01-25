@@ -1298,7 +1298,7 @@
      * This returns the list of changed content properties (does not include standard object property changes).
      */
             reBindChangedProperties: function reBindChangedProperties(origContent, savedContent) {
-                //TODO: We should probably split out this logic to deal with media/members seperately to content
+                //TODO: We should probably split out this logic to deal with media/members separately to content
                 //a method to ignore built-in prop changes
                 var shouldIgnore = function shouldIgnore(propName) {
                     return _.some([
@@ -2010,10 +2010,10 @@
  *
  * @description
  * Added in Umbraco 8.0. Application-wide service for handling infinite editing.
- * 
  *
- * 
- * 
+ *
+ *
+ *
 <h2><strong>Open a build-in infinite editor (media picker)</strong></h2>
 <h3>Markup example</h3>
 <pre>
@@ -2103,7 +2103,7 @@ When building a custom infinite editor view you can use the same components as a
                 hide-icon="true"
                 hide-description="true">
             </umb-editor-header>
-        
+
             <umb-editor-container>
                 <umb-box>
                     <umb-box-content>
@@ -2166,7 +2166,7 @@ When building a custom infinite editor view you can use the same components as a
  */
     (function () {
         'use strict';
-        function editorService(eventsService, keyboardService) {
+        function editorService(eventsService, keyboardService, $timeout) {
             var editorsKeyboardShorcuts = [];
             var editors = [];
             /**
@@ -2238,8 +2238,12 @@ When building a custom infinite editor view you can use the same components as a
                 };
                 // emit event to let components know an editor has been removed
                 eventsService.emit('appState.editors.close', args);
-                // rebind keyboard shortcuts for the new editor in focus
-                rebindKeyboardShortcuts();
+                // delay required to map the properties to the correct editor due
+                // to another delay in the closing animation of the editor
+                $timeout(function () {
+                    // rebind keyboard shortcuts for the new editor in focus
+                    rebindKeyboardShortcuts();
+                }, 0);
             }
             /**
      * @ngdoc method
@@ -2269,7 +2273,7 @@ When building a custom infinite editor view you can use the same components as a
      * @param {Boolean} editor.create Create new content item
      * @param {Function} editor.submit Callback function when the publish and close button is clicked. Returns the editor model object
      * @param {Function} editor.close Callback function when the close button is clicked.
-     * 
+     *
      * @returns {Object} editor object
      */
             function contentEditor(editor) {
@@ -2283,12 +2287,12 @@ When building a custom infinite editor view you can use the same components as a
      *
      * @description
      * Opens a content picker in infinite editing, the submit callback returns an array of selected items
-     * 
+     *
      * @param {Object} editor rendering options
      * @param {Boolean} editor.multiPicker Pick one or multiple items
      * @param {Function} editor.submit Callback function when the submit button is clicked. Returns the editor model object
      * @param {Function} editor.close Callback function when the close button is clicked.
-     * 
+     *
      * @returns {Object} editor object
      */
             function contentPicker(editor) {
@@ -2489,7 +2493,6 @@ When building a custom infinite editor view you can use the same components as a
      */
             function queryBuilder(editor) {
                 editor.view = 'views/common/infiniteeditors/querybuilder/querybuilder.html';
-                editor.size = 'small';
                 open(editor);
             }
             /**
@@ -2655,7 +2658,7 @@ When building a custom infinite editor view you can use the same components as a
      *
      * @description
      * Opens the section picker in infinite editing, the submit callback returns an array of the selected items
-     * 
+     *
      * @param {Object} editor rendering options
      * @param {Array} editor.availableItems Array of available items.
      * @param {Array} editor.selectedItems Array of selected items. When passed in the selected items will be filtered from the available items.
@@ -2676,7 +2679,7 @@ When building a custom infinite editor view you can use the same components as a
      *
      * @description
      * Opens a macro picker in infinite editing, the submit callback returns an array of the selected items
-     * 
+     *
      * @param {Callback} editor.submit Submits the editor.
      * @param {Callback} editor.close Closes the editor.
      * @returns {Object} editor object
@@ -2693,7 +2696,7 @@ When building a custom infinite editor view you can use the same components as a
      *
      * @description
      * Opens a member group picker in infinite editing.
-     * 
+     *
      * @param {Object} editor rendering options
      * @param {Object} editor.multiPicker Pick one or multiple items.
      * @param {Callback} editor.submit Submits the editor.
@@ -2705,6 +2708,28 @@ When building a custom infinite editor view you can use the same components as a
                 editor.size = 'small';
                 open(editor);
             }
+            /**
+    * @ngdoc method
+    * @name umbraco.services.editorService#memberPicker
+    * @methodOf umbraco.services.editorService
+    *
+    * @description
+    * Opens a member picker in infinite editing, the submit callback returns an array of selected items
+    * 
+    * @param {Object} editor rendering options
+    * @param {Boolean} editor.multiPicker Pick one or multiple items
+    * @param {Function} editor.submit Callback function when the submit button is clicked. Returns the editor model object
+    * @param {Function} editor.close Callback function when the close button is clicked.
+    * 
+    * @returns {Object} editor object
+    */
+            function memberPicker(editor) {
+                editor.view = 'views/common/infiniteeditors/treepicker/treepicker.html';
+                editor.size = 'small';
+                editor.section = 'member';
+                editor.treeAlias = 'member';
+                open(editor);
+            }
             ///////////////////////
             /**
      * @ngdoc method
@@ -2712,14 +2737,14 @@ When building a custom infinite editor view you can use the same components as a
      * @methodOf umbraco.services.editorService
      *
      * @description
-     * Internal method to keep track of keyboard shortcuts registered 
+     * Internal method to keep track of keyboard shortcuts registered
      * to each editor so they can be rebound when an editor closes
-     * 
+     *
      */
             function unbindKeyboardShortcuts() {
                 var shortcuts = angular.copy(keyboardService.keyboardEvent);
                 editorsKeyboardShorcuts.push(shortcuts);
-                // unbind the current shortcuts because we only want to 
+                // unbind the current shortcuts because we only want to
                 // shortcuts from the newly opened editor working
                 var _arr = Object.entries(shortcuts);
                 for (var _i = 0; _i < _arr.length; _i++) {
@@ -2734,7 +2759,7 @@ When building a custom infinite editor view you can use the same components as a
      *
      * @description
      * Internal method to rebind keyboard shortcuts for the editor in focus
-     * 
+     *
      */
             function rebindKeyboardShortcuts() {
                 // find the shortcuts from the previous editor
@@ -2779,7 +2804,8 @@ When building a custom infinite editor view you can use the same components as a
                 userPicker: userPicker,
                 itemPicker: itemPicker,
                 macroPicker: macroPicker,
-                memberGroupPicker: memberGroupPicker
+                memberGroupPicker: memberGroupPicker,
+                memberPicker: memberPicker
             };
             return service;
         }
@@ -2812,7 +2838,6 @@ When building a custom infinite editor view you can use the same components as a
     app.ready
     app.authenticated
     app.notAuthenticated
-    app.ysod
     app.reInitialize
     app.userRefresh
     app.navigationReady
@@ -3031,9 +3056,10 @@ When building a custom infinite editor view you can use the same components as a
                         this.handleServerValidation(err.data.ModelState);
                         //execute all server validation events and subscribers
                         serverValidationManager.notifyAndClearAllSubscriptions();
-                    } else {
-                        overlayService.ysod(err);
                     }
+                } else {
+                    //TODO: All YSOD handling should be done with an interceptor
+                    overlayService.ysod(err);
                 }
             },
             /**
@@ -5490,7 +5516,8 @@ When building a custom infinite editor view you can use the same components as a
         //A list of query strings defined that when changed will not cause a reload of the route
         var nonRoutingQueryStrings = [
             'mculture',
-            'cculture'
+            'cculture',
+            'lq'
         ];
         var retainedQueryStrings = ['mculture'];
         function setMode(mode) {
@@ -6345,6 +6372,10 @@ When building a custom infinite editor view you can use the same components as a
                 // set the default overlay position to center
                 if (!overlay.position) {
                     overlay.position = 'center';
+                }
+                // use a default empty view if nothing is set
+                if (!overlay.view) {
+                    overlay.view = 'views/common/overlays/default/default.html';
                 }
                 // option to disable backdrop clicks
                 if (overlay.disableBackdropClick) {
@@ -8667,14 +8698,14 @@ When building a custom infinite editor view you can use the same components as a
                 if (!args.editor) {
                     throw 'args.editor is required';
                 }
-                //if (!args.value) {
-                //    throw "args.value is required";
+                //if (!args.model.value) {
+                //    throw "args.model.value is required";
                 //}
                 var unwatch = null;
                 //Starts a watch on the model value so that we can update TinyMCE if the model changes behind the scenes or from the server
                 function startWatch() {
                     unwatch = $rootScope.$watch(function () {
-                        return args.value;
+                        return args.model.value;
                     }, function (newVal, oldVal) {
                         if (newVal !== oldVal) {
                             //update the display val again if it has changed from the server;
@@ -8696,14 +8727,14 @@ When building a custom infinite editor view you can use the same components as a
                     //stop watching before we update the value
                     stopWatch();
                     angularHelper.safeApply($rootScope, function () {
-                        args.value = args.editor.getContent();
+                        args.model.value = args.editor.getContent();
                     });
                     //re-watch the value
                     startWatch();
                 }
                 args.editor.on('init', function (e) {
-                    if (args.value) {
-                        args.editor.setContent(args.value);
+                    if (args.model.value) {
+                        args.editor.setContent(args.model.value);
                     }
                     //enable browser based spell checking
                     args.editor.getBody().setAttribute('spellcheck', true);
@@ -8755,7 +8786,7 @@ When building a custom infinite editor view you can use the same components as a
                         startNodeId: userData.startMediaIds.length !== 1 ? -1 : userData.startMediaIds[0],
                         startNodeIsVirtual: userData.startMediaIds.length !== 1,
                         submit: function submit(model) {
-                            self.insertMediaInEditor(args.editor, model.selectedImages[0]);
+                            self.insertMediaInEditor(args.editor, model.selection[0]);
                             editorService.close();
                         },
                         close: function close() {
@@ -9863,7 +9894,7 @@ When building a custom infinite editor view you can use the same components as a
                 },
                 formatContentTypePostData: function formatContentTypePostData(displayModel, action) {
                     //create the save model from the display model
-                    var saveModel = _.pick(displayModel, 'compositeContentTypes', 'isContainer', 'allowAsRoot', 'allowedTemplates', 'allowedContentTypes', 'alias', 'description', 'thumbnail', 'name', 'id', 'icon', 'trashed', 'key', 'parentId', 'alias', 'path', 'allowCultureVariant');
+                    var saveModel = _.pick(displayModel, 'compositeContentTypes', 'isContainer', 'allowAsRoot', 'allowedTemplates', 'allowedContentTypes', 'alias', 'description', 'thumbnail', 'name', 'id', 'icon', 'trashed', 'key', 'parentId', 'alias', 'path', 'allowCultureVariant', 'isElement');
                     //TODO: Map these
                     saveModel.allowedTemplates = _.map(displayModel.allowedTemplates, function (t) {
                         return t.alias;
@@ -10099,7 +10130,7 @@ When building a custom infinite editor view you can use the same components as a
                 },
                 /** formats the display model used to display the media to the model used to save the media */
                 formatMediaPostData: function formatMediaPostData(displayModel, action) {
-                    //NOTE: the display model inherits from the save model so we can in theory just post up the display model but 
+                    //NOTE: the display model inherits from the save model so we can in theory just post up the display model but
                     // we don't want to post all of the data as it is unecessary.
                     var saveModel = {
                         id: displayModel.id,
@@ -10114,7 +10145,7 @@ When building a custom infinite editor view you can use the same components as a
                 },
                 /** formats the display model used to display the content to the model used to save the content  */
                 formatContentPostData: function formatContentPostData(displayModel, action) {
-                    //NOTE: the display model inherits from the save model so we can in theory just post up the display model but 
+                    //NOTE: the display model inherits from the save model so we can in theory just post up the display model but
                     // we don't want to post all of the data as it is unecessary.
                     var saveModel = {
                         id: displayModel.id,
@@ -10145,8 +10176,8 @@ When building a custom infinite editor view you can use the same components as a
                 },
                 /**
        * This formats the server GET response for a content display item
-       * @param {} displayModel 
-       * @returns {} 
+       * @param {} displayModel
+       * @returns {}
        */
                 formatContentGetData: function formatContentGetData(displayModel) {
                     //We need to check for invariant properties among the variant variants.
@@ -10218,7 +10249,7 @@ When building a custom infinite editor view you can use the same components as a
 * @name umbraco.services.umbRequestHelper
 * @description A helper object used for sending requests to the server
 **/
-    function umbRequestHelper($http, $q, notificationsService, eventsService, formHelper) {
+    function umbRequestHelper($http, $q, notificationsService, eventsService, formHelper, overlayService) {
         return {
             /**
      * @ngdoc method
@@ -10370,10 +10401,12 @@ When building a custom infinite editor view you can use the same components as a
                     if (response.status >= 500 && response.status < 600) {
                         //show a ysod dialog
                         if (Umbraco.Sys.ServerVariables['isDebuggingEnabled'] === true) {
-                            eventsService.emit('app.ysod', {
+                            var error = {
                                 errorMsg: 'An error occured',
                                 data: response.data
-                            });
+                            };
+                            //TODO: All YSOD handling should be done with an interceptor
+                            overlayService.ysod(error);
                         } else {
                             //show a simple error notification                         
                             notificationsService.error('Server error', 'Contact administrator, see log for full details.<br/><i>' + result.errorMsg + '</i>');
@@ -10466,10 +10499,12 @@ When building a custom infinite editor view you can use the same components as a
                             notificationsService.error('Server error', 'The uploaded file was too large, check with your site administrator to adjust the maximum size allowed');
                         } else if (Umbraco.Sys.ServerVariables['isDebuggingEnabled'] === true) {
                             //show a ysod dialog
-                            eventsService.emit('app.ysod', {
+                            var error = {
                                 errorMsg: 'An error occured',
                                 data: response.data
-                            });
+                            };
+                            //TODO: All YSOD handling should be done with an interceptor
+                            overlayService.ysod(error);
                         } else {
                             //show a simple error notification                         
                             notificationsService.error('Server error', 'Contact administrator, see log for full details.<br/><i>' + response.data.ExceptionMessage + '</i>');
