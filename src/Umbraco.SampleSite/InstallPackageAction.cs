@@ -5,11 +5,10 @@ using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Umbraco.Core;
-using Umbraco.Core._Legacy.PackageActions;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
+using Umbraco.Core.PackageActions;
 using Umbraco.Core.Services;
-using Umbraco.Web._Legacy.PackageActions;
 using Umbraco.Web.Composing;
 
 namespace Umbraco.SampleSite

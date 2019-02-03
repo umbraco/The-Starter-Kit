@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Umbraco.Core;
 using Umbraco.Core.Components;
+using Umbraco.Web;
 using Umbraco.Web.Tour;
 
 namespace Umbraco.SampleSite
