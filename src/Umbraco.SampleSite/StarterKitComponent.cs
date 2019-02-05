@@ -9,7 +9,7 @@ using Umbraco.Core.Services.Implement;
 using Umbraco.SampleSite.Controllers;
 using Umbraco.Web;
 using Umbraco.Web.Composing;
-using Umbraco.Web.UI.JavaScript;
+using Umbraco.Web.JavaScript;
 
 namespace Umbraco.SampleSite
 {
