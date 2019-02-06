@@ -241,7 +241,7 @@ namespace Umbraco.SampleSite
             {
                 media.Key = key;
             }
-            service.Save(media);
+            service.Save(media,-1);
             return media.Id;
         }
     }
