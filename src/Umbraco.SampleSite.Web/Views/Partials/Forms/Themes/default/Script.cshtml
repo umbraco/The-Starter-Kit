@@ -43,10 +43,16 @@
         {
             Html.RequiresJs(script.Value, Model.JavaScriptTagAttributes);
         }
+        
+        foreach (var css in Html.GetThemeCssFiles(Model))
+        {
+            Html.RequiresCss(css.Value);
+        }
     }
     else
     {
         @Html.RenderFormsScripts(Url, Model, Model.JavaScriptTagAttributes)
+        @Html.RenderFormsStylesheets(Url, Model)
     }
     
 }

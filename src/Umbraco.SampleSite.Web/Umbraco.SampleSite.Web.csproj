@@ -384,16 +384,16 @@
       <HintPath>..\packages\UmbracoCms.Web.8.0.0-alpha.58.2109\lib\net472\Umbraco.Examine.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Forms.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoForms.Core.8.0.0-beta.10070\lib\net472\Umbraco.Forms.Core.dll</HintPath>
+      <HintPath>..\packages\UmbracoForms.Core.8.0.0-beta.10071\lib\net472\Umbraco.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Forms.Core.Providers, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoForms.Core.8.0.0-beta.10070\lib\net472\Umbraco.Forms.Core.Providers.dll</HintPath>
+      <HintPath>..\packages\UmbracoForms.Core.8.0.0-beta.10071\lib\net472\Umbraco.Forms.Core.Providers.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Forms.Web, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoForms.Core.8.0.0-beta.10070\lib\net472\Umbraco.Forms.Web.dll</HintPath>
+      <HintPath>..\packages\UmbracoForms.Core.8.0.0-beta.10071\lib\net472\Umbraco.Forms.Web.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Licensing, Version=2.0.33.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoForms.Core.8.0.0-beta.10070\lib\net472\Umbraco.Licensing.dll</HintPath>
+      <HintPath>..\packages\UmbracoForms.Core.8.0.0-beta.10071\lib\net472\Umbraco.Licensing.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.ModelsBuilder, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Umbraco.ModelsBuilder.8.0.0-alpha.36\lib\Umbraco.ModelsBuilder.dll</HintPath>
@@ -466,10 +466,19 @@
     <Content Include="Views\Product.cshtml" />
     <Content Include="Views\Products.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
-    <Content Include="Views\Partials\Forms\Themes\default\Submitted.cshtml" />
-    <Content Include="Views\Partials\Forms\Themes\default\ScrollToFormScript.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Script.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Render.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Macro.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Embed.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
+    <Content Include="Views\Partials\Grid\Bootstrap2-Fluid.cshtml" />
+    <Content Include="Views\Partials\Forms\Themes\default\Submitted.cshtml" />
+    <Content Include="Views\Partials\Forms\Themes\default\ScrollToFormScript.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Form.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.Textfield.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.Textarea.cshtml" />
@@ -501,15 +510,6 @@
     <Content Include="Views\Partials\Forms\Fieldtypes\FieldType.CheckBox.cshtml" />
     <Content Include="Views\Partials\Forms\Export\excel.cshtml" />
     <Content Include="Views\Partials\Forms\Emails\Example-Template.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Macro.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Embed.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
-    <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
-    <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
-    <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
-    <Content Include="Views\Partials\Grid\Bootstrap2-Fluid.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -523,6 +523,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Umbraco.SampleSite\Umbraco.SampleSite.csproj">
+      <Project>{ad6618cc-4dd7-414d-9050-39652566833e}</Project>
+      <Name>Umbraco.SampleSite</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

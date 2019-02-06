@@ -249,12 +249,6 @@
       <HintPath>..\packages\UmbracoCms.Web.8.0.0-alpha.58.2109\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Umbraco.SampleSite.Web\Umbraco.SampleSite.Web.csproj">
-      <Project>{a80f89c5-4d21-4b54-8537-dadc6cf230e8}</Project>
-      <Name>Umbraco.SampleSite.Web</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

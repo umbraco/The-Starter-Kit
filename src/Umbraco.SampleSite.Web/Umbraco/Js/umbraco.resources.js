@@ -89,7 +89,7 @@
                 if (!email) {
                     return $q.reject({ errorMsg: 'Email address cannot be empty' });
                 }
-                //TODO: This validation shouldn't really be done here, the validation on the login dialog
+                // TODO: This validation shouldn't really be done here, the validation on the login dialog
                 // is pretty hacky which is why this is here, ideally validation on the login dialog would
                 // be done properly.
                 var emailRegex = /\S+@\S+\.\S+/;
@@ -1726,7 +1726,7 @@
      *
      * @description
      * Retrieves the dashboard configuration for a given section
-     * 
+     *
      * @param {string} section Alias of section to retrieve dashboard configuraton for
      * @returns {Promise} resourcePromise object containing the user array.
      *
@@ -1741,7 +1741,7 @@
     *
     * @description
     * Retrieves dashboard content from a remote source for a given section
-    * 
+    *
     * @param {string} section Alias of section to retrieve dashboard content for
     * @returns {Promise} resourcePromise object containing the user array.
     *
@@ -1761,6 +1761,14 @@
                     values.push({ baseurl: baseurl });
                 }
                 return umbRequestHelper.getApiUrl('dashboardApiBaseUrl', 'GetRemoteDashboardCss', values);
+            },
+            getRemoteXmlData: function getRemoteXmlData(site, url) {
+                //build request values with optional params
+                var values = {
+                    site: site,
+                    url: url
+                };
+                return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('dashboardApiBaseUrl', 'GetRemoteXml', values)), 'Failed to get remote xml');
             }
         };
     }
@@ -2378,20 +2386,12 @@
      * 
      * @param {string} type Object type name        
      * @param {string} postFilter optional filter expression which will execute a dynamic where clause on the server
-     * @param {string} postFilterParams optional parameters for the postFilter expression
      * @returns {Promise} resourcePromise object containing the entity.
      *
      */
-            getAll: function getAll(type, postFilter, postFilterParams) {
+            getAll: function getAll(type, postFilter) {
                 //need to build the query string manually
-                var query = 'type=' + type + '&postFilter=' + (postFilter ? postFilter : '');
-                if (postFilter && postFilterParams) {
-                    var counter = 0;
-                    _.each(postFilterParams, function (val, key) {
-                        query += '&postFilterParams[' + counter + '].key=' + key + '&postFilterParams[' + counter + '].value=' + val;
-                        counter++;
-                    });
-                }
+                var query = 'type=' + type + '&postFilter=' + (postFilter ? encodeURIComponent(postFilter) : '');
                 return umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('entityApiBaseUrl', 'GetAll', query)), 'Failed to retrieve entity data for type ' + type);
             },
             /**
@@ -2687,11 +2687,11 @@
     * @description Handles retrieving data for javascript libraries on the server
     **/
         function javascriptLibraryResource($q, $http, umbRequestHelper) {
-            var existingLocales = [];
-            function getSupportedLocalesForMoment() {
+            var existingLocales = null;
+            function getSupportedLocales() {
                 var deferred = $q.defer();
-                if (existingLocales.length === 0) {
-                    umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('backOfficeAssetsApiBaseUrl', 'GetSupportedMomentLocales')), 'Failed to get cultures').then(function (locales) {
+                if (existingLocales === null) {
+                    umbRequestHelper.resourcePromise($http.get(umbRequestHelper.getApiUrl('backOfficeAssetsApiBaseUrl', 'GetSupportedLocales')), 'Failed to get cultures').then(function (locales) {
                         existingLocales = locales;
                         deferred.resolve(existingLocales);
                     });
@@ -2700,7 +2700,7 @@
                 }
                 return deferred.promise;
             }
-            var service = { getSupportedLocalesForMoment: getSupportedLocalesForMoment };
+            var service = { getSupportedLocales: getSupportedLocales };
             return service;
         }
         angular.module('umbraco.resources').factory('javascriptLibraryResource', javascriptLibraryResource);
@@ -2733,29 +2733,6 @@
         };
     }
     angular.module('umbraco.resources').factory('languageResource', languageResource);
-    'use strict';
-    /**
-    * @ngdoc service
-    * @name umbraco.resources.legacyResource
-    * @description Handles legacy dialog requests
-    **/
-    function legacyResource($q, $http, umbRequestHelper) {
-        //the factory object returned
-        return {
-            /** Loads in the data to display the section list */
-            deleteItem: function deleteItem(args) {
-                if (!args.nodeId || !args.nodeType || !args.alias) {
-                    throw 'The args parameter is not formatted correct, it requires properties: nodeId, nodeType, alias';
-                }
-                return umbRequestHelper.resourcePromise($http.post(umbRequestHelper.getApiUrl('legacyApiBaseUrl', 'DeleteLegacyItem', [
-                    { nodeId: args.nodeId },
-                    { nodeType: args.nodeType },
-                    { alias: args.alias }
-                ])), 'Failed to delete item ' + args.nodeId);
-            }
-        };
-    }
-    angular.module('umbraco.resources').factory('legacyResource', legacyResource);
     'use strict';
     /**
     * @ngdoc service
@@ -4915,11 +4892,7 @@
                     options.isDialog = false;
                 }
                 //create the query string for the tree request, these are the mandatory options:
-                var query = 'application=' + options.section + '&tree=' + options.tree + '&isDialog=' + options.isDialog;
-                //if you need to load a not initialized tree set this value to false - default is true
-                if (options.onlyinitialized) {
-                    query += '&onlyInitialized=' + options.onlyinitialized;
-                }
+                var query = 'application=' + options.section + '&tree=' + options.tree + '&use=' + (options.isDialog ? 'dialog' : 'main');
                 //the options can contain extra query string parameters
                 if (options.queryString) {
                     query += '&' + options.queryString;

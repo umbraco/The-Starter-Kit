@@ -1,9 +1,12 @@
 ﻿@model dynamic
+@using Umbraco.Web.Composing
+@using Umbraco.Web.Templates
 
 @if (Model.editor.config.markup != null)
 {
     string markup = Model.editor.config.markup.ToString();
-    markup = markup.Replace("#value#", HttpUtility.HtmlEncode(Model.value.ToString())).ToString();
+    var umbracoHelper = new UmbracoHelper(UmbracoContext.Current, Current.Services);
+    markup = markup.Replace("#value#", umbracoHelper.ReplaceLineBreaksForHtml(HttpUtility.HtmlEncode(Model.value.ToString())).ToString());
 
     if (Model.editor.config.style != null)
     {
