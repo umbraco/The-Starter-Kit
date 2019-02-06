@@ -15,7 +15,7 @@ namespace Umbraco.SampleSite
 {
     public class InstallPackageAction : IPackageAction
     {
-        public bool Execute(string packageName, XmlNode xmlData)
+        public bool Execute(string packageName, XElement xmlData)
         {
             var contentService = Current.Services.ContentService;
             var mediaTypeService = Current.Services.MediaTypeService;
@@ -60,7 +60,7 @@ namespace Umbraco.SampleSite
             }
 
             // create media folders
-           
+
             this.CreateMediaItem(mediaService, mediaTypeService, -1, "folder", new Guid("b6f11172-373f-4473-af0f-0b0e5aefd21c"), "Design", string.Empty, true);
             this.CreateMediaItem(mediaService, mediaTypeService, -1, "folder", new Guid("1fd2ecaf-f371-4c00-9306-867fa4585e7a"), "People", string.Empty, true);
             this.CreateMediaItem(mediaService, mediaTypeService, -1, "folder", new Guid("6d5bf746-cb82-45c5-bd15-dd3798209b87"), "Products", string.Empty, true);
@@ -70,25 +70,22 @@ namespace Umbraco.SampleSite
             IEnumerable<IMedia> rootMedia = mediaService.GetRootMedia().ToArray();
             try
             {
-                if (xmlData.HasChildNodes)
+                foreach (XElement selectNode in xmlData.Nodes())
                 {
-                    foreach (XmlNode selectNode in xmlData.SelectNodes("./mediaItem"))
+                    IMedia media1 = mediaRoot;
+                    foreach (IMedia media2 in rootMedia)
                     {
-                        IMedia media1 = mediaRoot;
-                        foreach (IMedia media2 in rootMedia)
-                        {
-                            if (media2.Name.InvariantEquals(selectNode.Attributes["folder"].Value))
-                                media1 = media2;
-                        }
-
-                        // add UDI support
-                        var key = selectNode.Attributes["key"] != null &&
-                                  string.IsNullOrWhiteSpace(selectNode.Attributes["key"].Value) == false
-                            ? Guid.Parse(selectNode.Attributes["key"].Value)
-                            : Guid.Empty;
-
-                        int mediaItem = CreateMediaItem(mediaService, mediaTypeService, media1.Id, "image", key, selectNode.Attributes["name"].Value, selectNode.Attributes["path"].Value, false);
+                        if (media2.Name.InvariantEquals(selectNode.Attribute("folder").Value))
+                            media1 = media2;
                     }
+
+                    // add UDI support
+                    var key = selectNode.Attribute("key") != null &&
+                              string.IsNullOrWhiteSpace(selectNode.Attribute("key").Value) == false
+                        ? Guid.Parse(selectNode.Attribute("key").Value)
+                        : Guid.Empty;
+
+                    int mediaItem = CreateMediaItem(mediaService, mediaTypeService, media1.Id, "image", key, selectNode.Attribute("name").Value, selectNode.Attribute("path").Value, false);
                 }
             }
             catch (Exception ex)
@@ -121,7 +118,7 @@ namespace Umbraco.SampleSite
                 if (bikerJacketPath.Contains("{"))
                 {
                     // we need to parse the media path from the json
-                    var def = new {Src = "", Crops = new string[] {""}};
+                    var def = new { Src = "", Crops = new string[] { "" } };
                     var mediaJson = JsonConvert.DeserializeAnonymousType(bikerJacketPath, def);
                     bikerJacketPath = mediaJson.Src;
                 }
@@ -135,10 +132,10 @@ namespace Umbraco.SampleSite
             }
         }
 
-        public bool Execute(string packageName, XElement xmlData)
-        {
-            throw new NotImplementedException();
-        }
+        //public bool Execute(string packageName, XElement xmlData)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public string Alias()
         {
@@ -174,7 +171,7 @@ namespace Umbraco.SampleSite
         {
             //var dataTypeDefinition = dts.GetAll().First<IDataType>((Func<IDataType, bool>)(x => x.Name == dataTypeName));
             var dataTypeDefinition = dts.GetDataType(dataTypeName);
-            
+
             //TODO V8: How do we do this?!
             //return dts.GetPreValuesCollectionByDataTypeId(dataTypeDefinition.Id).PreValuesAsDictionary.Where(d => d.Value.Value == preValueText).Select(f => f.Value.Id).First();
             return -1;
@@ -244,7 +241,7 @@ namespace Umbraco.SampleSite
             {
                 media.Key = key;
             }
-            service.Save(media);
+            service.Save(media,-1);
             return media.Id;
         }
     }
