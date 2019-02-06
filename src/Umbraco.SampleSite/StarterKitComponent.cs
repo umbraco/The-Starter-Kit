@@ -68,7 +68,7 @@ namespace Umbraco.SampleSite
 
         public void Terminate()
         {
-            throw new NotImplementedException();
+
         }
     }
 }
