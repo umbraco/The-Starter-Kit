@@ -189,9 +189,18 @@ namespace Umbraco.SampleSite
         {
             Current.Logger.Info<FormsInstallationHelper>("Creating Form for Starter Kit...");
 
-            var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
-            if (formsAssembly == null)
-                throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
+            Assembly formsAssembly;
+            try
+            {
+                formsAssembly = Assembly.Load("Umbraco.Forms.Core");
+                if (formsAssembly == null)
+                    throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
+            }
+            catch (Exception)
+            {
+                //forms assembly isn't there
+                return;
+            }
 
             var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Form");
             if (formsType == null) 
