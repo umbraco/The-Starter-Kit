@@ -162,7 +162,7 @@
       <orgName>SubNavigation.cshtml</orgName>
     </file>
     <file>
-      <guid>b63f9f7e-8774-4438-8d47-e723f64d104d_TopNavigation.cshtml</guid>
+      <guid>38498cd4-4a03-4815-96d1-290ee7f59050_TopNavigation.cshtml</guid>
       <orgPath>~/Views/Partials/Navigation</orgPath>
       <orgName>TopNavigation.cshtml</orgName>
     </file>
@@ -170,6 +170,21 @@
       <guid>umbraco-starterkit-style.css</guid>
       <orgPath>~/css</orgPath>
       <orgName>umbraco-starterkit-style.css</orgName>
+    </file>
+    <file>
+      <guid>5c665e7f-10eb-483a-8277-c403438263e2_FeaturedProducts.cshtml</guid>
+      <orgPath>~/Views/MacroPartials</orgPath>
+      <orgName>FeaturedProducts.cshtml</orgName>
+    </file>
+    <file>
+      <guid>e5fc917a-375d-479d-8f33-32cbb39f50d4_LatestBlogposts.cshtml</guid>
+      <orgPath>~/Views/MacroPartials</orgPath>
+      <orgName>LatestBlogposts.cshtml</orgName>
+    </file>
+    <file>
+      <guid>Home.cs</guid>
+      <orgPath>~/App_Data/Models</orgPath>
+      <orgName>Home.cs</orgName>
     </file>
   </files>
   <info>
@@ -195,7 +210,7 @@ It contains a simple website that contains many basic features to help get you s
   </info>
   <Documents>
     <DocumentSet importMode="root">
-      <home id="1133" key="ca4249ed-2b23-4337-b522-63cabe5587d1" parentID="-1" level="1" creatorID="-1" sortOrder="0" createDate="2019-01-09T09:05:38" updateDate="2019-02-06T09:47:24" nodeName="Home" urlName="home" path="-1,1133" isDoc="" nodeType="1079" nodeTypeAlias="home" creatorName="A User" writerName="A User" writerID="-1" template="1084" isPublished="true">
+      <home id="1133" key="ca4249ed-2b23-4337-b522-63cabe5587d1" parentID="-1" level="1" creatorID="-1" sortOrder="0" createDate="2019-01-09T09:05:38" updateDate="2019-02-08T13:17:47" nodeName="Home" urlName="home" path="-1,1133" isDoc="" nodeType="1079" nodeTypeAlias="home" creatorName="A User" writerName="A User" writerID="-1" template="1084" isPublished="true">
         <heroHeader><![CDATA[Umbraco Demo]]></heroHeader>
         <heroDescription><![CDATA[Moonfish, steelhead, lamprey southern flounder tadpole fish sculpin bigeye, blue-redstripe danio collared dogfish. Smalleye squaretail goldfish arowana butterflyfish pipefish wolf-herring jewel tetra, shiner; gibberfish red velvetfish. Thornyhead yellowfin pike threadsail ayu cutlassfish.]]></heroDescription>
         <heroCTACaption><![CDATA[Check our products]]></heroCTACaption>
@@ -219,43 +234,6 @@ It contains a simple website that contains many basic features to help get you s
                 "headline"
               ],
               "hasConfig": false,
-              "$allowedEditors": [
-                {
-                  "name": "Image",
-                  "alias": "media",
-                  "view": "media",
-                  "render": null,
-                  "icon": "icon-picture",
-                  "config": {}
-                },
-                {
-                  "name": "Macro",
-                  "alias": "macro",
-                  "view": "macro",
-                  "render": null,
-                  "icon": "icon-settings-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Embed",
-                  "alias": "embed",
-                  "view": "embed",
-                  "render": null,
-                  "icon": "icon-movie-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Headline",
-                  "alias": "headline",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-coin",
-                  "config": {
-                    "style": "font-size: 36px; line-height: 45px; font-weight: bold",
-                    "markup": "<h1>#value#</h1>"
-                  }
-                }
-              ],
               "controls": [
                 {
                   "value": {
@@ -268,89 +246,15 @@ It contains a simple website that contains many basic features to help get you s
                   "editor": {
                     "alias": "macro"
                   },
-                  "active": false,
-                  "$index": 0,
-                  "$uniqueId": "03f23941-8be8-4469-f8ae-a8a9cff46c16",
-                  "$editorPath": "views/propertyeditors/grid/editors/macro.html"
+                  "active": false
                 }
               ],
-              "$percentage": "100.00000000",
-              "$uniqueId": "0f97d59a-76b0-6c74-dff6-f7fefa4216f1",
               "active": false
             }
           ],
           "hasConfig": false,
-          "$initialized": true,
-          "$uniqueId": "33e41cd2-c81f-233e-d5a8-15b034daffa5",
-          "id": "bba2f043-5471-edb3-3e34-47b1ceee7c24",
+          "id": "314cb47b-fbe1-eeb6-f7cc-38db875d0f06",
           "active": false
-        }
-      ],
-      "$percentage": "100.00000000",
-      "$allowedLayouts": [
-        {
-          "name": "Full Width",
-          "areas": [
-            {
-              "grid": 12,
-              "allowAll": false,
-              "allowed": [
-                "media",
-                "macro",
-                "embed",
-                "headline"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Half and half",
-          "areas": [
-            {
-              "grid": 6,
-              "allowAll": false,
-              "allowed": [
-                "rte",
-                "media",
-                "macro",
-                "embed",
-                "headline",
-                "quote"
-              ]
-            },
-            {
-              "grid": 6,
-              "allowAll": false,
-              "allowed": [
-                "quote",
-                "headline",
-                "embed",
-                "macro",
-                "media",
-                "rte"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Testimonials",
-          "areas": [
-            {
-              "grid": 4,
-              "allowAll": false,
-              "allowed": []
-            },
-            {
-              "grid": 4,
-              "allowAll": false,
-              "allowed": []
-            },
-            {
-              "grid": 4,
-              "allowAll": false,
-              "allowed": []
-            }
-          ]
         }
       ]
     }
@@ -1679,7 +1583,7 @@ It contains a simple website that contains many basic features to help get you s
 }]]></bodyText>
           </blogpost>
         </blog>
-        <contact id="1157" key="4a1f4198-e143-48ba-a0f5-1a7ef2df23aa" parentID="1133" level="2" creatorID="-1" sortOrder="4" createDate="2019-01-09T10:32:40" updateDate="2019-01-25T14:11:45" nodeName="Contact" urlName="contact" path="-1,1133,1157" isDoc="" nodeType="1075" nodeTypeAlias="contact" creatorName="A User" writerName="A User" writerID="-1" template="1082" isPublished="true">
+        <contact id="1157" key="4a1f4198-e143-48ba-a0f5-1a7ef2df23aa" parentID="1133" level="2" creatorID="-1" sortOrder="4" createDate="2019-01-09T10:32:40" updateDate="2019-02-08T14:47:12" nodeName="Contact" urlName="contact" path="-1,1133,1157" isDoc="" nodeType="1075" nodeTypeAlias="contact" creatorName="A User" writerName="A User" writerID="-1" template="1082" isPublished="true">
           <keywords><![CDATA[[]]]></keywords>
           <umbracoNavihide>0</umbracoNavihide>
           <mapHeader><![CDATA[You'll find us here]]></mapHeader>
@@ -1687,7 +1591,6 @@ It contains a simple website that contains many basic features to help get you s
           <pageTitle><![CDATA[Let's have a chat]]></pageTitle>
           <contactFormHeader><![CDATA[Send Us A Message]]></contactFormHeader>
           <contactIntro><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget lacinia nisl. Aenean sollicitudin diam vitae enim ultrices, semper euismod magna efficitur.</p>]]></contactIntro>
-          <contactForm><![CDATA[a3b6097f-d8d1-4278-9242-c5cbe633a1aa]]></contactForm>
         </contact>
       </home>
     </DocumentSet>
@@ -2126,6 +2029,7 @@ It contains a simple website that contains many basic features to help get you s
           <Tab>Design</Tab>
           <SortOrder>1</SortOrder>
           <Mandatory>True</Mandatory>
+          <Description><![CDATA[This will be a custom property editor later]]></Description>
         </GenericProperty>
         <GenericProperty>
           <Name>Color Theme</Name>
@@ -2135,6 +2039,7 @@ It contains a simple website that contains many basic features to help get you s
           <Tab>Design</Tab>
           <SortOrder>2</SortOrder>
           <Mandatory>True</Mandatory>
+          <Description><![CDATA[This will be a custom property editor later]]></Description>
         </GenericProperty>
         <GenericProperty>
           <Name>Sitename</Name>
@@ -2418,8 +2323,8 @@ It contains a simple website that contains many basic features to help get you s
         <GenericProperty>
           <Name>Pick a Contact Form</Name>
           <Alias>contactForm</Alias>
-          <Type>UmbracoForms.FormPicker</Type>
-          <Definition>59accdfb-e0e7-4ff2-b8ab-4822b78d2c64</Definition>
+          <Type>Umbraco.NoEdit</Type>
+          <Definition>8e7f995c-bd81-4627-9932-c40e568ec788</Definition>
           <Tab>Form</Tab>
           <SortOrder>3</SortOrder>
           <Mandatory>False</Mandatory>
@@ -5914,7 +5819,6 @@ article {
     <DataType Name="Blog - How many posts should be shown - Slider" Id="Umbraco.Slider" Definition="9d5ba2c5-ed7a-41f8-b454-9fc65f48752e" DatabaseType="Nvarchar" Configuration="{&quot;EnableRange&quot;:false,&quot;InitialValue&quot;:3,&quot;InitialValue2&quot;:0,&quot;MinimumValue&quot;:1,&quot;MaximumValue&quot;:20,&quot;StepIncrements&quot;:1}" />
     <DataType Name="Blogpost - Categories - Tags" Id="Umbraco.Tags" Definition="9d0726e6-5fa7-4455-8fe6-ed5bf9057cc4" DatabaseType="Nvarchar" Configuration="{&quot;Group&quot;:&quot;default&quot;,&quot;StorageType&quot;:1,&quot;Delimiter&quot;:&quot;\u0000&quot;}" />
     <DataType Name="Contact - Contact Intro - Rich Text Editor" Id="Umbraco.TinyMCEv3" Definition="ecbbac0d-974e-490c-b533-fead926dc525" DatabaseType="Ntext" Configuration="{&quot;Editor&quot;:{&quot;toolbar&quot;:[&quot;undo&quot;,&quot;redo&quot;,&quot;styleselect&quot;,&quot;bold&quot;,&quot;italic&quot;,&quot;alignleft&quot;,&quot;aligncenter&quot;,&quot;alignright&quot;,&quot;bullist&quot;,&quot;numlist&quot;,&quot;outdent&quot;,&quot;indent&quot;,&quot;link&quot;],&quot;stylesheets&quot;:[],&quot;maxImageSize&quot;:500,&quot;mode&quot;:&quot;classic&quot;,&quot;dimensions&quot;:{&quot;height&quot;:500}},&quot;HideLabel&quot;:false}" />
-    <DataType Name="Contact - Pick a Contact Form - Form Picker" Id="UmbracoForms.FormPicker" Definition="59accdfb-e0e7-4ff2-b8ab-4822b78d2c64" DatabaseType="Nvarchar" Configuration="{&quot;allowedForms&quot;:[]}" />
     <DataType Name="Content Base - Content - Grid layout" Id="Umbraco.Grid" Definition="ea0ed4c1-c489-43b8-9058-a70babf430ff" DatabaseType="Ntext" Configuration="{&quot;Items&quot;:{&quot;styles&quot;:[],&quot;config&quot;:[],&quot;columns&quot;:12,&quot;templates&quot;:[{&quot;name&quot;:&quot;1 column layout&quot;,&quot;sections&quot;:[{&quot;grid&quot;:12,&quot;allowAll&quot;:true}]}],&quot;layouts&quot;:[{&quot;label&quot;:&quot;Article&quot;,&quot;name&quot;:&quot;Article&quot;,&quot;areas&quot;:[{&quot;grid&quot;:4},{&quot;grid&quot;:8}]},{&quot;name&quot;:&quot;Three Columns&quot;,&quot;areas&quot;:[{&quot;grid&quot;:4,&quot;allowAll&quot;:true},{&quot;grid&quot;:4,&quot;allowAll&quot;:true},{&quot;grid&quot;:4,&quot;allowAll&quot;:true}]},{&quot;name&quot;:&quot;FullWidth&quot;,&quot;areas&quot;:[{&quot;grid&quot;:12,&quot;allowAll&quot;:true}]}]},&quot;Rte&quot;:{&quot;toolbar&quot;:[&quot;code&quot;,&quot;bold&quot;,&quot;italic&quot;,&quot;styleselect&quot;,&quot;alignleft&quot;,&quot;aligncenter&quot;,&quot;alignright&quot;,&quot;bullist&quot;,&quot;numlist&quot;,&quot;outdent&quot;,&quot;indent&quot;,&quot;link&quot;,&quot;image&quot;,&quot;ace&quot;,&quot;redo&quot;,&quot;undo&quot;,&quot;strikethrough&quot;,&quot;table&quot;],&quot;stylesheets&quot;:[],&quot;maxImageSize&quot;:500,&quot;mode&quot;:&quot;classic&quot;,&quot;dimensions&quot;:{&quot;height&quot;:500}}}" />
     <DataType Name="People - Featured People - Multinode Treepicker" Id="Umbraco.MultiNodeTreePicker" Definition="4885450e-a60f-42bb-984a-43988baf5283" DatabaseType="Ntext" Configuration="{&quot;TreeSource&quot;:{&quot;type&quot;:&quot;content&quot;,&quot;query&quot;:&quot;$current&quot;,&quot;id&quot;:null},&quot;Filter&quot;:&quot;person&quot;,&quot;MinNumber&quot;:0,&quot;MaxNumber&quot;:0,&quot;ShowOpen&quot;:true}" />
     <DataType Name="Person - Department - Tags" Id="Umbraco.Tags" Definition="b58c1530-91c9-4c83-aa35-032aca0f7b89" DatabaseType="Nvarchar" Configuration="{&quot;Group&quot;:&quot;default&quot;,&quot;StorageType&quot;:0,&quot;Delimiter&quot;:&quot;\u0000&quot;}" />

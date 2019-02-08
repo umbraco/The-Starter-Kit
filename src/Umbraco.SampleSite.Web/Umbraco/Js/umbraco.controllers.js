@@ -9925,7 +9925,7 @@
                 }, function (err) {
                     contentEditingHelper.handleSaveError({
                         err: err,
-                        redirectOnError: !infiniteMode,
+                        redirectOnFailure: !infiniteMode,
                         rebindCallback: contentEditingHelper.reBindChangedProperties($scope.content, err.data)
                     });
                     editorState.set($scope.content);

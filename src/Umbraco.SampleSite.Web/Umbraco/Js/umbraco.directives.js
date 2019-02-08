@@ -3089,11 +3089,23 @@ Use this directive to render a button with a dropdown of alternative actions.
      */
             $scope.appChanged = function (app) {
                 $scope.app = app;
+                $scope.$broadcast('editors.apps.appChanged', { app: app });
                 if (infiniteMode) {
                     createInfiniteModeButtons($scope.content);
                 } else {
                     createButtons($scope.content);
                 }
+            };
+            /**
+     * Call back when a content app changes
+     * @param {any} app
+     */
+            $scope.appAnchorChanged = function (app, anchor) {
+                //send an event downwards
+                $scope.$broadcast('editors.apps.appAnchorChanged', {
+                    app: app,
+                    anchor: anchor
+                });
             };
             // methods for infinite editing
             $scope.close = function () {
@@ -3451,32 +3463,126 @@ Use this directive to render a button with a dropdown of alternative actions.
     (function () {
         'use strict';
         /** This directive is used to render out the current variant tabs and properties and exposes an API for other directives to consume  */
-        function tabbedContentDirective() {
+        function tabbedContentDirective($timeout) {
+            function link($scope, $element, $attrs) {
+                var appRootNode = $element[0];
+                // Directive for cached property groups.
+                var propertyGroupNodesDictionary = {};
+                var scrollableNode = appRootNode.closest('.umb-scrollable');
+                scrollableNode.addEventListener('scroll', onScroll);
+                scrollableNode.addEventListener('mousewheel', cancelScrollTween);
+                function onScroll(event) {
+                    var viewFocusY = scrollableNode.scrollTop + scrollableNode.clientHeight * 0.5;
+                    for (var i in $scope.content.tabs) {
+                        var group = $scope.content.tabs[i];
+                        var node = propertyGroupNodesDictionary[group.id];
+                        if (viewFocusY >= node.offsetTop && viewFocusY <= node.offsetTop + node.clientHeight) {
+                            setActiveAnchor(group);
+                            return;
+                        }
+                    }
+                }
+                function setActiveAnchor(tab) {
+                    if (tab.active !== true) {
+                        var i = $scope.content.tabs.length;
+                        while (i--) {
+                            $scope.content.tabs[i].active = false;
+                        }
+                        tab.active = true;
+                    }
+                }
+                function getActiveAnchor() {
+                    var i = $scope.content.tabs.length;
+                    while (i--) {
+                        if ($scope.content.tabs[i].active === true)
+                            return $scope.content.tabs[i];
+                    }
+                    return false;
+                }
+                function getScrollPositionFor(id) {
+                    if (propertyGroupNodesDictionary[id]) {
+                        return propertyGroupNodesDictionary[id].offsetTop - 20;    // currently only relative to closest relatively positioned parent 
+                    }
+                    return null;
+                }
+                function scrollTo(id) {
+                    var y = getScrollPositionFor(id);
+                    if (getScrollPositionFor !== null) {
+                        var viewportHeight = scrollableNode.clientHeight;
+                        var from = scrollableNode.scrollTop;
+                        var to = Math.min(y, scrollableNode.scrollHeight - viewportHeight);
+                        var animeObject = { _y: from };
+                        $scope.scrollTween = anime({
+                            targets: animeObject,
+                            _y: to,
+                            easing: 'easeOutExpo',
+                            duration: 200 + Math.min(Math.abs(to - from) / viewportHeight * 100, 400),
+                            update: function update() {
+                                scrollableNode.scrollTo(0, animeObject._y);
+                            }
+                        });
+                    }
+                }
+                function jumpTo(id) {
+                    var y = getScrollPositionFor(id);
+                    if (getScrollPositionFor !== null) {
+                        cancelScrollTween();
+                        scrollableNode.scrollTo(0, y);
+                    }
+                }
+                function cancelScrollTween() {
+                    if ($scope.scrollTween) {
+                        $scope.scrollTween.pause();
+                    }
+                }
+                $scope.registerPropertyGroup = function (element, appAnchor) {
+                    propertyGroupNodesDictionary[appAnchor] = element;
+                };
+                $scope.$on('editors.apps.appChanged', function ($event, $args) {
+                    // if app changed to this app, then we want to scroll to the current anchor
+                    if ($args.app.alias === 'umbContent') {
+                        var activeAnchor = getActiveAnchor();
+                        $timeout(jumpTo.bind(null, [activeAnchor.id]));
+                    }
+                });
+                $scope.$on('editors.apps.appAnchorChanged', function ($event, $args) {
+                    if ($args.app.alias === 'umbContent') {
+                        setActiveAnchor($args.anchor);
+                        scrollTo($args.anchor.id);
+                    }
+                });
+                //ensure to unregister from all dom-events
+                $scope.$on('$destroy', function () {
+                    cancelScrollTween();
+                    scrollableNode.removeEventListener('scroll', onScroll);
+                    scrollableNode.removeEventListener('mousewheel', cancelScrollTween);
+                });
+            }
+            function controller($scope, $element, $attrs) {
+                //expose the property/methods for other directives to use
+                this.content = $scope.content;
+                this.activeVariant = _.find(this.content.variants, function (variant) {
+                    return variant.active;
+                });
+                $scope.activeVariant = this.activeVariant;
+                $scope.defaultVariant = _.find(this.content.variants, function (variant) {
+                    return variant.language.isDefault;
+                });
+                $scope.unlockInvariantValue = function (property) {
+                    property.unlockInvariantValue = !property.unlockInvariantValue;
+                };
+                $scope.$watch('tabbedContentForm.$dirty', function (newValue, oldValue) {
+                    if (newValue === true) {
+                        $scope.content.isDirty = true;
+                    }
+                });
+            }
             var directive = {
                 restrict: 'E',
                 replace: true,
                 templateUrl: 'views/components/content/umb-tabbed-content.html',
-                controller: function controller($scope) {
-                    //expose the property/methods for other directives to use
-                    this.content = $scope.content;
-                    this.activeVariant = _.find(this.content.variants, function (variant) {
-                        return variant.active;
-                    });
-                    $scope.activeVariant = this.activeVariant;
-                    $scope.defaultVariant = _.find(this.content.variants, function (variant) {
-                        return variant.language.isDefault;
-                    });
-                    $scope.unlockInvariantValue = function (property) {
-                        property.unlockInvariantValue = !property.unlockInvariantValue;
-                    };
-                    $scope.$watch('tabbedContentForm.$dirty', function (newValue, oldValue) {
-                        if (newValue === true) {
-                            $scope.content.isDirty = true;
-                        }
-                    });
-                },
-                link: function link(scope) {
-                },
+                controller: controller,
+                link: link,
                 scope: { content: '=' }
             };
             return directive;
@@ -3501,7 +3607,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                 onCloseSplitView: '&',
                 onSelectVariant: '&',
                 onOpenSplitView: '&',
-                onSelectApp: '&'
+                onSelectApp: '&',
+                onSelectAppAnchor: '&'
             },
             controllerAs: 'vm',
             controller: umbVariantContentController
@@ -3515,6 +3622,7 @@ Use this directive to render a button with a dropdown of alternative actions.
             vm.selectVariant = selectVariant;
             vm.openSplitView = openSplitView;
             vm.selectApp = selectApp;
+            vm.selectAppAnchor = selectAppAnchor;
             function onInit() {
                 // disable the name field if the active content app is not "Content"
                 vm.nameDisabled = false;
@@ -3552,14 +3660,30 @@ Use this directive to render a button with a dropdown of alternative actions.
      * @param {any} item
      */
             function selectApp(item) {
-                // disable the name field if the active content app is not "Content" or "Info"
-                vm.nameDisabled = false;
-                if (item && item.alias !== 'umbContent' && item.alias !== 'umbInfo') {
-                    vm.nameDisabled = true;
-                }
                 // call the callback if any is registered
                 if (vm.onSelectApp) {
                     vm.onSelectApp({ 'app': item });
+                }
+            }
+            $scope.$on('editors.apps.appChanged', function ($event, $args) {
+                var app = $args.app;
+                // disable the name field if the active content app is not "Content" or "Info"
+                vm.nameDisabled = false;
+                if (app && app.alias !== 'umbContent' && app.alias !== 'umbInfo') {
+                    vm.nameDisabled = true;
+                }
+            });
+            /**
+     * Used to proxy a callback
+     * @param {any} item
+     */
+            function selectAppAnchor(item, anchor) {
+                // call the callback if any is registered
+                if (vm.onSelectAppAnchor) {
+                    vm.onSelectAppAnchor({
+                        'app': item,
+                        'anchor': anchor
+                    });
                 }
             }
             /**
@@ -3587,7 +3711,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                 content: '<',
                 // TODO: Not sure if this should be = since we are changing the 'active' property of a variant
                 culture: '<',
-                onSelectApp: '&?'
+                onSelectApp: '&?',
+                onSelectAppAnchor: '&?'
             },
             controllerAs: 'vm',
             controller: umbVariantContentEditorsController
@@ -3604,6 +3729,7 @@ Use this directive to render a button with a dropdown of alternative actions.
             vm.closeSplitView = closeSplitView;
             vm.selectVariant = selectVariant;
             vm.selectApp = selectApp;
+            vm.selectAppAnchor = selectAppAnchor;
             //Used to track how many content views there are (for split view there will be 2, it could support more in theory)
             vm.editors = [];
             //Used to track the open variants across the split views
@@ -3839,13 +3965,24 @@ Use this directive to render a button with a dropdown of alternative actions.
      * @param {any} app This is the model of the selected app
      */
             function selectApp(app) {
-                if (app && app.alias) {
-                    activeAppAlias = app.alias;
-                }
                 if (vm.onSelectApp) {
                     vm.onSelectApp({ 'app': app });
                 }
             }
+            function selectAppAnchor(app, anchor) {
+                if (vm.onSelectAppAnchor) {
+                    vm.onSelectAppAnchor({
+                        'app': app,
+                        'anchor': anchor
+                    });
+                }
+            }
+            $scope.$on('editors.apps.appChanged', function ($event, $args) {
+                var app = $args.app;
+                if (app && app.alias) {
+                    activeAppAlias = app.alias;
+                }
+            });
         }
         angular.module('umbraco.directives').component('umbVariantContentEditors', umbVariantContentEditors);
     }());
@@ -4273,9 +4410,15 @@ Use this directive to construct a main content area inside the main editor windo
                 scope.vm.currentVariant = '';
                 function onInit() {
                     setCurrentVariant();
+                    angular.forEach(scope.content.apps, function (app) {
+                        if (app.alias === 'umbContent') {
+                            console.log('app: ', app);
+                            app.anchors = scope.content.tabs;
+                        }
+                    });
                 }
                 function setCurrentVariant() {
-                    angular.forEach(scope.variants, function (variant) {
+                    angular.forEach(scope.content.variants, function (variant) {
                         if (variant.active) {
                             scope.vm.currentVariant = variant;
                         }
@@ -4293,6 +4436,14 @@ Use this directive to construct a main content area inside the main editor windo
                 scope.selectNavigationItem = function (item) {
                     if (scope.onSelectNavigationItem) {
                         scope.onSelectNavigationItem({ 'item': item });
+                    }
+                };
+                scope.selectAnchorItem = function (item, anchor) {
+                    if (scope.onSelectAnchorItem) {
+                        scope.onSelectAnchorItem({
+                            'item': item,
+                            'anchor': anchor
+                        });
                     }
                 };
                 scope.closeSplitView = function () {
@@ -4317,10 +4468,10 @@ Use this directive to construct a main content area inside the main editor windo
                 };
                 onInit();
                 //watch for the active culture changing, if it changes, update the current variant
-                if (scope.variants) {
+                if (scope.content.variants) {
                     scope.$watch(function () {
-                        for (var i = 0; i < scope.variants.length; i++) {
-                            var v = scope.variants[i];
+                        for (var i = 0; i < scope.content.variants.length; i++) {
+                            var v = scope.content.variants[i];
                             if (v.active) {
                                 return v.language.culture;
                             }
@@ -4343,11 +4494,11 @@ Use this directive to construct a main content area inside the main editor windo
                     nameDisabled: '<?',
                     menu: '=',
                     hideMenu: '<?',
-                    variants: '=',
+                    content: '=',
                     openVariants: '<',
                     hideChangeVariant: '<?',
-                    navigation: '=',
                     onSelectNavigationItem: '&?',
+                    onSelectAnchorItem: '&?',
                     showBackButton: '<?',
                     splitViewOpen: '=?',
                     onOpenInSplitView: '&?',
@@ -4870,14 +5021,25 @@ Use this directive to construct a header inside the main editor window.
                     active: false,
                     name: 'More'
                 };
-                scope.clickNavigationItem = function (selectedItem) {
+                scope.openNavigationItem = function (item) {
                     scope.showDropdown = false;
-                    runItemAction(selectedItem);
-                    setItemToActive(selectedItem);
+                    runItemAction(item);
+                    setItemToActive(item);
                     if (scope.onSelect) {
-                        scope.onSelect({ 'item': selectedItem });
+                        scope.onSelect({ 'item': item });
                     }
-                    eventsService.emit('app.tabChange', selectedItem);
+                    eventsService.emit('app.tabChange', item);
+                };
+                scope.openAnchorItem = function (item, anchor) {
+                    if (scope.onAnchorSelect) {
+                        scope.onAnchorSelect({
+                            'item': item,
+                            'anchor': anchor
+                        });
+                    }
+                    if (item.active !== true) {
+                        scope.openNavigationItem(item);
+                    }
                 };
                 scope.toggleDropdown = function () {
                     scope.showDropdown = !scope.showDropdown;
@@ -4957,13 +5119,54 @@ Use this directive to construct a header inside the main editor window.
                 templateUrl: 'views/components/editor/umb-editor-navigation.html',
                 scope: {
                     navigation: '=',
-                    onSelect: '&'
+                    onSelect: '&',
+                    onAnchorSelect: '&'
                 },
                 link: link
             };
             return directive;
         }
         angular.module('umbraco.directives.html').directive('umbEditorNavigation', EditorNavigationDirective);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        function UmbEditorNavigationItemController($scope, $element, $attrs) {
+            var vm = this;
+            vm.clicked = function () {
+                vm.onOpen({ item: vm.item });
+            };
+            vm.anchorClicked = function (anchor, $event) {
+                vm.onOpenAnchor({
+                    item: vm.item,
+                    anchor: anchor
+                });
+                $event.stopPropagation();
+                $event.preventDefault();
+            };
+            // needed to make sure that we update what anchors are active.
+            vm.mouseOver = function () {
+                $scope.$digest();
+            };
+            var componentNode = $element[0];
+            componentNode.classList.add('umb-sub-views-nav-item');
+            componentNode.addEventListener('mouseover', vm.mouseOver);
+            //ensure to unregister from all dom-events
+            $scope.$on('$destroy', function () {
+                componentNode.removeEventListener('mouseover', vm.mouseOver);
+            });
+        }
+        angular.module('umbraco.directives.html').component('umbEditorNavigationItem', {
+            templateUrl: 'views/components/editor/umb-editor-navigation-item.html',
+            controller: UmbEditorNavigationItemController,
+            controllerAs: 'vm',
+            bindings: {
+                item: '=',
+                onOpen: '&',
+                onOpenAnchor: '&',
+                index: '@'
+            }
+        });
     }());
     'use strict';
     (function () {
@@ -14415,6 +14618,23 @@ Use this directive to render a user group preview, where you can see the permiss
                 }
             }
         };
+    });
+    'use strict';
+    angular.module('umbraco.directives').directive('retriveDomElement', function () {
+        var directiveDefinitionObject = {
+            restrict: 'A',
+            selector: '[retriveDomElement]',
+            scope: { 'retriveDomElement': '&' },
+            link: {
+                post: function post(scope, iElement, iAttrs, controller) {
+                    scope.retriveDomElement({
+                        element: iElement,
+                        attributes: iAttrs
+                    });
+                }
+            }
+        };
+        return directiveDefinitionObject;
     });
     'use strict';
     /**
