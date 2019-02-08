@@ -12,11 +12,6 @@
       <orgName>FeaturedProducts.cshtml</orgName>
     </file>
     <file>
-      <guid>Home.cs</guid>
-      <orgPath>~/App_Data/Models</orgPath>
-      <orgName>Home.cs</orgName>
-    </file>
-    <file>
       <guid>7373036290_5e8420bf36_b.jpg</guid>
       <orgPath>~/Media/17552d12081d4d01b68132c495d6576f/00000006000000000000000000000000</orgPath>
       <orgName>7373036290_5e8420bf36_b.jpg</orgName>
@@ -267,7 +262,7 @@ It contains a simple website that contains many basic features to help get you s
                     "macroAlias": "latestBlogposts",
                     "macroParamsDictionary": {
                       "numberOfPosts": "3",
-                      "startNodeId": "1153"
+                      "startNodeId": "umb://media/1d770f10d1ca4a269d68071e2c9f7ac1"
                     }
                   },
                   "editor": {

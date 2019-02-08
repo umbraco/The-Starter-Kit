@@ -139,10 +139,10 @@ $PackageManifest = (Join-Path -Path $TempFolder -ChildPath "package.xml")
 $PackageManifestXML = [xml](Get-Content $PackageManifest)
 $PackageManifestXML.umbPackage.info.package.version = $FullVersionName
 $PackageManifestXML.umbPackage.info.package.name = $CreatedPackagesConfigXML.packages.package.name
-$PackageManifestXML.umbPackage.info.package.license."#cdata-section" = $CreatedPackagesConfigXML.packages.package.license."#cdata-section"
+$PackageManifestXML.umbPackage.info.package.license.set_InnerXML($CreatedPackagesConfigXML.packages.package.license."#cdata-section")
 $PackageManifestXML.umbPackage.info.package.license.url = $CreatedPackagesConfigXML.packages.package.license.url
 $PackageManifestXML.umbPackage.info.package.url = $CreatedPackagesConfigXML.packages.package.url
-$PackageManifestXML.umbPackage.info.author.name."#cdata-section" = $CreatedPackagesConfigXML.packages.package.author."#cdata-section"
+$PackageManifestXML.umbPackage.info.author.name = $CreatedPackagesConfigXML.packages.package.author."#cdata-section"
 $PackageManifestXML.umbPackage.info.author.website = $CreatedPackagesConfigXML.packages.package.author.url
 
 #clear the files from the manifest
@@ -176,6 +176,8 @@ Function MapPath ($f)
 }
 foreach($FileXML in $CreatedPackagesConfigXML.packages.package.files.file)
 {
+	Write-Host $FileXML -foregroundcolor Yellow
+
 	$File = Get-Item (MapPath $FileXML)
     if ($File -is [System.IO.DirectoryInfo]) 
     {
