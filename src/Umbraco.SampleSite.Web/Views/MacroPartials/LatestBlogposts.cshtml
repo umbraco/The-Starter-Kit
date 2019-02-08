@@ -17,6 +17,9 @@
 {
     @* Get the starting page *@
     var startNode = Umbraco.Content(startNodeId);
+
+    @* TODO: There needs to be a null check here in case the returned startNode is null! then handle accordingly below *@
+
     //Gets all blogposts to calculate pages
     var blogposts = startNode.Children.OrderBy(x => x.CreateDate).ToList();
     var pageCount = (int)Math.Ceiling((double)blogposts.Count / (double)numberOfPosts);
@@ -63,12 +66,12 @@
         }
         else
         {
-        <a class="nav-link nav-link--black" href="@(Model.Content.Url + "?page=" + (page - 1))">Prev</a>
+        <a class="nav-link nav-link--black" href="@(Model.Content.Url + " ?page=" + (page - 1))">Prev</a>
         }
 
         @for (int i = 1; i <= pageCount; i++)
         {
-        <a class="nav-link nav-link--black @(page == i ? "nav-link--active" : null)" href="@(Model.Content.Url + "?page=" + i)">@i</a>
+        <a class="nav-link nav-link--black @(page == i ? " nav-link--active" : null)" href="@(Model.Content.Url + " ?page=" + i)">@i</a>
         }
         @if (page == pageCount)
         {
@@ -76,7 +79,7 @@
         }
         else
         {
-        <a class="nav-link nav-link--black" href="@(Model.Content.Url + "?page=" + (page + 1))">Next</a>
+        <a class="nav-link nav-link--black" href="@(Model.Content.Url + " ?page=" + (page + 1))">Next</a>
         }
 
     </nav>

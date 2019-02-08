@@ -22,8 +22,8 @@ $PSScriptFilePath = Get-Item $MyInvocation.MyCommand.Path
 $RepoRoot = $PSScriptFilePath.Directory.Parent.FullName
 $BuildFolder = Join-Path -Path $RepoRoot -ChildPath "build";
 $WebProjFolder = Join-Path -Path $RepoRoot -ChildPath "src\Umbraco.SampleSite.Web";
-$ReleaseFolder = Join-Path -Path $BuildFolder -ChildPath "Releases-v8";
-$TempFolder = Join-Path -Path $ReleaseFolder -ChildPath "Temp-v8";
+$ReleaseFolder = Join-Path -Path $BuildFolder -ChildPath "Releases";
+$TempFolder = Join-Path -Path $ReleaseFolder -ChildPath "Temp";
 $SolutionRoot = Join-Path -Path $RepoRoot "src";
 
 if(( [string]::IsNullOrEmpty($ReleaseVersionNumber)))
@@ -124,7 +124,7 @@ if (-not $?)
 ####### DO THE UMBRACO PACKAGE BUILD #############
 
 # Set the version number in createdPackages.config
-$CreatedPackagesConfig = Join-Path -Path $WebProjFolder -ChildPath "App_Data\packages\created\createdPackages.config"
+$CreatedPackagesConfig = Join-Path -Path $WebProjFolder -ChildPath "App_Data\packages\createdPackages.config"
 $CreatedPackagesConfigXML = [xml](Get-Content $CreatedPackagesConfig)
 $CreatedPackagesConfigXML.packages.package.version = $FullVersionName
 $CreatedPackagesConfigXML.Save($CreatedPackagesConfig)
@@ -139,10 +139,10 @@ $PackageManifest = (Join-Path -Path $TempFolder -ChildPath "package.xml")
 $PackageManifestXML = [xml](Get-Content $PackageManifest)
 $PackageManifestXML.umbPackage.info.package.version = $FullVersionName
 $PackageManifestXML.umbPackage.info.package.name = $CreatedPackagesConfigXML.packages.package.name
-$PackageManifestXML.umbPackage.info.package.license.set_InnerXML($CreatedPackagesConfigXML.packages.package.license.get_InnerXML())
+$PackageManifestXML.umbPackage.info.package.license."#cdata-section" = $CreatedPackagesConfigXML.packages.package.license."#cdata-section"
 $PackageManifestXML.umbPackage.info.package.license.url = $CreatedPackagesConfigXML.packages.package.license.url
 $PackageManifestXML.umbPackage.info.package.url = $CreatedPackagesConfigXML.packages.package.url
-$PackageManifestXML.umbPackage.info.author.name = $CreatedPackagesConfigXML.packages.package.author.get_InnerXML()
+$PackageManifestXML.umbPackage.info.author.name."#cdata-section" = $CreatedPackagesConfigXML.packages.package.author."#cdata-section"
 $PackageManifestXML.umbPackage.info.author.website = $CreatedPackagesConfigXML.packages.package.author.url
 
 #clear the files from the manifest
