@@ -13566,7 +13566,7 @@
             entityType: 'Media',
             section: 'media',
             treeAlias: 'media',
-            idType: 'int'
+            idType: 'udi'
         };
         //combine the dialogOptions with any values returned from the server
         if ($scope.model.config) {
@@ -13741,7 +13741,7 @@
             entityType: 'Document',
             type: 'content',
             treeAlias: 'content',
-            idType: 'int'
+            idType: 'udi'
         };
         //combine the config with any values returned from the server
         if ($scope.model.config) {
@@ -13850,7 +13850,7 @@
             $scope.model.value = { type: 'content' };
         }
         if (!$scope.model.config) {
-            $scope.model.config = { idType: 'int' };
+            $scope.model.config = { idType: 'udi' };
         }
         if ($scope.model.value.id && $scope.model.value.type !== 'member') {
             var ent = 'Document';
@@ -14517,7 +14517,7 @@
             },
             treeAlias: $scope.model.config.startNode.type,
             section: $scope.model.config.startNode.type,
-            idType: 'int',
+            idType: 'udi',
             //only show the lang selector for content
             showLanguageSelector: $scope.model.config.startNode.type === 'content'
         };
@@ -19286,7 +19286,7 @@
                 section: 'content',
                 treeAlias: 'content',
                 multiPicker: false,
-                idType: $scope.model.config.idType ? $scope.model.config.idType : 'int',
+                idType: $scope.model.config.idType ? $scope.model.config.idType : 'udi',
                 submit: function submit(model) {
                     select(model.selection[0]);
                     editorService.close();
