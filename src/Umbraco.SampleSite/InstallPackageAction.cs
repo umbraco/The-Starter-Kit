@@ -42,23 +42,6 @@ namespace Umbraco.SampleSite
                 }
             }
 
-            var contentHome = contentService.GetRootContent().FirstOrDefault(x => x.ContentType.Alias == "home");
-            if (contentHome != null)
-            {
-                // update default design 
-                contentHome.SetValue("colorTheme", GetPreValueId(dataTypeService, "Home - Color Theme - Radio button list", "earth"));
-                contentHome.SetValue("font", GetPreValueId(dataTypeService, "Home - Font - Radio button list", "serif"));
-                contentService.Save(contentHome);
-            }
-
-            // update default currency pre value
-            IContent productContent = contentService.GetById(new Guid("485343b1-d99c-4789-a676-e9b4c98a38d4"));
-            if (productContent != null)
-            {
-                productContent.SetValue("defaultCurrency", GetPreValueId(dataTypeService, "Products - Default Currency - Dropdown list", "€"));
-                contentService.Save(productContent);
-            }
-
             // create media folders
 
             this.CreateMediaItem(mediaService, mediaTypeService, -1, "folder", new Guid("b6f11172-373f-4473-af0f-0b0e5aefd21c"), "Design", string.Empty, true);
@@ -70,22 +53,22 @@ namespace Umbraco.SampleSite
             IEnumerable<IMedia> rootMedia = mediaService.GetRootMedia().ToArray();
             try
             {
-                foreach (XElement selectNode in xmlData.Nodes())
+                foreach (XElement selectNode in xmlData.Elements("mediaItem"))
                 {
                     IMedia media1 = mediaRoot;
                     foreach (IMedia media2 in rootMedia)
                     {
-                        if (media2.Name.InvariantEquals(selectNode.Attribute("folder").Value))
+                        if (media2.Name.InvariantEquals((string)selectNode.Attribute("folder")))
                             media1 = media2;
                     }
 
                     // add UDI support
                     var key = selectNode.Attribute("key") != null &&
-                              string.IsNullOrWhiteSpace(selectNode.Attribute("key").Value) == false
-                        ? Guid.Parse(selectNode.Attribute("key").Value)
+                              string.IsNullOrWhiteSpace((string)selectNode.Attribute("key")) == false
+                        ? Guid.Parse((string)selectNode.Attribute("key"))
                         : Guid.Empty;
 
-                    int mediaItem = CreateMediaItem(mediaService, mediaTypeService, media1.Id, "image", key, selectNode.Attribute("name").Value, selectNode.Attribute("path").Value, false);
+                    int mediaItem = CreateMediaItem(mediaService, mediaTypeService, media1.Id, "image", key, (string)selectNode.Attribute("name"), (string)selectNode.Attribute("path"), false);
                 }
             }
             catch (Exception ex)
@@ -94,13 +77,19 @@ namespace Umbraco.SampleSite
             }
 
             // we need to update the references for the photo used in the grid in a blog post and about us page
+            //fixme - is this necessary since the images should be stored with udis already?
             ReplaceMediaGridValues(new Guid("a4174f42-86fb-47ee-a376-c3366597c5fc"), new Guid("208abda1-63b5-4ba1-bc2a-3d40fe156bb6"), "BlogPost", contentService, mediaService);
             ReplaceMediaGridValues(new Guid("d62f0f1d-e4a9-4093-94ae-4efce18872ee"), new Guid("981014a4-f0b9-46db-aa91-87cf2027f6e0"), "AboutUs", contentService, mediaService);
 
+            var contentHome = contentService.GetRootContent().FirstOrDefault(x => x.ContentType.Alias == "home");
             if (contentHome != null)
             {
                 // publish everything (moved here due to Deploy dependency checking)
                 contentService.SaveAndPublishBranch(contentHome, true);
+            }
+            else
+            {
+                Current.Logger.Warn<InstallPackageAction>("The installed Home page was not found");
             }
 
             return true;
@@ -132,11 +121,6 @@ namespace Umbraco.SampleSite
             }
         }
 
-        //public bool Execute(string packageName, XElement xmlData)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public string Alias()
         {
             return "SampleSiteInitialContent";
@@ -144,37 +128,9 @@ namespace Umbraco.SampleSite
 
         public bool Undo(string packageName, XElement xmlData)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// This occurs on package uninstall
-        /// </summary>
-        /// <param name="packageName"></param>
-        /// <param name="xmlData"></param>
-        /// <returns>
-        /// The return value doesn't make any difference
-        /// </returns>
-        public bool Undo(string packageName, XmlNode xmlData)
-        {
             //see https://github.com/umbraco/7.6-Starter-Kit/issues/26 - perhaps it's not a good idea to remove the form
             //FormsInstallationHelper.RemoveStarterKitForm();
             return true;
-        }
-
-        public XmlNode SampleXml()
-        {
-            throw new NotImplementedException();
-        }
-
-        private int GetPreValueId(IDataTypeService dts, string dataTypeName, string preValueText)
-        {
-            //var dataTypeDefinition = dts.GetAll().First<IDataType>((Func<IDataType, bool>)(x => x.Name == dataTypeName));
-            var dataTypeDefinition = dts.GetDataType(dataTypeName);
-
-            //TODO V8: How do we do this?!
-            //return dts.GetPreValuesCollectionByDataTypeId(dataTypeDefinition.Id).PreValuesAsDictionary.Where(d => d.Value.Value == preValueText).Select(f => f.Value.Id).First();
-            return -1;
         }
 
         private int CreateMediaItem(IMediaService service, IMediaTypeService mediaTypeService,

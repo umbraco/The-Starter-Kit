@@ -262,7 +262,7 @@ It contains a simple website that contains many basic features to help get you s
                     "macroAlias": "latestBlogposts",
                     "macroParamsDictionary": {
                       "numberOfPosts": "3",
-                      "startNodeId": "umb://media/1d770f10d1ca4a269d68071e2c9f7ac1"
+                      "startNodeId": "umb://document/1d770f10d1ca4a269d68071e2c9f7ac1"
                     }
                   },
                   "editor": {
@@ -2126,7 +2126,6 @@ It contains a simple website that contains many basic features to help get you s
           <Tab>Design</Tab>
           <SortOrder>1</SortOrder>
           <Mandatory>True</Mandatory>
-          <Description><![CDATA[This will be a custom property editor later]]></Description>
         </GenericProperty>
         <GenericProperty>
           <Name>Color Theme</Name>
@@ -2136,7 +2135,6 @@ It contains a simple website that contains many basic features to help get you s
           <Tab>Design</Tab>
           <SortOrder>2</SortOrder>
           <Mandatory>True</Mandatory>
-          <Description><![CDATA[This will be a custom property editor later]]></Description>
         </GenericProperty>
         <GenericProperty>
           <Name>Sitename</Name>
