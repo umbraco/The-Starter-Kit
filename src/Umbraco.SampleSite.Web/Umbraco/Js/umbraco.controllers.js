@@ -1119,7 +1119,7 @@
  */
     (function () {
         'use strict';
-        function DataTypeSettingsController($scope, dataTypeResource, dataTypeHelper, localizationService) {
+        function DataTypeSettingsController($scope, dataTypeResource, dataTypeHelper, localizationService, notificationsService, overlayService, formHelper) {
             var vm = this;
             vm.dataType = {};
             vm.loadingDataType = false;
@@ -1190,6 +1190,16 @@
                     vm.saveButtonState = 'success';
                     if ($scope.model && $scope.model.submit) {
                         $scope.model.submit($scope.model);
+                    }
+                }, function (err) {
+                    vm.saveButtonState = 'error';
+                    if (err.status === 400) {
+                        if (err.data && err.data.ModelState) {
+                            formHelper.handleServerValidation(err.data.ModelState);
+                            for (var e in err.data.ModelState) {
+                                notificationsService.error('Validation', err.data.ModelState[e][0]);
+                            }
+                        }
                     }
                 });
             }
@@ -14651,7 +14661,7 @@
             if (valueIds.length > 0) {
                 //need to determine which items we already have loaded
                 var renderModelIds = _.map($scope.renderModel, function (d) {
-                    return $scope.model.config.idType === 'udi' ? d.udi : d.id;
+                    return ($scope.model.config.idType === 'udi' ? d.udi : d.id).toString();
                 });
                 //get the ids that no longer exist
                 var toRemove = _.difference(renderModelIds, valueIds);
@@ -19489,7 +19499,7 @@
         angular.module('umbraco').controller('Umbraco.PropertyEditors.RTECodeEditorController', CodeEditorController);
     }());
     'use strict';
-    angular.module('umbraco').controller('Umbraco.PropertyEditors.RTEController', function ($scope, $q, assetsService, $timeout, tinyMceService, angularHelper, editorService, macroService, editorState) {
+    angular.module('umbraco').controller('Umbraco.PropertyEditors.RTEController', function ($scope, $q, assetsService, $timeout, tinyMceService, angularHelper) {
         // TODO: A lot of the code below should be shared between the grid rte and the normal rte
         $scope.isLoading = true;
         //To id the html textarea we need to use the datetime ticks because we can have multiple rte's per a single property alias
@@ -19498,7 +19508,7 @@
         var d = new Date();
         var n = d.getTime();
         $scope.textAreaHtmlId = $scope.model.alias + '_' + n + '_rte';
-        var editorConfig = $scope.model.config.editor;
+        var editorConfig = $scope.model.config ? $scope.model.config.editor : null;
         if (!editorConfig || angular.isString(editorConfig)) {
             editorConfig = tinyMceService.defaultPrevalues();
         }

@@ -51,10 +51,10 @@
         function removeProperty(obj, propertyPrefix) {
             for (var property in obj) {
                 if (obj.hasOwnProperty(property)) {
-                    if (property.startsWith(propertyPrefix) && obj[property]) {
+                    if (property.startsWith(propertyPrefix) && obj[property] !== undefined) {
                         obj[property] = undefined;
                     }
-                    if (_typeof(obj[property]) == 'object') {
+                    if (_typeof(obj[property]) === 'object') {
                         removeProperty(obj[property], propertyPrefix);
                     }
                 }

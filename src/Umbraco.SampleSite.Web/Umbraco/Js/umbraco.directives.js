@@ -1201,9 +1201,6 @@ Use this directive to render drawer view
 ) {
                         return;
                     }
-                    if (scope.userDialog) {
-                        closeUserDialog();
-                    }
                     navigationService.hideSearch();
                     navigationService.showTree(section.alias);
                     //in some cases the section will have a custom route path specified, if there is one we'll use it
@@ -3143,7 +3140,7 @@ Use this directive to render a button with a dropdown of alternative actions.
     (function () {
         'use strict';
         function ContentNodeInfoDirective($timeout, logResource, eventsService, userService, localizationService, dateHelper, editorService, redirectUrlsResource, overlayService) {
-            function link(scope, umbVariantContentCtrl) {
+            function link(scope) {
                 var evts = [];
                 var isInfoTab = false;
                 var auditTrailLoaded = false;
@@ -3221,22 +3218,17 @@ Use this directive to render a button with a dropdown of alternative actions.
                     if (scope.documentType !== null) {
                         scope.previewOpenUrl = '#/settings/documenttypes/edit/' + scope.documentType.id;
                     }
-                    //load in the audit trail if we are currently looking at the INFO tab
-                    if (umbVariantContentCtrl && umbVariantContentCtrl.editor) {
-                        var activeApp = _.find(umbVariantContentCtrl.editor.content.apps, function (a) {
-                            return a.active;
-                        });
-                        if (activeApp && activeApp.alias === 'umbInfo') {
-                            isInfoTab = true;
-                            loadAuditTrail();
-                            loadRedirectUrls();
-                        }
+                    var activeApp = _.find(scope.node.apps, function (a) {
+                        return a.active;
+                    });
+                    if (activeApp.alias === 'umbInfo') {
+                        loadRedirectUrls();
+                        loadAuditTrail();
                     }
                 }
                 scope.auditTrailPageChange = function (pageNumber) {
                     scope.auditTrailOptions.pageNumber = pageNumber;
-                    auditTrailLoaded = false;
-                    loadAuditTrail();
+                    loadAuditTrail(true);
                 };
                 scope.openDocumentType = function (documentType) {
                     var variantIsDirty = _.some(scope.node.variants, function (variant) {
@@ -3307,12 +3299,11 @@ Use this directive to render a button with a dropdown of alternative actions.
                     };
                     editorService.rollback(rollback);
                 };
-                function loadAuditTrail() {
+                function loadAuditTrail(forceReload) {
                     //don't load this if it's already done
-                    if (auditTrailLoaded) {
+                    if (auditTrailLoaded && !forceReload) {
                         return;
                     }
-                    ;
                     scope.loadingAuditTrail = true;
                     logResource.getPagedEntityLog(scope.auditTrailOptions).then(function (data) {
                         // get current backoffice user and format dates
@@ -3430,8 +3421,7 @@ Use this directive to render a button with a dropdown of alternative actions.
                         return;
                     }
                     if (isInfoTab) {
-                        auditTrailLoaded = false;
-                        loadAuditTrail();
+                        loadAuditTrail(true);
                         loadRedirectUrls();
                         setNodePublishStatus();
                         updateCurrentUrls();
