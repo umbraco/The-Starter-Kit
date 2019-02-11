@@ -171,21 +171,6 @@
       <orgPath>~/css</orgPath>
       <orgName>umbraco-starterkit-style.css</orgName>
     </file>
-    <file>
-      <guid>5c665e7f-10eb-483a-8277-c403438263e2_FeaturedProducts.cshtml</guid>
-      <orgPath>~/Views/MacroPartials</orgPath>
-      <orgName>FeaturedProducts.cshtml</orgName>
-    </file>
-    <file>
-      <guid>e5fc917a-375d-479d-8f33-32cbb39f50d4_LatestBlogposts.cshtml</guid>
-      <orgPath>~/Views/MacroPartials</orgPath>
-      <orgName>LatestBlogposts.cshtml</orgName>
-    </file>
-    <file>
-      <guid>Home.cs</guid>
-      <orgPath>~/App_Data/Models</orgPath>
-      <orgName>Home.cs</orgName>
-    </file>
   </files>
   <info>
     <package>

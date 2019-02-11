@@ -19,11 +19,9 @@ Alternatively if you are doing development for the starter kit, you can launch t
 
 The build script is: /build/build.ps1 run it in the powershell cli: `.\build\build.ps1`
 
-It will prompt you for the version number and pre-release. Example, enter `1.0.0` for the build number and 
-if it's a pre-release enter `beta-01` (be sure to enter the hyphen prefix). 
-If it's not a pre-release just press enter to skip that step.
+The build number is located in the `/build/build.xml` file.
 
-The package output will be `/build/Releases/(VersionNumber)/Umbraco.SampleSite.zip`
+The package output will be `/build/Releases/(VersionNumber)/Umbraco.SampleSite_4.0.0.zip` (but this should be the correct version you are building!)
 
 # Maintaining the package
 
