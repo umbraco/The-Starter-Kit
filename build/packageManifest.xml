@@ -513,7 +513,6 @@ It contains a simple website that contains many basic features to help get you s
               "controls": [
                 {
                   "value": {
-                    "id": 1121,
                     "udi": "umb://media/c0969cab13ab4de9819a848619ac2b5d",
                     "image": "/media/c0969cab13ab4de9819a848619ac2b5d/00000006000000000000000000000000/18095416144_44a566a5f4_h.jpg"
                   },
@@ -708,7 +707,6 @@ It contains a simple website that contains many basic features to help get you s
               "controls": [
                 {
                   "value": {
-                    "id": 1123,
                     "udi": "umb://media/55514845b8bd487cb3709724852fd6bb",
                     "image": "/media/55514845b8bd487cb3709724852fd6bb/00000006000000000000000000000000/4730684907_8a7f8759cb_b.jpg"
                   },
