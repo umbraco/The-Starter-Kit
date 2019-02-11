@@ -410,47 +410,6 @@ It contains a simple website that contains many basic features to help get you s
     {
       "grid": 12,
       "allowAll": true,
-      "$percentage": "100.00000000",
-      "$allowedLayouts": [
-        {
-          "label": "Article",
-          "name": "Article",
-          "areas": [
-            {
-              "grid": 4
-            },
-            {
-              "grid": 8
-            }
-          ]
-        },
-        {
-          "name": "Three Columns",
-          "areas": [
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            }
-          ]
-        },
-        {
-          "name": "FullWidth",
-          "areas": [
-            {
-              "grid": 12,
-              "allowAll": true
-            }
-          ]
-        }
-      ],
       "rows": []
     }
   ]
@@ -465,58 +424,6 @@ It contains a simple website that contains many basic features to help get you s
     {
       "grid": 12,
       "allowAll": true,
-      "$percentage": "100.00000000",
-      "$allowedLayouts": [
-        {
-          "label": "",
-          "name": "Full Width",
-          "areas": [
-            {
-              "grid": 12,
-              "editors": [
-                "headline"
-              ],
-              "allowAll": false,
-              "allowed": [
-                "rte",
-                "media",
-                "macro",
-                "embed",
-                "headline"
-              ]
-            }
-          ]
-        },
-        {
-          "label": "Article",
-          "name": "Article",
-          "areas": [
-            {
-              "grid": 4
-            },
-            {
-              "grid": 8
-            }
-          ]
-        },
-        {
-          "name": "Three Columns",
-          "areas": [
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            }
-          ]
-        }
-      ],
       "rows": []
     }
   ]
@@ -619,7 +526,6 @@ It contains a simple website that contains many basic features to help get you s
                     "config": {}
                   },
                   "active": false,
-                  "$index": 0
                 }
               ]
             },
@@ -638,7 +544,6 @@ It contains a simple website that contains many basic features to help get you s
                     "config": {}
                   },
                   "active": false,
-                  "$index": 0
                 },
                 {
                   "value": "<iframe width=\"360\" height=\"203\" src=\"https://www.youtube.com/embed/HPgKSCp_Y_U?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
@@ -671,52 +576,7 @@ It contains a simple website that contains many basic features to help get you s
   "sections": [
     {
       "grid": 12,
-      "allowAll": true,
-      "$percentage": "100.00000000",
-      "$allowedLayouts": [
-        {
-          "label": "",
-          "name": "Full Width",
-          "areas": [
-            {
-              "grid": 12,
-              "editors": [
-                "headline"
-              ],
-              "allowAll": false
-            }
-          ]
-        },
-        {
-          "label": "Article",
-          "name": "Article",
-          "areas": [
-            {
-              "grid": 4
-            },
-            {
-              "grid": 8
-            }
-          ]
-        },
-        {
-          "name": "Three Columns",
-          "areas": [
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            }
-          ]
-        }
-      ],
+      "allowAll": true,      
       "rows": []
     }
   ]
@@ -732,58 +592,6 @@ It contains a simple website that contains many basic features to help get you s
     {
       "grid": 12,
       "allowAll": true,
-      "$percentage": "100.00000000",
-      "$allowedLayouts": [
-        {
-          "label": "",
-          "name": "Full Width",
-          "areas": [
-            {
-              "grid": 12,
-              "editors": [
-                "headline"
-              ],
-              "allowAll": false,
-              "allowed": [
-                "rte",
-                "media",
-                "macro",
-                "embed",
-                "headline"
-              ]
-            }
-          ]
-        },
-        {
-          "label": "Article",
-          "name": "Article",
-          "areas": [
-            {
-              "grid": 4
-            },
-            {
-              "grid": 8
-            }
-          ]
-        },
-        {
-          "name": "Three Columns",
-          "areas": [
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            }
-          ]
-        }
-      ],
       "rows": [
         {
           "label": "",
@@ -793,93 +601,20 @@ It contains a simple website that contains many basic features to help get you s
               "grid": 12,
               "allowAll": false,
               "hasConfig": false,
-              "$allowedEditors": [
-                {
-                  "name": "Rich text editor",
-                  "alias": "rte",
-                  "view": "rte",
-                  "render": null,
-                  "icon": "icon-article",
-                  "config": {}
-                },
-                {
-                  "name": "Image",
-                  "alias": "media",
-                  "view": "media",
-                  "render": null,
-                  "icon": "icon-picture",
-                  "config": {}
-                },
-                {
-                  "name": "Macro",
-                  "alias": "macro",
-                  "view": "macro",
-                  "render": null,
-                  "icon": "icon-settings-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Embed",
-                  "alias": "embed",
-                  "view": "embed",
-                  "render": null,
-                  "icon": "icon-movie-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Headline",
-                  "alias": "headline",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-coin",
-                  "config": {
-                    "style": "font-size: 36px; line-height: 45px; font-weight: bold",
-                    "markup": "<h1>#value#</h1>"
-                  }
-                },
-                {
-                  "name": "Quote",
-                  "alias": "quote",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-quote",
-                  "config": {
-                    "style": "border-left: 3px solid #ccc; padding: 10px; color: #ccc; font-family: serif; font-style: italic; font-size: 18px",
-                    "markup": "<blockquote>#value#</blockquote>"
-                  }
-                },
-                {
-                  "name": "Form",
-                  "alias": "umbraco_form_picker",
-                  "view": "/App_Plugins/UmbracoForms/Backoffice/GridEditors/formpicker.html",
-                  "render": "macro",
-                  "icon": "icon-umb-contour",
-                  "config": {}
-                }
-              ],
-              "$allowsRTE": true,
               "controls": [
                 {
                   "value": "<p>Here's what could be improved in the Starter Kit so far:</p>\n<p> </p>\n<p>For v1:</p>\n<ul>\n<li>Use a custom grid editor for testimonials</li>\n<li>Integrated Analytics on pages</li>\n<li>Call To Action Button in the grid (with \"Tag Manager\" integration)</li>\n<li>Macro for fetching products (with friendly grid preview)</li>\n<li>Design Review (polish)</li>\n<li>Verify licenses of photos (Niels)</li>\n</ul>\n<p>For vNext</p>\n<ul>\n<li><span style=\"text-decoration: line-through;\">Swap text with uploaded logo</span></li>\n<li>Nicer pickers of products and employees</li>\n<li>Custom Listview for products and employees</li>\n<li>Discus template on blog posts</li>\n<li>404 template</li>\n<li>Member Login/Register/Profile/Forgot password</li>\n<li>Update default styling of grid header</li>\n<li>On a Blog post -&gt; Share/Social (tweet this / facebook this)</li>\n</ul>",
                   "editor": {
                     "alias": "rte"
                   },
-                  "$initializing": true,
                   "active": true,
-                  "$index": 1,
-                  "$uniqueId": "840b47ea-e382-addc-b6f4-8ab72418eb91",
-                  "$editorPath": "views/propertyeditors/grid/editors/rte.html"
                 }
               ],
-              "$percentage": "100.00000000",
-              "$uniqueId": "b45cd280-ed44-de7a-44e1-6bdf4f89a271",
               "active": true,
               "hasActiveChild": true
             }
           ],
           "hasConfig": false,
-          "$initialized": true,
-          "$uniqueId": "44d157a0-f413-28af-faba-46851215325f",
           "id": "5ea1e364-8406-e5e6-a82c-45985fd6054e",
           "hasActiveChild": true,
           "active": true
@@ -900,51 +635,6 @@ It contains a simple website that contains many basic features to help get you s
     {
       "grid": 12,
       "allowAll": true,
-      "$percentage": "100.00000000",
-      "$allowedLayouts": [
-        {
-          "label": "",
-          "name": "Full Width",
-          "areas": [
-            {
-              "grid": 12,
-              "editors": [
-                "headline"
-              ],
-              "allowAll": false
-            }
-          ]
-        },
-        {
-          "label": "Article",
-          "name": "Article",
-          "areas": [
-            {
-              "grid": 4
-            },
-            {
-              "grid": 8
-            }
-          ]
-        },
-        {
-          "name": "Three Columns",
-          "areas": [
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            }
-          ]
-        }
-      ],
       "rows": []
     }
   ]
@@ -964,58 +654,6 @@ It contains a simple website that contains many basic features to help get you s
     {
       "grid": 12,
       "allowAll": true,
-      "$percentage": "100.00000000",
-      "$allowedLayouts": [
-        {
-          "label": "",
-          "name": "Full Width",
-          "areas": [
-            {
-              "grid": 12,
-              "editors": [
-                "headline"
-              ],
-              "allowAll": false,
-              "allowed": [
-                "rte",
-                "media",
-                "macro",
-                "embed",
-                "headline"
-              ]
-            }
-          ]
-        },
-        {
-          "label": "Article",
-          "name": "Article",
-          "areas": [
-            {
-              "grid": 4
-            },
-            {
-              "grid": 8
-            }
-          ]
-        },
-        {
-          "name": "Three Columns",
-          "areas": [
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            }
-          ]
-        }
-      ],
       "rows": [
         {
           "label": "",
@@ -1025,92 +663,19 @@ It contains a simple website that contains many basic features to help get you s
               "grid": 12,
               "allowAll": false,
               "hasConfig": false,
-              "$allowedEditors": [
-                {
-                  "name": "Rich text editor",
-                  "alias": "rte",
-                  "view": "rte",
-                  "render": null,
-                  "icon": "icon-article",
-                  "config": {}
-                },
-                {
-                  "name": "Image",
-                  "alias": "media",
-                  "view": "media",
-                  "render": null,
-                  "icon": "icon-picture",
-                  "config": {}
-                },
-                {
-                  "name": "Macro",
-                  "alias": "macro",
-                  "view": "macro",
-                  "render": null,
-                  "icon": "icon-settings-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Embed",
-                  "alias": "embed",
-                  "view": "embed",
-                  "render": null,
-                  "icon": "icon-movie-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Headline",
-                  "alias": "headline",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-coin",
-                  "config": {
-                    "style": "font-size: 36px; line-height: 45px; font-weight: bold",
-                    "markup": "<h1>#value#</h1>"
-                  }
-                },
-                {
-                  "name": "Quote",
-                  "alias": "quote",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-quote",
-                  "config": {
-                    "style": "border-left: 3px solid #ccc; padding: 10px; color: #ccc; font-family: serif; font-style: italic; font-size: 18px",
-                    "markup": "<blockquote>#value#</blockquote>"
-                  }
-                },
-                {
-                  "name": "Form",
-                  "alias": "umbraco_form_picker",
-                  "view": "/App_Plugins/UmbracoForms/Backoffice/GridEditors/formpicker.html",
-                  "render": "macro",
-                  "icon": "icon-umb-contour",
-                  "config": {}
-                }
-              ],
-              "$allowsRTE": true,
               "controls": [
                 {
                   "value": "<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec sollicitudin molestie malesuada.</p>\n<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec sollicitudin molestie malesuada.</p>\n<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec sollicitudin molestie malesuada.</p>",
                   "editor": {
                     "alias": "rte"
                   },
-                  "$initializing": true,
                   "active": true,
-                  "$index": 1,
-                  "$uniqueId": "b0c96b00-11a4-9f49-9321-017383c95361",
-                  "$editorPath": "views/propertyeditors/grid/editors/rte.html"
                 }
               ],
-              "$percentage": "100.00000000",
-              "$uniqueId": "e89af46e-c861-d3cc-3fc4-a7fe3c4a7724",
               "active": true
             }
           ],
           "hasConfig": false,
-          "$initialized": true,
-          "$uniqueId": "314bdbd8-65f1-d03e-d4a0-06205a45179b",
           "id": "1f96a69f-0cb9-4a00-6a76-f8cec30befec",
           "hasActiveChild": true,
           "active": true
@@ -1132,58 +697,6 @@ It contains a simple website that contains many basic features to help get you s
     {
       "grid": 12,
       "allowAll": true,
-      "$percentage": "100.00000000",
-      "$allowedLayouts": [
-        {
-          "label": "",
-          "name": "Full Width",
-          "areas": [
-            {
-              "grid": 12,
-              "editors": [
-                "headline"
-              ],
-              "allowAll": false,
-              "allowed": [
-                "rte",
-                "media",
-                "macro",
-                "embed",
-                "headline"
-              ]
-            }
-          ]
-        },
-        {
-          "label": "Article",
-          "name": "Article",
-          "areas": [
-            {
-              "grid": 4
-            },
-            {
-              "grid": 8
-            }
-          ]
-        },
-        {
-          "name": "Three Columns",
-          "areas": [
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            }
-          ]
-        }
-      ],
       "rows": [
         {
           "label": "Article",
@@ -1192,71 +705,6 @@ It contains a simple website that contains many basic features to help get you s
             {
               "grid": 4,
               "hasConfig": false,
-              "$allowedEditors": [
-                {
-                  "name": "Rich text editor",
-                  "alias": "rte",
-                  "view": "rte",
-                  "render": null,
-                  "icon": "icon-article",
-                  "config": {}
-                },
-                {
-                  "name": "Image",
-                  "alias": "media",
-                  "view": "media",
-                  "render": null,
-                  "icon": "icon-picture",
-                  "config": {}
-                },
-                {
-                  "name": "Macro",
-                  "alias": "macro",
-                  "view": "macro",
-                  "render": null,
-                  "icon": "icon-settings-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Embed",
-                  "alias": "embed",
-                  "view": "embed",
-                  "render": null,
-                  "icon": "icon-movie-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Headline",
-                  "alias": "headline",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-coin",
-                  "config": {
-                    "style": "font-size: 36px; line-height: 45px; font-weight: bold",
-                    "markup": "<h1>#value#</h1>"
-                  }
-                },
-                {
-                  "name": "Quote",
-                  "alias": "quote",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-quote",
-                  "config": {
-                    "style": "border-left: 3px solid #ccc; padding: 10px; color: #ccc; font-family: serif; font-style: italic; font-size: 18px",
-                    "markup": "<blockquote>#value#</blockquote>"
-                  }
-                },
-                {
-                  "name": "Form",
-                  "alias": "umbraco_form_picker",
-                  "view": "/App_Plugins/UmbracoForms/Backoffice/GridEditors/formpicker.html",
-                  "render": "macro",
-                  "icon": "icon-umb-contour",
-                  "config": {}
-                }
-              ],
-              "$allowsRTE": true,
               "controls": [
                 {
                   "value": {
@@ -1267,106 +715,27 @@ It contains a simple website that contains many basic features to help get you s
                   "editor": {
                     "alias": "media"
                   },
-                  "$initializing": true,
                   "active": false,
-                  "$index": 1,
-                  "$uniqueId": "f034025e-39be-f838-f9af-7b3b42fe0ef8",
-                  "$editorPath": "views/propertyeditors/grid/editors/media.html"
                 }
               ],
-              "$percentage": "33.33333333",
-              "$uniqueId": "2f731640-d771-4afb-d727-8c9531889b4e",
               "active": false
             },
             {
               "grid": 8,
               "hasConfig": false,
-              "$allowedEditors": [
-                {
-                  "name": "Rich text editor",
-                  "alias": "rte",
-                  "view": "rte",
-                  "render": null,
-                  "icon": "icon-article",
-                  "config": {}
-                },
-                {
-                  "name": "Image",
-                  "alias": "media",
-                  "view": "media",
-                  "render": null,
-                  "icon": "icon-picture",
-                  "config": {}
-                },
-                {
-                  "name": "Macro",
-                  "alias": "macro",
-                  "view": "macro",
-                  "render": null,
-                  "icon": "icon-settings-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Embed",
-                  "alias": "embed",
-                  "view": "embed",
-                  "render": null,
-                  "icon": "icon-movie-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Headline",
-                  "alias": "headline",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-coin",
-                  "config": {
-                    "style": "font-size: 36px; line-height: 45px; font-weight: bold",
-                    "markup": "<h1>#value#</h1>"
-                  }
-                },
-                {
-                  "name": "Quote",
-                  "alias": "quote",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-quote",
-                  "config": {
-                    "style": "border-left: 3px solid #ccc; padding: 10px; color: #ccc; font-family: serif; font-style: italic; font-size: 18px",
-                    "markup": "<blockquote>#value#</blockquote>"
-                  }
-                },
-                {
-                  "name": "Form",
-                  "alias": "umbraco_form_picker",
-                  "view": "/App_Plugins/UmbracoForms/Backoffice/GridEditors/formpicker.html",
-                  "render": "macro",
-                  "icon": "icon-umb-contour",
-                  "config": {}
-                }
-              ],
-              "$allowsRTE": true,
               "controls": [
                 {
                   "value": "<p>Donec sollicitudin molestie malesuada. Proin eget tortor risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla porttitor accumsan tincidunt. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla porttitor accumsan tincidunt. Donec rutrum congue leo eget malesuada.</p>\n<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Pellentesque in ipsum id orci porta dapibus. Donec rutrum congue leo eget malesuada. Nulla porttitor accumsan tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. Sed porttitor lectus nibh.</p>\n<p>Pellentesque in ipsum id orci porta dapibus. Curabitur aliquet quam id dui posuere blandit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec rutrum congue leo eget malesuada. Donec rutrum congue leo eget malesuada. Sed porttitor lectus nibh. Nulla quis lorem ut libero malesuada feugiat.</p>",
                   "editor": {
                     "alias": "rte"
                   },
-                  "$initializing": true,
                   "active": true,
-                  "$index": 1,
-                  "$uniqueId": "cd30052b-e5e3-4da5-1eaf-3958ce04e756",
-                  "$editorPath": "views/propertyeditors/grid/editors/rte.html"
                 }
               ],
-              "$percentage": "66.66666667",
-              "$uniqueId": "df6c291c-69ed-3d42-a15e-8841b0a848d2",
               "active": true
             }
           ],
           "hasConfig": false,
-          "$initialized": true,
-          "$uniqueId": "f2e9d67f-2107-2296-4c26-16a2614ad2fd",
           "id": "011e74f2-b4de-0e4e-1cb9-23b2356b1213",
           "hasActiveChild": true,
           "active": true
@@ -1388,58 +757,6 @@ It contains a simple website that contains many basic features to help get you s
     {
       "grid": 12,
       "allowAll": true,
-      "$percentage": "100.00000000",
-      "$allowedLayouts": [
-        {
-          "label": "",
-          "name": "Full Width",
-          "areas": [
-            {
-              "grid": 12,
-              "editors": [
-                "headline"
-              ],
-              "allowAll": false,
-              "allowed": [
-                "rte",
-                "media",
-                "macro",
-                "embed",
-                "headline"
-              ]
-            }
-          ]
-        },
-        {
-          "label": "Article",
-          "name": "Article",
-          "areas": [
-            {
-              "grid": 4
-            },
-            {
-              "grid": 8
-            }
-          ]
-        },
-        {
-          "name": "Three Columns",
-          "areas": [
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            },
-            {
-              "grid": 4,
-              "allowAll": true
-            }
-          ]
-        }
-      ],
       "rows": [
         {
           "label": "",
@@ -1449,115 +766,34 @@ It contains a simple website that contains many basic features to help get you s
               "grid": 12,
               "allowAll": false,
               "hasConfig": false,
-              "$allowedEditors": [
-                {
-                  "name": "Rich text editor",
-                  "alias": "rte",
-                  "view": "rte",
-                  "render": null,
-                  "icon": "icon-article",
-                  "config": {}
-                },
-                {
-                  "name": "Image",
-                  "alias": "media",
-                  "view": "media",
-                  "render": null,
-                  "icon": "icon-picture",
-                  "config": {}
-                },
-                {
-                  "name": "Macro",
-                  "alias": "macro",
-                  "view": "macro",
-                  "render": null,
-                  "icon": "icon-settings-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Embed",
-                  "alias": "embed",
-                  "view": "embed",
-                  "render": null,
-                  "icon": "icon-movie-alt",
-                  "config": {}
-                },
-                {
-                  "name": "Headline",
-                  "alias": "headline",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-coin",
-                  "config": {
-                    "style": "font-size: 36px; line-height: 45px; font-weight: bold",
-                    "markup": "<h1>#value#</h1>"
-                  }
-                },
-                {
-                  "name": "Quote",
-                  "alias": "quote",
-                  "view": "textstring",
-                  "render": null,
-                  "icon": "icon-quote",
-                  "config": {
-                    "style": "border-left: 3px solid #ccc; padding: 10px; color: #ccc; font-family: serif; font-style: italic; font-size: 18px",
-                    "markup": "<blockquote>#value#</blockquote>"
-                  }
-                },
-                {
-                  "name": "Form",
-                  "alias": "umbraco_form_picker",
-                  "view": "/App_Plugins/UmbracoForms/Backoffice/GridEditors/formpicker.html",
-                  "render": "macro",
-                  "icon": "icon-umb-contour",
-                  "config": {}
-                }
-              ],
-              "$allowsRTE": true,
               "controls": [
                 {
                   "value": "<p>Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Proin eget tortor risus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec rutrum congue leo eget malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.</p>",
                   "editor": {
                     "alias": "rte"
                   },
-                  "$initializing": true,
                   "active": false,
-                  "$index": 1,
-                  "$uniqueId": "8873ab32-fcad-8105-a97a-090b7cbef255",
-                  "$editorPath": "views/propertyeditors/grid/editors/rte.html"
                 },
                 {
                   "value": "",
                   "editor": {
                     "alias": "embed"
                   },
-                  "$initializing": true,
                   "active": false,
-                  "$index": 1,
-                  "$uniqueId": "b3b7c0a1-d0d8-ad8a-b9c2-7cd5b50534c3",
-                  "$editorPath": "views/propertyeditors/grid/editors/embed.html"
                 },
                 {
                   "value": "<p> </p>\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta. Pellentesque in ipsum id orci porta dapibus.</p>\n<p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla quis lorem ut libero malesuada feugiat. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Sed porttitor lectus nibh. Vivamus suscipit tortor eget felis porttitor volutpat. Nulla porttitor accumsan tincidunt. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla porttitor accumsan tincidunt.</p>\n<p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec rutrum congue leo eget malesuada. Nulla porttitor accumsan tincidunt. Nulla quis lorem ut libero malesuada feugiat. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.</p>\n<p>Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.</p>",
                   "editor": {
                     "alias": "rte"
                   },
-                  "$initializing": true,
                   "active": true,
-                  "$index": 1,
-                  "$uniqueId": "87eec652-98bb-53c7-4e1d-65c0601effb4",
-                  "$editorPath": "views/propertyeditors/grid/editors/rte.html"
                 }
               ],
-              "$percentage": "100.00000000",
-              "$uniqueId": "6585fae0-21d9-38d0-7d07-301c27acfd88",
               "active": true,
               "hasActiveChild": true
             }
           ],
           "hasConfig": false,
-          "$initialized": true,
-          "$uniqueId": "be82c169-ec3c-10c3-147f-162d0a4213f8",
           "id": "4820aba2-8d6b-4a7e-7f57-e0490a9b475e",
           "hasActiveChild": true,
           "active": true
