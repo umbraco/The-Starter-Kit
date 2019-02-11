@@ -30,7 +30,8 @@ namespace Umbraco.SampleSite
             var master = fileService.GetTemplate("master");
             if (master != null)
             {
-                foreach (var template in fileService.GetTemplates())
+                var templatesToFind = new[] { "Blog", "Blogpost", "contact", "contentPage", "home", "people", "Person", "Product", "Products" };
+                foreach (var template in fileService.GetTemplates().Where(x => templatesToFind.InvariantContains(x.Alias)))
                 {
                     // we'll update the master template for all templates that doesn't have one already
                     if (template.Alias != master.Alias && (
