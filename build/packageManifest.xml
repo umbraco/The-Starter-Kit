@@ -1544,7 +1544,7 @@ It contains a simple website that contains many basic features to help get you s
           <Name>Pick a Contact Form</Name>
           <Alias>contactForm</Alias>
           <Type>Umbraco.NoEdit</Type>
-          <Definition>8e7f995c-bd81-4627-9932-c40e568ec788</Definition>
+          <Definition>f0bc4bfb-b499-40d6-ba86-058885a5178c</Definition>
           <Tab>Form</Tab>
           <SortOrder>3</SortOrder>
           <Mandatory>False</Mandatory>
