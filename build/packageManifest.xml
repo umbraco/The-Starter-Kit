@@ -162,11 +162,6 @@
       <orgName>SubNavigation.cshtml</orgName>
     </file>
     <file>
-      <guid>38498cd4-4a03-4815-96d1-290ee7f59050_TopNavigation.cshtml</guid>
-      <orgPath>~/Views/Partials/Navigation</orgPath>
-      <orgName>TopNavigation.cshtml</orgName>
-    </file>
-    <file>
       <guid>umbraco-starterkit-style.css</guid>
       <orgPath>~/css</orgPath>
       <orgName>umbraco-starterkit-style.css</orgName>
@@ -1249,7 +1244,7 @@ It contains a simple website that contains many basic features to help get you s
           <Tab>Design</Tab>
           <SortOrder>1</SortOrder>
           <Mandatory>True</Mandatory>
-          <Description><![CDATA[This will be a custom property editor later]]></Description>
+          <Description><![CDATA[]]></Description>
         </GenericProperty>
         <GenericProperty>
           <Name>Color Theme</Name>
@@ -1259,7 +1254,7 @@ It contains a simple website that contains many basic features to help get you s
           <Tab>Design</Tab>
           <SortOrder>2</SortOrder>
           <Mandatory>True</Mandatory>
-          <Description><![CDATA[This will be a custom property editor later]]></Description>
+          <Description><![CDATA[]]></Description>
         </GenericProperty>
         <GenericProperty>
           <Name>Sitename</Name>
