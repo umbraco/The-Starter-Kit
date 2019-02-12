@@ -1849,8 +1849,8 @@ It contains a simple website that contains many basic features to help get you s
     Layout = null;
     // Get basic design settings from the homepage
     var home = (Home)Model.Root();
-    var font = home.FontString;
-    var colorTheme = home.ColorThemeString;
+    var font = home.Font;
+    var colorTheme = home.ColorTheme;
 }
 
 <!doctype html>
