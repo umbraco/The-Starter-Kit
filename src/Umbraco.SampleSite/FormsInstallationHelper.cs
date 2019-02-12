@@ -14,7 +14,7 @@ namespace Umbraco.SampleSite
         private readonly ServiceContext _services;
 
         private static readonly Regex PreInstallContactFormHtmlPattern = new Regex(@"@Umbraco\.RenderMacro\(\""renderUmbracoForm\""\,[\.\w\{\}\=\(\)\s]+\)", RegexOptions.Compiled);
-        private static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.Content.ContactForm.ToString() })";
+        private static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.ContactForm.ToString() })";
 
         private static readonly Regex PostInstallContactFormHtmlPattern = new Regex(@"\<p class=\""compat-msg\""\>.+?\<\/p\>", RegexOptions.Compiled | RegexOptions.Singleline);
         private static string PostInstallContactFormHtml = @"<p class=""compat-msg"">
@@ -23,7 +23,7 @@ namespace Umbraco.SampleSite
         <br /><br />
         <a href=""/umbraco/#/forms"" class=""button button--border--solid"">Go to Back Office and install Forms</a>
         <!-- When Umbraco Forms is installed, uncomment this line -->
-        @* @Umbraco.RenderMacro(""renderUmbracoForm"", new {FormGuid=Model.Content.ContactForm.ToString()}) *@
+        @* @Umbraco.RenderMacro(""renderUmbracoForm"", new {FormGuid=Model.ContactForm.ToString()}) *@
         </p>";
 
         private const string DocTypeAlias = "contact";
@@ -121,7 +121,7 @@ namespace Umbraco.SampleSite
                     Current.Logger.Warn<FormsInstallationHelper>("Unable to find property {PropertyAlias} on {DocTypeAlias} to update for Forms installation", PropertyAlias, DocTypeAlias);
                     return;
                 }
-                    
+                
                 var formPickerDataType = dataTypeService.GetByEditorAlias(FormDataTypeAlias).FirstOrDefault();
                 if(formPickerDataType == null)
                 {
@@ -177,7 +177,7 @@ namespace Umbraco.SampleSite
             var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Models.Form");
             if (formsType == null) return;
 
-            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Core.Data.Storage.FormStorage");
+            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Core.Data.Storage.IFormStorage");
             if (formsStorageType == null) return;
 
             //this is the form id that is installed
@@ -187,11 +187,12 @@ namespace Umbraco.SampleSite
             object formsStorageInstance;
             try
             {
-                formsStorageInstance = Activator.CreateInstance(formsStorageType);
+                formsStorageInstance = Current.Factory.GetInstance(formsStorageType);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //If we cannot create it then there's nothing we can do
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to get instance of Umbraco.Forms.Core.Data.Storage.IFormStorage from Container");
                 return;
             }
 
@@ -202,9 +203,12 @@ namespace Umbraco.SampleSite
 
                 var deleteResult = CallMethod(formsStorageInstance, "DeleteForm", form);
             }
-            finally
+            catch (Exception ex)
             {
-                CallMethod(formsStorageInstance, "Dispose");
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to call method DeleteForm on FormStorage");
+
+                //If we cannot create it then there's nothing we can do
+                return;
             }
 
             Current.Logger.Info<FormsInstallationHelper>("Deleted Form created from Starter Kit");
@@ -224,9 +228,10 @@ namespace Umbraco.SampleSite
                 if (formsAssembly == null)
                     throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //forms assembly isn't there
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to find the Assembly Umbraco.Forms.Core");
                 return;
             }
 
@@ -237,18 +242,21 @@ namespace Umbraco.SampleSite
             //deserialize the form from the json file
             var form = JsonConvert.DeserializeObject(FormsDefinitions.ContactForm, formsType);
 
-            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Core.Data.Storage.FormStorage");
+            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Core.Data.Storage.IFormStorage");
             if (formsStorageType == null)
-                throw new InvalidOperationException("Could not find type Umbraco.Forms.Core.Data.Storage.FormStorage in assembly " + formsAssembly);
+                throw new InvalidOperationException("Could not find type Umbraco.Forms.Core.Data.Storage.IFormStorage in assembly " + formsAssembly);
+
 
             //create a FormsStorage instance
             object formsStorageInstance;
             try
             {
-                formsStorageInstance = Activator.CreateInstance(formsStorageType);
+                formsStorageInstance = Current.Factory.GetInstance(formsStorageType);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to get instance of Umbraco.Forms.Core.Data.Storage.IFormStorage from Container");
+
                 //If we cannot create it then there's nothing we can do
                 return;
             }
@@ -258,9 +266,12 @@ namespace Umbraco.SampleSite
             {
                 CallMethod(formsStorageInstance, "InsertForm", form, string.Empty, false);
             }
-            finally
+            catch (Exception ex)
             {
-                CallMethod(formsStorageInstance, "Dispose");
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to call method InsertForm on FormStorage");
+
+                //If we cannot create it then there's nothing we can do
+                return;
             }
 
             Current.Logger.Info<FormsInstallationHelper>("Created Form for Starter Kit");
