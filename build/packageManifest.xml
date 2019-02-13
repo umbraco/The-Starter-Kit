@@ -190,7 +190,7 @@ It contains a simple website that contains many basic features to help get you s
   </info>
   <Documents>
     <DocumentSet importMode="root">
-      <home id="1133" key="ca4249ed-2b23-4337-b522-63cabe5587d1" parentID="-1" level="1" creatorID="-1" sortOrder="0" createDate="2019-01-09T09:05:38" updateDate="2019-02-08T13:17:47" nodeName="Home" urlName="home" path="-1,1133" isDoc="" nodeType="1079" nodeTypeAlias="home" creatorName="A User" writerName="A User" writerID="-1" template="1084" isPublished="true">
+      <home id="1133" key="ca4249ed-2b23-4337-b522-63cabe5587d1" parentID="-1" level="1" creatorID="-1" sortOrder="0" createDate="2019-01-09T09:05:38" updateDate="2019-02-13T08:52:24" nodeName="Home" urlName="home" path="-1,1133" isDoc="" nodeType="1079" nodeTypeAlias="home" creatorName="A User" writerName="A User" writerID="-1" template="1084" isPublished="true">
         <heroHeader><![CDATA[Umbraco Demo]]></heroHeader>
         <heroDescription><![CDATA[Moonfish, steelhead, lamprey southern flounder tadpole fish sculpin bigeye, blue-redstripe danio collared dogfish. Smalleye squaretail goldfish arowana butterflyfish pipefish wolf-herring jewel tetra, shiner; gibberfish red velvetfish. Thornyhead yellowfin pike threadsail ayu cutlassfish.]]></heroDescription>
         <heroCTACaption><![CDATA[Check our products]]></heroCTACaption>
@@ -224,17 +224,20 @@ It contains a simple website that contains many basic features to help get you s
                     }
                   },
                   "editor": {
-                    "alias": "macro"
+                    "name": "Macro",
+                    "alias": "macro",
+                    "view": "macro",
+                    "render": null,
+                    "icon": "icon-settings-alt",
+                    "config": {}
                   },
                   "active": false
                 }
-              ],
-              "active": false
+              ]
             }
           ],
           "hasConfig": false,
-          "id": "314cb47b-fbe1-eeb6-f7cc-38db875d0f06",
-          "active": false
+          "id": "314cb47b-fbe1-eeb6-f7cc-38db875d0f06"
         }
       ]
     }
@@ -246,10 +249,10 @@ It contains a simple website that contains many basic features to help get you s
         <FooterCtalink><![CDATA[umb://document/1d770f10d1ca4a269d68071e2c9f7ac1]]></FooterCtalink>
         <footerAddress><![CDATA[Umbraco HQ - Unicorn Square - Haubergsvej 1 - 5000 Odense C - Denmark - +45 70 26 11 62]]></footerAddress>
         <HeroBackgroundImage><![CDATA[umb://media/662af6ca411a4c93a6c722c4845698e7]]></HeroBackgroundImage>
-        <font>2</font>
-        <colorTheme>2</colorTheme>
+        <font><![CDATA[serif]]></font>
+        <colorTheme><![CDATA[earth]]></colorTheme>
         <sitename><![CDATA[Umbraco Sample Site]]></sitename>
-        <products id="1134" key="ec4aafcc-0c25-4f25-a8fe-705bfae1d324" parentID="1133" level="2" creatorID="-1" sortOrder="0" createDate="2019-01-09T09:09:39" updateDate="2019-02-06T08:16:03" nodeName="Products" urlName="products" path="-1,1133,1134" isDoc="" nodeType="1109" nodeTypeAlias="products" creatorName="A User" writerName="A User" writerID="-1" template="1108" isPublished="true">
+        <products id="1134" key="ec4aafcc-0c25-4f25-a8fe-705bfae1d324" parentID="1133" level="2" creatorID="-1" sortOrder="0" createDate="2019-01-09T09:09:39" updateDate="2019-02-13T08:51:31" nodeName="Products" urlName="products" path="-1,1133,1134" isDoc="" nodeType="1109" nodeTypeAlias="products" creatorName="A User" writerName="A User" writerID="-1" template="1108" isPublished="true">
           <pageTitle><![CDATA[Our Gorgeous Selection]]></pageTitle>
           <bodyText><![CDATA[{
   "name": "1 column layout",
@@ -263,7 +266,7 @@ It contains a simple website that contains many basic features to help get you s
 }]]></bodyText>
           <keywords><![CDATA[[]]]></keywords>
           <umbracoNavihide>0</umbracoNavihide>
-          <defaultCurrency><![CDATA[€]]></defaultCurrency>
+          <defaultCurrency><![CDATA[["€"]]]></defaultCurrency>
           <featuredProducts><![CDATA[umb://document/262beb7053a649b89e98cfde2e85a78e,umb://document/df1eb830411b4d41a3433917b76d533c,umb://document/4e96411ab8e1435f93222faee30ef5f2,umb://document/d390a562107d4f028df757aa86bad752,umb://document/bb7d5ae007ac40b8b5b918c36947fb56,umb://document/202cdc2f1a4540f4a653a7b321e1c54c,umb://document/103171c8e11c40029bb2f3404cada22a,umb://document/061662b9b02a4dcfaf5992b603e8e3e1]]></featuredProducts>
           <product id="1137" key="df1eb830-411b-4d41-a343-3917b76d533c" parentID="1134" level="4" creatorID="-1" sortOrder="1" createDate="2019-01-09T09:43:29" updateDate="2019-02-04T15:22:12" nodeName="Tattoo" urlName="tattoo" path="-1,1133,1134,1137" isDoc="" nodeType="1103" nodeTypeAlias="product" creatorName="A User" writerName="A User" writerID="-1" template="1102" isPublished="true">
             <productName><![CDATA[Tattoo]]></productName>
@@ -1849,8 +1852,8 @@ It contains a simple website that contains many basic features to help get you s
     Layout = null;
     // Get basic design settings from the homepage
     var home = (Home)Model.Root();
-    var font = home.Font;
-    var colorTheme = home.ColorTheme;
+    var font = home.FontString;
+    var colorTheme = home.ColorThemeString;
 }
 
 <!doctype html>
@@ -5026,10 +5029,10 @@ article {
   <Languages />
   <DataTypes>
     <DataType Name="Home - Call To Action Link - Content Picker" Id="Umbraco.ContentPicker" Definition="3ece86aa-61ad-45d5-b1dd-8f02f25df949" DatabaseType="Nvarchar" Configuration="{&quot;ShowOpenButton&quot;:false,&quot;StartNodeId&quot;:&quot;umb://document/b61e08cd366445759a7295848cb803ac&quot;}" />
-    <DataType Name="Home - Color Theme - Radio button list" Id="Umbraco.RadioButtonList" Definition="71548df5-836c-41f8-96ac-5b98fe5e2e19" DatabaseType="Integer" Configuration="{&quot;Items&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;water&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;earth&quot;},{&quot;id&quot;:3,&quot;value&quot;:&quot;sun&quot;}]}" />
+    <DataType Name="Home - Color Theme - Radio button list" Id="Umbraco.RadioButtonList" Definition="71548df5-836c-41f8-96ac-5b98fe5e2e19" DatabaseType="Nvarchar" Configuration="{&quot;Items&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;water&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;earth&quot;},{&quot;id&quot;:3,&quot;value&quot;:&quot;sun&quot;}]}" />
     <DataType Name="Home - Content - Grid layout" Id="Umbraco.Grid" Definition="34a7f8f5-a84e-439b-9322-466ff7ed8866" DatabaseType="Ntext" Configuration="{&quot;Items&quot;:{&quot;styles&quot;:[],&quot;config&quot;:[],&quot;columns&quot;:12,&quot;templates&quot;:[{&quot;name&quot;:&quot;1 column layout&quot;,&quot;sections&quot;:[{&quot;grid&quot;:12}]}],&quot;layouts&quot;:[{&quot;name&quot;:&quot;Full Width&quot;,&quot;areas&quot;:[{&quot;grid&quot;:12,&quot;allowAll&quot;:false,&quot;allowed&quot;:[&quot;media&quot;,&quot;macro&quot;,&quot;embed&quot;,&quot;headline&quot;]}]},{&quot;name&quot;:&quot;Half and half&quot;,&quot;areas&quot;:[{&quot;grid&quot;:6,&quot;allowAll&quot;:false,&quot;allowed&quot;:[&quot;rte&quot;,&quot;media&quot;,&quot;macro&quot;,&quot;embed&quot;,&quot;headline&quot;,&quot;quote&quot;]},{&quot;grid&quot;:6,&quot;allowAll&quot;:false,&quot;allowed&quot;:[&quot;quote&quot;,&quot;headline&quot;,&quot;embed&quot;,&quot;macro&quot;,&quot;media&quot;,&quot;rte&quot;]}]},{&quot;name&quot;:&quot;Testimonials&quot;,&quot;areas&quot;:[{&quot;grid&quot;:4,&quot;allowAll&quot;:false,&quot;allowed&quot;:[]},{&quot;grid&quot;:4,&quot;allowAll&quot;:false,&quot;allowed&quot;:[]},{&quot;grid&quot;:4,&quot;allowAll&quot;:false,&quot;allowed&quot;:[]}]}]},&quot;Rte&quot;:{&quot;toolbar&quot;:[&quot;code&quot;,&quot;bold&quot;,&quot;italic&quot;,&quot;styleselect&quot;,&quot;alignleft&quot;,&quot;aligncenter&quot;,&quot;alignright&quot;,&quot;bullist&quot;,&quot;numlist&quot;,&quot;outdent&quot;,&quot;indent&quot;,&quot;link&quot;,&quot;image&quot;,&quot;ace&quot;],&quot;stylesheets&quot;:[],&quot;maxImageSize&quot;:500,&quot;mode&quot;:&quot;classic&quot;,&quot;dimensions&quot;:{&quot;height&quot;:500}}}" />
-    <DataType Name="Home - Design - Media Picker" Id="Umbraco.MediaPicker" Definition="135d60e0-64d9-49ed-ab08-893c9ba44ae5" DatabaseType="Ntext" Configuration="{&quot;Multiple&quot;:false,&quot;OnlyImages&quot;:true,&quot;DisableFolderSelect&quot;:true,&quot;StartNodeId&quot;:&quot;umb://document/b61e08cd366445759a7295848cb803ac&quot;}" />
-    <DataType Name="Home - Font - Radio button list" Id="Umbraco.RadioButtonList" Definition="fff3c360-3f90-45b3-a554-e29ca72cdce4" DatabaseType="Integer" Configuration="{&quot;Items&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;standard&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;serif&quot;},{&quot;id&quot;:3,&quot;value&quot;:&quot;mono&quot;}]}" />
+    <DataType Name="Home - Design - Media Picker" Id="Umbraco.MediaPicker" Definition="135d60e0-64d9-49ed-ab08-893c9ba44ae5" DatabaseType="Ntext" Configuration="{&quot;Multiple&quot;:false,&quot;OnlyImages&quot;:true,&quot;DisableFolderSelect&quot;:true,&quot;StartNodeId&quot;:&quot;umb://media/3464d78ec1d24fe4807d402672b237a5&quot;}" />
+    <DataType Name="Home - Font - Radio button list" Id="Umbraco.RadioButtonList" Definition="fff3c360-3f90-45b3-a554-e29ca72cdce4" DatabaseType="Nvarchar" Configuration="{&quot;Items&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;standard&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;serif&quot;},{&quot;id&quot;:3,&quot;value&quot;:&quot;mono&quot;}]}" />
     <DataType Name="Home - Logo - Media Picker" Id="Umbraco.MediaPicker" Definition="519eaa41-b905-4371-aa7c-40c9b3946f66" DatabaseType="Ntext" Configuration="{&quot;Multiple&quot;:false,&quot;OnlyImages&quot;:true,&quot;DisableFolderSelect&quot;:true,&quot;StartNodeId&quot;:&quot;umb://document/b61e08cd366445759a7295848cb803ac&quot;}" />
     <DataType Name="Blog - How many posts should be shown - Slider" Id="Umbraco.Slider" Definition="9d5ba2c5-ed7a-41f8-b454-9fc65f48752e" DatabaseType="Nvarchar" Configuration="{&quot;EnableRange&quot;:false,&quot;InitialValue&quot;:3,&quot;InitialValue2&quot;:0,&quot;MinimumValue&quot;:1,&quot;MaximumValue&quot;:20,&quot;StepIncrements&quot;:1}" />
     <DataType Name="Blogpost - Categories - Tags" Id="Umbraco.Tags" Definition="9d0726e6-5fa7-4455-8fe6-ed5bf9057cc4" DatabaseType="Nvarchar" Configuration="{&quot;Group&quot;:&quot;default&quot;,&quot;StorageType&quot;:1,&quot;Delimiter&quot;:&quot;\u0000&quot;}" />
