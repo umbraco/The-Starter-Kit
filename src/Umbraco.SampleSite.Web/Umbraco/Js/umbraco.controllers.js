@@ -6797,7 +6797,6 @@
         function Video_player(videoId) {
             // Get dom elements
             this.container = document.getElementById(videoId);
-            this.video = this.container.getElementsByTagName('video')[0];
             //Create controls
             this.controls = document.createElement('div');
             this.controls.className = 'video-controls';
@@ -6815,73 +6814,6 @@
             this.controls.appendChild(this.loader);
             this.loader.appendChild(this.progress_bar);
         }
-        Video_player.prototype.seeking = function () {
-            // get the value of the seekbar (hidden input[type="range"])
-            var time = this.video.duration * (this.seek_bar.value / 100);
-            // Update video to seekbar value
-            this.video.currentTime = time;
-        };
-        // Stop video when user initiates seeking
-        Video_player.prototype.start_seek = function () {
-            this.video.pause();
-        };
-        // Start video when user stops seeking
-        Video_player.prototype.stop_seek = function () {
-            this.video.play();
-        };
-        // Update the progressbar (span.loader) according to video.currentTime
-        Video_player.prototype.update_progress_bar = function () {
-            // Get video progress in %
-            var value = 100 / this.video.duration * this.video.currentTime;
-            // Update progressbar
-            this.progress_bar.style.width = value + '%';
-        };
-        // Bind progressbar to mouse when seeking
-        Video_player.prototype.handle_mouse_move = function (event) {
-            // Get position of progressbar relative to browser window
-            var pos = this.progress_bar.getBoundingClientRect().left;
-            // Make sure event is reckonized cross-browser
-            event = event || window.event;
-            // Update progressbar
-            this.progress_bar.style.width = event.clientX - pos + 'px';
-        };
-        // Eventlisteners for seeking
-        Video_player.prototype.video_event_handler = function (videoPlayer, interval) {
-            // Update the progress bar
-            var animate_progress_bar = setInterval(function () {
-                videoPlayer.update_progress_bar();
-            }, interval);
-            // Fire when input value changes (user seeking)
-            videoPlayer.seek_bar.addEventListener('change', function () {
-                videoPlayer.seeking();
-            });
-            // Fire when user clicks on seekbar
-            videoPlayer.seek_bar.addEventListener('mousedown', function (clickEvent) {
-                // Pause video playback
-                videoPlayer.start_seek();
-                // Stop updating progressbar according to video progress
-                clearInterval(animate_progress_bar);
-                // Update progressbar to where user clicks
-                videoPlayer.handle_mouse_move(clickEvent);
-                // Bind progressbar to cursor
-                window.onmousemove = function (moveEvent) {
-                    videoPlayer.handle_mouse_move(moveEvent);
-                };
-            });
-            // Fire when user releases seekbar
-            videoPlayer.seek_bar.addEventListener('mouseup', function () {
-                // Unbind progressbar from cursor
-                window.onmousemove = null;
-                // Start video playback
-                videoPlayer.stop_seek();
-                // Animate the progressbar
-                animate_progress_bar = setInterval(function () {
-                    videoPlayer.update_progress_bar();
-                }, interval);
-            });
-        };
-        var videoPlayer = new Video_player('video_1');
-        videoPlayer.video_event_handler(videoPlayer, 17);
     }
     angular.module('umbraco').controller('Umbraco.Dashboard.FormsDashboardController', FormsController);
     function startupLatestEditsController($scope) {
@@ -8399,6 +8331,17 @@
             }
             evts.push(eventsService.on('app.refreshEditor', function (name, error) {
                 loadDocumentType();
+            }));
+            evts.push(eventsService.on('editors.documentType.saved', function (name, args) {
+                if (args.documentType.allowedTemplates.length > 0) {
+                    navigationService.syncTree({
+                        tree: 'templates',
+                        path: [],
+                        forceReload: true
+                    }).then(function (syncArgs) {
+                        navigationService.reloadNode(syncArgs.node);
+                    });
+                }
             }));
             //ensure to unregister from all events!
             $scope.$on('$destroy', function () {
@@ -14029,7 +13972,7 @@
             var selectedVals = _.map(_.filter($scope.selectedItems, function (f) {
                 return f.checked;
             }), function (m) {
-                return m.key;
+                return m.value;
             });
             //get all of the same values between the arrays
             var same = _.intersection($scope.model.value, selectedVals);
@@ -14039,7 +13982,7 @@
             }
             $scope.selectedItems = [];
             for (var i = 0; i < configItems.length; i++) {
-                var isChecked = _.contains($scope.model.value, configItems[i].id);
+                var isChecked = _.contains($scope.model.value, configItems[i].value);
                 $scope.selectedItems.push({
                     checked: isChecked,
                     key: configItems[i].id,
@@ -14049,12 +13992,12 @@
         }
         function changed(item) {
             var index = _.findIndex($scope.model.value, function (v) {
-                return v === item.key;
+                return v === item.value;
             });
             if (item.checked) {
                 //if it doesn't exist in the model, then add it
                 if (index < 0) {
-                    $scope.model.value.push(item.key);
+                    $scope.model.value.push(item.value);
                 }
             } else {
                 //if it exists in the model, then remove it
@@ -14485,6 +14428,10 @@
             }
         };
         if ($scope.model.config) {
+            //special case, if the `startNode` is falsy on the server config delete it entirely so the default value is merged in
+            if (!$scope.model.config.startNode) {
+                delete $scope.model.config.startNode;
+            }
             //merge the server config on top of the default config, then set the server config to use the result
             $scope.model.config = angular.extend(defaultConfig, $scope.model.config);
         }
@@ -15122,10 +15069,35 @@
         });
     });
     'use strict';
-    angular.module('umbraco').controller('Umbraco.PropertyEditors.GridPrevalueEditor.LayoutConfigController', function ($scope) {
+    function EditConfigController($scope) {
+        $scope.close = function () {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+        $scope.submit = function () {
+            if ($scope.model && $scope.model.submit) {
+                $scope.model.submit($scope.model);
+            }
+        };
+    }
+    angular.module('umbraco').controller('Umbraco.PropertyEditors.GridPrevalueEditor.EditConfigController', EditConfigController);
+    'use strict';
+    angular.module('umbraco').controller('Umbraco.PropertyEditors.GridPrevalueEditor.LayoutConfigController', function ($scope, localizationService) {
+        function init() {
+            setTitle();
+        }
+        function setTitle() {
+            if (!$scope.model.title) {
+                localizationService.localize('grid_addGridLayout').then(function (data) {
+                    $scope.model.title = data;
+                });
+            }
+        }
         $scope.currentLayout = $scope.model.currentLayout;
         $scope.columns = $scope.model.columns;
         $scope.rows = $scope.model.rows;
+        $scope.currentSection = undefined;
         $scope.scaleUp = function (section, max, overflow) {
             var add = 1;
             if (overflow !== true) {
@@ -15167,8 +15139,10 @@
             var index = template.sections.indexOf(section);
             template.sections.splice(index, 1);
         };
-        $scope.closeSection = function () {
-            $scope.currentSection = undefined;
+        $scope.close = function () {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
         };
         $scope.$watch('currentLayout', function (layout) {
             if (layout) {
@@ -15179,9 +15153,20 @@
                 $scope.availableLayoutSpace = $scope.columns - total;
             }
         }, true);
+        init();
     });
     'use strict';
-    function RowConfigController($scope) {
+    function RowConfigController($scope, localizationService) {
+        function init() {
+            setTitle();
+        }
+        function setTitle() {
+            if (!$scope.model.title) {
+                localizationService.localize('grid_addRowConfiguration').then(function (data) {
+                    $scope.model.title = data;
+                });
+            }
+        }
         $scope.currentRow = $scope.model.currentRow;
         $scope.editors = $scope.model.editors;
         $scope.columns = $scope.model.columns;
@@ -15237,6 +15222,11 @@
         $scope.closeArea = function () {
             $scope.currentCell = undefined;
         };
+        $scope.close = function () {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
         $scope.nameChanged = false;
         var originalName = $scope.currentRow.name;
         $scope.$watch('currentRow', function (row) {
@@ -15255,8 +15245,23 @@
                 }
             }
         }, true);
+        init();
     }
     angular.module('umbraco').controller('Umbraco.PropertyEditors.GridPrevalueEditor.RowConfigController', RowConfigController);
+    'use strict';
+    function DeleteRowConfirmController($scope) {
+        $scope.close = function () {
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
+        };
+        $scope.submit = function () {
+            if ($scope.model && $scope.model.submit) {
+                $scope.model.submit($scope.model);
+            }
+        };
+    }
+    angular.module('umbraco').controller('Umbraco.PropertyEditors.GridPrevalueEditor.DeleteRowConfirmController', DeleteRowConfirmController);
     'use strict';
     angular.module('umbraco').controller('Umbraco.PropertyEditors.Grid.EmbedController', function ($scope, $timeout, $sce, editorService) {
         function onInit() {
@@ -16165,7 +16170,7 @@
         });
     });
     'use strict';
-    angular.module('umbraco').controller('Umbraco.PropertyEditors.GridPrevalueEditorController', function ($scope, gridService) {
+    angular.module('umbraco').controller('Umbraco.PropertyEditors.GridPrevalueEditorController', function ($scope, gridService, editorService) {
         var emptyModel = {
             styles: [{
                     label: 'Set a background image',
@@ -16225,22 +16230,20 @@
                 };
                 $scope.model.value.templates.push(template);
             }
-            $scope.layoutConfigOverlay = {};
-            $scope.layoutConfigOverlay.view = 'views/propertyEditors/grid/dialogs/layoutconfig.html';
-            $scope.layoutConfigOverlay.currentLayout = template;
-            $scope.layoutConfigOverlay.rows = $scope.model.value.layouts;
-            $scope.layoutConfigOverlay.columns = $scope.model.value.columns;
-            $scope.layoutConfigOverlay.show = true;
-            $scope.layoutConfigOverlay.submit = function (model) {
-                $scope.layoutConfigOverlay.show = false;
-                $scope.layoutConfigOverlay = null;
+            var layoutConfigOverlay = {
+                currentLayout: template,
+                rows: $scope.model.value.layouts,
+                columns: $scope.model.value.columns,
+                view: 'views/propertyEditors/grid/dialogs/layoutconfig.html',
+                size: 'small',
+                submit: function submit(model) {
+                    editorService.close();
+                },
+                close: function close(model) {
+                    editorService.close();
+                }
             };
-            $scope.layoutConfigOverlay.close = function (oldModel) {
-                //reset templates
-                $scope.model.value.templates = templatesCopy;
-                $scope.layoutConfigOverlay.show = false;
-                $scope.layoutConfigOverlay = null;
-            };
+            editorService.open(layoutConfigOverlay);
         };
         $scope.deleteTemplate = function (index) {
             $scope.model.value.templates.splice(index, 1);
@@ -16257,37 +16260,36 @@
                 };
                 $scope.model.value.layouts.push(layout);
             }
-            $scope.rowConfigOverlay = {};
-            $scope.rowConfigOverlay.view = 'views/propertyEditors/grid/dialogs/rowconfig.html';
-            $scope.rowConfigOverlay.currentRow = layout;
-            $scope.rowConfigOverlay.editors = $scope.editors;
-            $scope.rowConfigOverlay.columns = $scope.model.value.columns;
-            $scope.rowConfigOverlay.show = true;
-            $scope.rowConfigOverlay.submit = function (model) {
-                $scope.rowConfigOverlay.show = false;
-                $scope.rowConfigOverlay = null;
+            var rowConfigOverlay = {
+                currentRow: layout,
+                editors: $scope.editors,
+                columns: $scope.model.value.columns,
+                view: 'views/propertyEditors/grid/dialogs/rowconfig.html',
+                size: 'small',
+                submit: function submit(model) {
+                    editorService.close();
+                },
+                close: function close(model) {
+                    editorService.close();
+                }
             };
-            $scope.rowConfigOverlay.close = function (oldModel) {
-                $scope.model.value.layouts = layoutsCopy;
-                $scope.rowConfigOverlay.show = false;
-                $scope.rowConfigOverlay = null;
-            };
+            editorService.open(rowConfigOverlay);
         };
         //var rowDeletesPending = false;
         $scope.deleteLayout = function (index) {
-            $scope.rowDeleteOverlay = {};
-            $scope.rowDeleteOverlay.view = 'views/propertyEditors/grid/dialogs/rowdeleteconfirm.html';
-            $scope.rowDeleteOverlay.dialogData = { rowName: $scope.model.value.layouts[index].name };
-            $scope.rowDeleteOverlay.show = true;
-            $scope.rowDeleteOverlay.submit = function (model) {
-                $scope.model.value.layouts.splice(index, 1);
-                $scope.rowDeleteOverlay.show = false;
-                $scope.rowDeleteOverlay = null;
+            var rowDeleteOverlay = {
+                dialogData: { rowName: $scope.model.value.layouts[index].name },
+                view: 'views/propertyEditors/grid/dialogs/rowdeleteconfirm.html',
+                size: 'small',
+                submit: function submit(model) {
+                    $scope.model.value.layouts.splice(index, 1);
+                    editorService.close();
+                },
+                close: function close(model) {
+                    editorService.close();
+                }
             };
-            $scope.rowDeleteOverlay.close = function (oldModel) {
-                $scope.rowDeleteOverlay.show = false;
-                $scope.rowDeleteOverlay = null;
-            };
+            editorService.open(rowDeleteOverlay);
         };
         /****************
       utillities
@@ -16312,20 +16314,20 @@
             collection.splice(index, 1);
         };
         var editConfigCollection = function editConfigCollection(configValues, title, callback) {
-            $scope.editConfigCollectionOverlay = {};
-            $scope.editConfigCollectionOverlay.view = 'views/propertyeditors/grid/dialogs/editconfig.html';
-            $scope.editConfigCollectionOverlay.config = configValues;
-            $scope.editConfigCollectionOverlay.title = title;
-            $scope.editConfigCollectionOverlay.show = true;
-            $scope.editConfigCollectionOverlay.submit = function (model) {
-                callback(model.config);
-                $scope.editConfigCollectionOverlay.show = false;
-                $scope.editConfigCollectionOverlay = null;
+            var editConfigCollectionOverlay = {
+                config: configValues,
+                title: title,
+                view: 'views/propertyeditors/grid/dialogs/editconfig.html',
+                size: 'small',
+                submit: function submit(model) {
+                    callback(model.config);
+                    editorService.close();
+                },
+                close: function close(model) {
+                    editorService.close();
+                }
             };
-            $scope.editConfigCollectionOverlay.close = function (oldModel) {
-                $scope.editConfigCollectionOverlay.show = false;
-                $scope.editConfigCollectionOverlay = null;
-            };
+            editorService.open(editConfigCollectionOverlay);
         };
         $scope.editConfig = function () {
             editConfigCollection($scope.model.value.config, 'Settings', function (data) {
@@ -17195,7 +17197,6 @@
             });
         }
         $scope.options = {
-            displayAtTabNumber: $scope.model.config.displayAtTabNumber ? $scope.model.config.displayAtTabNumber : 1,
             pageSize: $scope.model.config.pageSize ? $scope.model.config.pageSize : 10,
             pageNumber: $routeParams.page && Number($routeParams.page) != NaN && Number($routeParams.page) > 0 ? $routeParams.page : 1,
             filter: '',
@@ -22294,12 +22295,9 @@
                     'selected': true
                 }
             ];
-            vm.activeLayout = {
-                'icon': 'icon-thumbnails-small',
-                'path': '1',
-                'selected': true
-            };
-            //don't show the invite button if no email is configured
+            // Set card layout to active by default
+            vm.activeLayout = vm.layouts[0];
+            // Don't show the invite button if no email is configured
             if (Umbraco.Sys.ServerVariables.umbracoSettings.showUserInvite) {
                 vm.defaultButton = {
                     labelKey: 'user_inviteUser',
@@ -22411,23 +22409,19 @@
                 selectedLayout.active = true;
                 vm.activeLayout = selectedLayout;
             }
-            function selectUser(user, selection, event) {
-                // prevent the current user to be selected
-                if (!user.isCurrentUser) {
-                    if (user.selected) {
-                        var index = selection.indexOf(user.id);
-                        selection.splice(index, 1);
-                        user.selected = false;
-                    } else {
-                        user.selected = true;
-                        vm.selection.push(user.id);
-                    }
-                    setBulkActions(vm.users);
-                    if (event) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
+            function selectUser(user) {
+                if (user.isCurrentUser) {
+                    return;
                 }
+                if (user.selected) {
+                    var index = vm.selection.indexOf(user.id);
+                    vm.selection.splice(index, 1);
+                    user.selected = false;
+                } else {
+                    user.selected = true;
+                    vm.selection.push(user.id);
+                }
+                setBulkActions(vm.users);
             }
             function clearSelection() {
                 angular.forEach(vm.users, function (user) {
@@ -22436,11 +22430,7 @@
                 vm.selection = [];
             }
             function clickUser(user) {
-                if (vm.selection.length > 0) {
-                    selectUser(user, vm.selection);
-                } else {
-                    goToUser(user.id);
-                }
+                goToUser(user.id);
             }
             function disableUsers() {
                 vm.disableUserButtonState = 'busy';
@@ -22792,7 +22782,7 @@
                         vm.allowEnableUser = false;
                         vm.allowUnlockUser = false;
                         vm.allowSetUserGroup = false;
-                        return;
+                        return false;
                     }
                     if (user.userDisplayState && user.userDisplayState.key === 'Disabled') {
                         vm.allowDisableUser = false;
@@ -22810,20 +22800,21 @@
                         vm.allowUnlockUser = false;
                     }
                     // store the user group aliases of the first selected user
-                    if (!firstSelectedUserGroups) {
-                        firstSelectedUserGroups = user.userGroups.map(function (ug) {
-                            return ug.alias;
-                        });
-                        vm.allowSetUserGroup = true;
-                    } else if (vm.allowSetUserGroup === true) {
-                        // for 2nd+ selected user, compare the user group aliases to determine if we should allow bulk editing.
-                        // we don't allow bulk editing of users not currently having the same assigned user groups, as we can't
-                        // really support that in the user group picker.
-                        var userGroups = user.userGroups.map(function (ug) {
-                            return ug.alias;
-                        });
-                        if (_.difference(firstSelectedUserGroups, userGroups).length > 0) {
-                            vm.allowSetUserGroup = false;
+                    if (vm.allowSetUserGroup === true) {
+                        if (!firstSelectedUserGroups) {
+                            firstSelectedUserGroups = user.userGroups.map(function (ug) {
+                                return ug.alias;
+                            });
+                        } else {
+                            // for 2nd+ selected user, compare the user group aliases to determine if we should allow bulk editing.
+                            // we don't allow bulk editing of users not currently having the same assigned user groups, as we can't
+                            // really support that in the user group picker.
+                            var userGroups = user.userGroups.map(function (ug) {
+                                return ug.alias;
+                            });
+                            if (_.difference(firstSelectedUserGroups, userGroups).length > 0) {
+                                vm.allowSetUserGroup = false;
+                            }
                         }
                     }
                 });

@@ -68,7 +68,9 @@
                 //dealing with requests:
                 'request': function request(config) {
                     if (config.method === 'POST') {
-                        transform(config.data);
+                        var clone = angular.copy(config);
+                        transform(clone.data);
+                        return clone;
                     }
                     return config;
                 }

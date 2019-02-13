@@ -10233,6 +10233,9 @@ When building a custom infinite editor view you can use the same components as a
                     //when it's successful, just return the data
                     return $q.resolve(result);
                 }, function (response) {
+                    if (!response) {
+                        return;    //sometimes oddly this happens, nothing we can do
+                    }
                     if (!response.status && response.message && response.stack) {
                         //this is a JS/angular error that we should deal with
                         return $q.reject({ errorMsg: response.message });
