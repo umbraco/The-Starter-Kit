@@ -8,7 +8,6 @@
   "dashboards":[
     {
       "alias": "lessons",
-      "name": "Lessons",
       "view": "/App_Plugins/StarterKit/starterkithelp.html",
       "sections": ["user-help"]
     }
