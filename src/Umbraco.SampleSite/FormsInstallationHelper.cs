@@ -3,8 +3,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Umbraco.Core;
 using Umbraco.Core.Composing;
 using Umbraco.Core.Logging;
+using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 
 namespace Umbraco.SampleSite
@@ -59,7 +61,8 @@ namespace Umbraco.SampleSite
                 if (contactFormType != null)
                 {
                     var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == PropertyAlias);
-                    var labelDataType = dataTypeService.GetByEditorAlias(Core.Constants.PropertyEditors.Aliases.NoEdit).FirstOrDefault();
+
+                    var labelDataType = dataTypeService.GetDataType(Constants.DataTypes.LabelString);
                     if (labelDataType != null && formPicker != null)
                     {
                         formPicker.DataTypeId = labelDataType.Id;
