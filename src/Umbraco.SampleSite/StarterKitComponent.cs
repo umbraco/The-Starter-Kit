@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Umbraco.Core.Components;
+using Umbraco.Core.Composing;
 using Umbraco.Core.Services;
 using Umbraco.Core.Services.Implement;
 using Umbraco.SampleSite.Controllers;
 using Umbraco.Web;
-using Umbraco.Web.Composing;
 using Umbraco.Web.JavaScript;
 
 namespace Umbraco.SampleSite
@@ -28,7 +27,7 @@ namespace Umbraco.SampleSite
         {
             if (e != null && e.PackageMetaData != null && e.PackageMetaData.Name == "Umbraco Forms")
             {
-                var formsInstallHelper = new FormsInstallationHelper(Current.Services);
+                var formsInstallHelper = new FormsInstallationHelper(Core.Composing.Current.Services);
                 formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
             }
         }
