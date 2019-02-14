@@ -2440,8 +2440,8 @@ Use this directive to render a button with a dropdown of alternative actions.
      * @param {any} app the active content app
      */
             function createButtons(content) {
-                // for trashed items, the save button is the primary action - otherwise it's a secondary action
-                $scope.page.saveButtonStyle = content.trashed ? 'primary' : 'info';
+                // for trashed and element type items, the save button is the primary action - otherwise it's a secondary action
+                $scope.page.saveButtonStyle = content.trashed || content.isElement ? 'primary' : 'info';
                 // only create the save/publish/preview buttons if the
                 // content app is "Conent"
                 if ($scope.app && $scope.app.alias !== 'umbContent' && $scope.app.alias !== 'umbInfo') {
@@ -3187,7 +3187,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                         'prompt_doctypeChangeWarning',
                         'general_history',
                         'auditTrails_historyIncludingVariants',
-                        'content_itemNotPublished'
+                        'content_itemNotPublished',
+                        'general_choose'
                     ];
                     localizationService.localizeMany(keys).then(function (data) {
                         labels.deleted = data[0];
@@ -3200,8 +3201,9 @@ Use this directive to render a button with a dropdown of alternative actions.
                         labels.doctypeChangeWarning = data[6];
                         labels.notPublished = data[9];
                         scope.historyLabel = scope.node.variants && scope.node.variants.length === 1 ? data[7] : data[8];
+                        scope.chooseLabel = data[10];
                         setNodePublishStatus();
-                        if (scope.currentUrls.length === 0) {
+                        if (scope.currentUrls && scope.currentUrls.length === 0) {
                             if (scope.node.id > 0) {
                                 //it's created but not published
                                 scope.currentUrls.push({
@@ -3237,6 +3239,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                         loadRedirectUrls();
                         loadAuditTrail();
                     }
+                    // never show templates for element types (if they happen to have been created in the content tree)
+                    scope.disableTemplates = scope.disableTemplates || scope.node.isElement;
                 }
                 scope.auditTrailPageChange = function (pageNumber) {
                     scope.auditTrailOptions.pageNumber = pageNumber;
@@ -3401,6 +3405,11 @@ Use this directive to render a button with a dropdown of alternative actions.
                     });
                 }
                 function updateCurrentUrls() {
+                    // never show urls for element types (if they happen to have been created in the content tree)
+                    if (scope.node.isElement) {
+                        scope.currentUrls = null;
+                        return;
+                    }
                     // find the urls for the currently selected language
                     if (scope.node.variants.length > 1) {
                         // nodes with variants
@@ -4412,7 +4421,6 @@ Use this directive to construct a main content area inside the main editor windo
                     setCurrentVariant();
                     angular.forEach(scope.content.apps, function (app) {
                         if (app.alias === 'umbContent') {
-                            console.log('app: ', app);
                             app.anchors = scope.content.tabs;
                         }
                     });
@@ -13433,7 +13441,9 @@ Use this directive make an element sticky and follow the page when scrolling.
                     clonedBar.addClass('-umb-sticky-bar');
                     clonedBar.css({
                         'position': 'fixed',
-                        'z-index': 500,
+                        // if you change this z-index value, make sure the sticky editor sub headers do not 
+                        // clash with umb-dropdown (e.g. the content actions dropdown in content list view)
+                        'z-index': 99,
                         'visibility': 'hidden'
                     });
                     cloneIsMade = true;

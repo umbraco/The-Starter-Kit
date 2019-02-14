@@ -7927,10 +7927,10 @@ When building a custom infinite editor view you can use the same components as a
             defaultPrevalues: function defaultPrevalues() {
                 var cfg = {};
                 cfg.toolbar = [
-                    'code',
+                    'ace',
+                    'styleselect',
                     'bold',
                     'italic',
-                    'styleselect',
                     'alignleft',
                     'aligncenter',
                     'alignright',
@@ -7939,10 +7939,9 @@ When building a custom infinite editor view you can use the same components as a
                     'outdent',
                     'indent',
                     'link',
-                    'image',
                     'umbmediapicker',
-                    'umbembeddialog',
-                    'umbmacro'
+                    'umbmacro',
+                    'umbembeddialog'
                 ];
                 cfg.stylesheets = [];
                 cfg.maxImageSize = 500;
@@ -8681,7 +8680,6 @@ When building a custom infinite editor view you can use the same components as a
                     var aceEditor = {
                         content: args.editor.getContent(),
                         view: 'views/propertyeditors/rte/codeeditor.html',
-                        size: 'small',
                         submit: function submit(model) {
                             args.editor.setContent(model.content);
                             editorService.close();

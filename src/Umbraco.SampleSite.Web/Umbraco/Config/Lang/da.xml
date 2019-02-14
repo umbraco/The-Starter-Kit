@@ -77,6 +77,10 @@
     <key alias="update">Tillad adgang til at gemme en node</key>
     <key alias="createblueprint">Tillad adgang til at oprette en indholdsskabelon</key>
   </area>
+  <area alias="apps">
+    <key alias="umbContent">Indhold</key>
+    <key alias="umbInfo">Info</key>
+  </area>
   <area alias="assignDomain">
     <key alias="permissionDenied">Tilladelse nægtet.</key>
     <key alias="addNew">Tilføj nyt domæne</key>
@@ -163,6 +167,7 @@
     <key alias="smallSendToPublish">Sendt til udgivelse</key>
     <key alias="smallSendToTranslate">Sendt til oversættelse</key>
     <key alias="smallSort">Sorteret</key>
+    <key alias="historyIncludingVariants">Historik (alle sprog)</key>
   </area>
   <area alias="changeDocType">
     <key alias="changeDocTypeInstruction">For at skifte det valgte indholds dokumenttype, skal du først vælge en ny dokumenttype, som er gyldig på denne placering.</key>
@@ -243,6 +248,7 @@
     <key alias="type">Type</key>
     <key alias="unpublish">Afpublicér</key>
     <key alias="unpublished">Afpubliceret</key>
+    <key alias="notCreated">Ikke oprettet</key>
     <key alias="updateDate">Sidst redigeret</key>
     <key alias="updateDateDesc" version="7.0">Tidspunkt for seneste redigering</key>
     <key alias="uploadClear">Fjern fil</key>
@@ -569,6 +575,7 @@
     <key alias="error">Fejl</key>
     <key alias="findDocument">Find</key>
     <key alias="first">Første</key>
+    <key alias="general">Generelt</key>
     <key alias="groups">Grupper</key>
     <key alias="height">Højde</key>
     <key alias="help">Hjælp</key>
@@ -680,7 +687,7 @@
     <key alias="copyLineDown">Copy Lines Down</key>
     <key alias="moveLineUp">Move Lines Up</key>
     <key alias="moveLineDown">Move Lines Down</key>
-    <key alias="generalHeader">General</key>
+    <key alias="generalHeader">Generelt</key>
     <key alias="editorHeader">Editor</key>
   </area>
   <area alias="graphicheadline">
@@ -1003,14 +1010,12 @@ Mange hilsner fra Umbraco robotten
   </area>
   <area alias="settings">
     <key alias="defaulttemplate">Standardskabelon</key>
-    <key alias="dictionary editor egenskab">Ordbogsnøgle</key>
     <key alias="importDocumentTypeHelp">For at importere en dokumenttype, find ".udt"-filen på din computer ved at klikke på "Gennemse"-knappen og klik "Import" (Du vil blive bedt om bekræftelse på næste skærmbillede)</key>
     <key alias="newtabname">Ny titel på faneblad</key>
     <key alias="nodetype">Nodetype</key>
     <key alias="objecttype">Type</key>
     <key alias="stylesheet">Stylesheet</key>
     <key alias="script">Script</key>
-    <key alias="stylesheet editor egenskab">Stylesheetegenskab</key>
     <key alias="tab">Faneblad</key>
     <key alias="tabname">Titel på faneblad</key>
     <key alias="tabs">Faneblade</key>

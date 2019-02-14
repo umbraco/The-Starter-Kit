@@ -1732,7 +1732,7 @@
                     // get the content properties to build the anchor name list
                     contentResource.getById(id).then(function (resp) {
                         $scope.anchorValues = tinyMceService.getAnchorNames(JSON.stringify(resp.properties));
-                        $scope.model.target.url = resp.urls[0];
+                        $scope.model.target.url = resp.urls[0].text;
                     });
                 }
             } else if ($scope.model.target.url.length) {
@@ -2979,6 +2979,7 @@
                 vm.diff = null;
                 vm.currentVersion = null;
                 vm.rollbackButtonDisabled = true;
+                vm.labels = {};
                 // find the current version for invariant nodes
                 if ($scope.model.node.variants.length === 1) {
                     vm.currentVersion = $scope.model.node.variants[0];
@@ -2994,12 +2995,16 @@
                         vm.currentVersion = active;
                     }
                 }
-                // set default title
-                if (!$scope.model.title) {
-                    localizationService.localize('actions_rollback').then(function (value) {
-                        $scope.model.title = value;
-                    });
-                }
+                localizationService.localizeMany([
+                    'actions_rollback',
+                    'general_choose'
+                ]).then(function (data) {
+                    // set default title
+                    if (!$scope.model.title) {
+                        $scope.model.title = data[0];
+                    }
+                    vm.labels.choose = data[1];
+                });
                 // Load in diff library
                 assetsService.loadJs('lib/jsdiff/diff.min.js', $scope).then(function () {
                     getVersions().then(function () {
@@ -11912,7 +11917,7 @@
                     $scope.package = pck;
                     vm.loading = false;
                     //make sure the packageView is formatted as a virtual path
-                    pck.packageView = pck.packageView.startsWith('/~') ? pck.packageView : pck.packageView.startsWith('/') ? '~' + pck.packageView : '~/' + pck.packageView;
+                    pck.packageView = pck.packageView.startsWith('~/') ? pck.packageView : pck.packageView.startsWith('/') ? '~' + pck.packageView : '~/' + pck.packageView;
                     pck.packageView = umbRequestHelper.convertVirtualToAbsolutePath(pck.packageView);
                 });
             }
@@ -14503,7 +14508,7 @@
             //if we have a query for the startnode, we will use that.
             var rootId = $routeParams.id;
             entityResource.getByQuery($scope.model.config.startNode.query, rootId, 'Document').then(function (ent) {
-                dialogOptions.startNodeId = $scope.model.config.idType === 'udi' ? ent.udi : ent.id;
+                dialogOptions.startNodeId = ($scope.model.config.idType === 'udi' ? ent.udi : ent.id).toString();
             });
         } else {
             dialogOptions.startNodeId = $scope.model.config.startNode.id;
@@ -14564,7 +14569,7 @@
         };
         $scope.add = function (item) {
             var currIds = $scope.model.value ? $scope.model.value.split(',') : [];
-            var itemId = $scope.model.config.idType === 'udi' ? item.udi : item.id;
+            var itemId = ($scope.model.config.idType === 'udi' ? item.udi : item.id).toString();
             if (currIds.indexOf(itemId) < 0) {
                 currIds.push(itemId);
                 $scope.model.value = currIds.join();

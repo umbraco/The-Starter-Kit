@@ -78,6 +78,10 @@
     <key alias="update">Allow access to save a node</key>
     <key alias="createblueprint">Allow access to create a Content Template</key>
   </area>
+  <area alias="apps">
+    <key alias="umbContent">Content</key>
+    <key alias="umbInfo">Info</key>
+  </area>
   <area alias="assignDomain">
     <key alias="permissionDenied">Permission denied.</key>
     <key alias="addNew">Add new Domain</key>
@@ -171,6 +175,7 @@
     <key alias="smallSendToPublish">Send To Publish</key>
     <key alias="smallSendToPublishVariant">Send To Publish</key>
     <key alias="smallSort">Sort</key>
+    <key alias="historyIncludingVariants">History (all variants)</key>
   </area>
   <area alias="changeDocType">
     <key alias="changeDocTypeInstruction">To change the document type for the selected content, first select from the list of valid types for this location.</key>
@@ -1260,14 +1265,12 @@ To manage your website, simply open the Umbraco back office and start adding con
   </area>
   <area alias="settings">
     <key alias="defaulttemplate">Default template</key>
-    <key alias="dictionary editor egenskab">Dictionary Key</key>
     <key alias="importDocumentTypeHelp">To import a document type, find the ".udt" file on your computer by clicking the "Browse" button and click "Import" (you'll be asked for confirmation on the next screen)</key>
     <key alias="newtabname">New Tab Title</key>
     <key alias="nodetype">Node type</key>
     <key alias="objecttype">Type</key>
     <key alias="stylesheet">Stylesheet</key>
     <key alias="script">Script</key>
-    <key alias="stylesheet editor egenskab">Stylesheet property</key>
     <key alias="tab">Tab</key>
     <key alias="tabname">Tab Title</key>
     <key alias="tabs">Tabs</key>
