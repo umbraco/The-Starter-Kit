@@ -708,6 +708,7 @@ Use this directive to render drawer view
             vm.externalLoginInfo = externalLoginInfo;
             vm.resetPasswordCodeInfo = resetPasswordCodeInfo;
             vm.backgroundImage = Umbraco.Sys.ServerVariables.umbracoSettings.loginBackgroundImage;
+            vm.usernameIsEmail = Umbraco.Sys.ServerVariables.umbracoSettings.usernameIsEmail;
             vm.$onInit = onInit;
             vm.togglePassword = togglePassword;
             vm.changeAvatar = changeAvatar;
@@ -719,6 +720,14 @@ Use this directive to render drawer view
             vm.loginSubmit = loginSubmit;
             vm.requestPasswordResetSubmit = requestPasswordResetSubmit;
             vm.setPasswordSubmit = setPasswordSubmit;
+            vm.labels = {};
+            localizationService.localizeMany([
+                vm.usernameIsEmail ? 'general_email' : 'general_username',
+                vm.usernameIsEmail ? 'placeholders_email' : 'placeholders_usernameHint'
+            ]).then(function (data) {
+                vm.labels.usernameLabel = data[0];
+                vm.labels.usernamePlaceholder = data[1];
+            });
             function onInit() {
                 // Check if it is a new user
                 var inviteVal = $location.search().invite;
@@ -3035,13 +3044,14 @@ Use this directive to render a button with a dropdown of alternative actions.
                     if (!_.contains(content.allowedActions, 'A')) {
                         previewWindow.location.href = redirect;
                     } else {
-                        var selectedVariant;
-                        if (!$scope.culture) {
-                            selectedVariant = $scope.content.variants[0];
-                        } else {
-                            selectedVariant = _.find($scope.content.variants, function (v) {
-                                return v.language.culture === $scope.culture;
+                        var selectedVariant = $scope.content.variants[0];
+                        if ($scope.culture) {
+                            var found = _.find($scope.content.variants, function (v) {
+                                return v.language && v.language.culture === $scope.culture;
                             });
+                            if (found) {
+                                selectedVariant = found;
+                            }
                         }
                         //ensure the save flag is set
                         selectedVariant.save = true;
@@ -5056,12 +5066,11 @@ Use this directive to construct a header inside the main editor window.
                     scope.showDropdown = false;
                 };
                 function onInit() {
-                    // hide navigation if there is only 1 item
-                    if (scope.navigation.length <= 1) {
-                        scope.showNavigation = false;
-                    }
-                    $timeout(function () {
-                        if ($window && $window.innerWidth) {
+                    var firstRun = true;
+                    scope.$watch('navigation.length', function (newVal, oldVal) {
+                        if (firstRun || newVal !== undefined && newVal !== oldVal) {
+                            firstRun = false;
+                            scope.showNavigation = newVal > 1;
                             calculateVisibleItems($window.innerWidth);
                         }
                     });
@@ -6768,7 +6777,7 @@ Use this directive to construct a title. Recommended to use it inside an {@link 
                 var throttledResizing = _.throttle(function () {
                     resizeImageToScale(scope.dimensions.scale.current);
                     calculateCropBox();
-                }, 100);
+                }, 15);
                 //happens when we change the scale
                 scope.$watch('dimensions.scale.current', function () {
                     if (scope.loaded) {

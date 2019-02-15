@@ -10867,14 +10867,14 @@ When building a custom infinite editor view you can use the same components as a
                     'color': 'warning'
                 }
             ];
-            angular.forEach(userStates, function (userState) {
-                var key = 'user_state' + userState.key;
-                localizationService.localize(key).then(function (value) {
-                    var reg = /^\[[\S\s]*]$/g;
-                    var result = reg.test(value);
-                    if (result === false) {
+            localizationService.localizeMany(_.map(userStates, function (userState) {
+                return 'user_state' + userState.key;
+            })).then(function (data) {
+                var reg = /^\[[\S\s]*]$/g;
+                _.each(data, function (value, index) {
+                    if (!reg.test(value)) {
                         // Only translate if key exists
-                        userState.name = value;
+                        userStates[index].name = value;
                     }
                 });
             });
