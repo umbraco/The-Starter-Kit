@@ -1543,7 +1543,7 @@ It contains a simple website that contains many basic features to help get you s
         <GenericProperty>
           <Name>Contact Intro</Name>
           <Alias>contactIntro</Alias>
-          <Type>Umbraco.TinyMCEv3</Type>
+          <Type>Umbraco.TinyMCE</Type>
           <Definition>ecbbac0d-974e-490c-b533-fead926dc525</Definition>
           <Tab>Form</Tab>
           <SortOrder>2</SortOrder>
@@ -1552,7 +1552,7 @@ It contains a simple website that contains many basic features to help get you s
         <GenericProperty>
           <Name>Pick a Contact Form</Name>
           <Alias>contactForm</Alias>
-          <Type>Umbraco.NoEdit</Type>
+          <Type>Umbraco.Label</Type>
           <Definition>f0bc4bfb-b499-40d6-ba86-058885a5178c</Definition>
           <Tab>Form</Tab>
           <SortOrder>3</SortOrder>
