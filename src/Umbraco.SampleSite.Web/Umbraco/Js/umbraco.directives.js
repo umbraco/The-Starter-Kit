@@ -100,30 +100,6 @@
         };
     });
     'use strict';
-    angular.module('umbraco.directives').directive('sectionIcon', function ($compile, iconHelper) {
-        return {
-            restrict: 'E',
-            replace: true,
-            link: function link(scope, element, attrs) {
-                var icon = attrs.icon;
-                if (iconHelper.isLegacyIcon(icon)) {
-                    //its a known legacy icon, convert to a new one
-                    element.html('<i class=\'' + iconHelper.convertFromLegacyIcon(icon) + '\'></i>');
-                } else if (iconHelper.isFileBasedIcon(icon)) {
-                    var convert = iconHelper.convertFromLegacyImage(icon);
-                    if (convert) {
-                        element.html('<i class=\'icon-section ' + convert + '\'></i>');
-                    } else {
-                        element.html('<img class=\'icon-section\' src=\'images/tray/' + icon + '\'>');
-                    }    //it's a file, normally legacy so look in the icon tray images
-                } else {
-                    //it's normal
-                    element.html('<i class=\'icon-section ' + icon + '\'></i>');
-                }
-            }
-        };
-    });
-    'use strict';
     (function () {
         'use strict';
         function AppHeaderDirective(eventsService, appState, userService) {
@@ -2321,7 +2297,7 @@ Use this directive to render a button with a dropdown of alternative actions.
     'use strict';
     (function () {
         'use strict';
-        function ContentEditController($rootScope, $scope, $routeParams, $q, $window, appState, contentResource, entityResource, navigationService, notificationsService, serverValidationManager, contentEditingHelper, treeService, formHelper, umbRequestHelper, editorState, $http, eventsService, relationResource, overlayService) {
+        function ContentEditController($rootScope, $scope, $routeParams, $q, $window, appState, contentResource, entityResource, navigationService, notificationsService, serverValidationManager, contentEditingHelper, localizationService, formHelper, umbRequestHelper, editorState, $http, eventsService, overlayService, $location) {
             var evts = [];
             var infiniteMode = $scope.infiniteModel && $scope.infiniteModel.infiniteMode;
             //setup scope vars
@@ -2336,7 +2312,7 @@ Use this directive to render a button with a dropdown of alternative actions.
             $scope.page.isNew = $scope.isNew ? true : false;
             $scope.page.buttonGroupState = 'init';
             $scope.page.hideActionsMenu = infiniteMode ? true : false;
-            $scope.page.hideChangeVariant = infiniteMode ? true : false;
+            $scope.page.hideChangeVariant = false;
             $scope.allowOpen = true;
             $scope.app = null;
             function init() {
@@ -2482,17 +2458,6 @@ Use this directive to render a button with a dropdown of alternative actions.
                 $scope.defaultButton = buttons.defaultButton;
                 $scope.subButtons = buttons.subButtons;
                 $scope.page.showPreviewButton = true;
-            }
-            // create infinite editing buttons
-            function createInfiniteModeButtons(content) {
-                $scope.page.allowInfinitePublishAndClose = false;
-                $scope.page.allowInfiniteSaveAndClose = false;
-                // check for publish rights
-                if (_.contains(content.allowedActions, 'U')) {
-                    $scope.page.allowInfinitePublishAndClose = true;    // check for save rights
-                } else if (_.contains(content.allowedActions, 'A')) {
-                    $scope.page.allowInfiniteSaveAndClose = true;
-                }
             }
             /** Syncs the content item to it's tree node - this occurs on first load and after saving */
             function syncTreeNode(content, path, initialLoad) {
@@ -2666,6 +2631,17 @@ Use this directive to render a button with a dropdown of alternative actions.
                     }
                 }
             }
+            /** Just shows a simple notification that there are client side validation issues to be fixed */
+            function showValidationNotification() {
+                //TODO: We need to make the validation UI much better, there's a lot of inconsistencies in v8 including colors, issues with the property groups and validation errors between variants
+                //need to show a notification else it's not clear there was an error.
+                localizationService.localizeMany([
+                    'speechBubbles_validationFailedHeader',
+                    'speechBubbles_validationFailedMessage'
+                ]).then(function (data) {
+                    notificationsService.error(data[0], data[1]);
+                });
+            }
             if ($scope.page.isNew) {
                 $scope.page.loading = true;
                 //we are creating so get an empty content item
@@ -2770,6 +2746,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                             }
                         };
                         overlayService.open(dialog);
+                    } else {
+                        showValidationNotification();
                     }
                 } else {
                     $scope.page.buttonGroupState = 'busy';
@@ -2828,6 +2806,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                             }
                         };
                         overlayService.open(dialog);
+                    } else {
+                        showValidationNotification();
                     }
                 } else {
                     //ensure the flags are set
@@ -2890,6 +2870,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                             }
                         };
                         overlayService.open(dialog);
+                    } else {
+                        showValidationNotification();
                     }
                 } else {
                     //ensure the flags are set
@@ -2969,6 +2951,8 @@ Use this directive to render a button with a dropdown of alternative actions.
                         }
                     };
                     overlayService.open(dialog);
+                } else {
+                    showValidationNotification();
                 }
             };
             $scope.publishDescendants = function () {
@@ -3025,44 +3009,44 @@ Use this directive to render a button with a dropdown of alternative actions.
                         }
                     };
                     overlayService.open(dialog);
+                } else {
+                    showValidationNotification();
                 }
             };
             $scope.preview = function (content) {
-                if (!$scope.busy) {
-                    // Chromes popup blocker will kick in if a window is opened
-                    // without the initial scoped request. This trick will fix that.
-                    //
-                    var previewWindow = $window.open('preview/?init=true', 'umbpreview');
-                    // Build the correct path so both /#/ and #/ work.
-                    var query = 'id=' + content.id;
+                // Chromes popup blocker will kick in if a window is opened
+                // without the initial scoped request. This trick will fix that.
+                //
+                var previewWindow = $window.open('preview/?init=true', 'umbpreview');
+                // Build the correct path so both /#/ and #/ work.
+                var query = 'id=' + content.id;
+                if ($scope.culture) {
+                    query += '#?culture=' + $scope.culture;
+                }
+                var redirect = Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath + '/preview/?' + query;
+                //The user cannot save if they don't have access to do that, in which case we just want to preview
+                //and that's it otherwise they'll get an unauthorized access message
+                if (!_.contains(content.allowedActions, 'A')) {
+                    previewWindow.location.href = redirect;
+                } else {
+                    var selectedVariant = $scope.content.variants[0];
                     if ($scope.culture) {
-                        query += '#?culture=' + $scope.culture;
-                    }
-                    var redirect = Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath + '/preview/?' + query;
-                    //The user cannot save if they don't have access to do that, in which case we just want to preview
-                    //and that's it otherwise they'll get an unauthorized access message
-                    if (!_.contains(content.allowedActions, 'A')) {
-                        previewWindow.location.href = redirect;
-                    } else {
-                        var selectedVariant = $scope.content.variants[0];
-                        if ($scope.culture) {
-                            var found = _.find($scope.content.variants, function (v) {
-                                return v.language && v.language.culture === $scope.culture;
-                            });
-                            if (found) {
-                                selectedVariant = found;
-                            }
-                        }
-                        //ensure the save flag is set
-                        selectedVariant.save = true;
-                        performSave({
-                            saveMethod: $scope.saveMethod(),
-                            action: 'save'
-                        }).then(function (data) {
-                            previewWindow.location.href = redirect;
-                        }, function (err) {
+                        var found = _.find($scope.content.variants, function (v) {
+                            return v.language && v.language.culture === $scope.culture;
                         });
+                        if (found) {
+                            selectedVariant = found;
+                        }
                     }
+                    //ensure the save flag is set
+                    selectedVariant.save = true;
+                    performSave({
+                        saveMethod: $scope.saveMethod(),
+                        action: 'save'
+                    }).then(function (data) {
+                        previewWindow.location.href = redirect;
+                    }, function (err) {
+                    });
                 }
             };
             /* publish method used in infinite editing */
@@ -3100,11 +3084,7 @@ Use this directive to render a button with a dropdown of alternative actions.
             $scope.appChanged = function (app) {
                 $scope.app = app;
                 $scope.$broadcast('editors.apps.appChanged', { app: app });
-                if (infiniteMode) {
-                    createInfiniteModeButtons($scope.content);
-                } else {
-                    createButtons($scope.content);
-                }
+                createButtons($scope.content);
             };
             /**
      * Call back when a content app changes
@@ -3121,6 +3101,17 @@ Use this directive to render a button with a dropdown of alternative actions.
             $scope.close = function () {
                 if ($scope.infiniteModel.close) {
                     $scope.infiniteModel.close($scope.infiniteModel);
+                }
+            };
+            /**
+     * Call back when user click the back-icon
+     */
+            $scope.onBack = function () {
+                if ($scope.infiniteModel && $scope.infiniteModel.close) {
+                    $scope.infiniteModel.close($scope.infiniteModel);
+                } else {
+                    // navigate backwards if content has a parent.
+                    $location.path('/' + $routeParams.section + '/' + $routeParams.tree + '/' + $routeParams.method + '/' + $scope.content.parentId);
                 }
             };
             //ensure to unregister from all events!
@@ -3627,7 +3618,9 @@ Use this directive to render a button with a dropdown of alternative actions.
                 onSelectVariant: '&',
                 onOpenSplitView: '&',
                 onSelectApp: '&',
-                onSelectAppAnchor: '&'
+                onSelectAppAnchor: '&',
+                onBack: '&?',
+                showBack: '<?'
             },
             controllerAs: 'vm',
             controller: umbVariantContentController
@@ -3642,6 +3635,7 @@ Use this directive to render a button with a dropdown of alternative actions.
             vm.openSplitView = openSplitView;
             vm.selectApp = selectApp;
             vm.selectAppAnchor = selectAppAnchor;
+            vm.showBackButton = showBackButton;
             function onInit() {
                 // disable the name field if the active content app is not "Content"
                 vm.nameDisabled = false;
@@ -3650,6 +3644,9 @@ Use this directive to render a button with a dropdown of alternative actions.
                         vm.nameDisabled = true;
                     }
                 });
+            }
+            function showBackButton() {
+                return vm.page.listViewPath !== null && vm.showBack;
             }
             /** Called when the component has linked all elements, this is when the form controller is available */
             function postLink() {
@@ -3731,7 +3728,9 @@ Use this directive to render a button with a dropdown of alternative actions.
                 // TODO: Not sure if this should be = since we are changing the 'active' property of a variant
                 culture: '<',
                 onSelectApp: '&?',
-                onSelectAppAnchor: '&?'
+                onSelectAppAnchor: '&?',
+                onBack: '&?',
+                showBack: '<?'
             },
             controllerAs: 'vm',
             controller: umbVariantContentEditorsController
@@ -4307,13 +4306,30 @@ Use this directive to generate a list of breadcrumbs.
 **/
     (function () {
         'use strict';
-        function BreadcrumbsDirective() {
+        function BreadcrumbsDirective($location, navigationService) {
             function link(scope, el, attr, ctrl) {
                 scope.allowOnOpen = false;
                 scope.open = function (ancestor) {
                     if (scope.onOpen && scope.allowOnOpen) {
                         scope.onOpen({ 'ancestor': ancestor });
                     }
+                };
+                scope.openPath = function (ancestor, event) {
+                    // targeting a new tab/window?
+                    if (event.ctrlKey || event.shiftKey || event.metaKey || // apple
+                        event.button && event.button === 1    // middle click, >IE9 + everyone else
+) {
+                        // yes, let the link open itself
+                        return;
+                    }
+                    event.stopPropagation();
+                    event.preventDefault();
+                    var path = scope.pathTo(ancestor);
+                    $location.path(path);
+                    navigationService.clearSearch(['cculture']);
+                };
+                scope.pathTo = function (ancestor) {
+                    return '/' + scope.entityType + '/' + scope.entityType + '/edit/' + ancestor.id;
                 };
                 function onInit() {
                     if ('onOpen' in attr) {
@@ -4416,7 +4432,7 @@ Use this directive to construct a main content area inside the main editor windo
     'use strict';
     (function () {
         'use strict';
-        function EditorContentHeader($location, $routeParams) {
+        function EditorContentHeader() {
             function link(scope, el, attr, ctrl) {
                 if (!scope.serverValidationNameField) {
                     scope.serverValidationNameField = 'Name';
@@ -4443,7 +4459,9 @@ Use this directive to construct a main content area inside the main editor windo
                     });
                 }
                 scope.goBack = function () {
-                    $location.path('/' + $routeParams.section + '/' + $routeParams.tree + '/' + $routeParams.method + '/' + scope.menu.currentNode.parentId);
+                    if (scope.onBack) {
+                        scope.onBack();
+                    }
                 };
                 scope.selectVariant = function (event, variant) {
                     if (scope.onSelectVariant) {
@@ -4511,13 +4529,14 @@ Use this directive to construct a main content area inside the main editor windo
                     name: '=',
                     nameDisabled: '<?',
                     menu: '=',
-                    hideMenu: '<?',
+                    hideActionsMenu: '<?',
                     content: '=',
                     openVariants: '<',
                     hideChangeVariant: '<?',
                     onSelectNavigationItem: '&?',
                     onSelectAnchorItem: '&?',
                     showBackButton: '<?',
+                    onBack: '&?',
                     splitViewOpen: '=?',
                     onOpenInSplitView: '&?',
                     onCloseSplitView: '&?',
@@ -4957,7 +4976,7 @@ Use this directive to construct a header inside the main editor window.
                     name: '=',
                     nameLocked: '=',
                     menu: '=',
-                    hideMenu: '<?',
+                    hideActionsMenu: '<?',
                     icon: '=',
                     hideIcon: '@',
                     alias: '=',
@@ -9794,8 +9813,16 @@ Use this directive to generate color swatches to pick from.
                     scope.useColorClass = false;
                 }
                 scope.setColor = function (color, $index, $event) {
-                    scope.selectedColor = color;
                     if (scope.onSelect) {
+                        // did the value change?
+                        if (scope.selectedColor != null && scope.selectedColor.value === color.value) {
+                            // User clicked the currently selected color
+                            // to remove the selection, they don't want
+                            // to select any color after all.
+                            // Unselect the color
+                            color = null;
+                        }
+                        scope.selectedColor = color;
                         scope.onSelect({
                             color: color,
                             $index: $index,
@@ -11484,11 +11511,11 @@ When this combination is hit an overview is opened with shortcuts based on the m
                     "name": "Design",
                     "shortcuts": [
                         {
-                            "description": "Add tab",
+                            "description": "Add group",
                             "keys": [
                                 {"key": "alt"},
                                 {"key": "shift"},
-                                {"key": "t"}
+                                {"key": "g"}
                             ]
                         }
                     ]

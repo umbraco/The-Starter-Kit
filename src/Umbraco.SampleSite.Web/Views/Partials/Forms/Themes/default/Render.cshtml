@@ -40,10 +40,10 @@
 
             @Html.AntiForgeryToken()
 
-            @Html.HiddenFor(x => Model.FormId)
-            @Html.HiddenFor(x => Model.FormName)
-            @Html.HiddenFor(x => Model.RecordId)
-            @Html.HiddenFor(x => Model.PreviousClicked)
+            @Html.HiddenFor(x => Model.FormId, new {id = $"{nameof(Model.FormId)}_{Model.FormId}"})
+            @Html.HiddenFor(x => Model.FormName, new {id = $"{nameof(Model.FormName)}_{Model.FormId}"})
+            @Html.HiddenFor(x => Model.RecordId, new {id = $"{nameof(Model.RecordId)}_{Model.FormId}"})
+            @Html.HiddenFor(x => Model.PreviousClicked, new {id = $"{nameof(Model.PreviousClicked)}_{Model.FormId}"})
 
             @* These 2 cannot use the htmlhelper *@
             <input type="hidden" name="FormStep" value="@Model.FormStep" />

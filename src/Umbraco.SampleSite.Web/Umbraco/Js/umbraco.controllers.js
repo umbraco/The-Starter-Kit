@@ -3157,7 +3157,7 @@
             }
             function setSectionIcon(sections) {
                 angular.forEach(sections, function (section) {
-                    section.icon = 'icon-section ' + section.cssclass;
+                    section.icon = 'icon-section';
                 });
             }
             function submit(model) {
@@ -8025,7 +8025,7 @@
                 'treeHeaders_templates',
                 'main_sections',
                 'shortcuts_navigateSections',
-                'shortcuts_addTab',
+                'shortcuts_addGroup',
                 'shortcuts_addProperty',
                 'shortcuts_addEditor',
                 'shortcuts_editDataType',
@@ -8055,7 +8055,7 @@
                 // keyboard shortcuts
                 vm.labels.sections = values[4];
                 vm.labels.navigateSections = values[5];
-                vm.labels.addTab = values[6];
+                vm.labels.addGroup = values[6];
                 vm.labels.addProperty = values[7];
                 vm.labels.addEditor = values[8];
                 vm.labels.editDataType = values[9];
@@ -8107,11 +8107,11 @@
                         'name': vm.labels.design,
                         'shortcuts': [
                             {
-                                'description': vm.labels.addTab,
+                                'description': vm.labels.addGroup,
                                 'keys': [
                                     { 'key': 'alt' },
                                     { 'key': 'shift' },
-                                    { 'key': 't' }
+                                    { 'key': 'g' }
                                 ]
                             },
                             {
@@ -8462,7 +8462,7 @@
                 }
             });
             // #3368 - changes on the other "buttons" do not register on the current form, so we manually have to flag the form as dirty 
-            $scope.$watch('vm.contentType.allowedContentTypes.length + vm.contentType.allowAsRoot + vm.contentType.allowedTemplates.length + vm.contentType.isContainer', function (newVal, oldVal) {
+            $scope.$watch('vm.contentType.allowedContentTypes.length + vm.contentType.allowAsRoot + vm.contentType.allowCultureVariant + vm.contentType.isElement + ' + 'vm.contentType.allowedTemplates.length + vm.contentType.isContainer + vm.contentType.compositeContentTypes.length', function (newVal, oldVal) {
                 if (oldVal === undefined) {
                     // still initializing, ignore
                     return;
@@ -9912,7 +9912,7 @@
  * @description
  * The controller for the media editor
  */
-    function mediaEditController($scope, $routeParams, $q, appState, mediaResource, entityResource, navigationService, notificationsService, angularHelper, serverValidationManager, contentEditingHelper, fileManager, formHelper, editorState, umbRequestHelper, $http, eventsService) {
+    function mediaEditController($scope, $routeParams, $q, appState, mediaResource, entityResource, navigationService, notificationsService, localizationService, serverValidationManager, contentEditingHelper, fileManager, formHelper, editorState, umbRequestHelper, $http, eventsService) {
         var evts = [];
         var nodeId = null;
         var create = false;
@@ -10032,9 +10032,19 @@
                 });
             }
         }
+        /** Just shows a simple notification that there are client side validation issues to be fixed */
+        function showValidationNotification() {
+            //TODO: We need to make the validation UI much better, there's a lot of inconsistencies in v8 including colors, issues with the property groups and validation errors between variants
+            //need to show a notification else it's not clear there was an error.
+            localizationService.localizeMany([
+                'speechBubbles_validationFailedHeader',
+                'speechBubbles_validationFailedMessage'
+            ]).then(function (data) {
+                notificationsService.error(data[0], data[1]);
+            });
+        }
         $scope.save = function () {
-            if (!$scope.busy && formHelper.submitForm({ scope: $scope })) {
-                $scope.busy = true;
+            if (formHelper.submitForm({ scope: $scope })) {
                 $scope.page.saveButtonState = 'busy';
                 mediaResource.save($scope.content, create, fileManager.getFiles()).then(function (data) {
                     formHelper.resetForm({ scope: $scope });
@@ -10045,7 +10055,6 @@
                         rebindCallback: contentEditingHelper.reBindChangedProperties($scope.content, data)
                     });
                     editorState.set($scope.content);
-                    $scope.busy = false;
                     syncTreeNode($scope.content, data.path);
                     init();
                     $scope.page.saveButtonState = 'success';
@@ -10061,11 +10070,10 @@
                         rebindCallback: contentEditingHelper.reBindChangedProperties($scope.content, err.data)
                     });
                     editorState.set($scope.content);
-                    $scope.busy = false;
                     $scope.page.saveButtonState = 'error';
                 });
             } else {
-                $scope.busy = false;
+                showValidationNotification();
             }
         };
         function loadMedia() {
@@ -10686,7 +10694,7 @@
  */
     (function () {
         'use strict';
-        function MediaTypesEditController($scope, $routeParams, mediaTypeResource, dataTypeResource, editorState, contentEditingHelper, formHelper, navigationService, iconHelper, contentTypeHelper, notificationsService, $filter, $q, localizationService, overlayHelper, eventsService) {
+        function MediaTypesEditController($scope, $routeParams, mediaTypeResource, dataTypeResource, editorState, contentEditingHelper, formHelper, navigationService, iconHelper, contentTypeHelper, notificationsService, $filter, $q, localizationService, overlayHelper, eventsService, angularHelper) {
             var vm = this;
             var evts = [];
             var mediaTypeId = $routeParams.id;
@@ -10718,7 +10726,7 @@
                 'general_rights',
                 'main_sections',
                 'shortcuts_navigateSections',
-                'shortcuts_addTab',
+                'shortcuts_addGroup',
                 'shortcuts_addProperty',
                 'shortcuts_addEditor',
                 'shortcuts_editDataType',
@@ -10734,7 +10742,7 @@
                 // keyboard shortcuts
                 vm.labels.sections = values[3];
                 vm.labels.navigateSections = values[4];
-                vm.labels.addTab = values[5];
+                vm.labels.addGroup = values[5];
                 vm.labels.addProperty = values[6];
                 vm.labels.addEditor = values[7];
                 vm.labels.editDataType = values[8];
@@ -10778,11 +10786,11 @@
                         'name': vm.labels.design,
                         'shortcuts': [
                             {
-                                'description': vm.labels.addTab,
+                                'description': vm.labels.addGroup,
                                 'keys': [
                                     { 'key': 'alt' },
                                     { 'key': 'shift' },
-                                    { 'key': 't' }
+                                    { 'key': 'g' }
                                 ]
                             },
                             {
@@ -11058,6 +11066,14 @@
                     eventsService.unsubscribe(evts[e]);
                 }
             });
+            // changes on the other "buttons" do not register on the current form, so we manually have to flag the form as dirty 
+            $scope.$watch('vm.contentType.allowedContentTypes.length + vm.contentType.allowAsRoot + vm.contentType.isContainer + vm.contentType.compositeContentTypes.length', function (newVal, oldVal) {
+                if (oldVal === undefined) {
+                    // still initializing, ignore
+                    return;
+                }
+                angularHelper.getCurrentForm($scope).$setDirty();
+            });
         }
         angular.module('umbraco').controller('Umbraco.Editors.MediaTypes.EditController', MediaTypesEditController);
     }());
@@ -11245,7 +11261,7 @@
  * @description
  * The controller for the member editor
  */
-    function MemberEditController($scope, $routeParams, $location, $q, $window, appState, memberResource, entityResource, navigationService, notificationsService, angularHelper, serverValidationManager, contentEditingHelper, fileManager, formHelper, umbModelMapper, editorState, umbRequestHelper, $http) {
+    function MemberEditController($scope, $routeParams, $location, appState, memberResource, entityResource, navigationService, notificationsService, localizationService, serverValidationManager, contentEditingHelper, fileManager, formHelper, editorState, umbRequestHelper, $http) {
         //setup scope vars
         $scope.page = {};
         $scope.page.loading = true;
@@ -11257,7 +11273,6 @@
         $scope.page.listViewPath = null;
         $scope.page.saveButtonState = 'init';
         $scope.page.exportButton = 'init';
-        $scope.busy = false;
         $scope.page.listViewPath = $routeParams.page && $routeParams.listName ? '/member/member/list/' + $routeParams.listName + '?page=' + $routeParams.page : null;
         //build a path to sync the tree with
         function buildTreePath(data) {
@@ -11331,9 +11346,19 @@
                 $scope.page.nameLocked = true;
             }
         }
+        /** Just shows a simple notification that there are client side validation issues to be fixed */
+        function showValidationNotification() {
+            //TODO: We need to make the validation UI much better, there's a lot of inconsistencies in v8 including colors, issues with the property groups and validation errors between variants
+            //need to show a notification else it's not clear there was an error.
+            localizationService.localizeMany([
+                'speechBubbles_validationFailedHeader',
+                'speechBubbles_validationFailedMessage'
+            ]).then(function (data) {
+                notificationsService.error(data[0], data[1]);
+            });
+        }
         $scope.save = function () {
-            if (!$scope.busy && formHelper.submitForm({ scope: $scope })) {
-                $scope.busy = true;
+            if (formHelper.submitForm({ scope: $scope })) {
                 $scope.page.saveButtonState = 'busy';
                 memberResource.save($scope.content, $routeParams.create, fileManager.getFiles()).then(function (data) {
                     formHelper.resetForm({ scope: $scope });
@@ -11345,7 +11370,6 @@
                         rebindCallback: contentEditingHelper.reBindChangedProperties($scope.content, data)
                     });
                     editorState.set($scope.content);
-                    $scope.busy = false;
                     $scope.page.saveButtonState = 'success';
                     var path = buildTreePath(data);
                     //sync the tree (only for ui purposes)
@@ -11361,11 +11385,10 @@
                         rebindCallback: contentEditingHelper.reBindChangedProperties($scope.content, err.data)
                     });
                     editorState.set($scope.content);
-                    $scope.busy = false;
                     $scope.page.saveButtonState = 'error';
                 });
             } else {
-                $scope.busy = false;
+                showValidationNotification();
             }
         };
         $scope.export = function () {
@@ -11625,7 +11648,7 @@
             var labelKeys = [
                 'general_design',
                 'shortcuts_shortcut',
-                'shortcuts_addTab',
+                'shortcuts_addGroup',
                 'shortcuts_addProperty',
                 'shortcuts_addEditor',
                 'shortcuts_editDataType'
@@ -11633,7 +11656,7 @@
             localizationService.localizeMany(labelKeys).then(function (values) {
                 vm.labels.design = values[0];
                 vm.labels.shortcut = values[1];
-                vm.labels.addTab = values[2];
+                vm.labels.addGroup = values[2];
                 vm.labels.addProperty = values[3];
                 vm.labels.addEditor = values[4];
                 vm.labels.editDataType = values[5];
@@ -11647,11 +11670,11 @@
                         'name': vm.labels.shortcut,
                         'shortcuts': [
                             {
-                                'description': vm.labels.addTab,
+                                'description': vm.labels.addGroup,
                                 'keys': [
                                     { 'key': 'alt' },
                                     { 'key': 'shift' },
-                                    { 'key': 't' }
+                                    { 'key': 'g' }
                                 ]
                             },
                             {
@@ -12164,20 +12187,22 @@
             var packageUri = $routeParams.method;
             if (packageInstallData) {
                 localStorageService.remove('packageInstallData');
+                if (packageInstallData.postInstallationPath) {
+                    //navigate to the custom installer screen if set
+                    $location.path(packageInstallData.postInstallationPath).search('packageId', packageInstallData.id);
+                    return;
+                }
+                //if it is "installed" then set the uri/path to that
+                if (packageInstallData === 'installed') {
+                    packageUri = 'installed';
+                }
             }
-            if (packageInstallData && packageInstallData !== 'installed' && packageInstallData.postInstallationPath) {
-                //navigate to the custom installer screen, if it is just "installed" it means there is no custom installer screen
-                $location.path(packageInstallData.postInstallationPath).search('packageId', packageInstallData.id);
-            } else {
-                var vm = this;
-                vm.page = {};
-                vm.page.labels = {};
-                vm.page.name = '';
-                vm.page.navigation = [];
-                packageUri = packageInstallData ? packageInstallData : packageUri;
-                //use the path stored in storage over the one in the current path
-                onInit();
-            }
+            var vm = this;
+            vm.page = {};
+            vm.page.labels = {};
+            vm.page.name = '';
+            vm.page.navigation = [];
+            onInit();
             function onInit() {
                 loadNavigation();
                 setPageName();
@@ -14220,12 +14245,12 @@
         }
         function changed(item) {
             var index = _.findIndex($scope.model.value, function (v) {
-                return v === item.value;
+                return v === item.val;
             });
             if (item.checked) {
                 //if it doesn't exist in the model, then add it
                 if (index < 0) {
-                    $scope.model.value.push(item.value);
+                    $scope.model.value.push(item.val);
                 }
             } else {
                 //if it exists in the model, then remove it
@@ -14692,9 +14717,7 @@
             },
             treeAlias: $scope.model.config.startNode.type,
             section: $scope.model.config.startNode.type,
-            idType: 'udi',
-            //only show the lang selector for content
-            showLanguageSelector: $scope.model.config.startNode.type === 'content'
+            idType: 'udi'
         };
         //since most of the pre-value config's are used in the dialog options (i.e. maxNumber, minNumber, etc...) we'll merge the 
         // pre-value config on to the dialog options
@@ -21912,7 +21935,7 @@
             }
             function setSectionIcon(sections) {
                 angular.forEach(sections, function (section) {
-                    section.icon = 'icon-section ' + section.cssclass;
+                    section.icon = 'icon-section';
                 });
             }
             init();
