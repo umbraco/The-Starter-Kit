@@ -8,6 +8,7 @@ using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using Umbraco.Core.PackageActions;
+using Umbraco.Core.PropertyEditors.ValueConverters;
 using Umbraco.Core.Services;
 using Umbraco.Web.Composing;
 
@@ -162,7 +163,7 @@ namespace Umbraco.SampleSite
 
             var media = service.CreateMedia(nodeName, parentFolderId, nodeTypeAlias);
             if (nodeTypeAlias != "folder")
-                media.SetValue("umbracoFile", mediaPath);
+                media.SetValue("umbracoFile", JsonConvert.SerializeObject(new ImageCropperValue { Src = mediaPath }));
             if (key != Guid.Empty)
             {
                 media.Key = key;
