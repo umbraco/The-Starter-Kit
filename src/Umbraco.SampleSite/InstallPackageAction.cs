@@ -26,6 +26,7 @@ namespace Umbraco.SampleSite
 
             var formsInstallHelper = new FormsInstallationHelper(Current.Services);
             formsInstallHelper.UpdateUmbracoDataForNonFormsInstallation();
+            formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
 
             // update master view for all templates (packager doesn't support this)
             var master = fileService.GetTemplate("master");
@@ -168,7 +169,7 @@ namespace Umbraco.SampleSite
             {
                 media.Key = key;
             }
-            service.Save(media,-1);
+            service.Save(media);
             return media.Id;
         }
     }

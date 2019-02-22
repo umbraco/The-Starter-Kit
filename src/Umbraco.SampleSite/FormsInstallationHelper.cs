@@ -90,7 +90,8 @@ namespace Umbraco.SampleSite
             else
             {
                 // forms is installed
-                CreateStarterKitForm();
+                var formsInstallHelper = new FormsInstallationHelper(Current.Services);
+                formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
             }
         }
 
