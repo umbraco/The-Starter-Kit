@@ -18,7 +18,7 @@
     @* Get the starting page *@
     var startNode = Umbraco.Content(startNodeId);
 
-    if (startNode != null)
+    if (startNode == null)
     {
         <div class="blogposts">
             <h1>There are no posts at this time, try again later.</h1>

@@ -176,6 +176,156 @@
       <orgPath>~/css</orgPath>
       <orgName>umbraco-starterkit-style.css</orgName>
     </file>
+    <file>
+      <guid>OsmMaps.controller.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps</orgPath>
+      <orgName>OsmMaps.controller.js</orgName>
+    </file>
+    <file>
+      <guid>OsmMaps.html</guid>
+      <orgPath>~/App_Plugins/OsmMaps</orgPath>
+      <orgName>OsmMaps.html</orgName>
+    </file>
+    <file>
+      <guid>65687077-e44e-4c04-bea8-92414afa0f31_package.manifest</guid>
+      <orgPath>~/App_Plugins/OsmMaps</orgPath>
+      <orgName>package.manifest</orgName>
+    </file>
+    <file>
+      <guid>osmmaps.css</guid>
+      <orgPath>~/App_Plugins/OsmMaps/assets/css</orgPath>
+      <orgName>osmmaps.css</orgName>
+    </file>
+    <file>
+      <guid>leaflet-src.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/assets/leaflet</orgPath>
+      <orgName>leaflet-src.js</orgName>
+    </file>
+    <file>
+      <guid>leaflet.css</guid>
+      <orgPath>~/App_Plugins/OsmMaps/assets/leaflet</orgPath>
+      <orgName>leaflet.css</orgName>
+    </file>
+    <file>
+      <guid>leaflet.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/assets/leaflet</orgPath>
+      <orgName>leaflet.js</orgName>
+    </file>
+    <file>
+      <guid>layers-2x.png</guid>
+      <orgPath>~/App_Plugins/OsmMaps/assets/leaflet/images</orgPath>
+      <orgName>layers-2x.png</orgName>
+    </file>
+    <file>
+      <guid>layers.png</guid>
+      <orgPath>~/App_Plugins/OsmMaps/assets/leaflet/images</orgPath>
+      <orgName>layers.png</orgName>
+    </file>
+    <file>
+      <guid>marker-icon-2x.png</guid>
+      <orgPath>~/App_Plugins/OsmMaps/assets/leaflet/images</orgPath>
+      <orgName>marker-icon-2x.png</orgName>
+    </file>
+    <file>
+      <guid>marker-icon.png</guid>
+      <orgPath>~/App_Plugins/OsmMaps/assets/leaflet/images</orgPath>
+      <orgName>marker-icon.png</orgName>
+    </file>
+    <file>
+      <guid>marker-shadow.png</guid>
+      <orgPath>~/App_Plugins/OsmMaps/assets/leaflet/images</orgPath>
+      <orgName>marker-shadow.png</orgName>
+    </file>
+    <file>
+      <guid>da-dk.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>da-dk.js</orgName>
+    </file>
+    <file>
+      <guid>de-de.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>de-de.js</orgName>
+    </file>
+    <file>
+      <guid>en-gb.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>en-gb.js</orgName>
+    </file>
+    <file>
+      <guid>en-us.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>en-us.js</orgName>
+    </file>
+    <file>
+      <guid>es-es.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>es-es.js</orgName>
+    </file>
+    <file>
+      <guid>fr-fr.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>fr-fr.js</orgName>
+    </file>
+    <file>
+      <guid>he-il.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>he-il.js</orgName>
+    </file>
+    <file>
+      <guid>it-it.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>it-it.js</orgName>
+    </file>
+    <file>
+      <guid>ja-jp.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>ja-jp.js</orgName>
+    </file>
+    <file>
+      <guid>ko-kr.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>ko-kr.js</orgName>
+    </file>
+    <file>
+      <guid>nb-no.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>nb-no.js</orgName>
+    </file>
+    <file>
+      <guid>nl-nl.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>nl-nl.js</orgName>
+    </file>
+    <file>
+      <guid>pl-pl.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>pl-pl.js</orgName>
+    </file>
+    <file>
+      <guid>pt-br.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>pt-br.js</orgName>
+    </file>
+    <file>
+      <guid>ru-ru.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>ru-ru.js</orgName>
+    </file>
+    <file>
+      <guid>sv-se.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>sv-se.js</orgName>
+    </file>
+    <file>
+      <guid>zh-cn.js</guid>
+      <orgPath>~/App_Plugins/OsmMaps/langs</orgPath>
+      <orgName>zh-cn.js</orgName>
+    </file>
+    <file>
+      <guid>Our.Umbraco.OsmMaps.dll</guid>
+      <orgPath>~/bin</orgPath>
+      <orgName>Our.Umbraco.OsmMaps.dll</orgName>
+    </file>
   </files>
   <info>
     <package>
@@ -811,12 +961,15 @@ It contains a simple website that contains many basic features to help get you s
 }]]></bodyText>
           </blogpost>
         </blog>
-        <contact id="1157" key="4a1f4198-e143-48ba-a0f5-1a7ef2df23aa" parentID="1133" level="2" creatorID="-1" sortOrder="4" createDate="2019-01-09T10:32:40" updateDate="2019-02-08T14:47:12" nodeName="Contact" urlName="contact" path="-1,1133,1157" isDoc="" nodeType="1075" nodeTypeAlias="contact" creatorName="A User" writerName="A User" writerID="-1" template="1082" isPublished="true">
+        <contact id="1157" key="4a1f4198-e143-48ba-a0f5-1a7ef2df23aa" parentID="1133" level="2" creatorID="-1" sortOrder="4" createDate="2019-01-09T10:32:40" updateDate="2019-02-22T11:30:17" nodeName="Contact" urlName="contact" path="-1,1133,1157" isDoc="" nodeType="1075" nodeTypeAlias="contact" creatorName="A User" writerName="A User" writerID="-1" template="1082" isPublished="true">
           <keywords><![CDATA[[]]]></keywords>
           <umbracoNavihide>0</umbracoNavihide>
           <pageTitle><![CDATA[Let's have a chat]]></pageTitle>
           <contactFormHeader><![CDATA[Send Us A Message]]></contactFormHeader>
           <contactIntro><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget lacinia nisl. Aenean sollicitudin diam vitae enim ultrices, semper euismod magna efficitur.</p>]]></contactIntro>
+          <contactForm><![CDATA[adf160f1-39f5-44c0-b01d-9e2da32bf093]]></contactForm>
+          <mapHeader><![CDATA[You'll find us here]]></mapHeader>
+          <mapCoordinates><![CDATA[55.40622012982414,10.388404726982117,18]]></mapCoordinates>
         </contact>
       </home>
     </DocumentSet>
@@ -1537,12 +1690,35 @@ It contains a simple website that contains many basic features to help get you s
           <Mandatory>False</Mandatory>
           <Description><![CDATA[If Umbraco Forms is installed you'll be able to select a form]]></Description>
         </GenericProperty>
+        <GenericProperty>
+          <Name>Map Header</Name>
+          <Alias>mapHeader</Alias>
+          <Type>Umbraco.TextBox</Type>
+          <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+          <Tab>Map</Tab>
+          <SortOrder>0</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
+        <GenericProperty>
+          <Name>Map Coordinates</Name>
+          <Alias>mapCoordinates</Alias>
+          <Type>Our.Umbraco.OsmMaps</Type>
+          <Definition>fc1475d2-7c7b-4b2f-bc53-54c86fd43d6c</Definition>
+          <Tab>Map</Tab>
+          <SortOrder>1</SortOrder>
+          <Mandatory>False</Mandatory>
+        </GenericProperty>
       </GenericProperties>
       <Tabs>
         <Tab>
           <Id>19</Id>
           <Caption>Form</Caption>
           <SortOrder>0</SortOrder>
+        </Tab>
+        <Tab>
+          <Id>32</Id>
+          <Caption>Map</Caption>
+          <SortOrder>1</SortOrder>
         </Tab>
       </Tabs>
     </DocumentType>
@@ -1723,21 +1899,47 @@ It contains a simple website that contains many basic features to help get you s
       <Alias>contact</Alias>
       <Design><![CDATA[@inherits UmbracoViewPage<Contact>
 @using ContentModels = Umbraco.Web.PublishedModels;
-@*using Terratype;*@
 @{
     Layout = "master.cshtml";
+
+
+    var coordinates = Model.MapCoordinates.ToString().Split(',');
+
+    var latitude = coordinates[0];
+    var longitude = coordinates[1];
+    var zoomLevel = coordinates[2];
+
+    // Build the coordinates string
+    var coordinatesString = longitude + "," + latitude + "," + longitude + "," + latitude;
 }
 @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
-
 <section class="section">
     <div class="container">
 
         <div class="row">
-            
+            <div class="col-md-6">
+                <h2>@Model.MapHeader</h2>
+                <iframe width="550"
+                        height="400"
+                        frameborder="0"
+                        scrolling="no"
+                        marginheight="0"
+                        marginwidth="0"
+                        src="https://www.openstreetmap.org/export/embed.html?bbox=@coordinatesString&amp;layer=mapnik&amp;marker=@Model.MapCoordinates"
+                        style="border: 1px solid black">
+                </iframe>
+
+                <br />
+
+                <small>
+                    <a href="https://www.openstreetmap.org/?mlat=@latitude&amp;mlon=@longitude#map=@zoomLevel/@latitude/@longitude&amp;layers=N">View Larger Map</a>
+                </small>
+            </div>
+
             <div class="col-md-6">
                 <h2>@Model.ContactFormHeader</h2>
                 @Model.ContactIntro
-                @Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.ContactForm.ToString() })
+                @Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.ContactForm })
             </div>
 
         </div>
@@ -5028,6 +5230,7 @@ article {
     <DataType Name="Product - Price - Decimal" Id="Umbraco.Decimal" Definition="3f6619b6-08a4-4be7-8d6a-2761844ee567" DatabaseType="Decimal" Configuration="{}" />
     <DataType Name="Products - Default Currency - Dropdown list" Id="Umbraco.DropDown.Flexible" Definition="28a6aeda-b3fc-4c4d-926e-607854a07891" DatabaseType="Nvarchar" Configuration="{&quot;Multiple&quot;:false,&quot;Items&quot;:[{&quot;id&quot;:1,&quot;value&quot;:&quot;€&quot;},{&quot;id&quot;:2,&quot;value&quot;:&quot;£&quot;},{&quot;id&quot;:3,&quot;value&quot;:&quot;$&quot;},{&quot;id&quot;:4,&quot;value&quot;:&quot;DKK&quot;}]}" />
     <DataType Name="Products - Featured Products - Multinode Treepicker" Id="Umbraco.MultiNodeTreePicker" Definition="d0382188-119b-49b7-86d3-84119a02645f" DatabaseType="Ntext" Configuration="{&quot;TreeSource&quot;:{&quot;type&quot;:&quot;content&quot;,&quot;query&quot;:null,&quot;id&quot;:&quot;umb://document/6d5bf746cb8245c5bd15dd3798209b87&quot;},&quot;Filter&quot;:&quot;product&quot;,&quot;MinNumber&quot;:0,&quot;MaxNumber&quot;:9,&quot;ShowOpen&quot;:true}" />
+    <DataType Name="Contact - Map Coordinates - Open street maps" Id="Our.Umbraco.OsmMaps" Definition="fc1475d2-7c7b-4b2f-bc53-54c86fd43d6c" DatabaseType="Nvarchar" Configuration="{}" />
   </DataTypes>
   <Actions>
     <Action runat="install" undo="false" alias="SampleSiteInitialContent">

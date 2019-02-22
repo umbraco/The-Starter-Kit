@@ -1,0 +1,15 @@
+.map{
+	height: 400px;
+}
+
+.btn{
+	margin-top:10px;
+}
+
+.hide{
+	display: none;
+}
+
+.pac-container {
+	z-index: 9999;
+}
