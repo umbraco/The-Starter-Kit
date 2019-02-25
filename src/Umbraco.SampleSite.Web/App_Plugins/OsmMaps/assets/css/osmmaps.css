@@ -1,15 +1,11 @@
-.map{
+.osmmaps .map{
 	height: 400px;
 }
 
-.btn{
+.osmmaps .btn{
 	margin-top:10px;
 }
 
-.hide{
+.osmmaps .hide{
 	display: none;
-}
-
-.pac-container {
-	z-index: 9999;
 }
