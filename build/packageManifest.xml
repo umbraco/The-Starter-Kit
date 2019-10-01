@@ -82,6 +82,31 @@
       <orgName>18531854019_351c579559_h.jpg</orgName>
     </file>
     <file>
+      <guid>40682846230_2a8257b8c6_c.jpg</guid>
+      <orgPath>~/Media/83ad12093c0c4ee592e0494f601e7618/00000006000000000000000000000000</orgPath>
+      <orgName>40682846230_2a8257b8c6_c.jpg</orgName>
+    </file>
+    <file>
+      <guid>42490702561_674b56aea3_c.jpg</guid>
+      <orgPath>~/Media/d0ff8fd6-ad56-461b-b52b-d166f60fb380/00000006000000000000000000000000</orgPath>
+      <orgName>42490702561_674b56aea3_c.jpg</orgName>
+    </file>
+    <file>
+      <guid>47992087002_f94da55db3_c.jpg</guid>
+      <orgPath>~/Media/1d24f58f-7180-401f-ba17-b0206b9dfb46/00000006000000000000000000000000</orgPath>
+      <orgName>47992087002_f94da55db3_c.jpg</orgName>
+    </file>
+    <file>
+      <guid>47992090703_5cc6004961_c.jpg</guid>
+      <orgPath>~/Media/10a62ffd-e1dd-42e6-a19e-53394ea6f8b1/00000006000000000000000000000000</orgPath>
+      <orgName>47992090703_5cc6004961_c.jpg</orgName>
+    </file>
+    <file>
+      <guid>47992136471_5fc857edcb_c.jpg</guid>
+      <orgPath>~/Media/c12c52a1-7f88-4378-8352-08226d9b4a12/00000006000000000000000000000000</orgPath>
+      <orgName>47992136471_5fc857edcb_c.jpg</orgName>
+    </file>
+    <file>
       <guid>umbraco-starterkit-app.js</guid>
       <orgPath>~/scripts</orgPath>
       <orgName>umbraco-starterkit-app.js</orgName>
@@ -576,7 +601,7 @@ It contains a simple website that contains many basic features to help get you s
           </product>
         </products>
         <people id="1144" key="e8ad9b65-cff6-4952-ac5b-efe56a60db62" parentID="1133" level="2" creatorID="-1" sortOrder="1" createDate="2019-01-09T10:00:15" updateDate="2019-01-24T09:14:53" nodeName="People" urlName="people" path="-1,1133,1144" isDoc="" nodeType="1096" nodeTypeAlias="people" creatorName="A User" writerName="A User" writerID="-1" template="1086" isPublished="true">
-          <pageTitle><![CDATA[Nice crazy people]]></pageTitle>
+          <pageTitle><![CDATA[Nice friendly people]]></pageTitle>
           <bodyText><![CDATA[{
   "name": "1 column layout",
   "sections": [
@@ -594,6 +619,38 @@ It contains a simple website that contains many basic features to help get you s
             <umbracoNavihide>0</umbracoNavihide>
             <photo><![CDATA[umb://media/cf1ab8dcad0f4a8e974b87b84777b0d6]]></photo>
             <department><![CDATA[mvp,Denmark]]></department>
+          </person>
+          <person id="1158" key="b10a8a15-8729-4942-98f3-c13e26b43824" parentID="1144" level="3" creatorID="-1" sortOrder="0" createDate="2019-09-30T23:40:01" updateDate="2019-09-30T23:40:01" nodeName="Lotte Pitcher" urlName="lotte-pitcher" path="-1,1133,1144,1158" isDoc="" nodeType="1088" nodeTypeAlias="person" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="-1" template="1087">
+            <umbracoNavihide>0</umbracoNavihide>
+            <photo><![CDATA[umb://media/83ad12093c0c4ee592e0494f601e7618]]></photo>
+            <department><![CDATA[mvp,United Kingdom]]></department>
+            <twitterUsername><![CDATA[@lottepitcher]]></twitterUsername>
+          </person>
+          <person id="1160" key="11a9ecf5-fa2e-4509-ad14-208d620cdac8" parentID="1144" level="3" creatorID="-1" sortOrder="0" createDate="2019-09-30T23:40:01" updateDate="2019-09-30T23:40:01" nodeName="Emma Burstow" urlName="emma-burstow" path="-1,1133,1144,1160" isDoc="" nodeType="1088" nodeTypeAlias="person" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="-1" template="1087">
+            <umbracoNavihide>0</umbracoNavihide>
+            <photo><![CDATA[umb://media/d0ff8fd6-ad56-461b-b52b-d166f60fb380]]></photo>
+            <department><![CDATA[mvp,United Kingdom]]></department>
+            <twitterUsername><![CDATA[@emaburst]]></twitterUsername>
+          </person>
+          <person id="1161" key="4616df3a-23d1-4d2f-97c4-dc2e741275c1" parentID="1144" level="3" creatorID="-1" sortOrder="0" createDate="2019-09-30T23:40:01" updateDate="2019-09-30T23:40:01" nodeName="Poornima Nayar" urlName="poornima-nayar" path="-1,1133,1144,1161" isDoc="" nodeType="1088" nodeTypeAlias="person" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="-1" template="1087">
+            <umbracoNavihide>0</umbracoNavihide>
+            <photo><![CDATA[umb://media/1d24f58f-7180-401f-ba17-b0206b9dfb46]]></photo>
+            <department><![CDATA[mvp,United Kingdom]]></department>
+            <twitterUsername><![CDATA[@PoornimaNayar]]></twitterUsername>
+          </person>
+          <person id="1162" key="2eb398e7-68ec-443d-8437-a7f432202829" parentID="1144" level="3" creatorID="-1" sortOrder="0" createDate="2019-09-30T23:40:01" updateDate="2019-09-30T23:40:01" nodeName="Laura Weatherhead" urlName="laura-weatherhead" path="-1,1133,1144,1162" isDoc="" nodeType="1088" nodeTypeAlias="person" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="-1" template="1087">
+            <umbracoNavihide>0</umbracoNavihide>
+            <photo><![CDATA[umb://media/10a62ffd-e1dd-42e6-a19e-53394ea6f8b1]]></photo>
+            <department><![CDATA[mvp,United Kingdom]]></department>
+            <twitterUsername><![CDATA[@lssweatherhead]]></twitterUsername>
+          </person>
+          <person id="1163" key="ca4249ed-2b23-4337-b522-63cabe5587d1" parentID="1144" level="3" creatorID="-1" sortOrder="0" createDate="2019-09-30T23:40:01" updateDate="2019-09-30T23:40:01" nodeName="Heather Floyd" urlName="heather-floyd" path="-1,1133,1144,1163" isDoc="" nodeType="1088" nodeTypeAlias="person" creatorName="Sara Andrews" writerName="Sara Andrews" writerID="-1" template="1087">
+            <umbracoNavihide>0</umbracoNavihide>
+            <photo><![CDATA[umb://media/c12c52a1-7f88-4378-8352-08226d9b4a12]]></photo>
+            <department><![CDATA[mvp]]></department>
+            <twitterUsername>
+              <![CDATA[@HFloyd]]>
+            </twitterUsername>
           </person>
           <person id="1146" key="eab72f13-b22e-46d5-b270-9c196e49a53b" parentID="1144" level="3" creatorID="-1" sortOrder="1" createDate="2019-01-09T10:02:09" updateDate="2019-01-09T12:58:58" nodeName="Matt Brailsford" urlName="matt-brailsford" path="-1,1133,1144,1146" isDoc="" nodeType="1088" nodeTypeAlias="person" creatorName="A User" writerName="A User" writerID="-1" template="1087" isPublished="true">
             <keywords><![CDATA[[]]]></keywords>
@@ -5248,6 +5305,11 @@ article {
       <mediaItem folder="people" name="Lee Kelleher" path="/media/fa763e0d0ceb408c8720365d57e06e32/00000006000000000000000000000000/18531854019_351c579559_h.jpg" key="fa763e0d-0ceb-408c-8720-365d57e06e32" updateDocPath="//person [@nodeName = 'Lee Kelleher']" updatePropertyAlias="photo" />
       <mediaItem folder="people" name="Jeavon Leopold" path="/media/c0969cab13ab4de9819a848619ac2b5d/00000006000000000000000000000000/18095416144_44a566a5f4_h.jpg" key="c0969cab-13ab-4de9-819a-848619ac2b5d" updateDocPath="//person [@nodeName = 'Jeavon Leopold']" updatePropertyAlias="photo" />
       <mediaItem folder="people" name="Jeroen Breuer" path="/media/34371d0892c84015912ebaacd002c5d0/00000006000000000000000000000000/18530280048_459b8b61b2_h.jpg" key="34371d08-92c8-4015-912e-baacd002c5d0" updateDocPath="//person [@nodeName = 'Jeroen Breuer']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Lotte Pitcher" path="/media/83ad12093c0c4ee592e0494f601e7618/00000006000000000000000000000000/40682846230_2a8257b8c6_c.jpg" key="83ad12093c0c4ee592e0494f601e7618" updateDocPath="//person [@nodeName = 'Lotte Pitcher']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Emma Burstow" path="/media/d0ff8fd6-ad56-461b-b52b-d166f60fb380/00000006000000000000000000000000/42490702561_674b56aea3_c.jpg" key="d0ff8fd6-ad56-461b-b52b-d166f60fb380" updateDocPath="//person [@nodeName = 'Emma Burstow']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Poorinma Nayar" path="/media/1d24f58f-7180-401f-ba17-b0206b9dfb46/00000006000000000000000000000000/47992087002_f94da55db3_c.jpg" key="1d24f58f-7180-401f-ba17-b0206b9dfb46" updateDocPath="//person [@nodeName = 'Poorinma Nayar']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Laura Weatherhead" path="/media/10a62ffd-e1dd-42e6-a19e-53394ea6f8b1/00000006000000000000000000000000/47992090703_5cc6004961_c.jpg" key="10a62ffd-e1dd-42e6-a19e-53394ea6f8b1" updateDocPath="//person [@nodeName = 'Laura Weatherhead']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Heather Floyd" path="/media/c12c52a1-7f88-4378-8352-08226d9b4a12/00000006000000000000000000000000/47992136471_5fc857edcb_c.jpg" key="c12c52a1-7f88-4378-8352-08226d9b4a12" updateDocPath="//person [@nodeName = 'Heather Floyd']" updatePropertyAlias="photo" />
     </Action>
   </Actions>
 </umbPackage>
