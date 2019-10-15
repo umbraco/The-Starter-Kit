@@ -21,11 +21,9 @@ Alternatively, if you are doing development for the Starter Kit, you can launch 
 The build script is: /build/build.ps1 
 Run it in the powershell cli: `.\build\build.ps1`
 
-It will prompt you for the version number and pre-release. Example: enter `1.0.0` for the build number and 
-if it's a pre-release, enter `beta-01` (be sure to enter the hyphen prefix). 
-If it's not a pre-release, just press Enter to skip that step.
+The build number is located in the `/build/build.xml` file.
 
-The package output will be `/build/Releases/(VersionNumber)/Umbraco.SampleSite.zip`
+The package output will be `/build/Releases/(VersionNumber)/Umbraco.SampleSite_4.0.0.zip` (but this should be the correct version you are building!)
 
 # Maintaining the package
 
@@ -35,3 +33,5 @@ If changes are made to the package, the package manifest file will need to be up
 * Publish the package in the back office and press the download button to download the .zip file
 * Open the zip file and find the package.xml file. Copy its contents to the /build/packageManifest.xml file. Alternatively, you can manually edit the /build/packageManifest.xml file, if you know what needs to be changed.
 
+**Important!** You must manually include any cshtml files that are used by macros, just selecting the macro isn't enough. This is due to how the 
+powershell build process works (this is not normally needed for creating packages normally in the back office)

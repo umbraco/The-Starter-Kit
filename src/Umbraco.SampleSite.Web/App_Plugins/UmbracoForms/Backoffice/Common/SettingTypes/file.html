@@ -1,0 +1,12 @@
+﻿<div ng-controller="UmbracoForms.SettingTypes.File">
+    {{setting.value}}
+    <a href="" ng-click="openMediaPicker()" class="btn">Pick</a>
+
+    <umb-overlay
+        ng-if="mediaPickerOverlay.show"
+        model="mediaPickerOverlay"
+        view="mediaPickerOverlay.view"
+        position="right">
+    </umb-overlay>
+
+</div>

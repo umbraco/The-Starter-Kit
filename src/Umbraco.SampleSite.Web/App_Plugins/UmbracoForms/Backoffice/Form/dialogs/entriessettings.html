@@ -1,0 +1,50 @@
+<div class="umb-panel" ng-controller="UmbracoForms.Editors.Form.EntriesSettingsController">
+
+	<umb-load-indicator ng-if="page.loading"></umb-load-indicator>
+
+	<umb-editor-view ng-if="!page.loading">
+
+		<div data-element="editor-header" class="umb-editor-header">
+			<div class="flex items-center" style="height: 100%;">
+				<h5>Export</h5>
+			</div>
+		</div>
+
+
+			<umb-editor-container class="form-horizontal">
+				<umb-box>
+					<umb-box-content>
+						<small>Choose a format to export form records to</small>
+						<div>
+							<ul class="unstyled list-icons">
+								<li ng-repeat="exportType in exportTypes">
+									<i class="icon {{exportType.icon}}"></i>
+									<a href ng-click="export(exportType, model.filter)">
+										{{exportType.name}}
+										<br/><small>{{exportType.description}}</small>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</umb-box-content>
+				</umb-box>
+			</umb-editor-container>
+
+
+	</umb-editor-view>
+
+
+	<umb-editor-footer>
+		<umb-editor-footer-content-right>
+			<div class="btn-toolbar umb-btn-toolbar pull-right">
+				<a href="" ng-click="close()" class="btn btn-primary">
+					Done
+				</a>
+			</div>
+		</umb-editor-footer-content-right>
+	</umb-editor-footer>
+
+
+
+
+</div>

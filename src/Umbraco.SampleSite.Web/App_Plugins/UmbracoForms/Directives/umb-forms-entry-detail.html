@@ -1,0 +1,51 @@
+<div class="umb-forms-entry">
+
+    <div class="umb-forms-entry-main">
+
+        <!-- TODO: make render types directive so the RenderTypes don't rely a "field" model -->
+        <div class="umb-control-group" ng-repeat="detail in entry.details">
+            <label class="control-label">{{ detail.name }}</label>
+
+            <small class="" ng-if="detail.containsSensitiveData">
+                <i class="icon-lock umb-group-builder__property-tag-icon"></i>
+                <localize key="contentTypeEditor_isSensitiveData">Is sensitive data</localize>
+            </small>
+
+            <umb-forms-render-type field="detail.value"
+                                   view="detail.view" sensitive="detail.containsSensitiveData" has-access="sensitiveDataAccess">
+            </umb-forms-render-type>
+        </div>
+
+    </div>
+
+
+    <div class="umb-forms-entry-sidebar">
+
+        <div class="umb-control-group -no-border">
+            <label class="control-label">Submitted</label>
+            <div title="{{entry.created  | momentDateTimeZone : 'LLL' }}">{{entry.created | relativeDate }}</div>
+        </div>
+
+        <div class="umb-control-group -no-border" ng-if="entry.updated !== entry.created">
+            <label class="control-label">Updated</label>
+            <div title="{{entry.updated  | momentDateTimeZone : 'LLL' }}">{{entry.updated | relativeDate }}</div>
+        </div>
+
+        <div class="umb-control-group -no-border">
+            <label class="control-label">State</label>
+            <div>{{entry.state}}</div>
+        </div>
+
+        <div class="umb-control-group -no-border">
+            <label class="control-label">Id</label>
+            <div>{{entry.id}}</div>
+        </div>
+
+        <div class="umb-control-group -no-border">
+            <label class="control-label">Unique id</label>
+            <div><small>{{entry.uniqueId}}</small></div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,19 @@
+<div ng-controller="UmbracoForms.Editors.Form.CopyController">
+    <div class="umb-dialog-body with-footer">
+        <div class="umb-pane">
+            <h5><i class="icon icon-autofill"></i> Copy form '{{ currentNode.name }}'</h5>
+
+            <input type="text" placeholder="Copy of {{ currentNode.name }}" ng-model="newFormName" class="input-block-level" required/>
+        </div>
+    </div>
+
+
+    <div class="umb-dialog-footer btn-toolbar umb-btn-toolbar">
+        <a class="btn btn-link" ng-click="cancelCopy()">
+            <localize key="general_cancel">Cancel</localize>
+        </a>
+        <button class="btn btn-primary" ng-click="copyForm(currentNode.id)">
+            <localize key="actions_copy">Copy</localize>
+        </button>
+    </div>
+</div>
