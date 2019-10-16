@@ -3,7 +3,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Umbraco.Core;
+using Umbraco.Core.Composing;
 using Umbraco.Core.Logging;
+using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 
 namespace Umbraco.SampleSite
@@ -13,7 +16,7 @@ namespace Umbraco.SampleSite
         private readonly ServiceContext _services;
 
         private static readonly Regex PreInstallContactFormHtmlPattern = new Regex(@"@Umbraco\.RenderMacro\(\""renderUmbracoForm\""\,[\.\w\{\}\=\(\)\s]+\)", RegexOptions.Compiled);
-        private static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.Content.ContactForm.ToString() })";
+        private static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.ContactForm.ToString() })";
 
         private static readonly Regex PostInstallContactFormHtmlPattern = new Regex(@"\<p class=\""compat-msg\""\>.+?\<\/p\>", RegexOptions.Compiled | RegexOptions.Singleline);
         private static string PostInstallContactFormHtml = @"<p class=""compat-msg"">
@@ -22,8 +25,14 @@ namespace Umbraco.SampleSite
         <br /><br />
         <a href=""/umbraco/#/forms"" class=""button button--border--solid"">Go to Back Office and install Forms</a>
         <!-- When Umbraco Forms is installed, uncomment this line -->
-        @* @Umbraco.RenderMacro(""renderUmbracoForm"", new {FormGuid=Model.Content.ContactForm.ToString()}) *@
+        @* @Umbraco.RenderMacro(""renderUmbracoForm"", new {FormGuid=Model.ContactForm.ToString()}) *@
         </p>";
+
+        private const string DocTypeAlias = "contact";
+        private const string PropertyAlias = "contactForm";
+        private const string TemplateAlias = "contact";
+        private const string FormDataTypeAlias = "UmbracoForms.FormPicker";
+        private const string FormsMacroAlias = "renderUmbracoForm";
 
         public FormsInstallationHelper(ServiceContext services)
         {
@@ -43,32 +52,32 @@ namespace Umbraco.SampleSite
             var fileService = _services.FileService;
 
             // check if forms is installed
-            var formMacro = macroService.GetByAlias("renderUmbracoForm");
+            var formMacro = macroService.GetByAlias(FormsMacroAlias);
             if (formMacro == null)
             {
                 // find the doctype and change the form chooser property type
 
-                var contactFormType = doctypeService.GetContentType("contact");
+                var contactFormType = doctypeService.Get(DocTypeAlias);
                 if (contactFormType != null)
                 {
-                    var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == "contactForm");
-                    var labelDataType = dataTypeService.GetDataTypeDefinitionByPropertyEditorAlias("Umbraco.NoEdit")
-                        .First();
+                    var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == PropertyAlias);
+
+                    var labelDataType = dataTypeService.GetDataType(Constants.DataTypes.LabelString);
                     if (labelDataType != null && formPicker != null)
                     {
-                        formPicker.DataTypeDefinitionId = labelDataType.Id;
+                        formPicker.DataTypeId = labelDataType.Id;
                         doctypeService.Save(contactFormType);
                     }
                 }
 
                 // update the template
-                var contactView = fileService.GetTemplate("contact");
+                var contactView = fileService.GetTemplate(TemplateAlias);
                 if (contactView != null)
                 {
                     var templateContent = contactView.Content;
                     if (string.IsNullOrWhiteSpace(templateContent) == false)
                     {
-                        //do the replacement
+                        // do the replacement
                         templateContent =
                             PreInstallContactFormHtmlPattern.Replace(templateContent, PostInstallContactFormHtml);
 
@@ -80,8 +89,9 @@ namespace Umbraco.SampleSite
             }
             else
             {
-                // form is installed
-                CreateStarterKitForm();
+                // forms is installed
+                var formsInstallHelper = new FormsInstallationHelper(Current.Services);
+                formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
             }
         }
 
@@ -97,25 +107,47 @@ namespace Umbraco.SampleSite
             var fileService = _services.FileService;
 
             // check if forms is installed
-            var formMacro = macroService.GetByAlias("renderUmbracoForm");
+            var formMacro = macroService.GetByAlias(FormsMacroAlias);
             if (formMacro != null)
             {
                 // find the doctype and change the form chooser property type
 
-                var contactFormType = doctypeService.GetContentType("contact");
-                if (contactFormType != null)
+                var contactFormType = doctypeService.Get(DocTypeAlias);
+                if (contactFormType == null)
                 {
-                    var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == "contactForm");
-                    var formPickerDataType = dataTypeService.GetDataTypeDefinitionByPropertyEditorAlias("UmbracoForms.FormPicker").First();
-                    if (formPickerDataType != null && formPicker != null)
-                    {
-                        formPicker.DataTypeDefinitionId = formPickerDataType.Id;
-                        doctypeService.Save(contactFormType);
-                    }
+                    Current.Logger.Warn<FormsInstallationHelper>("Unable to find document type {DocTypeAlias} to update for Forms installation", DocTypeAlias);
+                    return;
+                }
+                
+                var formPicker = contactFormType.PropertyTypes.FirstOrDefault(x => x.Alias == PropertyAlias);
+                if(formPicker == null)
+                {
+                    Current.Logger.Warn<FormsInstallationHelper>("Unable to find property {PropertyAlias} on {DocTypeAlias} to update for Forms installation", PropertyAlias, DocTypeAlias);
+                    return;
+                }
+                
+                var formPickerDataType = dataTypeService.GetByEditorAlias(FormDataTypeAlias).FirstOrDefault();
+                if(formPickerDataType == null)
+                {
+                    Current.Logger.Warn<FormsInstallationHelper>("Unable to find Data Type {DataTypeAlias} to update {PropertyAlias} on {DocTypeAlias} for Forms installation", FormDataTypeAlias, PropertyAlias, DocTypeAlias);
+                    return;
                 }
 
+                if (formPickerDataType != null && formPicker != null)
+                {
+                    formPicker.DataTypeId = formPickerDataType.Id;
+                    doctypeService.Save(contactFormType);
+                }
+                
+
                 // update the template
-                var contactView = fileService.GetTemplate("contact");
+                var contactView = fileService.GetTemplate(TemplateAlias);
+                if(contactView == null)
+                {
+                    Current.Logger.Warn<FormsInstallationHelper>("Unable to find Template {TemplateAlias} for Forms installation", TemplateAlias);
+                    return;
+                }
+                
                 if (contactView != null)
                 {
                     var templateContent = contactView.Content;
@@ -141,13 +173,15 @@ namespace Umbraco.SampleSite
         /// </remarks>
         public static void RemoveStarterKitForm()
         {
-            LogHelper.Info<FormsInstallationHelper>("Deleting Form created from Starter Kit...");
+            Current.Logger.Info<FormsInstallationHelper>("Deleting Form created from Starter Kit...");
 
             var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
             if (formsAssembly == null) return;
-            var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Form");
+
+            var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Models.Form");
             if (formsType == null) return;
-            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Data.Storage.FormStorage");
+
+            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Core.Data.Storage.IFormStorage");
             if (formsStorageType == null) return;
 
             //this is the form id that is installed
@@ -157,11 +191,12 @@ namespace Umbraco.SampleSite
             object formsStorageInstance;
             try
             {
-                formsStorageInstance = Activator.CreateInstance(formsStorageType);
+                formsStorageInstance = Current.Factory.GetInstance(formsStorageType);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //If we cannot create it then there's nothing we can do
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to get instance of Umbraco.Forms.Core.Data.Storage.IFormStorage from Container");
                 return;
             }
 
@@ -172,12 +207,15 @@ namespace Umbraco.SampleSite
 
                 var deleteResult = CallMethod(formsStorageInstance, "DeleteForm", form);
             }
-            finally
+            catch (Exception ex)
             {
-                CallMethod(formsStorageInstance, "Dispose");
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to call method DeleteForm on FormStorage");
+
+                //If we cannot create it then there's nothing we can do
+                return;
             }
 
-            LogHelper.Info<FormsInstallationHelper>("Deleted Form created from Starter Kit");
+            Current.Logger.Info<FormsInstallationHelper>("Deleted Form created from Starter Kit");
         }
 
         /// <summary>
@@ -185,30 +223,44 @@ namespace Umbraco.SampleSite
         /// </summary>
         private static void CreateStarterKitForm()
         {
-            LogHelper.Info<FormsInstallationHelper>("Creating Form for Starter Kit...");
+            Current.Logger.Info<FormsInstallationHelper>("Creating Form for Starter Kit...");
 
-            var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
-            if (formsAssembly == null)
-                throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
-            var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Form");
+            Assembly formsAssembly;
+            try
+            {
+                formsAssembly = Assembly.Load("Umbraco.Forms.Core");
+                if (formsAssembly == null)
+                    throw new InvalidOperationException("Could not load assembly Umbraco.Forms.Core");
+            }
+            catch (Exception ex)
+            {
+                //forms assembly isn't there
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to find the Assembly Umbraco.Forms.Core");
+                return;
+            }
+
+            var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Models.Form");
             if (formsType == null) 
-                throw new InvalidOperationException("Could not find type Umbraco.Forms.Core.Form in assembly " + formsAssembly);
+                throw new InvalidOperationException("Could not find type Umbraco.Forms.Core.Models.Form in assembly " + formsAssembly);
 
             //deserialize the form from the json file
             var form = JsonConvert.DeserializeObject(FormsDefinitions.ContactForm, formsType);
 
-            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Data.Storage.FormStorage");
+            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Core.Data.Storage.IFormStorage");
             if (formsStorageType == null)
-                throw new InvalidOperationException("Could not find type Umbraco.Forms.Data.Storage.FormStorage in assembly " + formsAssembly);
+                throw new InvalidOperationException("Could not find type Umbraco.Forms.Core.Data.Storage.IFormStorage in assembly " + formsAssembly);
+
 
             //create a FormsStorage instance
             object formsStorageInstance;
             try
             {
-                formsStorageInstance = Activator.CreateInstance(formsStorageType);
+                formsStorageInstance = Current.Factory.GetInstance(formsStorageType);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to get instance of Umbraco.Forms.Core.Data.Storage.IFormStorage from Container");
+
                 //If we cannot create it then there's nothing we can do
                 return;
             }
@@ -218,12 +270,15 @@ namespace Umbraco.SampleSite
             {
                 CallMethod(formsStorageInstance, "InsertForm", form, string.Empty, false);
             }
-            finally
+            catch (Exception ex)
             {
-                CallMethod(formsStorageInstance, "Dispose");
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to call method InsertForm on FormStorage");
+
+                //If we cannot create it then there's nothing we can do
+                return;
             }
 
-            LogHelper.Info<FormsInstallationHelper>("Created Form for Starter Kit");
+            Current.Logger.Info<FormsInstallationHelper>("Created Form for Starter Kit");
         }
 
         #region Reflection Helpers

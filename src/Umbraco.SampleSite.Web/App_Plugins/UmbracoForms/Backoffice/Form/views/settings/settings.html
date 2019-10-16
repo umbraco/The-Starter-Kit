@@ -1,0 +1,108 @@
+<umb-box>
+    <umb-box-content class="form-horizontal">
+
+        <umb-control-group label="Store Records" description="Check this box to save submitted records in a database.
+                                                              This will allow you to view and export them from the queries overview.
+                                                              If you don't want to store data (due to policies in your organisation), leave the box un-checked.">
+            <label class="checkbox no-indent">
+                <input type="checkbox" ng-model="model.storeRecordsLocally" />
+                Yes, keep submitted records in a database so they can be viewed and exported later
+            </label>
+        </umb-control-group>
+
+        <!--Captions-->
+        <umb-control-group label="Captions" description="Change the captions for the Submit, Next and Previous buttons.">
+            <div class="control-row -margin-bottom">
+                <label class="control-label -block">'Submit' button label</label>
+                <input class="-full-width-input" type="text" ng-model="model.submitLabel" />
+            </div>
+            <div class="control-row -margin-bottom">
+                <label class="control-label -block">'Next' button label</label>
+                <input class="-full-width-input" type="text" ng-model="model.nextLabel" />
+            </div>
+            <div class="control-row -margin-bottom">
+                <label class="control-label -block">'Previous' button label</label>
+                <input class="-full-width-input" type="text" ng-model="model.prevLabel" />
+            </div>
+        </umb-control-group>
+
+        <!--Styling-->
+        <umb-control-group label="Styling" description="Add one or more classes to wrap your form to enable custom styling, disable default styling and load assets with Client Dependency.">
+            <div class="control-row -margin-bottom">
+                <label class="control-label -block">Form CSS class</label>
+                <input class="-full-width-input" type="text" ng-model="model.cssClass" />
+            </div>
+            <div class="control-row">
+                <label class="checkbox no-indent">
+                    <input type="checkbox" ng-model="model.disableDefaultStylesheet" />
+                    Disable default stylesheet
+                </label>
+            </div>
+            <div class="control-row">
+                <label class="checkbox no-indent">
+                    <input type="checkbox" ng-model="model.useClientDependency" />
+                    Load assets with Client Dependency
+                </label>
+            </div>
+        </umb-control-group>
+        
+        <!--Validation-->
+        <umb-control-group label="Validation" description="Provide better validation messages, hide validation labels and change or disable the required/mandatory marker.">
+            <div class="block-form">
+                <div>
+                    <label class="control-label">Mandatory Error Message</label>
+                    <small>Message to display when a mandatory field was left empty</small>
+                    <input class="-full-width-input" type="text" ng-model="model.requiredErrorMessage" />
+                </div>
+                <br />
+                <div>
+                    <label class="control-label -block">Invalid Error Message</label>
+                    <small>Message to display when a field is invalid</small>
+                    <input class="-full-width-input" type="text" ng-model="model.invalidErrorMessage" />
+                </div>
+                <div>
+                    <label class="checkbox no-indent">
+                        <input type="checkbox" ng-model="model.showValidationSummary" />
+                        Show validation summary
+                    </label>
+                </div>
+                <div>
+                    <label class="checkbox no-indent">
+                        <input type="checkbox" ng-model="model.hideFieldValidation" />
+                        Hide field validation labels
+                    </label>
+                </div>
+                <hr />
+                <div class="control-row">
+                    <label class="control-label -block">Mark fields</label>
+                    <label class="radio -block -no-indent">
+                        <input type="radio" ng-model="model.fieldIndicationType" value="NoIndicator">
+                        No Indicator
+                    </label>
+                    <label class="radio -block -no-indent">
+                        <input type="radio" ng-model="model.fieldIndicationType" value="MarkMandatoryFields">
+                        Mark Mandatory Fields
+                    </label>
+                    <label class="radio -block -no-indent">
+                        <input type="radio" ng-model="model.fieldIndicationType" value="MarkOptionalFields">
+                        Mark Optional Fields
+                    </label>
+                </div>
+                <br />
+                <div>
+                    <label class="control-label -block">Indicator</label>
+                    <small>Change the mandatory indicator symbol</small>
+                    <input class="-full-width-input" type="text" ng-model="model.indicator" />
+                </div>
+            </div>
+        </umb-control-group>
+        
+        <!--Moderation-->
+        <umb-control-group label="Moderation" description="Allow form submissions to be post moderated. Most use cases are for publicly shown entries such as blog post comments or submissions for a social campaign.">
+            <label class="checkbox no-indent">
+                <input type="checkbox" ng-model="model.manualApproval" />
+                Enable Post Moderation
+            </label>
+        </umb-control-group>
+    </umb-box-content>
+</umb-box>
