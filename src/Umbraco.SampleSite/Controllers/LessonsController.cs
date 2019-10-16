@@ -18,6 +18,7 @@ namespace Umbraco.SampleSite.Controllers
     [PluginController("Starterkit")]
     public class LessonsController : UmbracoAuthorizedJsonController
     {
+
         /// <summary>
         /// Fetches available lessons for a given section from our.umbaco.org
         /// </summary>
@@ -28,10 +29,10 @@ namespace Umbraco.SampleSite.Controllers
         {
             //information for the request, so we could in the future filter by user, allowed sections, langugae and user-type
             var user = Security.CurrentUser;
-            var userType = user.UserType.Alias;
+            var userType = string.Empty; //This is not in recent versions of Umbraco & the API Controller on our.umb does nothing with this data currently
             var allowedSections = string.Join(",", user.AllowedSections);
             var language = user.Language;
-            var version = UmbracoVersion.GetSemanticVersion().ToSemanticString();
+            var version = UmbracoVersion.SemanticVersion.ToSemanticString();
 
             //construct the url and cache key
             var url = string.Format("https://our.umbraco.org/Umbraco/Documentation/Lessons/GetDocsForPath?path={0}&userType={1}&allowedSections={2}&lang={3}&version={4}", path, userType, allowedSections, language, version);
@@ -53,7 +54,7 @@ namespace Umbraco.SampleSite.Controllers
                 catch (HttpRequestException ex)
                 {
                     //Log it so we are aware there was an issue
-                    LogHelper.Debug<LessonsController>(string.Format("Error getting lesson content from '{0}': {1}\n{2}", url, ex.Message, ex.InnerException));
+                    this.Logger.Error<LessonsController>(ex, "Error getting lesson content from {Url} ': {ExMessage}\n{InnerEx}", url, ex.Message, ex.InnerException);
 
                     //The result is still a new/empty JObject() - So we will return it like this to avoid error codes which triggers UI warnings
                     //So this will cache an empty response until cache expires
@@ -63,7 +64,7 @@ namespace Umbraco.SampleSite.Controllers
             };
 
             //Get cache item or add new cache item with func
-            result = ApplicationContext.ApplicationCache.RuntimeCache.GetCacheItem<List<Lesson>>(key, fetchLesson, new TimeSpan(0, 30, 0));
+            result = AppCaches.RuntimeCache.GetCacheItem<List<Lesson>>(key, fetchLesson, new TimeSpan(0, 30, 0));
 
             return result;
         }
@@ -85,7 +86,7 @@ namespace Umbraco.SampleSite.Controllers
                 return JsonConvert.DeserializeObject<List<LessonStep>>(json);
             }
         }
-        
+
     }
 
     /// <summary>
