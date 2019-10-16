@@ -248,7 +248,7 @@
                 "element": "[data-element='editor-media'] [data-element='property-umbracoBytes']",
                 "elementPreventClick": true,
                 "title": "Image size",
-                "content": "<p>You will also find other details about the image, like the size.</p><p>Media items work in much the same way as content. Properties can vary depending on wich <b>Media type</b> the current item belongs to.</p>"
+                "content": "<p>You will also find other details about the image, like the size.</p><p>Media items work in much the same way as content. Properties can vary depending on which <b>Media type</b> the current item belongs to.</p>"
             },
             {
                 "element": "[data-element='editor-media'] [data-element='tab-_umb_infoTab']",
