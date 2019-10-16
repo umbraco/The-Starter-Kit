@@ -21,7 +21,7 @@ if(( -not [string]::IsNullOrEmpty($ReleaseVersionNumber)) -And [string]::IsNullO
 $PSScriptFilePath = Get-Item $MyInvocation.MyCommand.Path
 $RepoRoot = $PSScriptFilePath.Directory.Parent.FullName
 $BuildFolder = Join-Path -Path $RepoRoot -ChildPath "build";
-$WebProjFolder = Join-Path -Path $RepoRoot -ChildPath "src\Umbraco.SampleSite.Website";
+$WebProjFolder = Join-Path -Path $RepoRoot -ChildPath "src\Umbraco.SampleSite.Web";
 $ReleaseFolder = Join-Path -Path $BuildFolder -ChildPath "Releases";
 $TempFolder = Join-Path -Path $ReleaseFolder -ChildPath "Temp";
 $SolutionRoot = Join-Path -Path $RepoRoot "src";
@@ -69,12 +69,9 @@ if (-not (test-path $vswhere))
    mv "$dir\$file" $vswhere   
  }
 
-$MSBuild = &$vswhere -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
-if ($MSBuild) {
-  $MSBuild = join-path $MSBuild 'MSBuild\15.0\Bin\MSBuild.exe'
-  if (-not (test-path $msbuild)) {
-	throw "MSBuild not found!"
-  }
+$MSBuild = &$vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe | select-object -first 1
+if (-not (test-path $MSBuild)) {
+    throw "MSBuild not found!"
 }
 
 if ((Get-Item $ReleaseFolder -ErrorAction SilentlyContinue) -ne $null)
@@ -95,7 +92,7 @@ $SolutionInfoPath = Join-Path -Path $SolutionRoot -ChildPath "SolutionInfo.cs"
 	-replace "(?<=AssemblyInformationalVersion\(`")[.\w-]*(?=`"\))", $FullVersionName |
 	sc -Path $SolutionInfoPath -Encoding UTF8
 # Set the copyright
-$Copyright = "Copyright © Umbraco " + (Get-Date).year;
+$Copyright = "Copyright ï¿½ Umbraco " + (Get-Date).year;
 (gc -Path $SolutionInfoPath) `
 	-replace "(?<=AssemblyCopyright\(`").*(?=`"\))", $Copyright |
 	sc -Path $SolutionInfoPath -Encoding UTF8;
@@ -124,7 +121,7 @@ if (-not $?)
 ####### DO THE UMBRACO PACKAGE BUILD #############
 
 # Set the version number in createdPackages.config
-$CreatedPackagesConfig = Join-Path -Path $WebProjFolder -ChildPath "App_Data\packages\created\createdPackages.config"
+$CreatedPackagesConfig = Join-Path -Path $WebProjFolder -ChildPath "App_Data\packages\createdPackages.config"
 $CreatedPackagesConfigXML = [xml](Get-Content $CreatedPackagesConfig)
 $CreatedPackagesConfigXML.packages.package.version = $FullVersionName
 $CreatedPackagesConfigXML.Save($CreatedPackagesConfig)
@@ -139,10 +136,10 @@ $PackageManifest = (Join-Path -Path $TempFolder -ChildPath "package.xml")
 $PackageManifestXML = [xml](Get-Content $PackageManifest)
 $PackageManifestXML.umbPackage.info.package.version = $FullVersionName
 $PackageManifestXML.umbPackage.info.package.name = $CreatedPackagesConfigXML.packages.package.name
-$PackageManifestXML.umbPackage.info.package.license.set_InnerXML($CreatedPackagesConfigXML.packages.package.license.get_InnerXML())
+$PackageManifestXML.umbPackage.info.package.license.set_InnerXML($CreatedPackagesConfigXML.packages.package.license."#cdata-section")
 $PackageManifestXML.umbPackage.info.package.license.url = $CreatedPackagesConfigXML.packages.package.license.url
 $PackageManifestXML.umbPackage.info.package.url = $CreatedPackagesConfigXML.packages.package.url
-$PackageManifestXML.umbPackage.info.author.name = $CreatedPackagesConfigXML.packages.package.author.get_InnerXML()
+$PackageManifestXML.umbPackage.info.author.name = $CreatedPackagesConfigXML.packages.package.author."#cdata-section"
 $PackageManifestXML.umbPackage.info.author.website = $CreatedPackagesConfigXML.packages.package.author.url
 
 #clear the files from the manifest
@@ -176,6 +173,8 @@ Function MapPath ($f)
 }
 foreach($FileXML in $CreatedPackagesConfigXML.packages.package.files.file)
 {
+	Write-Host $FileXML -foregroundcolor Yellow
+
 	$File = Get-Item (MapPath $FileXML)
     if ($File -is [System.IO.DirectoryInfo]) 
     {
@@ -192,6 +191,6 @@ $PackageManifestXML.umbPackage.ReplaceChild($NewFilesXML, $PackageManifestXML.Se
 $PackageManifestXML.Save($PackageManifest)
 
 #finally zip the package
-$DestZIP = "$ReleaseFolder\Starter_Kit_$FullVersionName.zip"
+$DestZIP = "$ReleaseFolder\The-Starter_Kit_$FullVersionName.zip"
 Add-Type -assembly "system.io.compression.filesystem"
 [io.compression.zipfile]::CreateFromDirectory($TempFolder, $DestZIP) 

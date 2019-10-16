@@ -1,0 +1,70 @@
+﻿<form name="securityForm"
+      ng-controller="UmbracoForms.Editors.Security.EditController"
+      ng-show="loaded"
+      ng-submit="save()"
+      val-form-manager>
+    <umb-panel>
+        <umb-header>
+            <div class="span7">
+                <h1 class="headline">Forms Security</h1>
+            </div>
+
+            <div class="span5"></div>
+        </umb-header>
+
+        <div class="umb-panel-body umb-scrollable row-fluid">
+            <div class="tab-content form-horizontal" style="padding-bottom: 90px">
+                <div class="umb-pane">
+
+                    <umb-control-group label="Manage Forms" description="Grant or deny access to managing forms">
+                        <input type="checkbox" ng-model="security.userSecurity.manageForms">
+                    </umb-control-group>
+
+                    <umb-control-group label="Manage Workflows" description="Grant or deny access to managing all forms workflow items">
+                        <input type="checkbox" ng-model="security.userSecurity.manageWorkflows">
+                    </umb-control-group>
+
+                    <umb-control-group label="Manage Data Sources" description="Grant or deny access to managing any Data sources for all forms">
+                        <input type="checkbox" ng-model="security.userSecurity.manageDataSources">
+                    </umb-control-group>
+
+                    <umb-control-group label="Manage PreValue Sources" description="Grant or deny access to managing any PreValue sources for all forms">
+                        <input type="checkbox" ng-model="security.userSecurity.managePreValueSources">
+                    </umb-control-group>
+
+                    <umb-control-group label="Form Security" description="Grant or deny access to forms" ng-if="security.formsSecurity.length > 0">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Form Name</th>
+                                <th>Has Access</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="form in security.formsSecurity | orderBy: 'FormName'">
+                                <td>
+                                    {{ form.FormName }}
+                                    <small class="guiDialogTiny">{{ form.Fields }}</small>
+                                </td>
+                                <td><input type="checkbox" ng-model="form.HasAccess"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </umb-control-group>
+
+
+                    <div class="umb-tab-buttons" detect-fold>
+                        <div class="btn-group">
+                            <button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
+                                <localize key="buttons_save">Save</localize>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </umb-panel>
+</form>
