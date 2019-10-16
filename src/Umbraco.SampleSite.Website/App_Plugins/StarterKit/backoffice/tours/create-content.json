@@ -228,7 +228,7 @@
             {
                 "element": "[data-element='editor-media'] [data-element='dropzone']",
                 "title": "Upload a background image",
-                "content": "<p>Let's upload a new image we can use as background image on the Home page in the next tour.</p><p>Click the <b>Click here to choose files</b> button and select an image on your computer to upload.</p>",
+                "content": "<p>Let's upload a new image we can use as a background image on the Home page in the next tour.</p><p>Click the <b>Click here to choose files</b> button and select an image on your computer to upload.</p>",
                 "view": "/App_Plugins/StarterKit/Tours/views/medialibrary/uploadimages.html"
             },
             {
