@@ -16,7 +16,7 @@
         "steps": [
             {
                 "title": "The Content section",
-                "content": "<p>In this tour you will get a short introduction to the <b>Content section</b> in Umbraco.</p><p>The <b>Content section</b> is where all the pages and content for the website lives.</p><p>You will learn how to navigate the content, update some content, and preview the website.</p>",
+                "content": "<p>In this tour you will get a short introduction to the <b>Content section</b> in Umbraco.</p><p>The <b>Content section</b> is where all the pages and content for the website live.</p><p>You will learn how to navigate the content, update some content, and preview the website.</p>",
                 "type": "intro"
             },
             {
@@ -56,7 +56,7 @@
                 "element": "[data-element='property-heroHeader']",
                 "elementPreventClick": true,
                 "title": "Properties",
-                "content": "<p>In the center of the page you will find the content <b>Properties</b>.</p><p>These are all the pieces of information the content consist of. Properties can vary depending on wich <b>Document type</b> the current item is based on.</p>"
+                "content": "<p>In the center of the page you will find the content <b>Properties</b>.</p><p>These are all the pieces of information the content consist of. Properties can vary depending on which <b>Document type</b> the current item is based on.</p>"
             },
             {
                 "element": "[data-element='editor-tabs']",
@@ -162,7 +162,7 @@
             {
                 "element": "[data-element='editor-footer'] [data-element='button-preview']",
                 "title": "Preview",
-                "content": "<p><b>Click</b> the <b>Preview</b>-button to preview the new page before publishing it.</p>",
+                "content": "<p><b>Click</b> the <b>Preview</b> button to preview the new page before publishing it.</p>",
                 "event": "click"
             },
             {
@@ -228,7 +228,7 @@
             {
                 "element": "[data-element='editor-media'] [data-element='dropzone']",
                 "title": "Upload a background image",
-                "content": "<p>Let's upload a new image we can use as background image on the Home page in the next tour.</p><p>Click the <b>Click here to choose files</b>-button and select an image on your computer to upload.</p>",
+                "content": "<p>Let's upload a new image we can use as a background image on the Home page in the next tour.</p><p>Click the <b>Click here to choose files</b> button and select an image on your computer to upload.</p>",
                 "view": "/App_Plugins/StarterKit/Tours/views/medialibrary/uploadimages.html"
             },
             {
@@ -253,7 +253,7 @@
             {
                 "element": "[data-element='editor-media'] [data-element='tab-_umb_infoTab']",
                 "title": "Info",
-                "content": "Under the info tab you will find  default information about the media item.",
+                "content": "Under the info tab you will find default information about the media item.",
                 "event": "click"
             },
             {
@@ -287,7 +287,7 @@
         "steps": [
             {
                 "title": "Adding media to content",
-                "content": "<p>In this tour you will learn how to add media to a content page using a <b>Media picker</b>.</p><p>Your will use the image you uploaded to the design folder as a new background image for the <b>Home page</b>.</p>",
+                "content": "<p>In this tour you will learn how to add media to a content page using a <b>Media picker</b>.</p><p>You will use the image you uploaded to the design folder as a new background image for the <b>Home page</b>.</p>",
                 "type": "intro"
             },
             {
