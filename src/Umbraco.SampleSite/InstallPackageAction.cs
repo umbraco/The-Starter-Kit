@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
+using System.Web.Hosting;
 using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
@@ -164,7 +167,14 @@ namespace Umbraco.SampleSite
 
             var media = service.CreateMedia(nodeName, parentFolderId, nodeTypeAlias);
             if (nodeTypeAlias != "folder")
-                media.SetValue("umbracoFile", JsonConvert.SerializeObject(new ImageCropperValue { Src = mediaPath }));
+            {
+                var fileName = Path.GetFileName(mediaPath);
+                using (var fs = System.IO.File.OpenRead(HostingEnvironment.MapPath(mediaPath)))
+                {
+                    media.SetValue(Current.Services.ContentTypeBaseServices, "umbracoFile", fileName, fs);
+                }   
+            }
+                
             if (key != Guid.Empty)
             {
                 media.Key = key;

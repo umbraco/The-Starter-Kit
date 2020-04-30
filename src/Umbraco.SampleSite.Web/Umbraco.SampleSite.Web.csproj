@@ -550,6 +550,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Media\SK_Temp\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Umbraco.SampleSite\Umbraco.SampleSite.csproj">
