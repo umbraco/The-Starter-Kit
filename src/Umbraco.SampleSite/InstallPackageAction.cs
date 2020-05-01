@@ -7,7 +7,9 @@ using System.Web.Hosting;
 using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Umbraco.Core;
+using Umbraco.Core.Configuration.UmbracoSettings;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using Umbraco.Core.PackageActions;
@@ -26,6 +28,7 @@ namespace Umbraco.SampleSite
             var mediaService = Current.Services.MediaService;
             var dataTypeService = Current.Services.DataTypeService;
             var fileService = Current.Services.FileService;
+            var contentSection = Current.Configs.Settings().Content;
 
             var formsInstallHelper = new FormsInstallationHelper(Current.Services);
             formsInstallHelper.UpdateUmbracoDataForNonFormsInstallation();
@@ -82,6 +85,8 @@ namespace Umbraco.SampleSite
                 Current.Logger.Error<InstallPackageAction>(ex, "Error during post processing of Starter Kit");
             }
 
+            GridMediaFixup(contentService, mediaService, contentSection, Current.Logger);
+
             var contentHome = contentService.GetRootContent().FirstOrDefault(x => x.ContentType.Alias == "home");
             if (contentHome != null)
             {
@@ -106,6 +111,49 @@ namespace Umbraco.SampleSite
             //see https://github.com/umbraco/7.6-Starter-Kit/issues/26 - perhaps it's not a good idea to remove the form
             //FormsInstallationHelper.RemoveStarterKitForm();
             return true;
+        }
+
+        private void GridMediaFixup(IContentService contentService, IMediaService mediaService, IContentSection contentSection, ILogger logger)
+        {
+            // special case, we need to update documents 3cce2545-e3ac-44ec-bf55-a52cc5965db3 and 72346384-fc5e-4a6e-a07d-559eec11dcea
+            // to deal with the grid media value path that will be changed
+
+            var media = mediaService.GetById(Guid.Parse("c0969cab13ab4de9819a848619ac2b5d"));
+
+            var aboutUs = contentService.GetById(Guid.Parse("3cce2545-e3ac-44ec-bf55-a52cc5965db3"));
+            var gridVal = JsonConvert.DeserializeObject<GridValue>((string)aboutUs.Properties["bodyText"].GetValue());
+            var mediaItem = gridVal
+                .Sections
+                .SelectMany(x => x.Rows)
+                .Where(x => x.Name == "Article")
+                .SelectMany(x => x.Areas)
+                .SelectMany(x => x.Controls)
+                .First(x => x.Editor.Alias == "media");
+            mediaItem.Value = JObject.FromObject(new
+            {
+                udi = media.GetUdi().ToString(),
+                image = media.GetUrls(contentSection, logger).First()
+            });
+            aboutUs.SetValue("bodyText", JsonConvert.SerializeObject(gridVal));
+            contentService.Save(aboutUs);
+
+            var anotherOne = contentService.GetById(Guid.Parse("72346384-fc5e-4a6e-a07d-559eec11dcea"));
+            media = mediaService.GetById(Guid.Parse("55514845b8bd487cb3709724852fd6bb"));
+            gridVal = JsonConvert.DeserializeObject<GridValue>((string)anotherOne.Properties["bodyText"].GetValue());
+            mediaItem = gridVal
+                .Sections
+                .SelectMany(x => x.Rows)
+                .Where(x => x.Name == "Article")
+                .SelectMany(x => x.Areas)
+                .SelectMany(x => x.Controls)
+                .First(x => x.Editor.Alias == "media");
+            mediaItem.Value = JObject.FromObject(new
+            {
+                udi = media.GetUdi().ToString(),
+                image = media.GetUrls(contentSection, logger).First()
+            });
+            anotherOne.SetValue("bodyText", JsonConvert.SerializeObject(gridVal));
+            contentService.Save(anotherOne);
         }
 
         private int CreateMediaItem(IMediaService service, IMediaTypeService mediaTypeService,
