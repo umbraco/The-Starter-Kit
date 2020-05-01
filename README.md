@@ -1,3 +1,5 @@
+![CI](https://github.com/umbraco/The-Starter-Kit/workflows/CI/badge.svg?branch=dev-v8)
+
 # 7.6-Starter-Kit
 
 This Github project is used to manage the final build of the Starter Kit and is _not_ meant to be used as the Starter Kit content source.
