@@ -16,7 +16,7 @@ namespace Umbraco.SampleSite
         private readonly ServiceContext _services;
 
         private static readonly Regex PreInstallContactFormHtmlPattern = new Regex(@"@Umbraco\.RenderMacro\(\""renderUmbracoForm\""\,[\.\w\{\}\=\(\)\s]+\)", RegexOptions.Compiled);
-        private static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.ContactForm.ToString() })";
+        private static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.ContactForm.ToString(), ExcludeScripts=\"0\" })";
 
         private static readonly Regex PostInstallContactFormHtmlPattern = new Regex(@"\<p class=\""compat-msg\""\>.+?\<\/p\>", RegexOptions.Compiled | RegexOptions.Singleline);
         private static string PostInstallContactFormHtml = @"<p class=""compat-msg"">
