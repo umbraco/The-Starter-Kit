@@ -191,6 +191,6 @@ $PackageManifestXML.umbPackage.ReplaceChild($NewFilesXML, $PackageManifestXML.Se
 $PackageManifestXML.Save($PackageManifest)
 
 #finally zip the package
-$DestZIP = "$ReleaseFolder\The-Starter_Kit_$FullVersionName.zip"
+$DestZIP = "$ReleaseFolder\The_Starter_Kit_$FullVersionName.zip"
 Add-Type -assembly "system.io.compression.filesystem"
 [io.compression.zipfile]::CreateFromDirectory($TempFolder, $DestZIP) 
