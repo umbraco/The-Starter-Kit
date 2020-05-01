@@ -24,11 +24,11 @@ jobs:
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     - name: Restore packages
-      run: nuget restore **/*.sln
+      run: nuget restore src\Umbraco.SampleSite.sln
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build Solution
-      run: msbuild **/*.sln -p:Configuration=Release
+      run: msbuild src\Umbraco.SampleSite.sln -p:Configuration=Release
     - name: Build Umbraco package
       run: .\build\build.ps1
       shell: powershell
