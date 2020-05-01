@@ -150,4 +150,3 @@ _[Ss]cripts
 /src/Umbraco.SampleSite.Website/App_Data/umbraco.licensing.log.txt
 
 !/lib/*.dll
-/src/Umbraco.SampleSite.Web/Media/SK_Temp/*
