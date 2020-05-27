@@ -15,9 +15,14 @@ namespace Umbraco.SampleSite
     {
         private readonly ServiceContext _services;
 
+        private static readonly Regex PostInstallMasterHtmlPattern = new Regex(@"@* Insert this method call to load Umbraco Forms client dependencies\. @Html.RenderUmbracoFormDependencies\(\) \*@", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static string PostInstallMasterHtml = "@Html.RenderUmbracoFormDependencies()";
+
+
         private static readonly Regex PreInstallContactFormHtmlPattern = new Regex(@"@Umbraco\.RenderMacro\(\""renderUmbracoForm\""\,[\.\w\{\}\=\(\)\s]+\)", RegexOptions.Compiled);
         private static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.ContactForm.ToString(), ExcludeScripts=\"0\" })";
-
+        
+        
         private static readonly Regex PostInstallContactFormHtmlPattern = new Regex(@"\<p class=\""compat-msg\""\>.+?\<\/p\>", RegexOptions.Compiled | RegexOptions.Singleline);
         private static string PostInstallContactFormHtml = @"<p class=""compat-msg"">
         <em>Umbraco Forms</em> is required to render this form.It's a breeze to install, all you have to do is
@@ -31,6 +36,7 @@ namespace Umbraco.SampleSite
         private const string DocTypeAlias = "contact";
         private const string PropertyAlias = "contactForm";
         private const string TemplateAlias = "contact";
+        private const string MasterTemplateAlias = "master";
         private const string FormDataTypeAlias = "UmbracoForms.FormPicker";
         private const string FormsMacroAlias = "renderUmbracoForm";
 
@@ -155,6 +161,27 @@ namespace Umbraco.SampleSite
                     {
                         //do the replacement
                         templateContent = PostInstallContactFormHtmlPattern.Replace(templateContent, PreInstallContactFormHtml);
+
+                        contactView.Content = templateContent;
+                        fileService.SaveTemplate(contactView);
+                    }
+                }
+
+                // update the template
+                var masterView = fileService.GetTemplate(MasterTemplateAlias);
+                if(masterView == null)
+                {
+                    Current.Logger.Warn<FormsInstallationHelper>("Unable to find Template {MasterTemplateAlias} for Forms installation", MasterTemplateAlias);
+                    return;
+                }
+                
+                if (masterView != null)
+                {
+                    var templateContent = masterView.Content;
+                    if (string.IsNullOrWhiteSpace(templateContent) == false)
+                    {
+                        //do the replacement
+                        templateContent = PostInstallMasterHtmlPattern.Replace(templateContent, PostInstallMasterHtml);
 
                         contactView.Content = templateContent;
                         fileService.SaveTemplate(contactView);
