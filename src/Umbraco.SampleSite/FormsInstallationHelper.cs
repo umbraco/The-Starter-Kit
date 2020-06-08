@@ -15,7 +15,7 @@ namespace Umbraco.SampleSite
     {
         private readonly ServiceContext _services;
 
-        private static readonly Regex PostInstallMasterHtmlPattern = new Regex(@"@* Insert this method call to load Umbraco Forms client dependencies\. @Html.RenderUmbracoFormDependencies\(\) \*@", RegexOptions.Compiled | RegexOptions.Singleline);
+        private static readonly Regex PostInstallMasterHtmlPattern = new Regex(@"@\* Insert this method call to load Umbraco Forms client dependencies\. @Html.RenderUmbracoFormDependencies\(\) \*@", RegexOptions.Compiled | RegexOptions.Singleline);
         private static string PostInstallMasterHtml = "@Html.RenderUmbracoFormDependencies()";
 
 
