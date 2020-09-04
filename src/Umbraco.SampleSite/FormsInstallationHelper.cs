@@ -14,10 +14,10 @@ namespace Umbraco.SampleSite
     public class FormsInstallationHelper
     {
         private readonly ServiceContext _services;
-
         private static readonly Regex PreInstallContactFormHtmlPattern = new Regex(@"@Umbraco\.RenderMacro\(\""renderUmbracoForm\""\,[\.\w\{\}\=\(\)\s]+\)", RegexOptions.Compiled);
         private static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.ContactForm.ToString(), ExcludeScripts=\"0\" })";
-
+        
+        
         private static readonly Regex PostInstallContactFormHtmlPattern = new Regex(@"\<p class=\""compat-msg\""\>.+?\<\/p\>", RegexOptions.Compiled | RegexOptions.Singleline);
         private static string PostInstallContactFormHtml = @"<p class=""compat-msg"">
         <em>Umbraco Forms</em> is required to render this form.It's a breeze to install, all you have to do is
@@ -30,7 +30,7 @@ namespace Umbraco.SampleSite
 
         private const string DocTypeAlias = "contact";
         private const string PropertyAlias = "contactForm";
-        private const string TemplateAlias = "contact";
+        private const string TemplateAlias = "contact";        
         private const string FormDataTypeAlias = "UmbracoForms.FormPicker";
         private const string FormsMacroAlias = "renderUmbracoForm";
 
@@ -159,7 +159,7 @@ namespace Umbraco.SampleSite
                         contactView.Content = templateContent;
                         fileService.SaveTemplate(contactView);
                     }
-                }
+                }   
 
                 CreateStarterKitForm();
             }
