@@ -16,6 +16,7 @@ namespace Umbraco.SampleSite
         private readonly ServiceContext _services;
         private static readonly Regex PreInstallContactFormHtmlPattern = new Regex(@"@Umbraco\.RenderMacro\(\""renderUmbracoForm\""\,[\.\w\{\}\=\(\)\s]+\)", RegexOptions.Compiled);
         private static string PreInstallContactFormHtml = "@Umbraco.RenderMacro(\"renderUmbracoForm\", new { FormGuid = Model.ContactForm.ToString(), ExcludeScripts=\"0\" })";
+        private static Guid ContactFormId = new Guid("adf160f1-39f5-44c0-b01d-9e2da32bf093");
         
         
         private static readonly Regex PostInstallContactFormHtmlPattern = new Regex(@"\<p class=\""compat-msg\""\>.+?\<\/p\>", RegexOptions.Compiled | RegexOptions.Singleline);
@@ -183,10 +184,7 @@ namespace Umbraco.SampleSite
 
             var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Core.Data.Storage.IFormStorage");
             if (formsStorageType == null) return;
-
-            //this is the form id that is installed
-            var formId = new Guid("adf160f1-39f5-44c0-b01d-9e2da32bf093");
-
+            
             //create a FormsStorage instance
             object formsStorageInstance;
             try
@@ -202,7 +200,7 @@ namespace Umbraco.SampleSite
 
             try
             {
-                var form = CallMethod(formsStorageInstance, "GetForm", formId);
+                var form = CallMethod(formsStorageInstance, "GetForm", ContactFormId);
                 if (form == null) return;
 
                 var deleteResult = CallMethod(formsStorageInstance, "DeleteForm", form);
@@ -262,6 +260,22 @@ namespace Umbraco.SampleSite
                 Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to get instance of Umbraco.Forms.Core.Data.Storage.IFormStorage from Container");
 
                 //If we cannot create it then there's nothing we can do
+                return;
+            }
+
+            // If the form already exists - skip out instead of trying to import a duplicate.
+            try
+            {
+                var existingForm = CallMethod(formsStorageInstance, "GetForm", ContactFormId);
+                if (existingForm != null)
+                {
+                    Current.Logger.Info<FormsInstallationHelper>("Skipped creating form - it already exists.");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Current.Logger.Error<FormsInstallationHelper>(ex, "Unable to call method GetForm on FormStorage");
                 return;
             }
 
