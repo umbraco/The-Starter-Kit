@@ -1,21 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using Umbraco.Core.Composing;
+using Umbraco.Core.Events;
+using Umbraco.Core.Models.Packaging;
 using Umbraco.Core.Services;
 using Umbraco.Core.Services.Implement;
+using Umbraco.Extensions;
 using Umbraco.SampleSite.Controllers;
-using Umbraco.Web;
-using Umbraco.Web.JavaScript;
+using Umbraco.Web.WebAssets;
 
 namespace Umbraco.SampleSite
 {
     public class StarterKitComponent : IComponent
     {
-        public StarterKitComponent()
+        
+        private readonly IMacroService _macroService;
+        private readonly IContentTypeService _contentTypeService;
+        private readonly IDataTypeService _dataTypeService;
+        private readonly IFileService _fileService;
+        private readonly ILogger<FormsInstallationHelper> _logger;
+        private readonly LinkGenerator _linkGenerator;
+
+        public StarterKitComponent(IMacroService macroService, IContentTypeService contentTypeService,
+            IDataTypeService dataTypeService, IFileService fileService, ILogger<FormsInstallationHelper> logger,
+            LinkGenerator linkGenerator)
         {
+            _macroService = macroService ?? throw new ArgumentNullException(nameof(macroService));
+            _contentTypeService = contentTypeService ?? throw new ArgumentNullException(nameof(contentTypeService));
+            _dataTypeService = dataTypeService ?? throw new ArgumentNullException(nameof(dataTypeService));
+            _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
+            _logger = logger;
+            _linkGenerator = linkGenerator;
         }
 
         /// <summary>
@@ -23,11 +40,11 @@ namespace Umbraco.SampleSite
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PackagingService_ImportedPackage(IPackagingService sender, Core.Events.ImportPackageEventArgs<Core.Models.Packaging.InstallationSummary> e)
+        private void PackagingService_ImportedPackage(IPackagingService sender, ImportPackageEventArgs<InstallationSummary> e)
         {
             if (e != null && e.PackageMetaData != null && e.PackageMetaData.Name == "Umbraco Forms")
             {
-                var formsInstallHelper = new FormsInstallationHelper(Core.Composing.Current.Services);
+                var formsInstallHelper = new FormsInstallationHelper(_macroService, _contentTypeService, _dataTypeService, _fileService, _logger);
                 formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
             }
         }
@@ -50,13 +67,9 @@ namespace Umbraco.SampleSite
             if (!(umbracoUrlsObject is Dictionary<string, object> umbracoUrls))
                 throw new Exception("Invalid umbracoUrls");
 
-            //Code needed in order to retrieve a URLHelper
-            if (HttpContext.Current == null) throw new InvalidOperationException("HttpContext is null");
-            var urlHelper = new UrlHelper(new RequestContext(new HttpContextWrapper(HttpContext.Current), new RouteData()));
-
             //Add to 'Umbraco.Sys.ServerVariables.umbracoUrls.lessonsApiBaseUrl' global JS object
             //The URL/route for this API endpoint to be consumed by the Lessons AngularJS Service
-            umbracoUrls["lessonsApiBaseUrl"] = urlHelper.GetUmbracoApiServiceBaseUrl<LessonsController>(controller => controller.GetLessons(""));
+            umbracoUrls["lessonsApiBaseUrl"] = _linkGenerator.GetUmbracoApiServiceBaseUrl<LessonsController>(controller => controller.GetLessons(""));
         }
 
         public void Initialize()
