@@ -1,0 +1,25 @@
+﻿@inherits Umbraco.Web.Common.Macros.PartialViewMacroPage
+@using Umbraco.Core
+@using Umbraco.Web.Routing
+@using Umbraco.Web.Website
+@inject UmbracoHelper Umbraco
+@inject IPublishedUrlProvider PublishedUrlProvider
+@*
+    This snippet lists the items from a Multinode tree picker, using the pickers default settings.
+    Content Values stored as xml.
+
+    To get it working with any site's data structure, set the selection equal to the property which has the
+    multinode treepicker (so: replace "PropertyWithPicker" with the alias of your property).
+*@
+
+@{ var selection = CurrentPage.PropertyWithPicker.Split(','); }
+
+<ul>
+    @foreach (var id in selection)
+    {
+        var item = Umbraco.Content(id);
+        <li>
+            <a href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+        </li>
+    }
+</ul>
