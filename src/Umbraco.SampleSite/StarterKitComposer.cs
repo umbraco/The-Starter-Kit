@@ -13,6 +13,7 @@ namespace Umbraco.SampleSite
             builder.TourFilters().AddFilter(BackOfficeTourFilter.FilterAlias(new Regex("umbIntroCreateDocType|umbIntroCreateContent|umbIntroRenderInTemplate|umbIntroViewHomePage|umbIntroMediaSection")));
             
             builder.Components().Append<StarterKitComponent>();
+            builder.Services.AddUnique<FormsInstallationHelper>();
         }
     }
 }

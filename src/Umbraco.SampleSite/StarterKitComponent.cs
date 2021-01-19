@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Logging;
 using Umbraco.Core.Composing;
 using Umbraco.Core.Events;
 using Umbraco.Core.Models.Packaging;
@@ -15,23 +14,12 @@ namespace Umbraco.SampleSite
 {
     public class StarterKitComponent : IComponent
     {
-        
-        private readonly IMacroService _macroService;
-        private readonly IContentTypeService _contentTypeService;
-        private readonly IDataTypeService _dataTypeService;
-        private readonly IFileService _fileService;
-        private readonly ILogger<FormsInstallationHelper> _logger;
+        private readonly FormsInstallationHelper _formsInstallationHelper;
         private readonly LinkGenerator _linkGenerator;
 
-        public StarterKitComponent(IMacroService macroService, IContentTypeService contentTypeService,
-            IDataTypeService dataTypeService, IFileService fileService, ILogger<FormsInstallationHelper> logger,
-            LinkGenerator linkGenerator)
+        public StarterKitComponent(FormsInstallationHelper formsInstallationHelper, LinkGenerator linkGenerator)
         {
-            _macroService = macroService ?? throw new ArgumentNullException(nameof(macroService));
-            _contentTypeService = contentTypeService ?? throw new ArgumentNullException(nameof(contentTypeService));
-            _dataTypeService = dataTypeService ?? throw new ArgumentNullException(nameof(dataTypeService));
-            _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
-            _logger = logger;
+            _formsInstallationHelper = formsInstallationHelper;
             _linkGenerator = linkGenerator;
         }
 
@@ -44,8 +32,7 @@ namespace Umbraco.SampleSite
         {
             if (e != null && e.PackageMetaData != null && e.PackageMetaData.Name == "Umbraco Forms")
             {
-                var formsInstallHelper = new FormsInstallationHelper(_macroService, _contentTypeService, _dataTypeService, _fileService, _logger);
-                formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
+                _formsInstallationHelper.UpdateUmbracoDataForFormsInstallation();
             }
         }
 
@@ -79,8 +66,6 @@ namespace Umbraco.SampleSite
         }
 
         public void Terminate()
-        {
-
-        }
+        { }
     }
 }
