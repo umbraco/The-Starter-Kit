@@ -552,12 +552,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Media\SK_Temp\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Umbraco.SampleSite\Umbraco.SampleSite.csproj">
-      <Project>{ad6618cc-4dd7-414d-9050-39652566833e}</Project>
-      <Name>Umbraco.SampleSite</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
