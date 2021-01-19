@@ -2,64 +2,90 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
-using System.Web.Hosting;
-using System.Xml;
 using System.Xml.Linq;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Umbraco.Core;
-using Umbraco.Core.Configuration.UmbracoSettings;
-using Umbraco.Core.Logging;
+using Umbraco.Core.Configuration.Models;
+using Umbraco.Core.IO;
 using Umbraco.Core.Models;
 using Umbraco.Core.PackageActions;
-using Umbraco.Core.PropertyEditors.ValueConverters;
+using Umbraco.Core.PropertyEditors;
+using Umbraco.Core.Serialization;
 using Umbraco.Core.Services;
-using Umbraco.Web.Composing;
+using Umbraco.Core.Strings;
 
 namespace Umbraco.SampleSite
 {
     public class InstallPackageAction : IPackageAction
     {
+        private readonly IContentService _contentService;
+        private readonly IMediaTypeService _mediaTypeService;
+        private readonly IMediaService _mediaService;
+        private readonly IFileService _fileService;
+        private readonly IOptions<ContentSettings> _contentSettings;
+        private readonly FormsInstallationHelper _formsInstallHelper;
+        private readonly ILogger<InstallPackageAction> _logger;
+        private readonly MediaUrlGeneratorCollection _mediaUrlGenerators;
+        private readonly IMediaFileSystem _mediaFileSystem;
+        private readonly IShortStringHelper _shortStringHelper;
+        private readonly IContentTypeBaseServiceProvider _contentTypeBaseServiceProvider;
+        private readonly IJsonSerializer _serializer;
+
+        public InstallPackageAction(IContentService contentService, IMediaTypeService mediaTypeService,
+            IMediaService mediaService, IFileService fileService, IOptions<ContentSettings> contentSettings,
+            FormsInstallationHelper formsInstallHelper, ILogger<InstallPackageAction> logger, MediaUrlGeneratorCollection mediaUrlGenerators,
+            IMediaFileSystem mediaFileSystem, IShortStringHelper shortStringHelper, IContentTypeBaseServiceProvider contentTypeBaseServiceProvider,
+            IJsonSerializer serializer)
+        {
+            _contentService = contentService;
+            _mediaTypeService = mediaTypeService;
+            _mediaService = mediaService;
+            _fileService = fileService;
+            _contentSettings = contentSettings;
+            _formsInstallHelper = formsInstallHelper;
+            _logger = logger;
+            _mediaUrlGenerators = mediaUrlGenerators;
+            _mediaFileSystem = mediaFileSystem;
+            _shortStringHelper = shortStringHelper;
+            _contentTypeBaseServiceProvider = contentTypeBaseServiceProvider;
+            _serializer = serializer;
+        }
+
         public bool Execute(string packageName, XElement xmlData)
         {
-            var contentService = Current.Services.ContentService;
-            var mediaTypeService = Current.Services.MediaTypeService;
-            var mediaService = Current.Services.MediaService;
-            var dataTypeService = Current.Services.DataTypeService;
-            var fileService = Current.Services.FileService;
-            var contentSection = Current.Configs.Settings().Content;
-
-            var formsInstallHelper = new FormsInstallationHelper(Current.Services);
-            formsInstallHelper.UpdateUmbracoDataForNonFormsInstallation();
-            formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
+            _formsInstallHelper.UpdateUmbracoDataForNonFormsInstallation();
+            _formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
 
             // update master view for all templates (packager doesn't support this)
-            var master = fileService.GetTemplate("master");
+            var master = _fileService.GetTemplate("master");
             if (master != null)
             {
                 var templatesToFind = new[] { "Blog", "Blogpost", "contact", "contentPage", "home", "people", "Person", "Product", "Products" };
-                foreach (var template in fileService.GetTemplates().Where(x => templatesToFind.InvariantContains(x.Alias)))
+                foreach (var template in _fileService.GetTemplates().Where(x => templatesToFind.InvariantContains(x.Alias)))
                 {
                     // we'll update the master template for all templates that doesn't have one already
                     if (template.Alias != master.Alias && (
                             template.IsMasterTemplate == false && string.IsNullOrWhiteSpace(template.MasterTemplateAlias)))
                     {
                         template.SetMasterTemplate(master);
-                        fileService.SaveTemplate(template);
+                        _fileService.SaveTemplate(template);
                     }
                 }
             }
 
             // create media folders
 
-            this.CreateMediaItem(mediaService, mediaTypeService, -1, "folder", new Guid("b6f11172-373f-4473-af0f-0b0e5aefd21c"), "Design", string.Empty, true);
-            this.CreateMediaItem(mediaService, mediaTypeService, -1, "folder", new Guid("1fd2ecaf-f371-4c00-9306-867fa4585e7a"), "People", string.Empty, true);
-            this.CreateMediaItem(mediaService, mediaTypeService, -1, "folder", new Guid("6d5bf746-cb82-45c5-bd15-dd3798209b87"), "Products", string.Empty, true);
+            CreateMediaItem(_mediaService, _mediaTypeService, -1, "folder", new Guid("b6f11172-373f-4473-af0f-0b0e5aefd21c"), "Design", string.Empty, true);
+            CreateMediaItem(_mediaService, _mediaTypeService, -1, "folder", new Guid("1fd2ecaf-f371-4c00-9306-867fa4585e7a"), "People", string.Empty, true);
+            CreateMediaItem(_mediaService, _mediaTypeService, -1, "folder", new Guid("6d5bf746-cb82-45c5-bd15-dd3798209b87"), "Products", string.Empty, true);
 
             // create media
-            IMedia mediaRoot = mediaService.GetById(-1);
-            IEnumerable<IMedia> rootMedia = mediaService.GetRootMedia().ToArray();
+            IMedia mediaRoot = _mediaService.GetById(-1);
+            IEnumerable<IMedia> rootMedia = _mediaService.GetRootMedia().ToArray();
+
             try
             {
                 foreach (XElement selectNode in xmlData.Elements("mediaItem"))
@@ -77,25 +103,25 @@ namespace Umbraco.SampleSite
                         ? Guid.Parse((string)selectNode.Attribute("key"))
                         : Guid.Empty;
 
-                    int mediaItem = CreateMediaItem(mediaService, mediaTypeService, media1.Id, "image", key, (string)selectNode.Attribute("name"), (string)selectNode.Attribute("path"), false);
+                    int mediaItem = CreateMediaItem(_mediaService, _mediaTypeService, media1.Id, "image", key, (string)selectNode.Attribute("name"), (string)selectNode.Attribute("path"), false);
                 }
             }
             catch (Exception ex)
             {
-                Current.Logger.Error<InstallPackageAction>(ex, "Error during post processing of Starter Kit");
+                _logger.LogError(ex, "Error during post processing of Starter Kit");
             }
 
-            GridMediaFixup(contentService, mediaService, contentSection, Current.Logger);
+            GridMediaFixup(_contentService, _mediaService, _contentSettings, _mediaUrlGenerators);
 
-            var contentHome = contentService.GetRootContent().FirstOrDefault(x => x.ContentType.Alias == "home");
+            var contentHome = _contentService.GetRootContent().FirstOrDefault(x => x.ContentType.Alias == "home");
             if (contentHome != null)
             {
                 // publish everything (moved here due to Deploy dependency checking)
-                contentService.SaveAndPublishBranch(contentHome, true);
+                _contentService.SaveAndPublishBranch(contentHome, true);
             }
             else
             {
-                Current.Logger.Warn<InstallPackageAction>("The installed Home page was not found");
+                _logger.LogWarning("The installed Home page was not found");
             }
 
             return true;
@@ -113,7 +139,7 @@ namespace Umbraco.SampleSite
             return true;
         }
 
-        private void GridMediaFixup(IContentService contentService, IMediaService mediaService, IContentSection contentSection, ILogger logger)
+        private void GridMediaFixup(IContentService contentService, IMediaService mediaService, IOptions<ContentSettings> contentSettings, MediaUrlGeneratorCollection mediaUrlGenerators)
         {
             // special case, we need to update documents 3cce2545-e3ac-44ec-bf55-a52cc5965db3 and 72346384-fc5e-4a6e-a07d-559eec11dcea
             // to deal with the grid media value path that will be changed
@@ -132,7 +158,7 @@ namespace Umbraco.SampleSite
             mediaItem.Value = JObject.FromObject(new
             {
                 udi = media.GetUdi().ToString(),
-                image = media.GetUrls(contentSection, logger).First()
+                image = media.GetUrls(contentSettings.Value, mediaUrlGenerators).First()
             });
             aboutUs.SetValue("bodyText", JsonConvert.SerializeObject(gridVal));
             contentService.Save(aboutUs);
@@ -150,7 +176,7 @@ namespace Umbraco.SampleSite
             mediaItem.Value = JObject.FromObject(new
             {
                 udi = media.GetUdi().ToString(),
-                image = media.GetUrls(contentSection, logger).First()
+                image = media.GetUrls(contentSettings.Value, mediaUrlGenerators).First()
             });
             anotherOne.SetValue("bodyText", JsonConvert.SerializeObject(gridVal));
             contentService.Save(anotherOne);
@@ -167,7 +193,7 @@ namespace Umbraco.SampleSite
             var mediaType = mediaTypeService.Get(nodeTypeAlias);
             if (mediaType == null)
             {
-                Current.Logger.Warn<InstallPackageAction>("Could not create media, the {NodeTypeAlias} media type is missing, the Starter Kit package will not function correctly", nodeTypeAlias);
+                _logger.LogWarning("Could not create media, the {NodeTypeAlias} media type is missing, the Starter Kit package will not function correctly", nodeTypeAlias);
                 return -1;
             }
 
@@ -185,7 +211,7 @@ namespace Umbraco.SampleSite
                     var parentFolder = service.GetById(parentFolderId);
                     if (parentFolder == null)
                     {
-                        Current.Logger.Warn<InstallPackageAction>("No media parent found by Id {ParentFolderId} the media item {NodeName} cannot be installed", parentFolderId, nodeName);
+                        _logger.LogWarning("No media parent found by Id {ParentFolderId} the media item {NodeName} cannot be installed", parentFolderId, nodeName);
                         return -1;
                     }
 
@@ -208,18 +234,23 @@ namespace Umbraco.SampleSite
                 var parentFolder = service.GetById(parentFolderId);
                 if (parentFolder == null)
                 {
-                    Current.Logger.Warn<InstallPackageAction>("No media parent found by Id {ParentFolderId} the media item {NodeName} cannot be installed", parentFolderId, nodeName);
+                    _logger.LogWarning("No media parent found by Id {ParentFolderId} the media item {NodeName} cannot be installed", parentFolderId, nodeName);
                     return -1;
                 }
             }
 
             var media = service.CreateMedia(nodeName, parentFolderId, nodeTypeAlias);
+            
             if (nodeTypeAlias != "folder")
             {
                 var fileName = Path.GetFileName(mediaPath);
-                using (var fs = System.IO.File.OpenRead(HostingEnvironment.MapPath(mediaPath)))
+                var fileInfo = new FileInfo(fileName);
+                var fileStream = fileInfo.OpenReadWithRetry();
+                if (fileStream == null) throw new InvalidOperationException("Could not acquire file stream");
+                using (fileStream)
                 {
-                    media.SetValue(Current.Services.ContentTypeBaseServices, "umbracoFile", fileName, fs);
+                    //TODO: Check if this works also with Blob Storage file provider
+                    media.SetValue(_mediaFileSystem, _shortStringHelper, _contentTypeBaseServiceProvider, _serializer, "umbracoFile", fileName, fileStream);
                 }   
             }
                 

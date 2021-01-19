@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Umbraco.Core;
@@ -16,6 +17,7 @@ namespace Umbraco.SampleSite
         private readonly IDataTypeService _dataTypeService;
         private readonly IFileService _fileService;
         private readonly ILogger<FormsInstallationHelper> _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
 
         private static readonly Regex PreInstallContactFormHtmlPattern = new Regex(@"@Umbraco\.RenderMacro\(\""renderUmbracoForm\""\,[\.\w\{\}\=\(\)\s]+\)", RegexOptions.Compiled);
@@ -39,13 +41,16 @@ namespace Umbraco.SampleSite
         private const string FormDataTypeAlias = "UmbracoForms.FormPicker";
         private const string FormsMacroAlias = "renderUmbracoForm";
 
-        public FormsInstallationHelper(IMacroService macroService, IContentTypeService contentTypeService, IDataTypeService dataTypeService, IFileService fileService, ILogger<FormsInstallationHelper> logger)
+        public FormsInstallationHelper(IMacroService macroService, IContentTypeService contentTypeService,
+            IDataTypeService dataTypeService, IFileService fileService, ILogger<FormsInstallationHelper> logger,
+            IHttpContextAccessor httpContextAccessor)
         {
             _macroService = macroService;
             _contentTypeService = contentTypeService;
             _dataTypeService = dataTypeService;
             _fileService = fileService;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -93,7 +98,7 @@ namespace Umbraco.SampleSite
             else
             {
                 // forms is installed
-                var formsInstallHelper = new FormsInstallationHelper(_macroService, _contentTypeService, _dataTypeService, _fileService, _logger);
+                var formsInstallHelper = new FormsInstallationHelper(_macroService, _contentTypeService, _dataTypeService, _fileService, _logger, _httpContextAccessor);
                 formsInstallHelper.UpdateUmbracoDataForFormsInstallation();
             }
         }
@@ -169,49 +174,49 @@ namespace Umbraco.SampleSite
         /// <remarks>
         /// This will not throw any exceptions if the forms types are not found, it will just exit
         /// </remarks>
-        //public void RemoveStarterKitForm()
-        //{
-        //    _logger.LogInformation("Deleting Form created from Starter Kit...");
+        public void RemoveStarterKitForm()
+        {
+            _logger.LogInformation("Deleting Form created from Starter Kit...");
 
-        //    var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
-        //    if (formsAssembly == null) return;
+            var formsAssembly = Assembly.Load("Umbraco.Forms.Core");
+            if (formsAssembly == null) return;
 
-        //    var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Models.Form");
-        //    if (formsType == null) return;
+            var formsType = formsAssembly.GetType("Umbraco.Forms.Core.Models.Form");
+            if (formsType == null) return;
 
-        //    var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Core.Data.Storage.IFormStorage");
-        //    if (formsStorageType == null) return;
-            
-        //    //create a FormsStorage instance
-        //    object formsStorageInstance;
-        //    try
-        //    {
-        //        formsStorageInstance = Current.Factory.GetInstance(formsStorageType);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //If we cannot create it then there's nothing we can do
-        //        _logger.LogError(ex, "Unable to get instance of Umbraco.Forms.Core.Data.Storage.IFormStorage from Container");
-        //        return;
-        //    }
+            var formsStorageType = formsAssembly.GetType("Umbraco.Forms.Core.Data.Storage.IFormStorage");
+            if (formsStorageType == null) return;
 
-        //    try
-        //    {
-        //        var form = CallMethod(formsStorageInstance, "GetForm", ContactFormId);
-        //        if (form == null) return;
+            //create a FormsStorage instance
+            object formsStorageInstance;
+            try
+            {
+                formsStorageInstance = _httpContextAccessor.HttpContext.RequestServices.GetService(formsStorageType);
+            }
+            catch (Exception ex)
+            {
+                //If we cannot create it then there's nothing we can do
+                _logger.LogError(ex, "Unable to get instance of Umbraco.Forms.Core.Data.Storage.IFormStorage from Container");
+                return;
+            }
 
-        //        var deleteResult = CallMethod(formsStorageInstance, "DeleteForm", form);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Unable to call method DeleteForm on FormStorage");
+            try
+            {
+                var form = CallMethod(formsStorageInstance, "GetForm", ContactFormId);
+                if (form == null) return;
 
-        //        //If we cannot create it then there's nothing we can do
-        //        return;
-        //    }
+                var deleteResult = CallMethod(formsStorageInstance, "DeleteForm", form);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unable to call method DeleteForm on FormStorage");
 
-        //    _logger.LogInformation("Deleted Form created from Starter Kit");
-        //}
+                //If we cannot create it then there's nothing we can do
+                return;
+            }
+
+            _logger.LogInformation("Deleted Form created from Starter Kit");
+        }
 
         /// <summary>
         /// Creates a Form by importing it via a serialized version of the form and using reflection to invoke the forms API
@@ -247,47 +252,47 @@ namespace Umbraco.SampleSite
 
 
             //create a FormsStorage instance
-            //object formsStorageInstance;
-            //try
-            //{
-            //    formsStorageInstance = Current.Factory.GetInstance(formsStorageType);
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogError(ex, "Unable to get instance of Umbraco.Forms.Core.Data.Storage.IFormStorage from Container");
+            object formsStorageInstance;
+            try
+            {
+                formsStorageInstance = _httpContextAccessor.HttpContext.RequestServices.GetService(formsStorageType);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unable to get instance of Umbraco.Forms.Core.Data.Storage.IFormStorage from Container");
 
-            //    //If we cannot create it then there's nothing we can do
-            //    return;
-            //}
+                //If we cannot create it then there's nothing we can do
+                return;
+            }
 
-            //// If the form already exists - skip out instead of trying to import a duplicate.
-            //try
-            //{
-            //    var existingForm = CallMethod(formsStorageInstance, "GetForm", ContactFormId);
-            //    if (existingForm != null)
-            //    {
-            //        _logger.LogInformation("Skipped creating form - it already exists.");
-            //        return;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogError(ex, "Unable to call method GetForm on FormStorage");
-            //    return;
-            //}
+            // If the form already exists - skip out instead of trying to import a duplicate.
+            try
+            {
+                var existingForm = CallMethod(formsStorageInstance, "GetForm", ContactFormId);
+                if (existingForm != null)
+                {
+                    _logger.LogInformation("Skipped creating form - it already exists.");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unable to call method GetForm on FormStorage");
+                return;
+            }
 
-            ////Insert the form, then dispose the FormsStorage
-            //try
-            //{
-            //    CallMethod(formsStorageInstance, "InsertForm", form, string.Empty, false);
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogError(ex, "Unable to call method InsertForm on FormStorage");
+            //Insert the form, then dispose the FormsStorage
+            try
+            {
+                CallMethod(formsStorageInstance, "InsertForm", form, string.Empty, false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unable to call method InsertForm on FormStorage");
 
-            //    //If we cannot create it then there's nothing we can do
-            //    return;
-            //}
+                //If we cannot create it then there's nothing we can do
+                return;
+            }
 
             _logger.LogInformation("Created Form for Starter Kit");
         }
