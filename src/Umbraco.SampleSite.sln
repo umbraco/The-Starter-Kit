@@ -4,8 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30001.183
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.SampleSite.Web.Legacy", "Umbraco.SampleSite.Web.Legacy\Umbraco.SampleSite.Web.Legacy.csproj", "{A80F89C5-4D21-4B54-8537-DADC6CF230E8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.SampleSite.Legacy", "Umbraco.SampleSite.Legacy\Umbraco.SampleSite.Legacy.csproj", "{AD6618CC-4DD7-414D-9050-39652566833E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4} = {58DCD6B9-04D4-4F89-A3B9-19A192D561A4}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{28F8A6EA-1613-4AF3-BFCB-9B330BDC455C}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,7 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{28F8A6EA
 		SolutionInfo.cs = SolutionInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.SampleSite", "Umbraco.SampleSite\Umbraco.SampleSite.csproj", "{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umbraco.SampleSite", "Umbraco.SampleSite\Umbraco.SampleSite.csproj", "{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umbraco.SampleSite.Web", "Umbraco.SampleSite.Web\Umbraco.SampleSite.Web.csproj", "{A38752D7-8022-4368-969D-22D096A50AC7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4} = {58DCD6B9-04D4-4F89-A3B9-19A192D561A4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,14 +36,14 @@ Global
 		{A80F89C5-4D21-4B54-8537-DADC6CF230E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A80F89C5-4D21-4B54-8537-DADC6CF230E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A80F89C5-4D21-4B54-8537-DADC6CF230E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD6618CC-4DD7-414D-9050-39652566833E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD6618CC-4DD7-414D-9050-39652566833E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD6618CC-4DD7-414D-9050-39652566833E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD6618CC-4DD7-414D-9050-39652566833E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A38752D7-8022-4368-969D-22D096A50AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A38752D7-8022-4368-969D-22D096A50AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A38752D7-8022-4368-969D-22D096A50AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A38752D7-8022-4368-969D-22D096A50AC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

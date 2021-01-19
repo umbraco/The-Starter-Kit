@@ -24,7 +24,8 @@ namespace Umbraco.SampleSite.Controllers
         private readonly ILogger<LessonsController> _logger;
         private readonly IAppPolicyCache _runtimeCache;
 
-        public LessonsController(IBackOfficeSecurityAccessor backofficeSecurityAccessor, IUmbracoVersion umbracoVersion, ILogger<LessonsController> logger, IAppPolicyCache runtimeCache)
+        public LessonsController(IBackOfficeSecurityAccessor backofficeSecurityAccessor, IUmbracoVersion umbracoVersion,
+            ILogger<LessonsController> logger, IAppPolicyCache runtimeCache)
         {
             _backofficeSecurityAccessor = backofficeSecurityAccessor;
             _umbracoVersion = umbracoVersion;
@@ -43,7 +44,7 @@ namespace Umbraco.SampleSite.Controllers
             //information for the request, so we could in the future filter by user, allowed sections, langugae and user-type
             var user = _backofficeSecurityAccessor.BackOfficeSecurity.CurrentUser;
             var userType = string.Empty; //This is not in recent versions of Umbraco & the API Controller on our.umb does nothing with this data currently
-            var allowedSections = string.Join((string) ",", (IEnumerable<string>) user.AllowedSections);
+            var allowedSections = string.Join(",", user.AllowedSections);
             var language = user.Language;
             var version = _umbracoVersion.SemanticVersion.ToSemanticString();
 
