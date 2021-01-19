@@ -1,14 +1,35 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>8</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="6.10.7" />
+    <None Remove="ContactForm.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ContactForm.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Umbraco.Cms.Web" Version="0.5.0-alpha003.20210112.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="FormsDefinitions.Designer.cs">
+      <DependentUpon>FormsDefinitions.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="FormsDefinitions.resx">
+      <LastGenOutput>FormsDefinitions.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
