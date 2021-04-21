@@ -6,13 +6,13 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Umbraco.Core;
-using Umbraco.Core.Cache;
-using Umbraco.Core.Configuration;
-using Umbraco.Core.Security;
-using Umbraco.Web.BackOffice.Controllers;
-using Umbraco.Web.BackOffice.Filters;
-using Umbraco.Web.Common.Attributes;
+using Umbraco.Cms.Core.Cache;
+using Umbraco.Cms.Core.Configuration;
+using Umbraco.Cms.Core.Security;
+using Umbraco.Cms.Web.BackOffice.Controllers;
+using Umbraco.Cms.Web.BackOffice.Filters;
+using Umbraco.Cms.Web.Common.Attributes;
+using Umbraco.Extensions;
 
 namespace Umbraco.SampleSite.Controllers
 {

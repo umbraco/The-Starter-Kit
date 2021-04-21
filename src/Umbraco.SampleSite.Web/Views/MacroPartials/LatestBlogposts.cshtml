@@ -1,13 +1,15 @@
-﻿@inherits Umbraco.Web.Common.Macros.PartialViewMacroPage
-@using Umbraco.Core
-@using Umbraco.Web.Routing
-@using Umbraco.Web.Website
-@using ContentModels = Umbraco.Web.PublishedModels
+﻿@using Microsoft.AspNetCore.Http
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Cms.Web.Common
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Macros.PartialViewMacroPage
 @inject UmbracoHelper Umbraco
 @inject IPublishedUrlProvider PublishedUrlProvider
+@inject IHttpContextAccessor HttpContextAccessor
 @{
-    var startNodeId = Model.MacroParameters["startNodeId"] != null ? Model.MacroParameters["startNodeId"] : Model.Content.Id;
-
+    var startNodeId = Model.MacroParameters["startNodeId"] ?? Model.Content.Id;
 
     var numberOfPosts = 3;
     if (Model.MacroParameters["numberOfPosts"] != null)
@@ -31,14 +33,16 @@
         return;
     }
 
+    var httpContext = HttpContextAccessor.HttpContext;
+
     //Gets all blogposts to calculate pages
     var blogposts = startNode.Children.OrderBy(x => x.CreateDate).ToList();
     var pageCount = (int)Math.Ceiling((double)blogposts.Count / (double)numberOfPosts);
     //gets the page from the querystring and sets it to one if it is out of range
     var page = 1;
-    if (!string.IsNullOrEmpty(Request.QueryString["page"]))
+    if (httpContext != null && !string.IsNullOrEmpty(httpContext.Request.Query["page"]))
     {
-        int.TryParse(Request.QueryString["page"], out page);
+        int.TryParse(httpContext.Request.Query["page"], out page);
         if (page <= 0 || page > pageCount)
         {
             page = 1;

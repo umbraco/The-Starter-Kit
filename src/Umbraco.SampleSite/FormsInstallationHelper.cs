@@ -5,8 +5,8 @@ using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Umbraco.Core;
-using Umbraco.Core.Services;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.Services;
 
 namespace Umbraco.SampleSite
 {

@@ -1,6 +1,6 @@
-﻿@inherits Umbraco.Web.Common.AspNetCore.UmbracoViewPage<ContentModels.Home>
-@using ContentModels = Umbraco.Web.PublishedModels
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
 @using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
 @{
     Layout = "master.cshtml";
     var backgroundImage = Model.HeroBackgroundImage != null ? Model.HeroBackgroundImage.Url : string.Empty;

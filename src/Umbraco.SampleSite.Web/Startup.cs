@@ -3,13 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Umbraco.Core.DependencyInjection;
+using Umbraco.Cms.Core.DependencyInjection;
 using Umbraco.Extensions;
-using Umbraco.Web.BackOffice.DependencyInjection;
-using Umbraco.Web.BackOffice.Security;
-using Umbraco.Web.Common.DependencyInjection;
-using Umbraco.Web.Website.DependencyInjection;
 
 namespace Umbraco.SampleSite.Web
 {
@@ -32,8 +27,6 @@ namespace Umbraco.SampleSite.Web
             _config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
-
-
         /// <summary>
         /// Configures the services
         /// </summary>
@@ -50,7 +43,6 @@ namespace Umbraco.SampleSite.Web
                 .AddComposers()
                 .Build();
 #pragma warning restore IDE0022 // Use expression body for methods
-
         }
 
         /// <summary>
@@ -58,12 +50,6 @@ namespace Umbraco.SampleSite.Web
         /// </summary>
         public void Configure(IApplicationBuilder app)
         {
-            if (_env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseUmbraco();
             app.UseUmbracoBackOffice();
             app.UseUmbracoWebsite();
         }

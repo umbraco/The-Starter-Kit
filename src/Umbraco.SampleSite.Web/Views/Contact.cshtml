@@ -1,6 +1,6 @@
-﻿@inherits Umbraco.Web.Common.AspNetCore.UmbracoViewPage<ContentModels.Contact>
-@using ContentModels = Umbraco.Web.PublishedModels
-@using Umbraco.Web.Website
+﻿@using Umbraco.Cms.Web.Common
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Contact>
 @inject UmbracoHelper Umbraco
 @{
     Layout = "master.cshtml";

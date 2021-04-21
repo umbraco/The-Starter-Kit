@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5</TargetFramework>
         <LangVersion>8</LangVersion>
     </PropertyGroup>
 
@@ -13,8 +13,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Umbraco.Cms" Version="0.5.0-alpha003.20210112.10" />
-        <PackageReference Include="Umbraco.Cms.SqlCe" Version="0.5.0-alpha003.20210112.10" />
+        <PackageReference Include="Umbraco.Cms" Version="9.0.0-beta001.20210416.5" />
+        <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-beta001.20210416.5" />
+        <PackageReference Include="Umbraco.Forms" Version="9.0.0-alpha001.20210416.16" />
         <PackageReference Include="Umbraco.SqlServerCE" Version="4.0.0.1" />
     </ItemGroup>
 

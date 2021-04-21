@@ -1,12 +1,12 @@
-﻿@inherits Umbraco.Web.Common.AspNetCore.UmbracoViewPage<ContentModels.People>
-@using ContentModels = Umbraco.Web.PublishedModels
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.People>
 @{
     Layout = "master.cshtml";
 }
 @{
     void SocialLink(string content, string service)
     {
-        if(!string.IsNullOrEmpty(content))
+        if (!string.IsNullOrEmpty(content))
         {
             ; //semicolon needed otherwise <a> cannot be resolved
             <a class="employee-grid__item__contact-item" href="http://@(service).com/@content">@service</a>
@@ -14,7 +14,7 @@
     }
 }
 
-    @Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+@Html.Partial("~/Views/Partials/SectionHeader.cshtml")
 
 <section class="section">
 
@@ -41,12 +41,12 @@
                         {
                             <a href="mailto:@person.Email" class="employee-grid__item__email">@person.Email</a>
                         }
-                    <div class="employee-grid__item__contact">
-                        @{ SocialLink(person.FacebookUsername, "Facebook"); }
-                        @{ SocialLink(person.TwitterUsername, "Twitter"); }
-                        @{ SocialLink(person.LinkedInUsername, "LinkedIn"); }
-                        @{ SocialLink(person.InstagramUsername, "Instagram"); }
-                    </div>
+                        <div class="employee-grid__item__contact">
+                            @{ SocialLink(person.FacebookUsername, "Facebook"); }
+                            @{ SocialLink(person.TwitterUsername, "Twitter"); }
+                            @{ SocialLink(person.LinkedInUsername, "LinkedIn"); }
+                            @{ SocialLink(person.InstagramUsername, "Instagram"); }
+                        </div>
                     </div>
                 </div>
             }
