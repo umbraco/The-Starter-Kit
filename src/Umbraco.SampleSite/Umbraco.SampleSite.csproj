@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <LangVersion>8</LangVersion>
   </PropertyGroup>
 
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web" Version="0.5.0-alpha003.20210112.10" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-beta001.20210416.5" />
   </ItemGroup>
 
   <ItemGroup>
