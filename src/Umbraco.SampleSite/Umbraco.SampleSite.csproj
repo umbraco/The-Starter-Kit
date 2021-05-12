@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-beta001.20210416.5" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-beta002" />
   </ItemGroup>
 
   <ItemGroup>

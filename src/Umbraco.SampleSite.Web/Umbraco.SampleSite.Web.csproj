@@ -13,10 +13,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Umbraco.Cms" Version="9.0.0-beta001.20210416.5" />
-        <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-beta001.20210416.5" />
-        <PackageReference Include="Umbraco.Forms" Version="9.0.0-alpha001.20210416.16" />
-        <PackageReference Include="Umbraco.SqlServerCE" Version="4.0.0.1" />
+        <PackageReference Include="Umbraco.Cms" Version="9.0.0-beta002" />
+        <!--<PackageReference Include="Umbraco.Forms" Version="9.0.0-alpha001.20210416.16" />-->
     </ItemGroup>
 
 </Project>
