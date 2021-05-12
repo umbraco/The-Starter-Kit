@@ -176,7 +176,7 @@
       <orgPath>~/css</orgPath>
       <orgName>umbraco-starterkit-style.css</orgName>
     </file>
-    <file>
+    <!--<file>
       <guid>OsmMaps.controller.js</guid>
       <orgPath>~/App_Plugins/OsmMaps</orgPath>
       <orgName>OsmMaps.controller.js</orgName>
@@ -325,7 +325,7 @@
       <guid>Our.Umbraco.OsmMaps.dll</guid>
       <orgPath>~/bin</orgPath>
       <orgName>Our.Umbraco.OsmMaps.dll</orgName>
-    </file>
+    </file>-->
   </files>
   <info>
     <package>
