@@ -1,9 +1,10 @@
-﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
-@using Umbraco.Extensions
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
 @{
     Layout = "master.cshtml";
-    var backgroundImage = Model.HeroBackgroundImage != null ? Model.HeroBackgroundImage.Url : string.Empty;
+    var backgroundImage = Model.HeroBackgroundImage != null ? Model.HeroBackgroundImage.Url() : String.Empty;
 }
 <section class="section section--full-height background-image-full overlay overlay--dark section--content-center section--thick-border"
          style="background-image: url('@backgroundImage')">
@@ -12,7 +13,7 @@
         <p class="section__description">@Model.HeroDescription</p>
         @if (Model.HeroCtalink != null)
         {
-            <a class="button button--border--solid" href="@Model.HeroCtalink.Url">
+            <a class="button button--border--solid" href="@Model.HeroCtalink.Url()">
                 @Model.HeroCtacaption
             </a>
         }
@@ -33,7 +34,7 @@
                 <h2>@Model.FooterHeader</h2>
                 <p class="section__description mw-640 ma-h-auto">@Model.FooterDescription</p>
 
-                <a class="button button--border--light_solid" href="@Model.FooterCtalink.Url">
+                <a class="button button--border--light_solid" href="@Model.FooterCtalink.Url()">
                     @Model.FooterCtacaption
                 </a>
 
