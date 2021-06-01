@@ -1,22 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-    <PropertyGroup>
-        <TargetFramework>net5</TargetFramework>
-        <LangVersion>8</LangVersion>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net5</TargetFramework>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <Compile Remove="Views\**" />
-      <Content Remove="Views\**" />
-      <EmbeddedResource Remove="Views\**" />
-      <None Remove="Views\**" />
-    </ItemGroup>
+  <PropertyGroup>
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
+    <RazorCompileOnPublish>false</RazorCompileOnPublish>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Umbraco.Cms" Version="9.0.0-beta001.20210416.5" />
-        <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-beta001.20210416.5" />
-        <PackageReference Include="Umbraco.Forms" Version="9.0.0-alpha001.20210416.16" />
-        <PackageReference Include="Umbraco.SqlServerCE" Version="4.0.0.1" />
-    </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Partials\Forms\**" />
+    <Compile Remove="Views\Partials\Grid\**" />
+    <Content Remove="Views\Partials\Forms\**" />
+    <Content Remove="Views\Partials\Grid\**" />
+    <EmbeddedResource Remove="Views\Partials\Forms\**" />
+    <EmbeddedResource Remove="Views\Partials\Grid\**" />
+    <None Remove="Views\Partials\Forms\**" />
+    <None Remove="Views\Partials\Grid\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms" Version="9.0.0-beta002" />
+    <!--<PackageReference Include="Umbraco.Forms" Version="9.0.0-alpha001.20210416.16" />-->
+  </ItemGroup>
 
 </Project>

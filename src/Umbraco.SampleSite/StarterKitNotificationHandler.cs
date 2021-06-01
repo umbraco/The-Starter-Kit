@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Routing;
 using Umbraco.Cms.Core.Events;
+using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Infrastructure.WebAssets;
 using Umbraco.Extensions;
 using Umbraco.SampleSite.Controllers;
 
 namespace Umbraco.SampleSite
 {
-    public class StarterKitNotificationHandler : INotificationHandler<ImportedPackageNotification>, INotificationHandler<ServerVariablesParsing>
+    public class StarterKitNotificationHandler : INotificationHandler<ImportedPackageNotification>, INotificationHandler<ServerVariablesParsingNotification>
     {
         private readonly FormsInstallationHelper _formsInstallationHelper;
         private readonly LinkGenerator _linkGenerator;
@@ -22,7 +23,7 @@ namespace Umbraco.SampleSite
         /// <summary>
         /// Handles the <see cref="ServerVariablesParsing"/> notification to add custom urls
         /// </summary>
-        public void Handle(ServerVariablesParsing notification)
+        public void Handle(ServerVariablesParsingNotification notification)
         {
             IDictionary<string, object> serverVars = notification.ServerVariables;
 

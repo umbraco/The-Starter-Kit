@@ -13,81 +13,82 @@
     </file>
     <file>
       <guid>7373036290_5e8420bf36_b.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>7373036290_5e8420bf36_b.jpg</orgName>
     </file>
     <file>
       <guid>14272036539_469ca21d5c_h.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>14272036539_469ca21d5c_h.jpg</orgName>
     </file>
     <file>
       <guid>7373036208_30257976a0_b.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>7373036208_30257976a0_b.jpg</orgName>
     </file>
     <file>
       <guid>7371127652_e01b6ab56f_b.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>7371127652_e01b6ab56f_b.jpg</orgName>
     </file>
     <file>
       <guid>18530280048_459b8b61b2_h.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>18530280048_459b8b61b2_h.jpg</orgName>
     </file>
     <file>
       <guid>7377957524_347859faac_b.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>7377957524_347859faac_b.jpg</orgName>
     </file>
     <file>
       <guid>16403439029_f500be349b_o.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>16403439029_f500be349b_o.jpg</orgName>
     </file>
     <file>
       <guid>4730684907_8a7f8759cb_b.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>4730684907_8a7f8759cb_b.jpg</orgName>
     </file>
     <file>
       <guid>5852022091_87c5d045ab_b.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>5852022091_87c5d045ab_b.jpg</orgName>
     </file>
     <file>
       <guid>18095416144_44a566a5f4_h.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>18095416144_44a566a5f4_h.jpg</orgName>
     </file>
     <file>
       <guid>5852022211_9028df67c0_b.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>5852022211_9028df67c0_b.jpg</orgName>
     </file>
     <file>
       <guid>18720470241_ff77768544_h.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>18720470241_ff77768544_h.jpg</orgName>
     </file>
     <file>
       <guid>18531852339_981b067419_h.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>18531852339_981b067419_h.jpg</orgName>
     </file>
     <file>
       <guid>18531854019_351c579559_h.jpg</guid>
-      <orgPath>~/Media/SK_Temp</orgPath>
+      <orgPath>~/www/media/SK_Temp</orgPath>
       <orgName>18531854019_351c579559_h.jpg</orgName>
     </file>
     <file>
       <guid>umbraco-starterkit-app.js</guid>
-      <orgPath>~/scripts</orgPath>
+      <orgPath>~/wwwroot/scripts</orgPath>
       <orgName>umbraco-starterkit-app.js</orgName>
     </file>
     <file>
       <guid>Umbraco.SampleSite.dll</guid>
+      <!-- TODO: This will not work, the /bin path in netcore is dynamic -->
       <orgPath>~/bin</orgPath>
       <orgName>Umbraco.SampleSite.dll</orgName>
     </file>
@@ -176,7 +177,7 @@
       <orgPath>~/css</orgPath>
       <orgName>umbraco-starterkit-style.css</orgName>
     </file>
-    <file>
+    <!--<file>
       <guid>OsmMaps.controller.js</guid>
       <orgPath>~/App_Plugins/OsmMaps</orgPath>
       <orgName>OsmMaps.controller.js</orgName>
@@ -325,18 +326,18 @@
       <guid>Our.Umbraco.OsmMaps.dll</guid>
       <orgPath>~/bin</orgPath>
       <orgName>Our.Umbraco.OsmMaps.dll</orgName>
-    </file>
+    </file>-->
   </files>
   <info>
     <package>
       <name>The Starter Kit</name>
-      <version>4.0.0</version>
+      <version>5.0.0</version>
       <iconUrl></iconUrl>
       <license url="http://opensource.org/licenses/MIT">MIT License</license>
       <url>https://umbraco.com</url>
       <requirements type="Strict">
-        <major>8</major>
-        <minor>7</minor>
+        <major>9</major>
+        <minor>0</minor>
         <patch>0</patch>
       </requirements>
     </package>
@@ -5236,20 +5237,20 @@ article {
   </DataTypes>
   <Actions>
     <Action runat="install" undo="false" alias="SampleSiteInitialContent">
-      <mediaItem folder="design" name="Umbraco Campari Meeting Room" path="/media/SK_Temp/16403439029_f500be349b_o.jpg" key="662af6ca-411a-4c93-a6c7-22c4845698e7" updateDocPath="//home" updatePropertyAlias="heroBackgroundImage" />
-      <mediaItem folder="products" name="Biker Jacket" path="/media/SK_Temp/4730684907_8a7f8759cb_b.jpg" key="55514845-b8bd-487c-b370-9724852fd6bb" updateDocPath="//product [@nodeName = 'Biker Jacket']" updatePropertyAlias="photos" />
-      <mediaItem folder="products" name="Tattoo" path="/media/SK_Temp/7371127652_e01b6ab56f_b.jpg" key="20e3a8ff-ad1b-4fe9-b48c-b8461c46d2d0" updateDocPath="//product [@nodeName = 'Tattoo']" updatePropertyAlias="photos" />
-      <mediaItem folder="products" name="Unicorn" path="/media/SK_Temp/14272036539_469ca21d5c_h.jpg" key="1bc5280b-8658-4027-89d9-58e2576e469b" updateDocPath="//product [@nodeName = 'Unicorn']" updatePropertyAlias="photos" />
-      <mediaItem folder="products" name="Ping Pong Ball" path="/media/SK_Temp/5852022211_9028df67c0_b.jpg" key="c09ec77f-08e3-466a-ac58-c979befd3cd6" updateDocPath="//product [@nodeName = 'Ping Pong Ball']" updatePropertyAlias="photos" />
-      <mediaItem folder="products" name="Bowling Ball" path="/media/SK_Temp/5852022091_87c5d045ab_b.jpg" key="b76ddb4e-e603-4014-9906-6087984740ec" updateDocPath="//product [@nodeName = 'Bowling Ball']" updatePropertyAlias="photos" />
-      <mediaItem folder="products" name="Jumpsuit" path="/media/SK_Temp/7377957524_347859faac_b.jpg" key="46a025d6-095a-4b14-8b96-1b59ca4e951c" updateDocPath="//product [@nodeName = 'Jumpsuit']" updatePropertyAlias="photos" />
-      <mediaItem folder="products" name="Banjo" path="/media/SK_Temp/7373036290_5e8420bf36_b.jpg" key="17552d12-081d-4d01-b681-32c495d6576f" updateDocPath="//product [@nodeName = 'Banjo']" updatePropertyAlias="photos" />
-      <mediaItem folder="products" name="Knitted West" path="/media/SK_Temp/7373036208_30257976a0_b.jpg" key="1d0b713a-022a-49c8-b842-a2463c83a553" updateDocPath="//product [@nodeName = 'Knitted West']" updatePropertyAlias="photos" />
-      <mediaItem folder="people" name="Jan Skovgaard" path="/media/SK_Temp/18720470241_ff77768544_h.jpg" key="cf1ab8dc-ad0f-4a8e-974b-87b84777b0d6" updateDocPath="//person [@nodeName = 'Jan Skovgaard']" updatePropertyAlias="photo" />
-      <mediaItem folder="people" name="Matt Brailsford" path="/media/SK_Temp/18531852339_981b067419_h.jpg" key="eee91c05-b2e8-4031-a056-dcd7f28eff89" updateDocPath="//person [@nodeName = 'Matt Brailsford']" updatePropertyAlias="photo" />
-      <mediaItem folder="people" name="Lee Kelleher" path="/media/SK_Temp/18531854019_351c579559_h.jpg" key="fa763e0d-0ceb-408c-8720-365d57e06e32" updateDocPath="//person [@nodeName = 'Lee Kelleher']" updatePropertyAlias="photo" />
-      <mediaItem folder="people" name="Jeavon Leopold" path="/media/SK_Temp/18095416144_44a566a5f4_h.jpg" key="c0969cab-13ab-4de9-819a-848619ac2b5d" updateDocPath="//person [@nodeName = 'Jeavon Leopold']" updatePropertyAlias="photo" />
-      <mediaItem folder="people" name="Jeroen Breuer" path="/media/SK_Temp/18530280048_459b8b61b2_h.jpg" key="34371d08-92c8-4015-912e-baacd002c5d0" updateDocPath="//person [@nodeName = 'Jeroen Breuer']" updatePropertyAlias="photo" />
+      <mediaItem folder="design" name="Umbraco Campari Meeting Room" path="/wwwroot/media/SK_Temp/16403439029_f500be349b_o.jpg" key="662af6ca-411a-4c93-a6c7-22c4845698e7" updateDocPath="//home" updatePropertyAlias="heroBackgroundImage" />
+      <mediaItem folder="products" name="Biker Jacket" path="/wwwroot/media/SK_Temp/4730684907_8a7f8759cb_b.jpg" key="55514845-b8bd-487c-b370-9724852fd6bb" updateDocPath="//product [@nodeName = 'Biker Jacket']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Tattoo" path="/wwwroot/media/SK_Temp/7371127652_e01b6ab56f_b.jpg" key="20e3a8ff-ad1b-4fe9-b48c-b8461c46d2d0" updateDocPath="//product [@nodeName = 'Tattoo']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Unicorn" path="/wwwroot/media/SK_Temp/14272036539_469ca21d5c_h.jpg" key="1bc5280b-8658-4027-89d9-58e2576e469b" updateDocPath="//product [@nodeName = 'Unicorn']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Ping Pong Ball" path="/wwwroot/media/SK_Temp/5852022211_9028df67c0_b.jpg" key="c09ec77f-08e3-466a-ac58-c979befd3cd6" updateDocPath="//product [@nodeName = 'Ping Pong Ball']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Bowling Ball" path="/wwwroot/media/SK_Temp/5852022091_87c5d045ab_b.jpg" key="b76ddb4e-e603-4014-9906-6087984740ec" updateDocPath="//product [@nodeName = 'Bowling Ball']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Jumpsuit" path="/wwwroot/media/SK_Temp/7377957524_347859faac_b.jpg" key="46a025d6-095a-4b14-8b96-1b59ca4e951c" updateDocPath="//product [@nodeName = 'Jumpsuit']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Banjo" path="/wwwroot/media/SK_Temp/7373036290_5e8420bf36_b.jpg" key="17552d12-081d-4d01-b681-32c495d6576f" updateDocPath="//product [@nodeName = 'Banjo']" updatePropertyAlias="photos" />
+      <mediaItem folder="products" name="Knitted West" path="/wwwroot/media/SK_Temp/7373036208_30257976a0_b.jpg" key="1d0b713a-022a-49c8-b842-a2463c83a553" updateDocPath="//product [@nodeName = 'Knitted West']" updatePropertyAlias="photos" />
+      <mediaItem folder="people" name="Jan Skovgaard" path="/wwwroot/media/SK_Temp/18720470241_ff77768544_h.jpg" key="cf1ab8dc-ad0f-4a8e-974b-87b84777b0d6" updateDocPath="//person [@nodeName = 'Jan Skovgaard']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Matt Brailsford" path="/wwwroot/media/SK_Temp/18531852339_981b067419_h.jpg" key="eee91c05-b2e8-4031-a056-dcd7f28eff89" updateDocPath="//person [@nodeName = 'Matt Brailsford']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Lee Kelleher" path="/wwwroot/media/SK_Temp/18531854019_351c579559_h.jpg" key="fa763e0d-0ceb-408c-8720-365d57e06e32" updateDocPath="//person [@nodeName = 'Lee Kelleher']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Jeavon Leopold" path="/wwwroot/media/SK_Temp/18095416144_44a566a5f4_h.jpg" key="c0969cab-13ab-4de9-819a-848619ac2b5d" updateDocPath="//person [@nodeName = 'Jeavon Leopold']" updatePropertyAlias="photo" />
+      <mediaItem folder="people" name="Jeroen Breuer" path="/wwwroot/media/SK_Temp/18530280048_459b8b61b2_h.jpg" key="34371d08-92c8-4015-912e-baacd002c5d0" updateDocPath="//person [@nodeName = 'Jeroen Breuer']" updatePropertyAlias="photo" />
     </Action>
   </Actions>
 </umbPackage>

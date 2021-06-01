@@ -29,7 +29,7 @@ namespace Umbraco.SampleSite
         private readonly FormsInstallationHelper _formsInstallHelper;
         private readonly ILogger<InstallPackageAction> _logger;
         private readonly MediaUrlGeneratorCollection _mediaUrlGenerators;
-        private readonly IMediaFileSystem _mediaFileSystem;
+        private readonly MediaFileManager _mediaFileManager;
         private readonly IShortStringHelper _shortStringHelper;
         private readonly IContentTypeBaseServiceProvider _contentTypeBaseServiceProvider;
         private readonly IJsonSerializer _serializer;
@@ -37,7 +37,7 @@ namespace Umbraco.SampleSite
         public InstallPackageAction(IContentService contentService, IMediaTypeService mediaTypeService,
             IMediaService mediaService, IFileService fileService, IOptions<ContentSettings> contentSettings,
             FormsInstallationHelper formsInstallHelper, ILogger<InstallPackageAction> logger, MediaUrlGeneratorCollection mediaUrlGenerators,
-            IMediaFileSystem mediaFileSystem, IShortStringHelper shortStringHelper, IContentTypeBaseServiceProvider contentTypeBaseServiceProvider,
+            MediaFileManager mediaFileManager, IShortStringHelper shortStringHelper, IContentTypeBaseServiceProvider contentTypeBaseServiceProvider,
             IJsonSerializer serializer)
         {
             _contentService = contentService;
@@ -48,7 +48,7 @@ namespace Umbraco.SampleSite
             _formsInstallHelper = formsInstallHelper;
             _logger = logger;
             _mediaUrlGenerators = mediaUrlGenerators;
-            _mediaFileSystem = mediaFileSystem;
+            _mediaFileManager = mediaFileManager;
             _shortStringHelper = shortStringHelper;
             _contentTypeBaseServiceProvider = contentTypeBaseServiceProvider;
             _serializer = serializer;
@@ -250,7 +250,7 @@ namespace Umbraco.SampleSite
                 using (fileStream)
                 {
                     //TODO: Check if this works also with Blob Storage file provider
-                    media.SetValue(_mediaFileSystem, _shortStringHelper, _contentTypeBaseServiceProvider, _serializer, "umbracoFile", fileName, fileStream);
+                    media.SetValue(_mediaFileManager, _shortStringHelper, _contentTypeBaseServiceProvider, _serializer, "umbracoFile", fileName, fileStream);
                 }   
             }
                 
