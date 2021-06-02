@@ -10,6 +10,11 @@
     <PackageReference Include="Umbraco.Forms" Version="9.0.0-preview20210602.64798" />
   </ItemGroup>
 
+  <Import Project="..\Umbraco.SampleSite\build\Umbraco.SampleSite.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Umbraco.SampleSite\Umbraco.SampleSite.csproj" />
+  </ItemGroup>
+  
   <ItemGroup>
     <Compile Remove="umbraco\Data\**" />
     <Compile Remove="umbraco\logs\**" />
@@ -64,6 +69,15 @@
     <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Script.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\ScrollToFormScript.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Submitted.cshtml" />
+    <_ContentIncludedByDefault Remove="App_Plugins\UmbracoForms\RazorTemplates\HtmlTable.cshtml" />
+    <_ContentIncludedByDefault Remove="App_Plugins\StarterKit\backoffice\tours\create-content.json" />
+    <_ContentIncludedByDefault Remove="App_Plugins\StarterKit\backoffice\tours\data-structure.json" />
+    <_ContentIncludedByDefault Remove="App_Plugins\UmbracoForms\Data\Templates\commentform.json" />
+    <_ContentIncludedByDefault Remove="App_Plugins\UmbracoForms\Data\Templates\contactform.json" />
+    <_ContentIncludedByDefault Remove="Views\MacroPartials\FeaturedProducts.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\MacroPartials\LatestBlogposts.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\Navigation\SubNavigation.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\Navigation\TopNavigation.cshtml" />
   </ItemGroup>
   
   <PropertyGroup>
