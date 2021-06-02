@@ -1,9 +1,8 @@
-﻿@inherits Umbraco.Web.Common.AspNetCore.UmbracoViewPage
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @using Umbraco.Cms.Core.Models.PublishedContent
 @using Umbraco.Cms.Core.Routing
-@using Umbraco.Core;
-@using Umbraco.Core.Models.PublishedContent
-@using Umbraco.Web.Routing
+@using Umbraco.Extensions
+
 @inject IPublishedValueFallback PublishedValueFallback
 @inject IPublishedUrlProvider PublishedUrlProvider
 @{

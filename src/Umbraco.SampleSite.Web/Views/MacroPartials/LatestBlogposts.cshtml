@@ -3,7 +3,6 @@
 @using Microsoft.AspNetCore.Mvc.Rendering
 @using Umbraco.Cms.Core.Routing
 @using Umbraco.Cms.Web.Common
-@using Umbraco.Extensions
 @inherits Umbraco.Cms.Web.Common.Macros.PartialViewMacroPage
 @inject UmbracoHelper Umbraco
 @inject IPublishedUrlProvider PublishedUrlProvider
@@ -16,9 +15,8 @@
     {
         int.TryParse((string)Model.MacroParameters["numberOfPosts"], out numberOfPosts);
     }
-
-
 }
+
 @if (startNodeId != null)
 {
     @* Get the starting page *@

@@ -5,10 +5,10 @@ using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Configuration;
 using Umbraco.Cms.Core.Security;
+using Umbraco.Cms.Core.Serialization;
 using Umbraco.Cms.Web.BackOffice.Controllers;
 using Umbraco.Cms.Web.BackOffice.Filters;
 using Umbraco.Cms.Web.Common.Attributes;
@@ -23,14 +23,16 @@ namespace Umbraco.SampleSite.Controllers
         private readonly IUmbracoVersion _umbracoVersion;
         private readonly ILogger<LessonsController> _logger;
         private readonly IAppPolicyCache _runtimeCache;
+        private readonly IJsonSerializer _jsonSerializer;
 
         public LessonsController(IBackOfficeSecurityAccessor backofficeSecurityAccessor, IUmbracoVersion umbracoVersion,
-            ILogger<LessonsController> logger, IAppPolicyCache runtimeCache)
+            ILogger<LessonsController> logger, IAppPolicyCache runtimeCache, IJsonSerializer jsonSerializer)
         {
             _backofficeSecurityAccessor = backofficeSecurityAccessor;
             _umbracoVersion = umbracoVersion;
             _logger = logger;
             _runtimeCache = runtimeCache;
+            _jsonSerializer = jsonSerializer;
         }
 
         /// <summary>
@@ -39,7 +41,7 @@ namespace Umbraco.SampleSite.Controllers
         /// <param name="path">Name of the documentation section to fetch from, ex: "getting-started", "Tutorials/Starter-kit/Lessons" </param>
         /// <returns></returns>
         [ValidateAngularAntiForgeryToken]
-        public async Task<IEnumerable<Lesson>> GetLessons(string path)
+        public IEnumerable<Lesson> GetLessons(string path)
         {
             //information for the request, so we could in the future filter by user, allowed sections, langugae and user-type
             var user = _backofficeSecurityAccessor.BackOfficeSecurity.CurrentUser;
@@ -62,7 +64,7 @@ namespace Umbraco.SampleSite.Controllers
                     using var web = new HttpClient();
                     //fetch dashboard json and parse to JObject
                     var json = web.GetStringAsync(url);
-                    result = JsonConvert.DeserializeObject<IEnumerable<Lesson>>(json.Result).ToList();
+                    result = _jsonSerializer.Deserialize<IEnumerable<Lesson>>(json.Result).ToList();
                 }
                 catch (HttpRequestException ex)
                 {
@@ -95,7 +97,7 @@ namespace Umbraco.SampleSite.Controllers
             using var web = new HttpClient();
             //fetch dashboard json and parse to JObject
             var json = await web.GetStringAsync(url);
-            return JsonConvert.DeserializeObject<List<LessonStep>>(json);
+            return _jsonSerializer.Deserialize<List<LessonStep>>(json);
         }
     }
 

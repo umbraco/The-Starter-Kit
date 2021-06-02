@@ -1,7 +1,7 @@
 ﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
-@using Umbraco.Cms.Web.Common
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Blog>
-@inject UmbracoHelper Umbraco
+
 @{
     Layout = "master.cshtml";
 }
@@ -10,7 +10,7 @@
 <section class="section">
 
     <div class="container">
-        @Umbraco.RenderMacro("latestBlogposts",
+        @await Umbraco.RenderMacroAsync("latestBlogposts",
             new
             {
                 numberOfPosts = Model.HowManyPostsShouldBeShown,

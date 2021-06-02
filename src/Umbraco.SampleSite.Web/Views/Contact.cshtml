@@ -1,7 +1,6 @@
 ﻿@using Umbraco.Cms.Web.Common
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Contact>
-@inject UmbracoHelper Umbraco
 @{
     Layout = "master.cshtml";
 
@@ -42,7 +41,9 @@
             <div class="col-md-6">
                 <h2>@Model.ContactFormHeader</h2>
                 @Model.ContactIntro
-                @Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.ContactForm })
+                @{
+                    await Umbraco.RenderMacroAsync("renderUmbracoForm", new {FormGuid = Model.ContactForm});
+                }
             </div>
 
         </div>

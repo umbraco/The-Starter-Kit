@@ -1,7 +1,7 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
-
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+﻿
+@using Umbraco.Extensions
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Home>
 @{
     Layout = "master.cshtml";
     var backgroundImage = Model.HeroBackgroundImage != null ? Model.HeroBackgroundImage.Url() : String.Empty;

@@ -1,5 +1,6 @@
-﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.People>
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<People>
 @{
     Layout = "master.cshtml";
 }
@@ -30,11 +31,11 @@
         </nav>
         -->
         <div class="employee-grid">
-            @foreach (ContentModels.Person person in Model.Children)
+            @foreach (Person person in Model.Children<Person>())
             {
 
                 <div class="employee-grid__item">
-                    <div class="employee-grid__item__image" style="background-image: url('@person.Photo.Url')"></div>
+                    <div class="employee-grid__item__image" style="background-image: url('@person.Photo.Url()')"></div>
                     <div class="employee-grid__item__details">
                         <h3 class="employee-grid__item__name">@person.Name</h3>
                         @if (!string.IsNullOrEmpty(person.Email))

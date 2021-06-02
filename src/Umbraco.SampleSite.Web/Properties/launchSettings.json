@@ -1,10 +1,11 @@
 {
+  "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:5000",
-      "sslPort": 5001
+      "applicationUrl": "http://localhost:9010",
+      "sslPort": 44339
     }
   },
   "profiles": {
@@ -17,10 +18,11 @@
     },
     "Umbraco.SampleSite.Web": {
       "commandName": "Project",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+      "applicationUrl": "https://localhost:44331;http://localhost:9000"
     }
   }
 }
