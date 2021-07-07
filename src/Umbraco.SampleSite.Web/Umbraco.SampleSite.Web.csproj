@@ -5,8 +5,8 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="9.0.0-rc001.pre001" />
-    <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-rc001.pre001" />
+    <PackageReference Include="Umbraco.Cms" Version="9.0.0-rc001" />
+    <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-rc001" />
 
   </ItemGroup>
 
@@ -43,12 +43,7 @@
     <Content Remove="umbraco\logs\**" />
     <Content Remove="umbraco\MediaCache\**" />
   </ItemGroup>
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="App_Plugins\StarterKit\backoffice\tours\create-content.json" />
-    <_ContentIncludedByDefault Remove="App_Plugins\StarterKit\backoffice\tours\data-structure.json" />
-  </ItemGroup>
-
-  
+    
   <PropertyGroup>
     <RazorCompileOnBuild>false</RazorCompileOnBuild>
     <RazorCompileOnPublish>false</RazorCompileOnPublish>

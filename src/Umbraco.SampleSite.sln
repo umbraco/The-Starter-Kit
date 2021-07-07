@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30001.183
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umbraco.SampleSite.Web.Legacy", "Umbraco.SampleSite.Web.Legacy\Umbraco.SampleSite.Web.Legacy.csproj", "{A80F89C5-4D21-4B54-8537-DADC6CF230E8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4} = {58DCD6B9-04D4-4F89-A3B9-19A192D561A4}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{28F8A6EA-1613-4AF3-BFCB-9B330BDC455C}"
 	ProjectSection(SolutionItems) = preProject
 		..\build\build.ps1 = ..\build\build.ps1
@@ -31,8 +26,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A80F89C5-4D21-4B54-8537-DADC6CF230E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A80F89C5-4D21-4B54-8537-DADC6CF230E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
