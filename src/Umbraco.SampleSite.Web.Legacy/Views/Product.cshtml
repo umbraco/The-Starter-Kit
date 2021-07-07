@@ -4,7 +4,7 @@
     Layout = "master.cshtml";
 }
 <!-- for the section we want to show the shop header -->
-@Html.Partial("~/Views/Partials/SectionHeader.cshtml", Model.Parent)
+@await Html.PartialAsync("~/Views/Partials/SectionHeader.cshtml", Model.Parent)
 
 <section class="section">
     <div class="container">

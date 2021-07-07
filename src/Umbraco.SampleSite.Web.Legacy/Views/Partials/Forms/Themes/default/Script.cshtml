@@ -31,7 +31,7 @@
     {
         foreach (var partial in Model.CurrentPage.PartialViewFiles)
         {
-            @Html.Partial(partial.Value)
+            @await Html.PartialAsync(partial.Value)
         }
     }
 

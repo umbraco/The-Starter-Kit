@@ -44,7 +44,7 @@
                 <div @RenderElementAttributes(area)>
                     @foreach (var control in area.controls) {
                         if (control !=null && control.editor != null && control.editor.view != null ) {
-                            <text>@Html.Partial("grid/editors/base", (object)control)</text>
+                            <text>@await Html.PartialAsync("grid/editors/base", (object)control)</text>
                         }
                     }
                 </div>

@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <UmbracoSampleSiteContentFilesPath>$(MSBuildThisFileDirectory)..\App_Plugins\StarterKit\**\*.*</UmbracoSampleSiteContentFilesPath>
-        <UmbracoSampleSiteViewsPath>$(MSBuildThisFileDirectory)..\Views\**\*.*</UmbracoSampleSiteViewsPath>
         <UmbracoSampleSiteWwwrootPath>$(MSBuildThisFileDirectory)..\wwwroot\**\*.*</UmbracoSampleSiteWwwrootPath>
     </PropertyGroup>
 
@@ -15,28 +14,6 @@
             SourceFiles="@(UmbracoSampleSiteContentFiles)"
             DestinationFiles="@(UmbracoSampleSiteContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\StarterKit\%(RecursiveDir)%(Filename)%(Extension)')"
             SkipUnchangedFiles="true" />
-    </Target>
-
-    <Target Name="CopyUmbracoSampleSiteViews" BeforeTargets="Build">
-        <ItemGroup>
-            <UmbracoSampleSiteViews Include="$(UmbracoSampleSiteViewsPath)" />
-        </ItemGroup>
-        <Message Text="Copying UmbracoSampleSite View files: $(UmbracoSampleSiteViewsPath) - #@(UmbracoSampleSiteViews->Count()) files"  Importance="high" />
-        <Copy
-                SourceFiles="@(UmbracoSampleSiteViews)"
-                DestinationFiles="@(UmbracoSampleSiteViews->'$(MSBuildProjectDirectory)\Views\%(RecursiveDir)%(Filename)%(Extension)')"
-                SkipUnchangedFiles="true" />
-    </Target>
-
-    <Target Name="CopyUmbracoSampleSiteWwwroot" BeforeTargets="Build">
-        <ItemGroup>
-            <UmbracoSampleSiteWwwroot Include="$(UmbracoSampleSiteWwwrootPath)" />
-        </ItemGroup>
-        <Message Text="Copying UmbracoSampleSite wwwroot files: $(UmbracoSampleSiteWwwrootPath) - #@(UmbracoSampleSiteWwwroot->Count()) files"  Importance="high" />
-        <Copy
-                SourceFiles="@(UmbracoSampleSiteWwwroot)"
-                DestinationFiles="@(UmbracoSampleSiteWwwroot->'$(MSBuildProjectDirectory)\wwwroot\%(RecursiveDir)%(Filename)%(Extension)')"
-                SkipUnchangedFiles="true" />
     </Target>
 
     <Target Name="ClearUmbracoSampleSiteAssets" BeforeTargets="Clean">

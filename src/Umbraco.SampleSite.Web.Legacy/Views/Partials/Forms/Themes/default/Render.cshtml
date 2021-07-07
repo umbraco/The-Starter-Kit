@@ -27,7 +27,7 @@
 *@
 @if (Model.SubmitHandled)
 {
-    @Html.Partial(formThemedView);
+    @await Html.PartialAsync(formThemedView);
 
 } else {
 
@@ -50,7 +50,7 @@
             <input type="hidden" name="RecordState" value="@Model.RecordState" />
             
             @* Render the form html *@
-            @Html.Partial(formThemedView)
+            @await Html.PartialAsync(formThemedView)
         }
 
 

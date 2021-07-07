@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Routing;
 using Umbraco.Cms.Core.Events;
 using Umbraco.Cms.Core.Notifications;
-using Umbraco.Cms.Infrastructure.WebAssets;
 using Umbraco.Extensions;
 using Umbraco.SampleSite.Controllers;
 
 namespace Umbraco.SampleSite
 {
-    public class StarterKitNotificationHandler : INotificationHandler<ImportedPackageNotification>, INotificationHandler<ServerVariablesParsingNotification>
+    public class StarterKitNotificationHandler :INotificationHandler<ServerVariablesParsingNotification>
     {
-        private readonly FormsInstallationHelper _formsInstallationHelper;
         private readonly LinkGenerator _linkGenerator;
 
-        public StarterKitNotificationHandler(FormsInstallationHelper formsInstallationHelper, LinkGenerator linkGenerator)
+        public StarterKitNotificationHandler(LinkGenerator linkGenerator)
         {
-            _formsInstallationHelper = formsInstallationHelper;
             _linkGenerator = linkGenerator;
         }
 
@@ -48,12 +45,5 @@ namespace Umbraco.SampleSite
             umbracoUrls["lessonsApiBaseUrl"] = _linkGenerator.GetUmbracoApiServiceBaseUrl<LessonsController>(controller => controller.GetLessons(""));
         }
 
-        public void Handle(ImportedPackageNotification notification)
-        {
-            if (notification?.PackageMetaData != null && notification.PackageMetaData.Name == "Umbraco Forms")
-            {
-                _formsInstallationHelper.UpdateUmbracoDataForFormsInstallation();
-            }
-        }
     }
 }

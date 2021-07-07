@@ -67,7 +67,7 @@
 
                                 <div class="umbraco-forms-field-wrapper">
 
-                                    @Html.Partial(FormThemeResolver.GetFieldView(Model, f), f)
+                                    @await Html.PartialAsync(FormThemeResolver.GetFieldView(Model, f), f)
 
                                     @if (Model.ShowFieldValidaton)
                                     {
@@ -132,4 +132,4 @@
     </div>
 </div>
 
-@Html.Partial("Forms/Themes/default/ScrollToFormScript")
+@await Html.PartialAsync("Forms/Themes/default/ScrollToFormScript")

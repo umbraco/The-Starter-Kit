@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
     
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="9.0.0-beta003" />
-    <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-beta003" />
-    <PackageReference Include="Umbraco.Forms" Version="9.0.0-preview20210602.64798" />
+    <PackageReference Include="Umbraco.Cms" Version="9.0.0-rc001.pre001" />
+    <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-rc001.pre001" />
+
   </ItemGroup>
 
   <Import Project="..\Umbraco.SampleSite\build\Umbraco.SampleSite.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Umbraco.SampleSite\Umbraco.SampleSite.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Compile Remove="umbraco\Data\**" />
     <Compile Remove="umbraco\logs\**" />
@@ -44,44 +44,14 @@
     <Content Remove="umbraco\MediaCache\**" />
   </ItemGroup>
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\DatePicker.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Emails\Example-Template.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Export\excel.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\bootstrap3-horizontal\Fieldtypes\FieldType.RadioButtonList.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\bootstrap3-horizontal\Form.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\DatePicker.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.CheckBox.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.CheckBoxList.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.DataConsent.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.DatePicker.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.DropDownList.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.FileUpload.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.HiddenField.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.PasswordField.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.RadioButtonList.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\Fieldtype.Recaptcha2.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\Fieldtype.Recaptcha3.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.Text.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.Textarea.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.Textfield.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Form.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Render.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Script.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\ScrollToFormScript.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Forms\Themes\default\Submitted.cshtml" />
-    <_ContentIncludedByDefault Remove="App_Plugins\UmbracoForms\RazorTemplates\HtmlTable.cshtml" />
     <_ContentIncludedByDefault Remove="App_Plugins\StarterKit\backoffice\tours\create-content.json" />
     <_ContentIncludedByDefault Remove="App_Plugins\StarterKit\backoffice\tours\data-structure.json" />
-    <_ContentIncludedByDefault Remove="App_Plugins\UmbracoForms\Data\Templates\commentform.json" />
-    <_ContentIncludedByDefault Remove="App_Plugins\UmbracoForms\Data\Templates\contactform.json" />
-    <_ContentIncludedByDefault Remove="Views\MacroPartials\FeaturedProducts.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\MacroPartials\LatestBlogposts.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Navigation\SubNavigation.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Partials\Navigation\TopNavigation.cshtml" />
   </ItemGroup>
+
   
   <PropertyGroup>
-    <RazorCompileOnBuild>true</RazorCompileOnBuild>
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
+    <RazorCompileOnPublish>false</RazorCompileOnPublish>
   </PropertyGroup>
 
 </Project>

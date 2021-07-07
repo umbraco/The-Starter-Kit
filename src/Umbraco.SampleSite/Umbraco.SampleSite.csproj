@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <ContentTargetFolders>.</ContentTargetFolders>
     <Product>Umbraco.SampleSite</Product>
     <PackageId>Umbraco.SampleSite</PackageId>
     <Title>Umbraco.SampleSite</Title>
@@ -9,6 +10,8 @@
     <Product>...</Product>
     <PackageTags>umbraco plugin package</PackageTags>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <Version>9.0.0-beta001.pre1</Version>
+    
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,10 +19,20 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </Content>
+
     <None Include="build\**\*.*">
       <Pack>True</Pack>
-      <PackagePath>build</PackagePath>
+      <PackagePath>buildTransitive</PackagePath>
     </None>
+
+    <EmbeddedResource Include="Migrations\Files\**\*">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\package.xml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>   
 
     <Content Include="Views\**\*.*">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -30,89 +43,12 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </Content>
-
-    <Content Update="Views\Blog.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\Blogpost.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\Contact.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\ContentPage.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\Home.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\Master.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\People.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\Person.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\Product.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\Products.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\Partials\CategoryLinks.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-
-    <Content Update="Views\Partials\SectionHeader.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Remove="ContactForm.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="ContactForm.json" />
+    <PackageReference Include="Bergmania.OpenStreetMap" Version="1.0.0" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-rc001.pre001" />
+<!--    <PackageReference Include="Umbraco.Forms" Version="9.0.0-preview20210628.66674" />-->
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-beta003" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="FormsDefinitions.Designer.cs">
-      <DependentUpon>FormsDefinitions.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="FormsDefinitions.resx">
-      <LastGenOutput>FormsDefinitions.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="App_Plugins\StarterKit\backoffice\tours\create-content.json" />
-    <Content Include="App_Plugins\StarterKit\backoffice\tours\data-structure.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot" />
-  </ItemGroup>
 </Project>

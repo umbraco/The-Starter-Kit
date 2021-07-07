@@ -17,7 +17,7 @@
 @try
 {
     string editor = EditorView(Model);                                                       
-    <text>@Html.Partial(editor, (object)Model)</text>
+    <text>@await Html.PartialAsync(editor, (object)Model)</text>
 }
 catch (Exception ex) { 
 <pre>@ex.ToString()</pre>

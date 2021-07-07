@@ -17,8 +17,6 @@ namespace Umbraco.SampleSite
             builder.TourFilters().AddFilter(BackOfficeTourFilter.FilterAlias(new Regex("umbIntroCreateDocType|umbIntroCreateContent|umbIntroRenderInTemplate|umbIntroViewHomePage|umbIntroMediaSection")));
             
             builder.AddNotificationHandler<ServerVariablesParsingNotification, StarterKitNotificationHandler>();
-            builder.AddNotificationHandler<ImportedPackageNotification, StarterKitNotificationHandler>();
-            builder.Services.AddUnique<FormsInstallationHelper>();
         }
     }
 }
