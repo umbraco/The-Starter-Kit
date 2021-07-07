@@ -5,12 +5,9 @@ VisualStudioVersion = 16.0.30001.183
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{28F8A6EA-1613-4AF3-BFCB-9B330BDC455C}"
 	ProjectSection(SolutionItems) = preProject
-		..\build\build.ps1 = ..\build\build.ps1
-		..\build\build.xml = ..\build\build.xml
-		..\.github\workflows\main.yml = ..\.github\workflows\main.yml
 		NuGet.config = NuGet.config
-		..\build\packageManifest.xml = ..\build\packageManifest.xml
 		..\README.md = ..\README.md
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umbraco.SampleSite", "Umbraco.SampleSite\Umbraco.SampleSite.csproj", "{58DCD6B9-04D4-4F89-A3B9-19A192D561A4}"

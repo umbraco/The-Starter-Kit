@@ -1,34 +1,57 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
-trigger:
-- dev-v8
-
-pool:
-  vmImage: 'windows-latest'
+name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+#  VersionNumber: $(Major).$(Minor).$(rev:.r)
+stages:
+  - stage: Windows
+    dependsOn: [] # this removes the implicit dependency on previous stage and causes this to run in parallel
+    jobs:
 
-steps:
-- task: NuGetToolInstaller@1
+      - job: CreateNugetPacakges
+        displayName: 'Create Nuget Packages'
+        pool:
+          vmImage: 'windows-latest'
+        steps:
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
+          - task: UseDotNet@2
+            displayName: 'Use .Net Core sdk 5.0.x'
+            inputs:
+              version: 5.0.x
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+          - task: DotNetCoreCLI@2
+            displayName: 'dotnet restore'
+            inputs:
+              command: 'restore'
+              projects: '**/Umbraco.SampleSite.csproj'
+              restoreArguments: '--source https://www.myget.org/F/umbraconightly/api/v3/index.json --source https://www.myget.org/F/umbracoprereleases/api/v3/index.json --source https://api.nuget.org/v3/index.json'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+          - task: DotNetCoreCLI@2
+            displayName: 'dotnet build'
+            inputs:
+              command: 'build'
+              projects: '**/Umbraco.SampleSite.csproj'
+              arguments: '--configuration $(buildConfiguration) --no-restore'
+
+          - task: PowerShell@1
+            displayName: 'dotnet pack'
+            inputs:
+              scriptType: inlineScript
+              inlineScript: >
+                $isRelease = [regex]::matches($env:BUILD_SOURCEBRANCH,"v\d+\/\d+.\d+.*");
+
+                if ($isRelease.Count -gt 0)
+                {
+                   Write-Host "##vso[build.addbuildtag]Release build"
+                   dotnet pack --no-build --include-symbols --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) ./Umbraco.SampleSite/Umbraco.SampleSite.csproj
+                }
+                else
+                {
+                   Write-Host "##vso[build.addbuildtag]Continuous build"
+                   dotnet pack --no-build --include-symbols --version-suffix nightly.$(Build.BuildId) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) ./Umbraco.SampleSite/Umbraco.SampleSite.csproj
+                }
+          - task: PublishBuildArtifacts@1
+            displayName: 'Make NuGet Artifacts available for release'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: packages
