@@ -1682,7 +1682,7 @@
 <body class="frontpage theme-font-@font theme-color-@colorTheme">
     <div class="mobile-nav">
         <nav class="nav-bar">
-            @await Html.PartialAsync("~/views/partials/navigation/topNavigation.cshtml")
+            @await Html.PartialAsync("~/Views/Partials/Navigation/TopNavigation.cshtml")
         </nav>
     </div>
 
