@@ -11,37 +11,23 @@ namespace Umbraco.SampleSite.Migrations
 {
     public class ImportPackageXmlMigration : PackageMigrationBase
     {
-        private XDocument _xdoc;
-
         public ImportPackageXmlMigration(
             IPackagingService packagingService,
             IMediaService mediaService,
-            MediaFileManager mediaFileManager,
+            MediaFileManager mediaFileManager, 
             MediaUrlGeneratorCollection mediaUrlGenerators,
             IShortStringHelper shortStringHelper, 
-            IContentTypeBaseServiceProvider contentTypeBaseServiceProvider,
+            IContentTypeBaseServiceProvider contentTypeBaseServiceProvider, 
             IMigrationContext context) 
             : base(packagingService, 
                 mediaService,
                 mediaFileManager, 
-                mediaUrlGenerators,
-                shortStringHelper,
-                contentTypeBaseServiceProvider,
+                mediaUrlGenerators, 
+                shortStringHelper, 
+                contentTypeBaseServiceProvider, 
                 context)
         {
         }
-
-        private XDocument PackageDataManifest
-        {
-          get
-          {
-            if (this._xdoc != null)
-              return this._xdoc;
-            this._xdoc = PackageMigrationResource.GetEmbeddedPackageDataManifest(this.GetType());
-            return this._xdoc;
-          }
-        }
-
 
         protected override void Migrate()
         {
