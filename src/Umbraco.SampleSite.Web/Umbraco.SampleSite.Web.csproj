@@ -5,12 +5,12 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="9.0.0-rc001" />
-    <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-rc001" />
+    <PackageReference Include="Umbraco.Cms" Version="9.0.0-preview20210813.69828" />
+    <PackageReference Include="Umbraco.Cms.SqlCe" Version="9.0.0-preview20210813.69828" />
 
   </ItemGroup>
 
-  <Import Project="..\Umbraco.SampleSite\build\Umbraco.SampleSite.targets" />
+  <Import Project="..\Umbraco.SampleSite\build\Umbraco.TheStarterKit.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Umbraco.SampleSite\Umbraco.SampleSite.csproj" />
   </ItemGroup>
