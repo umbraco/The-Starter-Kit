@@ -19,10 +19,6 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </Content>
-    <EmbeddedResource Include="Migrations\package.xml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </EmbeddedResource>
 
     <None Include="build\**\*.*">
       <Pack>True</Pack>
@@ -43,6 +39,10 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </Content>
+
+    <None Remove="Migrations\package.zip" />
+
+    <EmbeddedResource Include="Migrations\package.zip" />
   </ItemGroup>
 
   <ItemGroup>
