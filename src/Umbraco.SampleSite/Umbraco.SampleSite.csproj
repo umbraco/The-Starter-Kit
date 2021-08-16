@@ -19,10 +19,6 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </Content>
-    <EmbeddedResource Include="Migrations\package.xml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </EmbeddedResource>
 
     <None Include="build\**\*.*">
       <Pack>True</Pack>
@@ -43,11 +39,15 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </Content>
+
+    <None Remove="Migrations\package.zip" />
+
+    <EmbeddedResource Include="Migrations\package.zip" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Bergmania.OpenStreetMap" Version="1.0.0" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-rc001" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-preview20210813.69828" />
 <!--    <PackageReference Include="Umbraco.Forms" Version="9.0.0-preview20210628.66674" />-->
   </ItemGroup>
 

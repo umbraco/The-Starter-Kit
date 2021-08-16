@@ -1,6 +1,9 @@
 ﻿using System.Xml.Linq;
+using Umbraco.Cms.Core.IO;
 using Umbraco.Cms.Core.Packaging;
+using Umbraco.Cms.Core.PropertyEditors;
 using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Strings;
 using Umbraco.Cms.Infrastructure.Migrations;
 using Umbraco.Cms.Infrastructure.Packaging;
 
@@ -10,11 +13,24 @@ namespace Umbraco.SampleSite.Migrations
     {
         private XDocument _xdoc;
 
-        public ImportPackageXmlMigration(IPackagingService packagingService, IMigrationContext context) 
-            : base(packagingService, context)
+        public ImportPackageXmlMigration(
+            IPackagingService packagingService,
+            IMediaService mediaService,
+            MediaFileManager mediaFileManager,
+            MediaUrlGeneratorCollection mediaUrlGenerators,
+            IShortStringHelper shortStringHelper, 
+            IContentTypeBaseServiceProvider contentTypeBaseServiceProvider,
+            IMigrationContext context) 
+            : base(packagingService, 
+                mediaService,
+                mediaFileManager, 
+                mediaUrlGenerators,
+                shortStringHelper,
+                contentTypeBaseServiceProvider,
+                context)
         {
         }
-        
+
         private XDocument PackageDataManifest
         {
           get
@@ -29,7 +45,7 @@ namespace Umbraco.SampleSite.Migrations
 
         protected override void Migrate()
         {
-            ImportPackage.FromXmlDataManifest(PackageDataManifest).Do();
+            ImportPackage.FromEmbeddedResource(GetType()).Do();
             Context.AddPostMigration<PublishRootBranchPostMigration>();
         }
     }
