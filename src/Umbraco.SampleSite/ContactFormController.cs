@@ -47,7 +47,7 @@ namespace Umbraco.SampleSite
         protected virtual async Task<string> HandleSuccessfulSubmitAsync(ContactFormViewModel model)
         {
             var mailMessage = new EmailMessage(_globalSettings.Value?.Smtp?.From ?? "noreply@umbraco.com", model.Email, $"Website Contact form: {model.Name}", model.Message, true);
-            await _emailSender.SendAsync(mailMessage, true);
+            await _emailSender.SendAsync(mailMessage, "StarterKitContactEmail", true);
             
             return "Message submitted";
         }
