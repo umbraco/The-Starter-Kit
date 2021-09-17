@@ -47,7 +47,7 @@
 
   <ItemGroup>
     <PackageReference Include="Bergmania.OpenStreetMap" Version="1.0.0" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-rc003" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0-preview20210916.72563" />
   </ItemGroup>
 
 </Project>
