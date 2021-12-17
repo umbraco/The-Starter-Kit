@@ -47,13 +47,13 @@
                 "content": "<p>At the top of the page you will find the name of the content you are editing.</p>"
             },
             {
-                "element": "[data-element='property-heroHeader']",
+                "element": "[data-element='tab-content-'] [data-element='property-heroHeader'] .umb-property",
                 "elementPreventClick": true,
                 "title": "Properties",
                 "content": "<p>In the center of the page you will find the content <b>Properties</b>.</p><p>These are all the pieces of information the content consist of. Properties can vary depending on which <b>Document type</b> the current item is based on.</p>"
             },
             {
-                "element": "[data-element='group-Hero']",
+                "element": "[data-element='group-hero']",
                 "elementPreventClick": true,
                 "title": "Organise with groups",
                 "content": "<p>The properties of a page are organised in <b>groups</b> making it easy to find the right place to update the content.</p>"
@@ -65,7 +65,7 @@
                 "event": "click"
             },
             {
-                "element": "[data-element='property-heroHeader']",
+                "element": "[data-element='tab-content-'] [data-element='property-heroHeader'] .umb-property",
                 "title": "Update the header",
                 "content": "<p>Let's make an update to the content in the <b>Header</b> property.</p><p>Try changing it to: <code>Welcome to my website</code></p>"
             },
@@ -215,13 +215,13 @@
                 "eventElement": "[data-element='editor-media'] [data-element='media-grid-item-0'] [data-element='media-grid-item-edit']"
             },
             {
-                "element": "[data-element='editor-media'] [data-element='property-umbracoFile']",
+                "element": "[data-element='editor-media'] [data-element='group-image']",
                 "elementPreventClick": true,
                 "title": "The uploaded image",
                 "content": "<p>Here you can see the image you have uploaded.</p>"
             },
             {
-                "element": "[data-element='editor-media'] [data-element='property-umbracoBytes']",
+                "element": "[data-element='editor-media'] [data-element='property-umbracoBytes'] .umb-property",
                 "elementPreventClick": true,
                 "title": "Image size",
                 "content": "<p>You will also find other details about the image, like the size.</p><p>Media items work in much the same way as content. Properties can vary depending on which <b>Media type</b> the current item belongs to.</p>"
@@ -275,7 +275,7 @@
                 "eventElement": "#tree [data-element='tree-item-Home'] a.umb-tree-item__label"
             },
             {
-                "element": "[data-element='group-Design']",
+                "element": "[data-element='group-design']",
                 "elementPreventClick": true,
                 "title": "Design",
                 "content": "<p>Under the <b>Design group</b> you will find the property to change the background image.</p>"

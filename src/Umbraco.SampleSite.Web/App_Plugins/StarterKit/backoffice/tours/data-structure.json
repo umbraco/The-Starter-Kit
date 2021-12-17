@@ -148,13 +148,13 @@
         "eventElement": "#tree [data-element='tree-item-Home'] a.umb-tree-item__label"
       },
       {
-        "element": "[data-element='editor-content'] [data-element='group-Content']",
+        "element": "[data-element='editor-content'] [data-element='group-content']",
         "elementPreventClick": true,
         "title": "The Content group",
         "content": "<p>Under the Content group you will find the new property.</p>"
       },
       {
-        "element": "[data-element='property-welcomeText']",
+        "element": "[data-element='property-welcomeText'] .umb-property",
         "title": "Add an About text",
         "content": "<p>Here you can see the text area you added. Try entering some text. This could be</p><p><pre>This is the Home page!</pre></p>"
       },
