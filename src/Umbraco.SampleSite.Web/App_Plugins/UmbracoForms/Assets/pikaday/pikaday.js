@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * Pikaday
  *
  * Copyright Â© 2014 David Bushell | BSD & MIT license | https://github.com/Pikaday/Pikaday
@@ -12,7 +12,7 @@
     if (typeof exports === 'object') {
         // CommonJS module
         // Load moment.js as an optional dependency
-        try { moment = require('moment'); } catch (e) {}
+        try { moment = require('moment'); } catch { /* Silently fail */ }
         module.exports = factory(moment);
     } else if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -20,7 +20,7 @@
         {
             // Load moment.js as an optional dependency
             var id = 'moment';
-            try { moment = req(id); } catch (e) {}
+            try { moment = req(id); } catch { /* Silently fail */ }
             return factory(moment);
         });
     } else {

@@ -34,16 +34,17 @@
     @*Standard form and wrapper *@
     <div id="umbraco_form_@Model.FormClientId" class="umbraco-forms-form @Model.CssClass umbraco-forms-@Model.Theme">
 
-        @using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm"))
+        @using (Html.BeginUmbracoForm<Umbraco.Forms.Web.Controllers.UmbracoFormsController>("HandleForm", null, Model.HtmlAttributes ))
         {
             @* Standard form meta data *@
 
             @Html.AntiForgeryToken()
 
-            @Html.HiddenFor(x => Model.FormId, new {id = $"{nameof(Model.FormId)}_{Model.FormId}"})
-            @Html.HiddenFor(x => Model.FormName, new {id = $"{nameof(Model.FormName)}_{Model.FormId}"})
-            @Html.HiddenFor(x => Model.RecordId, new {id = $"{nameof(Model.RecordId)}_{Model.FormId}"})
-            @Html.HiddenFor(x => Model.PreviousClicked, new {id = $"{nameof(Model.PreviousClicked)}_{Model.FormId}"})
+            @Html.HiddenFor(x => Model.FormId, new {id = (string)null})
+            @Html.HiddenFor(x => Model.FormName, new {id = (string)null})
+            @Html.HiddenFor(x => Model.RecordId, new {id = (string)null})
+            @Html.HiddenFor(x => Model.PreviousClicked, new {id = (string)null})
+            @Html.HiddenFor(x => Model.Theme, new {id = (string)null})
 
             @* These 2 cannot use the htmlhelper *@
             <input type="hidden" name="FormStep" value="@Model.FormStep" />

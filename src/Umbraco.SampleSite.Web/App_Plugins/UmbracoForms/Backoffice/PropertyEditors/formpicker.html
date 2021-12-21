@@ -1,10 +1,14 @@
-﻿<div ng-controller="UmbracoForms.FormPickerController as vm">
+<div ng-controller="UmbracoForms.FormPickerController as vm" class="umb-form-picker">
 
     <umb-node-preview
         ng-if="vm.selectedForm.name"
         name="vm.selectedForm.name"
         icon="vm.selectedForm.icon"
         description="vm.selectedForm.fields"
+        allow-edit="vm.selectedForm.canEditForm"
+        on-edit="vm.openFormDesigner()"
+        allow-open="vm.selectedForm.canViewEntries"
+        on-open="vm.openFormEntries()"
         allow-remove="true"
         on-remove="vm.remove()">
     </umb-node-preview>

@@ -1,50 +1,47 @@
-<div class="umb-panel" ng-controller="UmbracoForms.Editors.Form.EntriesSettingsController">
+<div class="umb-panel umb-export-type-select" ng-controller="UmbracoForms.Editors.Form.EntriesSettingsController">
 
-	<umb-load-indicator ng-if="page.loading"></umb-load-indicator>
-
-	<umb-editor-view ng-if="!page.loading">
+	<umb-editor-view>
 
 		<div data-element="editor-header" class="umb-editor-header">
 			<div class="flex items-center" style="height: 100%;">
-				<h5>Export</h5>
+				<h5><localize key="formEntries_export"></localize></h5>
 			</div>
 		</div>
 
+		<umb-editor-container class="form-horizontal">
+			<umb-box>
+				<umb-box-content>
+					<h5><localize key="formEntries_chooseExportFormat"></localize></h5>
 
-			<umb-editor-container class="form-horizontal">
-				<umb-box>
-					<umb-box-content>
-						<small>Choose a format to export form records to</small>
-						<div>
-							<ul class="unstyled list-icons">
-								<li ng-repeat="exportType in exportTypes">
-									<i class="icon {{exportType.icon}}"></i>
-									<a href ng-click="export(exportType, model.filter)">
-										{{exportType.name}}
-										<br/><small>{{exportType.description}}</small>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</umb-box-content>
-				</umb-box>
-			</umb-editor-container>
+					<umb-load-indicator ng-show="exporting"></umb-load-indicator>
 
+					<ul class="umb-actions umb-actions-child">
+						<li ng-repeat="exportType in exportTypes"
+								ng-click="export(exportType, model.filter)">
+							<a href="" title="{{ exportType.name }}">
+								<i class="icon {{exportType.icon}}"></i>
+								<span class="menu-label">
+									{{exportType.name}}
+									<small>{{exportType.description}} </small>
+								</span>
+							</a>
+						</li>
+					</ul>
+
+				</umb-box-content>
+			</umb-box>
+		</umb-editor-container>
 
 	</umb-editor-view>
-
 
 	<umb-editor-footer>
 		<umb-editor-footer-content-right>
 			<div class="btn-toolbar umb-btn-toolbar pull-right">
 				<a href="" ng-click="close()" class="btn btn-primary">
-					Done
+					<localize key="general_close"></localize>
 				</a>
 			</div>
 		</umb-editor-footer-content-right>
 	</umb-editor-footer>
-
-
-
 
 </div>

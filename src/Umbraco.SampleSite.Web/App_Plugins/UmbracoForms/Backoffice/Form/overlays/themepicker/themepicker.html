@@ -7,7 +7,7 @@
     <umb-empty-state
         ng-if="vm.themes.length === 0"
         position="center">
-        <div>No themes available. Add themes to /Views/Partials/Forms/Themes</div>
+        <div><localize key="formThemes_noThemesAvailable"></localize></div>
     </umb-empty-state>
 
     <!-- FILTER -->
@@ -15,11 +15,10 @@
 		<div class="form-search">
 			<i class="icon-search"></i>
 			<input type="text"
-				class="-full-width-input"
+				class="umb-search-field search-query search-input input-block-level -full-width-input"
 				ng-model="vm.filterTerm"
-				class="umb-search-field search-query search-input input-block-level"
 				localize="placeholder"
-	            placeholder="@placeholders_filter"
+	      placeholder="@placeholders_filter"
 				umb-auto-focus>
 		</div>
 	</div>

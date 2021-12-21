@@ -1,4 +1,4 @@
-﻿<div class="umb-panel" ng-controller="UmbracoForms.Editors.Form.Dialogs.FieldsetSettingController">
+<div class="umb-panel" ng-controller="UmbracoForms.Editors.Form.Dialogs.FieldsetSettingController">
     <div class="umb-panel-body no-header with-footer">
         <div class="umb-forms-settings">
 
@@ -20,8 +20,6 @@
                     of the following match:
 
                     <div ng-repeat="rule in dialogOptions.fieldset.condition.rules" class="umb-forms-rule">
-
-
                         <select ng-model="rule.field" ng-options="field.id as field.caption for field in dialogOptions.fields"></select>
                         <select ng-model="rule.operator">
                             <option value="Is">Is</option>

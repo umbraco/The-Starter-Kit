@@ -1,7 +1,7 @@
 ﻿@inherits WebViewPage<Umbraco.Forms.Web.Models.FormViewModel>
 @if (!ViewData.ModelState.IsValid || Model.SubmitHandled)
 {
-    <script>
+    <script type="application/javascript">
         document.onreadystatechange = function () {
           
             if (document.readyState == "complete") {

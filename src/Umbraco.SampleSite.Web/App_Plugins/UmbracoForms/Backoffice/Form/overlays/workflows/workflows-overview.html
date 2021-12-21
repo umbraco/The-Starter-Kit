@@ -19,8 +19,8 @@
                                     <i class="umb-forms-workflow__icon icon-check"></i>
                                 </div>
                                 <div class="umb-forms-workflow__name-wrapper">
-                                    <div class="umb-forms-workflow__name">On {{ model.submitLabel }}</div>
-                                    <div class="umb-forms-workflow__description">We will run these workflows for you when the form is submitted</div>
+                                    <div class="umb-forms-workflow__name"><localize key="formWorkflows_onSubmit"></localize></div>
+                                    <div class="umb-forms-workflow__description"><localize key="formWorkflows_onSubmitDescription"></localize></div>
                                 </div>
                             </div>
                             <div class="umb-forms-workflow" ng-click="vm.editSubmitMessageWorkflow()">
@@ -28,14 +28,14 @@
                                     <i class="umb-forms-workflow__icon icon-document"></i>
                                 </div>
                                 <div class="umb-forms-workflow__name-wrapper">
-                                    <div class="umb-forms-workflow__name">Submit message / Go to page</div>
-                                    <div class="umb-forms-workflow__description">Show a message when the form is submitted or go to an umbraco page</div>
+                                    <div class="umb-forms-workflow__name"><localize key="formWorkflows_defaultWorkflowName"></localize></div>
+                                    <div class="umb-forms-workflow__description"><localize key="formWorkflows_defaultWorkflowDescription"></localize></div>
                                 </div>
                             </div>
                             <div class="umb-forms-workflows__sortable-wrapper" ui-sortable="vm.workflowsSortableOptions" ng-model="model.formWorkflows.onSubmit">
                                 <div class="umb-forms-workflow sortable"
                                      ng-repeat="workflow in model.formWorkflows.onSubmit | filter:{isDeleted:'false'}"
-                                     ng-click="vm.editWorkflow(workflow)">
+                                     ng-click="vm.editWorkflow(workflow, 'onSubmit', $index)">
                                     <div class="umb-forms-workflow__icon-wrapper sortable-handle">
                                         <i class="umb-forms-workflow__icon" ng-class="workflow.workflowTypeIcon"></i>
                                     </div>
@@ -53,29 +53,29 @@
                             <div class="umb-forms-workflow -add-new" href="" ng-click="vm.openWorkflowsTypesOverlay(model.formWorkflows.onSubmit)">
                                 <div class="umb-forms-workflow__icon-wrapper -empty"></div>
                                 <div class="umb-forms-workflow__name-wrapper">
-                                    <a class="umb-forms-add-workflow">Add workflow</a>
+                                    <a class="umb-forms-add-workflow"><localize key="formWorkflows_addWorkflow"></localize></a>
                                 </div>
                             </div>
                             <div class="umb-forms-workflows__line"></div>
                         </div>
-                        <div class="umb-forms-workflows-divider" ng-if="model.manualApproval"></div>
-                        <div class="umb-forms-workflows" ng-if="model.manualApproval">
+                        <div class="umb-forms-workflows-divider"></div>
+                        <div class="umb-forms-workflows" ng-if="model.manualApproval || model.formWorkflows.onApprove.length > 0">
                             <div class="umb-forms-workflow -not-clickable">
                                 <div class="umb-forms-workflow__icon-wrapper -round">
                                     <i class="umb-forms-workflow__icon icon-thumb-up"></i>
                                 </div>
                                 <div class="umb-forms-workflow__name-wrapper">
-                                    <div class="umb-forms-workflow__name">On Approve</div>
-                                    <div class="umb-forms-workflow__description">These workflows will run if an entry needs approval</div>
+                                    <div class="umb-forms-workflow__name"><localize key="formWorkflows_onApprove"></localize></div>
+                                    <div class="umb-forms-workflow__description"><localize key="formWorkflows_onApproveDescription"></localize><span ng-show="!model.manualApproval"> (<localize key="formWorkflows_onApproveAutomaticDescription"></localize>)</span>.</div>
                                 </div>
                             </div>
-
+                            
                             <div class="umb-forms-workflows__sortable-wrapper" ui-sortable="vm.workflowsSortableOptions" ng-model="model.formWorkflows.onApprove">
                                 <div class="umb-forms-workflow sortable"
                                      ng-repeat="workflow in model.formWorkflows.onApprove | filter:{isDeleted:'false'}"
-                                     ng-click="vm.editWorkflow(workflow)">
+                                     ng-click="vm.editWorkflow(workflow, 'onApprove', $index)">
                                     <div class="umb-forms-workflow__icon-wrapper sortable-handle">
-                                        <i class="umb-forms-workflow__icon" ng-class="workflow.workflowTypeIcon"></i>
+                                        <i class="umb-forms-workflow__icon" ng-class="workflow.workflowTypeIcon"></i> 
                                     </div>
                                     <div class="umb-forms-workflow__name-wrapper">
                                         <div class="umb-forms-workflow__name">{{ workflow.name }}</div>
@@ -91,7 +91,7 @@
                             <div class="umb-forms-workflow -add-new">
                                 <div class="umb-forms-workflow__icon-wrapper -empty"></div>
                                 <div class="umb-forms-workflow__name-wrapper">
-                                    <a class="umb-forms-add-workflow" href="" ng-click="vm.openWorkflowsTypesOverlay(model.formWorkflows.onApprove)">Add workflow</a>
+                                    <a class="umb-forms-add-workflow" href="" ng-click="vm.openWorkflowsTypesOverlay(model.formWorkflows.onApprove)"><localize key="formWorkflows_addWorkflow"></localize></a>
                                 </div>
                             </div>
                             <div class="umb-forms-workflows__line"></div>
@@ -113,6 +113,7 @@
                     <umb-button type="button"
                                 button-style="link"
                                 label-key="general_close"
+                                shortcut="esc"
                                 action="vm.close()">
                     </umb-button>
                     <umb-button type="button"

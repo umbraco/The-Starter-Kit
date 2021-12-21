@@ -11,7 +11,7 @@
 
             <div ng-show="success">
                 <div class="alert alert-success">
-                    <strong>{{source.name}}</strong> was copied to
+                    <strong>{{source.name}}</strong>
                     <localize key="actions_wasCopiedTo">was copied to</localize>
                     <strong>{{target.name}}</strong>
                 </div>
@@ -24,9 +24,7 @@
                 <localize key="actions_toInTheTreeStructureBelow">to in the tree structure below</localize>
             </p>
 
-            <div class="umb-loader-wrapper" ng-show="busy">
-                <div class="umb-loader"></div>
-            </div>
+            <umb-loader ng-show="busy"></umb-loader>
 
             <div ng-hide="success">
 

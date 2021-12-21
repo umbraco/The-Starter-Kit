@@ -1,5 +1,6 @@
 'use strict';
 
+
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
@@ -35,24 +36,23 @@
 
     this.placeholder =    settings.placeholder || this.format.input;
 
-    this.days_array =     settings.days_array && settings.days_array.length == 7 ? 
-                          settings.days_array : 
-                          ['S','M','T','W','T','F','S'];
+    this.days_array =     settings.days_array && settings.days_array.length == 7 ?
+                          settings.days_array : moment.weekdaysMin();
 
     this.orig_start_date =    null;
     this.orig_end_date =      null;
     this.orig_current_date =  null;
 
-    this.earliest_date =  settings.earliest_date ? moment(new Date(settings.earliest_date)).startOf('day')
-                          : moment(new Date('January 1, 1900')).startOf('day');
-    this.latest_date =    settings.latest_date ? moment(new Date(settings.latest_date)).startOf('day')
-                          : moment(new Date('December 31, 2900')).startOf('day');
-    this.end_date =       settings.end_date ? new Date(settings.end_date)
-                          : (this.type == 'double' ? new Date() : null);
-    this.start_date =     settings.start_date ? new Date(settings.start_date)
-                          : (this.type == 'double' ? new Date(moment(this.end_date).subtract(1, 'month')) : null);
-    this.current_date =   settings.current_date ? new Date(settings.current_date)
-                          : (this.type == 'single' ? new Date() : null);
+    this.earliest_date =  settings.earliest_date ? moment(settings.earliest_date)
+                          : moment('1900-01-01', 'YYYY-MM-DD');
+    this.latest_date =    settings.latest_date ? moment(settings.latest_date)
+                          : moment('2900-12-31', 'YYYY-MM-DD');
+    this.end_date =       settings.end_date ? moment(settings.end_date)
+                          : (this.type == 'double' ? moment() : null);
+    this.start_date =     settings.start_date ? moment(settings.start_date)
+                          : (this.type == 'double' ? this.end_date.clone().subtract(1, 'month') : null);
+    this.current_date =   settings.current_date ? moment(settings.current_date)
+                          : (this.type == 'single' ? moment() : null);
 
     this.presets =        settings.presets == false || this.type == 'single' ? false : true;
 
@@ -129,7 +129,7 @@
             var back = moment(self.current_date).subtract(1, timeframe);
 
             $(this).html(back.format(self.format.input));
-            self.current_date = back._d;
+            self.current_date = back;
           break;
 
           case 40: // Down
@@ -145,7 +145,7 @@
             var forward = moment(self.current_date).add(1, timeframe);
 
             $(this).html(forward.format(self.format.input));
-            self.current_date = forward._d;
+            self.current_date = forward;
           break;
         }
       }
@@ -186,16 +186,15 @@
 
     // Once you click into a selection.. this lets you click out
     this.element.on('click', function() {
-      $('.daterange, input').add(window).on('click', function(f) {
-        var contains = self.element.find(f.target);
-        
+      document.addEventListener('click', function (event) {
+        var contains = $(event.target).parents(self.element);
+
         if (!contains.length) {
           if (self.presetIsOpen)
             self.presetToggle();
 
           if (self.calIsOpen) {
-
-            if ($(self.selected).hasClass("dr-date-end"))
+            if ($(self.selected).hasClass('dr-date-end'))
               self.calendarSaveDates();
 
             self.calendarSetDates();
@@ -231,32 +230,42 @@
   Calendar.prototype.presetCreate = function() {
     var self = this;
     var ul_presets = $('<ul class="dr-preset-list" style="display: none;"></ul>');
-    var presets = typeof self.settings.presets == 'object' ? self.settings.presets : 
+    var presets = typeof self.settings.presets === 'object' ? self.settings.presets :
     [{
       label: 'Last 30 days',
-      start: moment(this.latest_date).subtract(29, 'days'),
-      end: this.latest_date
+      start: moment(self.latest_date).subtract(29, 'days'),
+      end: self.latest_date
     },{
       label: 'Last month',
-      start: moment(this.latest_date).subtract(1, 'month').startOf('month'),
-      end: moment(this.latest_date).subtract(1, 'month').endOf('month')
+      start: moment(self.latest_date).subtract(1, 'month').startOf('month'),
+      end: moment(self.latest_date).subtract(1, 'month').endOf('month')
     },{
       label: 'Last 3 months',
-      start: moment(this.latest_date).subtract(3, 'month').startOf('month'),
-      end: moment(this.latest_date).subtract(1, 'month').endOf('month')
+      start: moment(self.latest_date).subtract(3, 'month').startOf('month'),
+      end: moment(self.latest_date).subtract(1, 'month').endOf('month')
     },{
       label: 'Last 6 months',
-      start: moment(this.latest_date).subtract(6, 'month').startOf('month'),
-      end: moment(this.latest_date).subtract(1, 'month').endOf('month')
+      start: moment(self.latest_date).subtract(6, 'month').startOf('month'),
+      end: moment(self.latest_date).subtract(1, 'month').endOf('month')
     },{
       label: 'Last year',
-      start: moment(this.latest_date).subtract(12, 'month').startOf('month'),
-      end: moment(this.latest_date).subtract(1, 'month').endOf('month')
+      start: moment(self.latest_date).subtract(1, 'year').startOf('year'),
+      end: moment(self.latest_date).subtract(1, 'year').endOf('year')
     },{
       label: 'All time',
-      start: this.earliest_date,
-      end: this.latest_date
+      start: self.earliest_date,
+      end: self.latest_date
     }];
+
+    if (moment(self.latest_date).diff(moment(self.latest_date).startOf('month'), 'days') >= 6 &&
+        typeof self.settings.presets !== 'object'
+    ) {
+      presets.splice(1, 0, {
+        label: 'This month',
+        start: moment(self.latest_date).startOf('month'),
+        end: self.latest_date
+      });
+    }
 
     $.each(presets, function(i, d) {
       if (moment(d.start).isBefore(self.earliest_date)) {
@@ -300,7 +309,7 @@
       var old_date = $('.dr-date', this.element).html();
       var new_date = moment(this.current_date).format(this.format.input);
 
-      if (old_date.length == 0 && !this.required)
+      if (old_date.length === 0 && !this.required)
         new_date = '';
 
       if (old_date != new_date)
@@ -310,106 +319,105 @@
 
 
   Calendar.prototype.calendarSaveDates = function() {
-    if (this.type == 'double') {
+    if (this.type === 'double') {
       if (!moment(this.orig_end_date).isSame(this.end_date) || !moment(this.orig_start_date).isSame(this.start_date))
         return this.callback();
     } else {
-      if ($(this.selected).html().length && !moment(this.orig_current_date).isSame(this.current_date))
+      if (!this.required || !moment(this.orig_current_date).isSame(this.current_date))
         return this.callback();
     }
   }
 
   Calendar.prototype.calendarCheckDate = function(d) {
-    var regex = /(?!<=\d)(st|nd|rd|th)/;
-    var d_array = d ? d.replace(regex, '').split(' ') : [];
-
     // Today
-    if (d == 'today' || d == 'now')
-      d = moment().isAfter(this.latest_date) ? this.latest_date : moment();
+    if (d === 'today' || d === 'now')
+      return moment().isAfter(this.latest_date) ? this.latest_date :
+              moment().isBefore(this.earliest_date) ? this.earliest_date : moment();
 
     // Earliest
-    if (d == 'earliest')
-      d = this.earliest_date;
+    if (d === 'earliest')
+      return this.earliest_date;
 
     // Latest
-    if (d == 'latest')
-      d = this.latest_date;
+    if (d === 'latest')
+      return this.latest_date;
 
     // Convert string to a date if keyword ago or ahead exists
-    if (d && (d.toString().indexOf('ago') != -1 || d.toString().indexOf('ahead') != -1))
-      d = this.stringToDate(d);
+    if (d && (/\bago\b/.test(d) || /\bahead\b/.test(d)))
+      return this.stringToDate(d);
+
+    var regex = /(?:\d)((?:st|nd|rd|th)?,?)/;
+    var d_array = d ? d.replace(regex, '').split(' ') : [];
 
     // Add current year if year is not included
     if (d_array.length == 2) {
-      d_array.push(moment().format(this.display_year_format))
+      d_array.push(moment().format(this.format.jump_year));
       d = d_array.join(' ');
     }
 
     // Convert using settings format
-    if (d && $.type(d) == 'string') {
-      var parsed_d = moment(d, this.format.input);
-      if (parsed_d.isValid())
-        d = parsed_d;
-    }
+    var parsed_d = this.parseDate(d);
 
-    return new Date(d);
+    if (!parsed_d.isValid())
+        return moment(d); // occurs when parsing preset dates
+
+    return parsed_d;
   }
 
   Calendar.prototype.calendarCheckDates = function() {
-    var s = $('.dr-date-start', this.element).html();
-    var e = $('.dr-date-end', this.element).html();
-    var c = $(this.selected).html();
+    var startTxt = $('.dr-date-start', this.element).html();
+    var endTxt = $('.dr-date-end', this.element).html();
+    var c = this.calendarCheckDate($(this.selected).html());
+    var s;
+    var e;
 
     // Modify strings via some specific keywords to create valid dates
-    // Year to date
-    if (s == 'ytd' || e == 'ytd') {
-      s = moment().startOf('year');
-      e = moment().isAfter(this.latest_date) ? this.latest_date : moment();
-    }
-
     // Finally set all strings as dates
-    else {
-      s = this.calendarCheckDate(s);
-      e = this.calendarCheckDate(e);
-    } c = this.calendarCheckDate(c);
-
-    if (moment(c).isSame(s) && moment(s).isAfter(e)) {
-      e = moment(s).add(6, 'day');
+    if (startTxt === 'ytd' || endTxt === 'ytd') { // Year to date
+      s = moment().startOf('year');
+      e = moment().endOf('year');
+    } else {
+      s = this.calendarCheckDate(startTxt);
+      e = this.calendarCheckDate(endTxt);
     }
 
-    if (moment(c).isSame(e) && moment(e).isBefore(s)) {
-      s = moment(e).subtract(6, 'day');
-    }
+    if (c.isBefore(this.earliest_date))
+      c = this.earliest_date;
+    if (s.isBefore(this.earliest_date))
+      s = this.earliest_date;
+    if (e.isBefore(this.earliest_date) || e.isBefore(s))
+      e = s.clone().add(6, 'day');
 
-    if (moment(e).isBefore(this.earliest_date) || moment(s).isBefore(this.earliest_date)) {
-      s = moment(this.earliest_date);
-      e = moment(this.earliest_date).add(6, 'day');
-    }
-
-    if (moment(e).isAfter(this.latest_date) || moment(s).isAfter(this.latest_date)) {
-      s = moment(this.latest_date).subtract(6, 'day');
-      e = moment(this.latest_date);
-    }
-
-    // Is this a valid date?
-    if (moment(s).isSame(e) && !this.sameDayRange)
-      return this.calendarSetDates();
+    if (c.isAfter(this.latest_date))
+      c = this.latest_date;
+    if (e.isAfter(this.latest_date))
+      e = this.latest_date;
+    if (s.isAfter(this.latest_date) || s.isAfter(e))
+      s = e.clone().subtract(6, 'day');
 
     // Push and save if it's valid otherwise return to previous state
-    this.start_date = s == 'Invalid Date' ? this.start_date : s;
-    this.end_date = e == 'Invalid Date' ? this.end_date : e;
-    this.current_date = c == 'Invalid Date' ? this.current_date : c;
+    if (this.type === 'double') {
+
+      // Is this a valid date?
+      if (s.isSame(e) && !this.sameDayRange)
+        return this.calendarSetDates();
+
+      this.start_date = s.isValid() ? s : this.start_date;
+      this.end_date = e.isValid() ? e : this.end_date;
+    }
+
+    this.current_date = c.isValid() ? c : this.current_date;
   }
 
 
   Calendar.prototype.stringToDate = function(str) {
     var date_arr = str.split(' ');
 
-    if (date_arr[2] == 'ago') {
+    if (date_arr[2] === 'ago') {
       return moment(this.current_date).subtract(date_arr[0], date_arr[1]);
     }
 
-    else if (date_arr[2] == 'ahead') {
+    else if (date_arr[2] === 'ahead') {
       return moment(this.current_date).add(date_arr[0], date_arr[1]);
     }
 
@@ -553,28 +561,24 @@
         $('.dr-maybe:not(.dr-current)', self.element).removeClass('dr-start dr-end');
         $('.dr-day', self.element).removeClass('dr-maybe');
         $('.dr-selected', self.element).css('background-color', '');
-      },
-      mousedown: function() {
-        var date = $(this).data('date');
-        var string = moment(date).format(self.format.input);
-
-        if (other) {
-          $('.dr-date', self.element)
-            .not(self.selected)
-            .html(other.format(self.format.input));
-        }
-
-        $(self.selected).html(string);
-        self.calendarOpen(self.selected);
-
-        if ($(self.selected).hasClass('dr-date-start')) {
-          $('.dr-date-end', self.element).trigger('click');
-        } else {
-          self.calendarSaveDates();
-          self.calendarClose('force');
-        }
       }
     });
+
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+      $('.dr-day', this.element).on({
+        touchstart: function() {
+          self.selectOneDate(other, self, $(this).data('date'));
+        }
+      });
+
+      $('div[contenteditable]', this.element).removeAttr('contenteditable');
+    } else {
+      $('.dr-day', this.element).on({
+        mousedown: function () {
+          self.selectOneDate(other, self, $(this).data('date'));
+        }
+      });
+    }
 
     $('.dr-calendar', this.element)
       .css('width', cal_width)
@@ -643,102 +647,37 @@
     var self = this;
     current = moment(current || start || end).startOf('day');
 
-    //Determine what first day of the week is
-    //Some locale's it's Sunday 'en' others it's Momnday 'en-gb'
-    //0 = Sunday, 1 = Monday
-    var first_day_of_week = moment().localeData().firstDayOfWeek();
-    
-    var first_day = moment(switcher || current).startOf('month');
-    var last_day = moment(switcher || current).endOf('month');
-    var current_month_start_day = +first_day.format('d');
-    var current_month_end_day = +last_day.format('d');
+    var reference = switcher || current || start || end;
 
-    var current_month = {
-      start: {
-        day: current_month_start_day ? current_month_start_day - first_day_of_week : 7 - current_month_start_day - first_day_of_week,
-        str: +first_day.format('D')
-      },
-      end: {
-        day: current_month_end_day ? current_month_end_day - first_day_of_week : 7 - current_month_end_day - first_day_of_week,
-        str: +last_day.format('D')
-      }
-    }
+    var startRange = moment(reference).startOf('month').startOf('week');
+    var endRange = moment(startRange).add(6*7 - 1, 'days').endOf('day');
 
-
-    // Beginning faded dates
-    var d = undefined;
-
-    var start_hidden = this.range(current_month.start.day).map(function() {
-      if (d == undefined) {
-        d = moment(first_day);
-      } d = d.subtract(1, 'day');
-
-      return {
+    var daysInRange = [];
+    var d = moment(startRange);
+    while ( d.isBefore(endRange) ) {
+      daysInRange.push( {
         str: +d.format('D'),
-        start: d.isSame(start),
-        end: d.isSame(end),
-        current: d.isSame(current),
-        selected: d.isBetween(start, end),
-        date: d.toISOString(),
-        outside: d.isBefore(self.earliest_date),
-        fade: true
-      }
-    }).reverse();
-    
-    // Leftover faded dates
-    var leftover = (6 * 7) - (current_month.end.str + start_hidden.length);
-    d = undefined;
-
-    var end_hidden = this.range(leftover).map(function() {
-      if (d == undefined) {
-        d = moment(last_day);
-      } d = d.add(1, 'day').startOf('day');
-
-      return {
-        str: +d.format('D'),
-        start: d.isSame(start),
-        end: d.isSame(end),
-        current: d.isSame(current),
-        selected: d.isBetween(start, end),
-        date: d.toISOString(),
-        outside: d.isAfter(self.latest_date),
-        fade: true
-      }
-    });
-
-    // Actual visible dates
-    d = undefined;
-
-    var visible = this.range(current_month.end.str).map(function() {
-      if (d == undefined) {
-        d = moment(first_day);
-      } else {
-        d = d.add(1, 'day').startOf('day');
-      }
-
-      return {
-        str: +d.format('D'),
-        start: d.isSame(start),
-        end: d.isSame(end),
-        current: d.isSame(current),
-        selected: d.isBetween(start, end),
+        start: start && d.isSame(start, 'day'),
+        end: end && d.isSame(end, 'day'),
+        current: current && d.isSame(current, 'day'),
+        selected: start && end && d.isBetween(start, end),
         date: d.toISOString(),
         outside: d.isBefore(self.earliest_date) || d.isAfter(self.latest_date),
-        fade: false
-      }
-    });
+        fade: !d.isSame(reference, 'month')
+      } );
+      d.add(1, 'd');
+    }
 
-
-    return start_hidden.concat(visible, end_hidden);
+    return daysInRange;
   }
 
 
   Calendar.prototype.calendarHTML = function(type) {
     var ul_days_of_the_week = $('<ul class="dr-days-of-week-list"></ul>');
-    var days = this.days_array.splice(moment().localeData().firstDayOfWeek()).concat(this.days_array.splice(0, moment().localeData().firstDayOfWeek()));
+    var days = this.days_array.splice(moment.localeData().firstDayOfWeek()).concat(this.days_array.splice(0, moment.localeData().firstDayOfWeek()));
 
     $.each(days, function(i, elem) {
-      ul_days_of_the_week.append('<li class="dr-day-of-week">' + elem + '</li>'); 
+      ul_days_of_the_week.append('<li class="dr-day-of-week">' + elem + '</li>');
     });
 
     if (type == "double")
@@ -778,7 +717,7 @@
 
     return this.element.append('<div class="dr-input">' +
       '<div class="dr-dates">' +
-        '<div class="dr-date" contenteditable placeholder="'+ this.placeholder +'">'+ (this.required ? moment(this.current_date).format(this.format.input) : '') +'</div>' +
+        '<div class="dr-date" contenteditable placeholder="'+ this.placeholder +'">'+ (this.settings.current_date ? moment(this.current_date).format(this.format.input) : '') +'</div>' +
       '</div>' +
     '</div>' +
 
@@ -803,14 +742,44 @@
   }
 
 
+  Calendar.prototype.parseDate = function(d) {
+    if (moment.defaultZone !== null && moment.hasOwnProperty('tz')) {
+      return moment.tz(d, this.format.input, moment.defaultZone.name);
+    } else {
+      return moment(d, this.format.input);
+    }
+  }
+
+
   Calendar.prototype.range = function(length) {
     var range = new Array(length);
 
     for (var idx = 0; idx < length; idx++) {
       range[idx] = idx;
     }
-    
+
     return range;
+  }
+
+
+  Calendar.prototype.selectOneDate = function(other, cal, date) {
+    var string = moment(date).format(cal.format.input);
+
+    if (other) {
+      $('.dr-date', cal.element)
+        .not(cal.selected)
+        .html(other.format(cal.format.input));
+    }
+
+    $(cal.selected).html(string);
+    cal.calendarOpen(cal.selected);
+
+    if ($(cal.selected).hasClass('dr-date-start')) {
+      $('.dr-date-end', cal.element).trigger('click');
+    } else {
+      cal.calendarSaveDates();
+      cal.calendarClose('force');
+    }
   }
 
 

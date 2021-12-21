@@ -1,6 +1,6 @@
 ﻿<div ng-controller="UmbracoForms.SettingTypes.DocumentMapperController">
 
-    <select ng-model="doctype" ng-options="type.id as type.value for type in doctypes" ng-change="setDocType()">
+    <select ng-model="doctype" ng-options="type.id as type.value for type in doctypes" ng-change="setDocType()" data-umb="documentmapper">
         <option value="">-- choose type --</option>
     </select>
 
@@ -45,7 +45,7 @@
             </div>
 
             <div class="umb-forms__save-as-node-field">
-                <select class="-full-width" ng-model="property.field" ng-options="field.id as field.value for field in fields" ng-change="setValue()">
+                <select class="-full-width" ng-model="property.field" ng-options="field.id as field.value for field in fields" ng-change="setValue()" data-umb="select_form_field">
                     <option value="">Select Form Field</option>
                 </select>
             </div>

@@ -1,5 +1,4 @@
 @model Umbraco.Forms.Mvc.Models.FieldViewModel
-@using Umbraco.Forms.Core.Extensions
 @using Umbraco.Forms.Mvc
 
 @{
@@ -8,13 +7,13 @@
     var hasBody = (settings.ContainsKey("BodyText") && !string.IsNullOrEmpty(settings["BodyText"]));
 }
 
-<div id="@Model.Id" class="@Html.GetFormFieldClass(Model.FieldTypeName)">
+<div id="@Model.Id" data-umb="@Model.Id" class="@Html.GetFormFieldClass(Model.FieldTypeName)">
     @if (hasCaption)
     {
-        <h2>@settings["Caption"].ParsePlaceHolders()</h2>
+        <h2>@settings["Caption"]</h2>
     }
     @if (hasBody)
     {
-        <p>@Html.Raw(settings["BodyText"].ParsePlaceHolders().Replace(System.Environment.NewLine, "<br />"))</p>
+        <p>@Html.Raw(settings["BodyText"].Replace(System.Environment.NewLine, "<br />"))</p>
     }
 </div>

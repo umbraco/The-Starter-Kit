@@ -30,7 +30,7 @@
 
 @if (!alreadyRendered)
 {
-    <script>
+    <script type="application/javascript">
         var umbracoFormsLocale = { name: '@CultureInfo.CurrentUICulture.Name', datePickerYearRange: '@datePickerYearRange', locales: @Html.Raw(JsonConvert.SerializeObject(locales)) };
     </script>
 }

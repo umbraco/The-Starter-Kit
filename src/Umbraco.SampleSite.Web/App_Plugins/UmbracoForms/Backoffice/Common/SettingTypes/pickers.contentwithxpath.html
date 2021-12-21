@@ -6,7 +6,7 @@
             <ul class="unstyled list-icons">
                 <li>
                     <i class="icon icon-add blue"></i>
-                    <a href ng-click="openContentPicker()" prevent-default>
+                    <a href ng-click="openContentPicker()" prevent-default data-umb="choose_a_root_node">
                         <localize key="general_choose">Choose a root node</localize>...
                     </a>
                 </li>
@@ -19,7 +19,7 @@
 
         <div ng-show="queryIsVisible">
 
-            <input type="text" ng-model="query" ng-change="setXpath()" placeholder="Enter xpath query">
+            <input type="text" ng-model="query" ng-change="setXpath()" placeholder="Enter xpath query" data-umb="settingstype-pickers-contentwithxpath-input">
 
             <ul class="unstyled list-icons" style="margin-top: 15px">
                 <li style="max-width: 600px">

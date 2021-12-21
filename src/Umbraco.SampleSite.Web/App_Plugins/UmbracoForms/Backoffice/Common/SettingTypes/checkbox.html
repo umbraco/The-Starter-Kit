@@ -1,3 +1,6 @@
-﻿<input type="checkbox" 
-	ng-model="setting.value"
-    ng-true-value="'True'" ng-false-value="'False'" />
+﻿<div ng-controller="UmbracoForms.SettingTypes.Pickers.CheckboxController as vm">
+	<umb-toggle
+			checked="vm.checked"
+			on-click="vm.toggle()">
+	</umb-toggle>
+</div>

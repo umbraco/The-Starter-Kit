@@ -4,7 +4,7 @@
 @{ var i = 0; }
 
 
-<div id="@Model.Id">
+<div class="radiobuttonlist" id="@Model.Id" data-umb="@Model.Id">
 	
 @foreach (Umbraco.Forms.Mvc.Models.PrevalueViewModel pv in Model.PreValues)  
 {
@@ -13,9 +13,10 @@
 		<label>
 			<input type="radio" 
 				name="@Model.Id" 
-				id="@string.Concat(Model.Id,"_",i)" 
+				id="@string.Concat(Model.Id,"_",i)"
+				data-umb="@string.Concat(Model.Id,"_",i)"   
 				value="@pv.Value" 
-    			@if (Model.Mandatory) {<text>data-val="true" data-val-requiredlist="@Model.RequiredErrorMessage"</text>}
+    			@if (Model.Mandatory) {<text>data-val="true" data-val-required="@Model.RequiredErrorMessage" data-rule-required="true" data-msg-required="@Model.RequiredErrorMessage"</text>}
     			@if (Model.ContainsValue(pv.Value)){<text>checked="checked"</text>} />
     	
 			@pv.Value

@@ -29,20 +29,25 @@
         var datePickerFields = document.getElementsByClassName('datepickerfield');
         for (var i = 0; i < datePickerFields.length; i++) {
             var field = datePickerFields[i];
-            var currentId = field.id;
             new Pikaday({
-                field: document.getElementById(currentId),
+                field: field,
                 yearRange: e.umbracoFormsLocale.datePickerYearRange,
                 i18n: e.umbracoFormsLocale.locales,
                 format: "LL",
                 onSelect: function (date) {
-                    setShadow(currentId.replace("_1", ""), date);
+                    setShadow(this, date);
+                    var evt = document.createEvent("HTMLEvents");
+                    evt.initEvent("input", false, true);
+                    this._o.field.dispatchEvent(evt);
                 },
-                minDate: new Date('1753-01-01T00:00:00') //Min value of datetime in SQL Server CE
+                minDate: new Date('1753-01-01T00:00:00'), //Min value of datetime in SQL Server CE
+                defaultDate: new Date(field.value),
+                setDefaultDate: true
             });
         }
 
-        function setShadow(id, date) {
+        function setShadow(pickaday, date) {
+            var id = pickaday._o.field.id.replace("_1", "");
             var value = moment(date).format('YYYY-MM-DD');
             var field = document.getElementById(id);
             field.value = value;
