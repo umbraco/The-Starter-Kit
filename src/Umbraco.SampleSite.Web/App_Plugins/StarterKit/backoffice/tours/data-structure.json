@@ -190,6 +190,7 @@
       },
       {
         "element": "#tree [data-element='tree-item-templates']",
+        "skipStepIfVisible": "#tree [data-element='tree-item-templates'] > div > button[data-element=tree-item-expand] span.icon-navigation-down",
         "title": "Expand the Templates node",
         "content": "<p>To see all our templates click the <b>arrow</b> to the left of the Templates node.</p>",
         "event": "click",
