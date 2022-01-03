@@ -7,6 +7,7 @@
     var formJsObj = new
     {
         formId = Model.FormClientId,
+        pageButtonConditions = Model.PageButtonConditions,
         fieldSetConditions = Model.FieldsetConditions,
         fieldConditions = Model.FieldConditions,
         recordValues = Model.GetFieldsNotDisplayed()
@@ -15,9 +16,9 @@
     Html.AddFormThemeScriptFile(Model, "~/App_Plugins/UmbracoForms/Assets/Themes/Default/umbracoforms.js");
 }
 
-<script>
+<script type="application/javascript">
     if (typeof umbracoFormsCollection === 'undefined') var umbracoFormsCollection = [];
-    umbracoFormsCollection.push(@Html.Raw(JsonConvert.SerializeObject(formJsObj)));
+    umbracoFormsCollection.push("@(Html.Raw(Uri.EscapeUriString(JsonConvert.SerializeObject(formJsObj))))");
 </script>
 
 @* Only render out scripts on the page if the form has not been submitted yet *@

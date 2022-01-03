@@ -2,7 +2,7 @@
     Umbraco Forms - Dependencies Checker
 */
 
-function performDependencyChecks(formId){
+window.performDependencyChecks = function (formId){
 
     //Only perform check if the global 'Umbraco.Sys' is null/undefined
     //If present means we are in backoffice & that this is being rendered as a macro preview

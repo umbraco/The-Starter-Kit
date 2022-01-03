@@ -1,7 +1,6 @@
-﻿<div ng-controller="UmbracoForms.SettingTypes.FieldMapperController">
+<div ng-controller="UmbracoForms.SettingTypes.FieldMapperController">
 
-
-    <div class="umb-forms-mappings" ng-if="mappings.length > 0">
+  <div class="umb-forms-mappings" ng-if="mappings.length > 0">
 
         <div class="umb-forms-mapping-header">
             <div class="umb-forms-mapping-field -no-margin-left">Alias</div>
@@ -18,7 +17,7 @@
                     type="text"
                     placeholder="Alias"
                     ng-model="mapping.alias"
-                    on-blur="stringifyValue()" />
+                    ng-blur="stringifyValue()" />
             </div>
 
             <div class="umb-forms-mapping-field">
@@ -36,7 +35,7 @@
                     type="text"
                     placeholder="Static value"
                     ng-model="mapping.staticValue"
-                    on-blur="stringifyValue()" />
+                    ng-blur="stringifyValue()" />
             </div>
 
             <div class="umb-forms-mapping-remove -no-margin-right">

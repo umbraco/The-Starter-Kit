@@ -3,8 +3,8 @@
        var acceptCopy = string.Empty;
        Model.AdditionalSettings.TryGetValue("AcceptCopy", out acceptCopy);
 }
-<input type="checkbox" name="@Model.Id" id="@Model.Id" value="true" 
-       @if(Model.Mandatory){<text>  data-rule-required="true" data-val="true" data-msg-required="@Model.RequiredErrorMessage"</text>}
+<input type="checkbox" name="@Model.Id" id="@Model.Id" value="true" data-umb="@Model.Id" 
+       @if(Model.Mandatory){<text> data-val="true" data-val-required="@Model.RequiredErrorMessage"</text>}
        @if (Model.ContainsValue(true) || Model.ContainsValue("true") || Model.ContainsValue("on"))
        {<text>checked="checked"</text>}       
                                                                                                                                                                  

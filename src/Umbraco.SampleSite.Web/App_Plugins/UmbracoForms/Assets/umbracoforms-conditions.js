@@ -1,4 +1,4 @@
-﻿var umbracoForms = umbracoForms || {};
+var umbracoForms = umbracoForms || {};
 (function (uf) {
     var conditions = uf.conditions || {},
         operators = conditions.operators || {
@@ -132,7 +132,7 @@
             return true;
         }
 
-        function handleCondition(element, id, condition, type) {
+        function handleCondition(element, id, condition) {
             // console.log(type + " " + id);
             var shouldShow = isVisible(id, condition);
             if (shouldShow) {

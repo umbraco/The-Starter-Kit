@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyCopyright("Copyright © Umbraco 2020")]
+[assembly: AssemblyCopyright("Copyright © Umbraco 2021")]
 
 [assembly: AssemblyCompany("Umbraco")]
 
@@ -11,6 +11,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("4.0.2")]
-[assembly: AssemblyFileVersion("4.0.2")]
-[assembly: AssemblyInformationalVersion("4.0.2")]
+[assembly: AssemblyVersion("4.2.0")]
+[assembly: AssemblyFileVersion("4.2.0")]
+[assembly: AssemblyInformationalVersion("4.2.0")]

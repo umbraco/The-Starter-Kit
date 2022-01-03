@@ -1,21 +1,18 @@
-﻿@inherits UmbracoViewPage<Umbraco.Forms.Core.Models.FormsHtmlModel>
+@inherits UmbracoViewPage<Umbraco.Forms.Core.Models.FormsHtmlModel>
 
 @{
     //This is an example email template where you can use Razor Views to send HTML emails
 
-    //You can use Umbraco.TypedContent & Umbraco.TypedMedia etc to use Images & content from your site
+    //You can use Umbraco.Content & Umbraco.Media etc to use Images & content from your site
     //directly in your email templates too
 
     //Strongly Typed
     //@Model.GetValue("aliasFormField")
     //@foreach (var color in Model.GetValues("checkboxField")){}
 
-    //Dynamics
-    //@Model.DynamicFields.aliasFormField
-    //@foreach(var color in Model.DynamicFields.checkboxField
 
     //Images need to be absolute - so fetching domain to prefix with images
-    var siteDomain = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+    var siteDomain = Request.Url.GetLeftPart(UriPartial.Authority);
     var assetUrl = siteDomain + "/App_plugins/UmbracoForms/Assets/Email-Example";
 
 }
@@ -29,36 +26,63 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
     <style type="text/css">
 
-    /* CLIENT-SPECIFIC STYLES */
-    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-    img { -ms-interpolation-mode: bicubic; }
+        /* CLIENT-SPECIFIC STYLES */
+        body, table, td, a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
 
-    /* RESET STYLES */
-    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
-    table { border-collapse: collapse !important; }
-    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
 
-    /* iOS BLUE LINKS */
-    a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-        font-size: inherit !important;
-        font-family: inherit !important;
-        font-weight: inherit !important;
-        line-height: inherit !important;
-    }
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
 
-	/* MOBILE STYLES */
-	@@media screen and (max-width:600px){
-		h1 {
-			font-size: 32px !important;
-			line-height: 32px !important;
-		}
-	}
+        /* RESET STYLES */
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
 
-    /* ANDROID CENTER FIX */
-    div[style*="margin: 16px 0;"] { margin: 0 !important; }
+        table {
+            border-collapse: collapse !important;
+        }
+
+        body {
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+
+        /* iOS BLUE LINKS */
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        /* MOBILE STYLES */
+        @@media screen and (max-width:600px) {
+            h1 {
+                font-size: 32px !important;
+                line-height: 32px !important;
+            }
+        }
+
+        /* ANDROID CENTER FIX */
+        div[style*="margin: 16px 0;"] {
+            margin: 0 !important;
+        }
     </style>
 </head>
 <body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
@@ -147,33 +171,54 @@
                     <!-- COPY -->
                     <tr>
                         <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #303033; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            
-                            @foreach (var field in Model.Fields)
+
+                            @{
+                                string[] ignoreFields = new string[]
+                                {
+                                    "FieldType.Recaptcha2.cshtml",
+                                    "FieldType.Recaptcha3.cshtml",
+                                    "FieldType.Text.cshtml"
+                                };
+                            }
+
+                            @foreach (var field in Model.Fields.Where(x => ignoreFields.Contains(x.FieldType) == false))
                             {
                                 <h4 style="font-weight: 700; margin: 0; color: #000000;">@field.Name</h4>
 
-                                switch (field.FieldType)
-                                {
-                                    case "FieldType.FileUpload.cshtml":
-                                        <p style="margin-top: 0;"><a href="@siteDomain/@field.GetValue()" target="_blank" style="color: #00AEA2;">@field.GetValue()</a></p>
-                                        break;
-
-                                    case "FieldType.DatePicker.cshtml":
-                                        <p style="margin-top: 0;">@(Convert.ToDateTime(field.GetValue()).ToString("f"))</p>
-                                        break;
-
-                                    case "FieldType.CheckboxList.cshtml":
-                                        <p style="margin-top: 0;">
-                                            @foreach (var color in field.GetValues())
+                                <p style="margin-top: 0;">
+                                    @switch (field.FieldType)
+                                    {
+                                        case "FieldType.FileUpload.cshtml":
+                                            var fileUploadValue = field.GetValue();
+                                            if (fileUploadValue != null && !string.IsNullOrEmpty(fileUploadValue.ToString()))
                                             {
-                                                @color<br/>
+                                                <a href="@siteDomain/@fileUploadValue" target="_blank" style="color: #00AEA2;">@fileUploadValue</a>
                                             }
-                                        </p>
-                                        break;
-                                    default:
-                                        <p style="margin-top: 0;">@field.GetValue()</p>
-                                        break;
-                                }
+                                            break;
+
+                                        case "FieldType.DatePicker.cshtml":
+                                            var datePickerValue = field.GetValue();
+                                            if (datePickerValue != null && !string.IsNullOrEmpty(datePickerValue.ToString()))
+                                            {
+                                                DateTime dt;
+                                                var dateValid = DateTime.TryParse(datePickerValue != null ? datePickerValue.ToString() : string.Empty, out dt);
+                                                var dateStr = dateValid ? dt.ToString("f") : "";
+                                                @dateStr
+                                            }
+                                            break;
+
+                                        default:
+                                            var values = field.GetValues();
+                                            if (values != null)
+                                            {
+                                                foreach (var value in values)
+                                                {
+                                                    @value<br />
+                                                }
+                                            }
+                                            break;
+                                    }
+                                </p>
                             }
 
                         </td>

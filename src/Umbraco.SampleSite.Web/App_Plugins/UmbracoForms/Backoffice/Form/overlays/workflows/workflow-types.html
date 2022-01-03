@@ -1,4 +1,4 @@
-<div ng-controller="UmbracoForms.Overlays.WorkflowTypesOverlayController as vm">
+<div ng-controller="UmbracoForms.Overlays.WorkflowTypesOverlayController as vm" class="umb-forms-grid-picker">
     <form name="workflowTypeForm"
           novalidate
           val-form-manager>
@@ -12,7 +12,6 @@
             <umb-editor-container>
                 <umb-box>
                     <umb-box-content>
-
 
                         <!-- FILTER -->
                         <div class="umb-control-group -no-border">
@@ -49,6 +48,7 @@
                     <umb-button type="button"
                                 button-style="link"
                                 label-key="general_close"
+                                shortcut="esc"
                                 action="vm.close()">
                     </umb-button>
                 </umb-editor-footer-content-right>

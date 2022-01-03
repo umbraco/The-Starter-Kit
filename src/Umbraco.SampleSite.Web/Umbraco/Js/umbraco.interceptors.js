@@ -8,6 +8,7 @@
             $httpProvider.defaults.xsrfCookieName = 'UMB-XSRF-TOKEN';
             $httpProvider.interceptors.push('securityInterceptor');
             $httpProvider.interceptors.push('debugRequestInterceptor');
+            $httpProvider.interceptors.push('requiredHeadersInterceptor');
             $httpProvider.interceptors.push('doNotPostDollarVariablesOnPostRequestInterceptor');
             $httpProvider.interceptors.push('cultureRequestInterceptor');
         }
@@ -35,6 +36,7 @@
                     if ($routeParams) {
                         // it's an API request, add the current client culture as a header value
                         config.headers['X-UMB-CULTURE'] = $routeParams.cculture ? $routeParams.cculture : $routeParams.mculture;
+                        config.headers['X-UMB-SEGMENT'] = $routeParams.csegment ? $routeParams.csegment : null;
                     }
                     return config;
                 }
@@ -99,7 +101,7 @@
                 //dealing with requests:
                 'request': function request(config) {
                     if (config.method === 'POST') {
-                        var clone = angular.copy(config);
+                        var clone = Utilities.copy(config);
                         transform(clone.data);
                         return clone;
                     }
@@ -117,6 +119,29 @@
             return ['www.gravatar.com'];
         }
         angular.module('umbraco.interceptors').value('requestInterceptorFilter', requestInterceptorFilter);
+    }());
+    'use strict';
+    (function () {
+        'use strict';
+        /**
+   * Used to set required headers on all requests where necessary
+   * @param {any} $q
+   * @param {any} urlHelper
+   */
+        function requiredHeadersInterceptor($q, urlHelper) {
+            return {
+                //dealing with requests:
+                'request': function request(config) {
+                    // This is a standard header that should be sent for all ajax requests and is required for 
+                    // how the server handles auth rejections, etc... see
+                    // https://github.com/aspnet/AspNetKatana/blob/e2b18ec84ceab7ffa29d80d89429c9988ab40144/src/Microsoft.Owin.Security.Cookies/Provider/DefaultBehavior.cs
+                    // https://brockallen.com/2013/10/27/using-cookie-authentication-middleware-with-web-api-and-401-response-codes/
+                    config.headers['X-Requested-With'] = 'XMLHttpRequest';
+                    return config;
+                }
+            };
+        }
+        angular.module('umbraco.interceptors').factory('requiredHeadersInterceptor', requiredHeadersInterceptor);
     }());
     'use strict';
     (function () {
@@ -156,7 +181,7 @@
                     // Make sure we have an object for the headers of the request
                     var headers = config.headers ? config.headers : {};
                     //Here we'll check if we should ignore the error (either based on the original header set or the request configuration)
-                    if (headers['x-umb-ignore-error'] === 'ignore' || config.umbIgnoreErrors === true || angular.isArray(config.umbIgnoreStatus) && config.umbIgnoreStatus.indexOf(rejection.status) !== -1) {
+                    if (headers['x-umb-ignore-error'] === 'ignore' || config.umbIgnoreErrors === true || Utilities.isArray(config.umbIgnoreStatus) && config.umbIgnoreStatus.indexOf(rejection.status) !== -1) {
                         //exit/ignore
                         return $q.reject(rejection);
                     }
@@ -169,18 +194,23 @@
                         }
                     }
                     //A 401 means that the user is not logged in
-                    if (rejection.status === 401 && !rejection.config.url.endsWith('umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser')) {
-                        var userService = $injector.get('userService');
-                        // see above
-                        //Associate the user name with the retry to ensure we retry for the right user
-                        return userService.getCurrentUser().then(function (user) {
-                            var userName = user ? user.name : null;
-                            //The request bounced because it was not authorized - add a new request to the retry queue
-                            return requestRetryQueue.pushRetryFn('unauthorized-server', userName, function retryRequest() {
-                                // We must use $injector to get the $http service to prevent circular dependency
-                                return $injector.get('$http')(rejection.config);
+                    if (rejection.status === 401) {
+                        //avoid an infinite loop
+                        var umbRequestHelper = $injector.get('umbRequestHelper');
+                        var getCurrentUserPath = umbRequestHelper.getApiUrl('authenticationApiBaseUrl', 'GetCurrentUser');
+                        if (!rejection.config.url.endsWith(getCurrentUserPath)) {
+                            var userService = $injector.get('userService');
+                            // see above
+                            //Associate the user name with the retry to ensure we retry for the right user
+                            return userService.getCurrentUser().then(function (user) {
+                                var userName = user ? user.name : null;
+                                //The request bounced because it was not authorized - add a new request to the retry queue
+                                return requestRetryQueue.pushRetryFn('unauthorized-server', userName, function retryRequest() {
+                                    // We must use $injector to get the $http service to prevent circular dependency
+                                    return $injector.get('$http')(rejection.config);
+                                });
                             });
-                        });
+                        }
                     } else if (rejection.status === 404) {
                         //a 404 indicates that the request was not found - this could be due to a non existing url, or it could
                         //be due to accessing a url with a parameter that doesn't exist, either way we should notifiy the user about it

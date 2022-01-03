@@ -1,10 +1,10 @@
-﻿<div data-element="editor-data-types"  ng-controller="UmbracoForms.Editors.PreValueSource.EditController">
+<div data-element="editor-data-types"  ng-controller="UmbracoForms.Editors.PreValueSource.EditController">
 
     <umb-load-indicator ng-if="page.loading"></umb-load-indicator>
     
     <form name="preValueSourceForm"
-          ng-submit="save()"
           ng-show="loaded && security.userSecurity.managePreValueSources"
+          novalidate
           val-form-manager>
 
         <umb-editor-view ng-if="!page.loading">
@@ -13,7 +13,7 @@
                     name="preValueSource.name"
                     hide-icon="true"
                     hide-description="true"
-                    hide-alias="true">
+                    hide-alias="true"> 
             </umb-editor-header>
 
 
@@ -21,34 +21,33 @@
 
                 <umb-box>
 
-                    <umb-box-content>
+                  <umb-box-content>
+                    <umb-control-group localize="label,description"
+                                       label="@general_type" description="@formPrevalueSources_typeDescription">
+                      <select ng-model="preValueSource.fieldPreValueSourceTypeId" ng-options="type.id as type.name for type in types" ng-change="setType()" data-umb="settingstype-pickers-fieldPreValueSourceType">
+                      </select>
+                    </umb-control-group>
 
-                        <umb-control-group label="Type" description="Select the type of prevalue source">
-                            <select ng-model="preValueSource.fieldPreValueSourceTypeId" ng-options="type.id as type.name for type in types" ng-change="setType()">
-                                <option value="">-- choose type --</option>
-                            </select>
-                        </umb-control-group>
 
-
-                        <umb-control-group ng-repeat="setting in preValueSource.$type.settings" label="{{setting.name}}" description="{{setting.description}}">
-                            <div ng-include="setting.view"></div>
-                        </umb-control-group>
-
+                    <umb-control-group ng-repeat="setting in preValueSource.$type.settings" label="{{setting.name}}" description="{{setting.description}}">
+                      <div ng-include="setting.view"></div>
+                    </umb-control-group>
 
 
 
-                        <table ng-show="prevalues" class="table table-striped">
-                            <tr>
-                                <th>Id</th>
-                                <th>Value</th>
-                            </tr>
-                            <tr ng-repeat="prevalue in prevalues">
-                                <td>{{prevalue.id}}</td>
-                                <td>{{prevalue.value}}</td>
-                            </tr>
-                        </table>
 
-                    </umb-box-content>
+                    <table ng-show="prevalues" class="table table-striped" data-umb="prevalues">
+                      <tr>
+                        <th><localize key="general_id"></localize></th>
+                        <th><localize key="general_value"></localize></th>
+                      </tr>
+                      <tr ng-repeat="prevalue in prevalues">
+                        <td data-umb="prevalueId_{{$index}}">{{prevalue.id}}</td>
+                        <td data-umb="prevalue_{{$index}}">{{prevalue.value}}</td>
+                      </tr>
+                    </table>
+
+                  </umb-box-content>
 
                 </umb-box>
 
@@ -58,14 +57,14 @@
 
                 <umb-editor-footer-content-right>
 
-                    <umb-button
-                            type="submit"
-                            button-style="success"
-                            state="page.saveButtonState"
-                            shortcut="ctrl+s"
-                            label="Save"
-                            label-key="buttons_save">
-                    </umb-button>
+                    <umb-button type="button"
+                                action="save()"
+                                state="page.saveButtonState"
+                                button-style="success"
+                                shortcut="ctrl+s"
+                                label="Save"
+                                label-key="buttons_save"
+                                data-element='button-save'>
 
                 </umb-editor-footer-content-right>
 

@@ -16,7 +16,7 @@
 }
 
 
-<div class="umbraco-forms-page">
+<div class="umbraco-forms-page" id="@Model.CurrentPage.Id">
 
     @if (string.IsNullOrEmpty(Model.CurrentPage.Caption) == false)
     {
@@ -86,7 +86,7 @@
         </fieldset>
     }
 
-    <div style="display: none">
+    <div style="display: none" aria-hidden="true">
         <input type="text" name="@Model.FormId.ToString().Replace("-", "")" />
     </div>
 
@@ -118,7 +118,7 @@
                     <input type="submit" 
                            class="btn primary" 
                            value="@Model.SubmitCaption" 
-                           name="__next" />
+                           name="__next" data-umb="submit-forms-form"/>
                 }
             }
             else
@@ -126,7 +126,7 @@
                 <input type="submit" 
                        class="btn primary" 
                        value="@Model.SubmitCaption" 
-                       name="__next" />
+                       name="__next" data-umb="submit-forms-form" />
             }
         </div>
     </div>

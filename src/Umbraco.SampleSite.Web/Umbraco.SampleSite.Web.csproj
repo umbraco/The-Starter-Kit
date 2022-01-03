@@ -1,5 +1,5 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\UmbracoCms.8.0.0\build\UmbracoCms.props" Condition="Exists('..\packages\UmbracoCms.8.0.0\build\UmbracoCms.props')" />
+  <Import Project="..\packages\UmbracoCms.8.17.1\build\UmbracoCms.props" Condition="Exists('..\packages\UmbracoCms.8.17.1\build\UmbracoCms.props')" />
   <Import Project="..\packages\UmbracoCms.8.0.0-alpha.58.1640\build\UmbracoCms.props" Condition="Exists('..\packages\UmbracoCms.8.0.0-alpha.58.1640\build\UmbracoCms.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -49,20 +49,20 @@
     <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="ClientDependency.Core, Version=1.9.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ClientDependency.1.9.7\lib\net45\ClientDependency.Core.dll</HintPath>
+    <Reference Include="ClientDependency.Core, Version=1.9.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClientDependency.1.9.9\lib\net45\ClientDependency.Core.dll</HintPath>
     </Reference>
-    <Reference Include="ClientDependency.Core.Mvc, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ClientDependency-Mvc5.1.8.0.0\lib\net45\ClientDependency.Core.Mvc.dll</HintPath>
+    <Reference Include="ClientDependency.Core.Mvc, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClientDependency-Mvc5.1.9.3\lib\net45\ClientDependency.Core.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="CSharpTest.Net.Collections, Version=14.906.1403.1082, Culture=neutral, PublicKeyToken=06aee00cce822474, processorArchitecture=MSIL">
       <HintPath>..\packages\CSharpTest.Net.Collections.14.906.1403.1082\lib\net40\CSharpTest.Net.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="Examine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Examine.1.0.0\lib\net452\Examine.dll</HintPath>
+    <Reference Include="Examine, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Examine.1.2.0\lib\net452\Examine.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.8.14.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.8.14\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -70,11 +70,14 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="ImageProcessor, Version=2.7.0.100, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ImageProcessor.2.7.0.100\lib\net452\ImageProcessor.dll</HintPath>
+    <Reference Include="ImageProcessor, Version=2.9.1.225, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.2.9.1\lib\net452\ImageProcessor.dll</HintPath>
     </Reference>
-    <Reference Include="ImageProcessor.Web, Version=4.10.0.100, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ImageProcessor.Web.4.10.0.100\lib\net452\ImageProcessor.Web.dll</HintPath>
+    <Reference Include="ImageProcessor.Web, Version=4.12.1.216, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.Web.4.12.1\lib\net452\ImageProcessor.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.1.11\lib\net46\K4os.Compression.LZ4.dll</HintPath>
     </Reference>
     <Reference Include="LightInject, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LightInject.5.4.0\lib\net46\LightInject.dll</HintPath>
@@ -97,6 +100,12 @@
     <Reference Include="Markdown, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1b320cc08ad5aa89, processorArchitecture=MSIL">
       <HintPath>..\packages\Markdown.2.2.1\lib\net451\Markdown.dll</HintPath>
     </Reference>
+    <Reference Include="MessagePack, Version=2.2.0.0, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagePack.2.2.85\lib\netstandard2.0\MessagePack.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagePack.Annotations, Version=2.2.0.0, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagePack.Annotations.2.2.85\lib\netstandard2.0\MessagePack.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -105,6 +114,9 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.Common.2.10.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
@@ -166,39 +178,48 @@
       <HintPath>..\packages\Semver.2.0.4\lib\net452\Semver.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.2.8.0\lib\net46\Serilog.dll</HintPath>
+      <HintPath>..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.Enrichers.Process, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Enrichers.Process.2.0.1\lib\net45\Serilog.Enrichers.Process.dll</HintPath>
+      <HintPath>..\packages\Serilog.Enrichers.Process.2.0.2\lib\net45\Serilog.Enrichers.Process.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.Enrichers.Thread, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Enrichers.Thread.3.0.0\lib\net45\Serilog.Enrichers.Thread.dll</HintPath>
+      <HintPath>..\packages\Serilog.Enrichers.Thread.3.1.0\lib\net45\Serilog.Enrichers.Thread.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Filters.Expressions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Filters.Expressions.2.0.0\lib\net45\Serilog.Filters.Expressions.dll</HintPath>
+    <Reference Include="Serilog.Filters.Expressions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Filters.Expressions.2.1.0\lib\net45\Serilog.Filters.Expressions.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Formatting.Compact, Version=1.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Formatting.Compact.1.0.0\lib\net45\Serilog.Formatting.Compact.dll</HintPath>
+    <Reference Include="Serilog.Formatting.Compact, Version=1.1.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Formatting.Compact.1.1.0\lib\net452\Serilog.Formatting.Compact.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Formatting.Compact.Reader, Version=1.0.3.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Formatting.Compact.Reader.1.0.3\lib\net45\Serilog.Formatting.Compact.Reader.dll</HintPath>
+    <Reference Include="Serilog.Formatting.Compact.Reader, Version=1.0.5.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Formatting.Compact.Reader.1.0.5\lib\net45\Serilog.Formatting.Compact.Reader.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.Settings.AppSettings, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Settings.AppSettings.2.2.2\lib\net45\Serilog.Settings.AppSettings.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog.Sinks.Async, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Async.1.5.0\lib\net461\Serilog.Sinks.Async.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.Sinks.File.4.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+      <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Map, Version=1.0.2.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.Map.1.0.2\lib\netstandard2.0\Serilog.Sinks.Map.dll</HintPath>
     </Reference>
     <Reference Include="Superpower, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aec39280ded1b3a7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Superpower.2.0.0\lib\net45\Superpower.dll</HintPath>
+      <HintPath>..\packages\Superpower.2.3.0\lib\net45\Superpower.dll</HintPath>
     </Reference>
     <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -260,11 +281,17 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
       <Private>True</Private>
@@ -279,6 +306,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.Extensions.4.3.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
       <Private>True</Private>
@@ -311,15 +341,15 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Text.Encoding.CodePages, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encoding.CodePages.4.3.0\lib\net46\System.Text.Encoding.CodePages.dll</HintPath>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.7.1\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Dataflow.4.9.0\lib\netstandard2.0\System.Threading.Tasks.Dataflow.dll</HintPath>
     </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
@@ -391,31 +421,34 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Umbraco.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoCms.Core.8.0.0\lib\net472\Umbraco.Core.dll</HintPath>
+      <HintPath>..\packages\UmbracoCms.Core.8.17.1\lib\net472\Umbraco.Core.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Examine, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoCms.Web.8.0.0\lib\net472\Umbraco.Examine.dll</HintPath>
+      <HintPath>..\packages\UmbracoCms.Web.8.17.1\lib\net472\Umbraco.Examine.dll</HintPath>
     </Reference>
-    <Reference Include="Umbraco.Forms.Core, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoForms.Core.8.0.0\lib\net472\Umbraco.Forms.Core.dll</HintPath>
+    <Reference Include="Umbraco.Forms.Core, Version=8.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoForms.Core.8.10.0\lib\net472\Umbraco.Forms.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Umbraco.Forms.Core.Providers, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoForms.Core.8.0.0\lib\net472\Umbraco.Forms.Core.Providers.dll</HintPath>
+    <Reference Include="Umbraco.Forms.Core.Providers, Version=8.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoForms.Core.8.10.0\lib\net472\Umbraco.Forms.Core.Providers.dll</HintPath>
     </Reference>
-    <Reference Include="Umbraco.Forms.Web, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoForms.Core.8.0.0\lib\net472\Umbraco.Forms.Web.dll</HintPath>
+    <Reference Include="Umbraco.Forms.Web, Version=8.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoForms.Core.8.10.0\lib\net472\Umbraco.Forms.Web.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Licensing, Version=2.0.33.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoForms.Core.8.0.0\lib\net472\Umbraco.Licensing.dll</HintPath>
+      <HintPath>..\packages\UmbracoForms.Core.8.10.0\lib\net472\Umbraco.Licensing.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.ModelsBuilder, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Umbraco.ModelsBuilder.8.0.1\lib\net472\Umbraco.ModelsBuilder.dll</HintPath>
+      <HintPath>..\packages\Umbraco.ModelsBuilder.8.1.6\lib\net472\Umbraco.ModelsBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Umbraco.ModelsBuilder.Embedded, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoCms.Web.8.17.1\lib\net472\Umbraco.ModelsBuilder.Embedded.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Web, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoCms.Web.8.0.0\lib\net472\Umbraco.Web.dll</HintPath>
+      <HintPath>..\packages\UmbracoCms.Web.8.17.1\lib\net472\Umbraco.Web.dll</HintPath>
     </Reference>
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UmbracoCms.Web.8.0.0\lib\net472\Umbraco.Web.UI.dll</HintPath>
+      <HintPath>..\packages\UmbracoCms.Web.8.17.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -430,6 +463,145 @@
     <Content Include="App_Plugins\StarterKit\tours\views\medialibrary\uploadimages.html" />
     <Content Include="App_Plugins\StarterKit\tours\views\validatetext.controller.js" />
     <Content Include="App_Plugins\StarterKit\tours\views\validatetext.html" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\aspnet-validation\dist\aspnet-validation.min.js" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\BaremetricsCalendar\public\css\application.css" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\BaremetricsCalendar\public\js\Calendar.js" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\datepicker.init.js" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\defaultform.css" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\Email-Example\sample-image.jpg" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\Email-Example\umbraco-logo.png" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\moment\min\moment-with-locales.min.js" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\pikaday\pikaday.css" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\pikaday\pikaday.js" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\promise-polyfill\dist\polyfill.min.js" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\themes\default\style.css" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\themes\default\umbracoforms.js" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\umbracoforms-conditions.js" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\umbracoforms-dependencies.js" />
+    <Content Include="App_Plugins\UmbracoForms\Assets\umbracoforms.js" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\checkbox.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\checkboxlist.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\dataconsent.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\datepicker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\dropdownlist.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\fileupload.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\hiddenfield.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\password.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\radiobuttonlist.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\recaptcha.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\Recaptcha2.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\recaptcha3.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\text.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\textarea.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\FieldTypes\textfield.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\RenderTypes\date.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\RenderTypes\file.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\RenderTypes\member.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\RenderTypes\number.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\RenderTypes\text.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\checkbox.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\documentmapper.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\dropdownlist.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\emailtemplatepicker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\fieldmapper.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\file-upload.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\file.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\numericfield.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\password.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\passwordnoautocomplete.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\pickers.connectionstring.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\pickers.content.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\pickers.contentwithxpath.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\pickers.datatype.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\pickers.documenttype.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\range.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\standardfieldmapper.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\textarea.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\textfield.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\textfieldnoautocomplete.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Common\SettingTypes\textstring.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Dashboards\forms.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\DataSource\delete.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\DataSource\dialogs\wizard.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\DataSource\edit.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\FormSecurity\edit.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\copy.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\create.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\delete.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\dialogs\additem.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\dialogs\entriesdetail.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\dialogs\entriessettings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\dialogs\fieldsetsettings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\dialogs\fieldsettings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\dialogs\formsettings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\edit.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\entries.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\move.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\fieldsetsettings\fieldset-settings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\fieldsettings\field-settings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\fieldtypepicker\field-type-picker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\formpicker\formpicker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\pagesettings\page-settings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\themepicker\themepicker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\workflows\submit-message-workflow-settings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\workflows\workflow-settings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\workflows\workflow-types.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\overlays\workflows\workflows-overview.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\rename.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\views\design\design.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\views\settings\settings.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\Form\workflows.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\GridEditors\FormPicker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\PreValueSource\delete.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\PreValueSource\edit.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\PropertyEditors\formpicker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\PropertyEditors\formpicker.prevalues.html" />
+    <Content Include="App_Plugins\UmbracoForms\Backoffice\PropertyEditors\themepicker.html" />
+    <Content Include="App_Plugins\UmbracoForms\css\umbraco.forms.css" />
+    <Content Include="App_Plugins\UmbracoForms\Directives\umb-forms-content-picker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Directives\umb-forms-designer-new.html" />
+    <Content Include="App_Plugins\UmbracoForms\Directives\umb-forms-entry-detail.html" />
+    <Content Include="App_Plugins\UmbracoForms\Directives\umb-forms-file-upload-editor.html" />
+    <Content Include="App_Plugins\UmbracoForms\Directives\umb-forms-inline-prevalue-editor.html" />
+    <Content Include="App_Plugins\UmbracoForms\Directives\umb-forms-legacy-content-picker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Directives\umb-forms-prevalue-editor.html" />
+    <Content Include="App_Plugins\UmbracoForms\Directives\umb-forms-regexpicker.html" />
+    <Content Include="App_Plugins\UmbracoForms\Directives\umb-forms-render-type.html" />
+    <Content Include="App_Plugins\UmbracoForms\Fonts\icomoon.svg" />
+    <Content Include="App_Plugins\UmbracoForms\Images\close.png" />
+    <Content Include="App_Plugins\UmbracoForms\Images\recaptcha.png" />
+    <Content Include="App_Plugins\UmbracoForms\Images\recaptcha2.png" />
+    <Content Include="App_Plugins\UmbracoForms\Images\recaptcha3.png" />
+    <Content Include="App_Plugins\UmbracoForms\Images\succes-green.png" />
+    <Content Include="App_Plugins\UmbracoForms\Images\workflows\slack\icon.svg" />
+    <Content Include="App_Plugins\UmbracoForms\js\umbraco.forms.js" />
+    <Content Include="App_Plugins\UmbracoForms\lang\cs-CZ.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\da-DK.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\de-DE.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\en-GB.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\en-US.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\es-ES.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\fr-FR.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\he-IL.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\it-IT.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\ja-JP.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\ko-KR.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\nb-NO.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\nl-NL.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\pl-PL.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\pt-BR.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\ru-RU.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\sv-SE.xml" />
+    <Content Include="App_Plugins\UmbracoForms\lang\zh-CN.xml" />
+    <Content Include="App_Plugins\UmbracoForms\Xslt\DataTables_json.xslt" />
+    <Content Include="App_Plugins\UmbracoForms\Xslt\DataTables_json_medtrust.xslt" />
+    <Content Include="App_Plugins\UmbracoForms\Xslt\excel.xslt" />
+    <Content Include="App_Plugins\UmbracoForms\Xslt\Html.xslt" />
+    <Content Include="App_Plugins\UmbracoForms\Xslt\postAsXmlSample.xslt" />
+    <Content Include="App_Plugins\UmbracoForms\Xslt\sendXsltEmailSample.xslt" />
+    <Content Include="App_Plugins\UmbracoForms\Xslt\Templates\Schema2\UmbracoContourListComments.xslt" />
+    <Content Include="App_Plugins\UmbracoForms\Xslt\Templates\UmbracoContourListComments.xslt" />
+    <Content Include="App_Plugins\UmbracoForms\Xslt\xml.xslt" />
     <Content Include="config\grid.editors.config.js" />
     <Content Include="config\Lang\cs-CZ.user.xml" />
     <Content Include="config\Lang\da-DK.user.xml" />
@@ -477,6 +649,15 @@
     <Content Include="config\serilog.config" />
     <Content Include="config\HealthChecks.config" />
     <Content Include="config\BackOfficeTours\getting-started.json" />
+    <Content Include="App_Plugins\UmbracoForms\Data\Templates\commentform.json" />
+    <Content Include="App_Plugins\UmbracoForms\Data\Templates\contactform.json" />
+    <Content Include="App_Plugins\UmbracoForms\Data\Web.config" />
+    <Content Include="App_Plugins\UmbracoForms\Fonts\icomoon.eot" />
+    <Content Include="App_Plugins\UmbracoForms\Fonts\icomoon.ttf" />
+    <Content Include="App_Plugins\UmbracoForms\Fonts\icomoon.woff" />
+    <Content Include="App_Plugins\UmbracoForms\package.manifest" />
+    <Content Include="App_Plugins\UmbracoForms\RazorTemplates\HtmlTable.cshtml" />
+    <Content Include="App_Plugins\UmbracoForms\UmbracoForms.config" />
     <None Include="packages.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Blog.cshtml" />
@@ -499,6 +680,7 @@
     <Content Include="Views\Partials\Grid\Editors\Base.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
+    <Content Include="Views\Partials\BlockList\Default.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Submitted.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\ScrollToFormScript.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Script.cshtml" />
@@ -507,6 +689,7 @@
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.Textfield.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.Textarea.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.Text.cshtml" />
+    <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\Fieldtype.Recaptcha3.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\Fieldtype.Recaptcha2.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.RadioButtonList.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.PasswordField.cshtml" />
@@ -517,11 +700,13 @@
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.DataConsent.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.CheckBoxList.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\default\Fieldtypes\FieldType.CheckBox.cshtml" />
+    <Content Include="Views\Partials\Forms\Themes\default\DatePicker.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\bootstrap3-horizontal\Form.cshtml" />
     <Content Include="Views\Partials\Forms\Themes\bootstrap3-horizontal\Fieldtypes\FieldType.RadioButtonList.cshtml" />
     <Content Include="Views\Partials\Forms\Fieldtypes\FieldType.Textfield.cshtml" />
     <Content Include="Views\Partials\Forms\Fieldtypes\FieldType.Textarea.cshtml" />
     <Content Include="Views\Partials\Forms\Fieldtypes\FieldType.Text.cshtml" />
+    <Content Include="Views\Partials\Forms\Fieldtypes\Fieldtype.Recaptcha3.cshtml" />
     <Content Include="Views\Partials\Forms\Fieldtypes\Fieldtype.Recaptcha2.cshtml" />
     <Content Include="Views\Partials\Forms\Fieldtypes\FieldType.RadioButtonList.cshtml" />
     <Content Include="Views\Partials\Forms\Fieldtypes\FieldType.PasswordField.cshtml" />
@@ -534,7 +719,6 @@
     <Content Include="Views\Partials\Forms\Fieldtypes\FieldType.CheckBox.cshtml" />
     <Content Include="Views\Partials\Forms\Export\excel.cshtml" />
     <Content Include="Views\Partials\Forms\Emails\Example-Template.cshtml" />
-    <Content Include="Views\Partials\Forms\DatePicker.cshtml" />
     <Content Include="Views\MacroPartials\RenderUmbracoFormScripts.cshtml" />
     <Content Include="Views\MacroPartials\InsertUmbracoFormWithTheme.cshtml" />
     <None Include="Web.Debug.config">
@@ -590,11 +774,11 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets'))" />
-    <Error Condition="!Exists('..\packages\UmbracoCms.8.0.0\build\UmbracoCms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.8.0.0\build\UmbracoCms.props'))" />
-    <Error Condition="!Exists('..\packages\UmbracoCms.8.0.0\build\UmbracoCms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.8.0.0\build\UmbracoCms.targets'))" />
+    <Error Condition="!Exists('..\packages\UmbracoCms.8.17.1\build\UmbracoCms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.8.17.1\build\UmbracoCms.props'))" />
+    <Error Condition="!Exists('..\packages\UmbracoCms.8.17.1\build\UmbracoCms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.8.17.1\build\UmbracoCms.targets'))" />
   </Target>
   <Import Project="..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets" Condition="Exists('..\packages\Umbraco.SqlServerCE.4.0.0.1\build\Umbraco.SqlServerCE.targets')" />
-  <Import Project="..\packages\UmbracoCms.8.0.0\build\UmbracoCms.targets" Condition="Exists('..\packages\UmbracoCms.8.0.0\build\UmbracoCms.targets')" />
+  <Import Project="..\packages\UmbracoCms.8.17.1\build\UmbracoCms.targets" Condition="Exists('..\packages\UmbracoCms.8.17.1\build\UmbracoCms.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
