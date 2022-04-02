@@ -9,14 +9,23 @@
     multinode treepicker (so: replace "PropertyWithPicker" with the alias of your property).
 *@
 
-@{ var selection = CurrentPage.PropertyWithPicker.Split(','); }
+@{ 
+    var selection = Model.MacroParameters
+        .FirstOrDefault(p => p.Key == "product")
+        .Value?
+        .ToString()
+        .Split(',');
+}
 
 <ul>
-    @foreach (var id in selection)
+    @if (selection != null)
     {
-        var item = Umbraco.Content(id);
-        <li>
-            <a href="@item.Url">@item.Name</a>
-        </li>
+        foreach (var id in selection)
+        {
+            var item = Umbraco.Content(id);
+            <li>
+                <a href="@item.Url()">@item.Name</a>
+            </li>
+        }
     }
 </ul>
