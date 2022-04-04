@@ -14,7 +14,7 @@
     multinode treepicker (so: replace "PropertyWithPicker" with the alias of your property).
 *@
 
-@{ var selection = Model.Content.Value<IEnumerable<IPublishedContent>>(PublishedValueFallback, "PropertyWithPicker").ToArray(); }
+@{ var selection = Model.MacroParameters.FirstOrDefault(p => p.Key == "product").Value?.ToString().Split(','); }
 
 <ul>
     @foreach (var id in selection)
