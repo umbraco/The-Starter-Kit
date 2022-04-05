@@ -6,22 +6,45 @@
 @inject UmbracoHelper Umbraco
 @inject IPublishedValueFallback PublishedValueFallback
 @inject IPublishedUrlProvider PublishedUrlProvider
+
 @*
     This snippet lists the items from a Multinode tree picker, using the pickers default settings.
     Content Values stored as xml.
 
     To get it working with any site's data structure, set the selection equal to the property which has the
     multinode treepicker (so: replace "PropertyWithPicker" with the alias of your property).
+
+    But for classic version of a macro you use the parameter settings
 *@
 
-@{ var selection = Model.Content.Value<IEnumerable<IPublishedContent>>(PublishedValueFallback, "PropertyWithPicker").ToArray(); }
+@{
+    //example 1: using document type properties for this macro
+    var contentMntpSelection = Model.Content.Value<IEnumerable<IPublishedContent>>(PublishedValueFallback, "PropertyWithPicker")?.ToArray();
 
-<ul>
-    @foreach (var id in selection)
+    //example 2: using classic macro parameter
+    var selection = Model.MacroParameters.FirstOrDefault(p => p.Key == "product").Value?.ToString().Split(',');
+
+    if (contentMntpSelection != null && contentMntpSelection.Any())
     {
-        var item = Umbraco.Content(id);
-        <li>
-            <a href="@item.Url(PublishedUrlProvider)">@item.Name</a>
-        </li>
+        <ul>
+            @foreach (var item in contentMntpSelection)
+            {
+                <li>
+                    <a href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+                </li>
+            }
+        </ul>
     }
-</ul>
+    else if (selection != null && selection.Any())
+    {
+        <ul>
+            @foreach (var id in selection)
+            {
+                var item = Umbraco.Content(id);
+                <li>
+                    <a href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+                </li>
+            }
+        </ul>
+    }
+}
