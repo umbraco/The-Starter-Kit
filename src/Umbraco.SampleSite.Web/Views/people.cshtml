@@ -33,7 +33,6 @@
         <div class="employee-grid">
             @foreach (Person person in Model.Children<Person>())
             {
-
                 <div class="employee-grid__item">
                     <div class="employee-grid__item__image" style="background-image: url('@person.Photo?.Url()')"></div>
                     <div class="employee-grid__item__details">
