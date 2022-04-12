@@ -5,7 +5,8 @@
 @{
     Layout = "master.cshtml";
 }
-@Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+
+@await Html.PartialAsync("~/Views/Partials/SectionHeader.cshtml")
 
 <section class="section">
     <div class="container">
@@ -13,7 +14,7 @@
             <div class="blogpost-meta">
                 <small class="blogpost-date">@Model.CreateDate.ToShortDateString()</small>
                 <span class="blogpost-cat">
-                    @Html.Partial("~/Views/Partials/CategoryLinks.cshtml", Model.Categories)
+                    @await Html.PartialAsync("~/Views/Partials/CategoryLinks.cshtml", Model.Categories)
                 </span>
             </div>
             <h3>@Model.Excerpt</h3>
