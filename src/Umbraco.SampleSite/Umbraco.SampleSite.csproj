@@ -9,7 +9,7 @@
     <Description>The default starter kit for Umbraco</Description>
     <PackageTags>umbraco plugin package</PackageTags>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <VersionPrefix>10.0.0-rc</VersionPrefix>
+    <VersionPrefix>10.0.0</VersionPrefix>
     <Authors>Umbraco HQ</Authors>
   </PropertyGroup>
 
@@ -45,8 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bergmania.OpenStreetMap" Version="4.0.0-rc" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0-rc1" />
+    <PackageReference Include="Bergmania.OpenStreetMap" Version="4.0.0" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.0.0" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="10.0.0-rc1" />
+    <PackageReference Include="Umbraco.Cms" Version="10.0.0" />
 
   </ItemGroup>
 
@@ -43,9 +43,6 @@
     <Content Remove="umbraco\MediaCache\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\MacroPartials" />
-  </ItemGroup>
-  <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\media\0aslars0\7377957524_347859faac_b.jpg" />
     <_ContentIncludedByDefault Remove="wwwroot\media\1c3833ce637f4985a142e029d1d50cac\18720470241_ff77768544_h.jpg" />
     <_ContentIncludedByDefault Remove="wwwroot\media\1k2bvtyp\18720470241_ff77768544_h.jpg" />
@@ -81,6 +78,20 @@
     <_ContentIncludedByDefault Remove="wwwroot\media\vwojnqfl\jeavon-leopold.jpg" />
     <_ContentIncludedByDefault Remove="wwwroot\media\zt1cuzq0\16403439029_f500be349b_o.jpg" />
     <_ContentIncludedByDefault Remove="wwwroot\scripts\umbraco-starterkit-app.js" />
+    <_ContentIncludedByDefault Remove="Views\Partials\blocklist\default.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\CategoryLinks.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\ContactForm.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\bootstrap3-fluid.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\bootstrap3.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\base.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\embed.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\macro.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\media.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\rte.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\textstring.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\Navigation\SubNavigation.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\Navigation\TopNavigation.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\SectionHeader.cshtml" />
   </ItemGroup>
     
   <PropertyGroup>
