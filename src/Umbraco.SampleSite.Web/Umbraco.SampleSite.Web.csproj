@@ -3,10 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
-    
-  <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="10.0.0" />
 
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms" Version="10.1.0" />
   </ItemGroup>
 
   <Import Project="..\Umbraco.SampleSite\build\Umbraco.TheStarterKit.targets" />
@@ -93,7 +92,7 @@
     <_ContentIncludedByDefault Remove="Views\Partials\Navigation\TopNavigation.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Partials\SectionHeader.cshtml" />
   </ItemGroup>
-    
+
   <PropertyGroup>
     <RazorCompileOnBuild>false</RazorCompileOnBuild>
     <RazorCompileOnPublish>false</RazorCompileOnPublish>
