@@ -2,23 +2,23 @@
 
 # 10.0-Starter-Kit
 
-This Github project is used to manage the final build of the Starter Kit and is _not_ meant to be used as the Starter Kit content source.
+You can find the Starter Kit on NuGet by running the following command:
 
-_TODO_: We need to merge this repo: https://github.com/umbraco/Starterkit-TheUmbracoCommunity into this one and remove the CSS/JS one; they should exist in this one only.
+```bash
+dotnet add package Umbraco.TheStarterKit --version 10.0.0
+```
 
-You can find the Starter Kit as the default option in Umbraco 7.6.4+, as well as in the package repository on Our Umbraco.
-
-Default Back Office user is:
-
-* Email: mail@me.com
-* Password: 1234567890
+## Content
 
 Get in touch if you wish to have access to this Umbraco Cloud project, which contains the master content for the Starter Kit:
 https://umbraco-starter-kit.s1.umbraco.io
 
-Alternatively, if you are doing development for the Starter Kit, you can launch the website project contained in this repo.
+## Development
 
-# Building the package
+If you are doing development for the Starter Kit, you can launch the [Umbraco.SampleSite.Web](src/Umbraco.SampleSite.Web/) contained in this repo.
 
-The the pipeline on azure pipelines
+Run the project in Visual Studio or the terminal and the package migrations will run from the source project [Umbraco.SampleSite](src/Umbraco.SampleSite/) the first time.
 
+### Changing view files
+
+If you are going to change the views, you need to zip them back into the package.zip file located in `src/Umbraco.SampleSite/Migrations/package.zip`.
