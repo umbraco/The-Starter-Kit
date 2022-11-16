@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="11.0.0-rc3" />
+    <PackageReference Include="Umbraco.Cms" Version="11.0.0-rc4" />
   </ItemGroup>
 
   <Import Project="..\Umbraco.SampleSite\build\Umbraco.TheStarterKit.targets" />
