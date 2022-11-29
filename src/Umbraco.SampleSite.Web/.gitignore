@@ -494,3 +494,4 @@ appsettings-schema.json
 /Views/Partials/SectionHeader.cshtml
 /Views/Partials/Navigation/SubNavigation.cshtml
 /Views/Partials/Navigation/TopNavigation.cshtml
+/appsettings-schema.Umbraco.Cms.json
