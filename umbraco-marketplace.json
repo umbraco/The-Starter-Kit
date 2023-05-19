@@ -1,0 +1,20 @@
+{
+  "AuthorDetails": {
+    "Description": "The Starter Kit is the default starter kit available from Umbraco HQ.",
+    "Url": "https://umbraco.com",
+    "ImageUrl": "https://our.umbraco.com/media/upload/0fca1f43-fdec-4067-8a0f-4c680d6f0c74/umbraco_logo_blue.png"
+  },
+  "Category": "Themes & Starter Kits",
+  "LicenseType": "Free",
+  "IssueTrackerUrl": "https://github.com/umbraco/The-Starter-Kit/issues",
+  "PackageType": "Package",
+  "PackagesByAuthor": [
+    "Umbraco.Forms",
+    "Umbraco.Deploy.OnPrem",
+    "Umbraco.Workflow"
+  ],
+  "Tags": [
+    "Starter",
+    "StarterKit"
+  ]
+}

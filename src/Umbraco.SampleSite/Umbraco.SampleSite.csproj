@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,10 +7,12 @@
     <PackageId>Umbraco.TheStarterKit</PackageId>
     <Title>Umbraco.TheStarterKit</Title>
     <Description>The default starter kit for Umbraco</Description>
-    <PackageTags>umbraco plugin package</PackageTags>
+    <PackageTags>umbraco umbraco-marketplace plugin package</PackageTags>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <VersionPrefix>11.0.0-rc</VersionPrefix>
+    <VersionPrefix>11.0.0</VersionPrefix>
     <Authors>Umbraco HQ</Authors>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
