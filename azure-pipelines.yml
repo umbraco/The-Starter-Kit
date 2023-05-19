@@ -1,17 +1,12 @@
 name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 
 parameters:
-  - name: cache_npm
-    displayName: Cache NPM packages
-    type: boolean
-    default: true
   - name: cache_nuget
     displayName: Cache NuGet packages
     type: boolean
     default: false
 
 variables:
-  nodeVersion: 16.17.x
   solution: Umbraco.SampleSite.sln
   buildConfiguration: Release
   DOTNET_NOLOGO: true
@@ -46,17 +41,6 @@ stages:
             displayName: Use .NET SDK from global.json
             inputs:
               useGlobalJson: true
-
-          # Cache and restore NPM packages
-          - task: Cache@2
-            condition: ${{ parameters.cache_npm }}
-            displayName: Cache NPM packages
-            inputs:
-              key: 'npm | "$(Agent.OS)" | **/package-lock.json, !**/node_modules/**'
-              restoreKeys: |
-                npm | "$(Agent.OS)"
-                npm
-              path: $(npm_config_cache)
 
           # Cache and restore NuGet packages
           - task: Cache@2
