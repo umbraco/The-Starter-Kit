@@ -32,11 +32,6 @@ stages:
           - task: NuGetAuthenticate@1
             displayName: Authenticate NuGet
 
-          - task: NodeTool@0
-            displayName: Use Node.js $(nodeVersion)
-            inputs:
-              versionSpec: $(nodeVersion)
-
           - task: UseDotNet@2
             displayName: Use .NET SDK from global.json
             inputs:
