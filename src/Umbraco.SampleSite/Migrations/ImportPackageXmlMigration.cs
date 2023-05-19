@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Configuration.Models;
 using Umbraco.Cms.Core.IO;
 using Umbraco.Cms.Core.PropertyEditors;
@@ -14,18 +14,19 @@ public class ImportPackageXmlMigration : PackageMigrationBase
     public ImportPackageXmlMigration(
         IPackagingService packagingService,
         IMediaService mediaService,
-        MediaFileManager mediaFileManager, 
+        MediaFileManager mediaFileManager,
         MediaUrlGeneratorCollection mediaUrlGenerators,
-        IShortStringHelper shortStringHelper, 
-        IContentTypeBaseServiceProvider contentTypeBaseServiceProvider, 
+        IShortStringHelper shortStringHelper,
+        IContentTypeBaseServiceProvider contentTypeBaseServiceProvider,
         IMigrationContext context,
-        IOptions<PackageMigrationSettings> packageMigrationsSettings) 
-        : base(packagingService, 
+        IOptions<PackageMigrationSettings> packageMigrationsSettings)
+        : base(
+            packagingService,
             mediaService,
-            mediaFileManager, 
-            mediaUrlGenerators, 
-            shortStringHelper, 
-            contentTypeBaseServiceProvider, 
+            mediaFileManager,
+            mediaUrlGenerators,
+            shortStringHelper,
+            contentTypeBaseServiceProvider,
             context,
             packageMigrationsSettings)
     {

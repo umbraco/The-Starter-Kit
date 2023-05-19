@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace Umbraco.SampleSite.Models;
 
 /// <summary>
-/// Simple POCO for binding JSON from our.umbraco WebAPI
+/// Simple POCO for binding JSON from our.umbraco WebAPI.
 /// </summary>
 [DataContract(Name = "lesson")]
 public class LessonModel

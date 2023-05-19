@@ -12,7 +12,7 @@ public class PublishRootBranchPostMigration : MigrationBase
 
     public PublishRootBranchPostMigration(
         ILogger<PublishRootBranchPostMigration> logger,
-        IContentService contentService, 
+        IContentService contentService,
         IMigrationContext context) : base(context)
     {
         _logger = logger;

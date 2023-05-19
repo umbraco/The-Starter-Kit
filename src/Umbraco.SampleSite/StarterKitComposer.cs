@@ -10,9 +10,9 @@ public partial class StarterKitComposer : IComposer
 {
     public void Compose(IUmbracoBuilder builder)
     {
-        //disable some of the default core tours since they don't make sense to have when the starter kit is installed
+        // disable some of the default core tours since they don't make sense to have when the starter kit is installed
         builder.TourFilters().AddFilter(BackOfficeTourFilter.FilterAlias(ToursToRemoveRegex()));
-        
+
         _ = builder.AddNotificationHandler<ServerVariablesParsingNotification, StarterKitNotificationHandler>();
     }
 

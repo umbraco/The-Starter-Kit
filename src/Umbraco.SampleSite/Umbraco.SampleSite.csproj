@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <ContentTargetFolders>.</ContentTargetFolders>
     <Product>Umbraco.TheStarterKit</Product>
     <PackageId>Umbraco.TheStarterKit</PackageId>
@@ -9,7 +10,6 @@
     <Description>The default starter kit for Umbraco</Description>
     <PackageTags>umbraco umbraco-marketplace plugin package</PackageTags>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <VersionPrefix>11.0.0</VersionPrefix>
     <Authors>Umbraco HQ</Authors>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -48,7 +48,15 @@
 
   <ItemGroup>
     <PackageReference Include="Bergmania.OpenStreetMap" Version="5.1.0" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="11.0.0-rc5" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="11.*" />
+
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.113" PrivateAssets="all" IsImplicitlyDefined="true" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435" PrivateAssets="all" IsImplicitlyDefined="true" />
+    <PackageReference Include="Umbraco.Code" Version="2.0.0" PrivateAssets="all" IsImplicitlyDefined="true" />
+    <PackageReference Include="Umbraco.GitVersioning.Extensions" Version="0.2.0" PrivateAssets="all" IsImplicitlyDefined="true" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <GitVersionBaseDirectory>$(MSBuildThisFileDirectory)</GitVersionBaseDirectory>
+  </PropertyGroup>
 </Project>
