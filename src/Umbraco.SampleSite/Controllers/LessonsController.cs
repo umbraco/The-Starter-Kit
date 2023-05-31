@@ -1,139 +1,110 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime.Serialization;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Configuration;
+using Umbraco.Cms.Core.Models.Membership;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Serialization;
 using Umbraco.Cms.Web.BackOffice.Controllers;
 using Umbraco.Cms.Web.BackOffice.Filters;
 using Umbraco.Cms.Web.Common.Attributes;
 using Umbraco.Extensions;
+using Umbraco.SampleSite.Models;
 
-namespace Umbraco.SampleSite.Controllers
+namespace Umbraco.SampleSite.Controllers;
+
+[PluginController("Starterkit")]
+public class LessonsController : UmbracoAuthorizedJsonController
 {
-    [PluginController("Starterkit")]
-    public class LessonsController : UmbracoAuthorizedJsonController
-    {
-        private readonly IBackOfficeSecurityAccessor _backofficeSecurityAccessor;
-        private readonly IUmbracoVersion _umbracoVersion;
-        private readonly ILogger<LessonsController> _logger;
-        private readonly IAppPolicyCache _runtimeCache;
-        private readonly IJsonSerializer _jsonSerializer;
+    private readonly IBackOfficeSecurityAccessor _backofficeSecurityAccessor;
+    private readonly IUmbracoVersion _umbracoVersion;
+    private readonly ILogger<LessonsController> _logger;
+    private readonly IAppPolicyCache _runtimeCache;
+    private readonly IJsonSerializer _jsonSerializer;
 
-        public LessonsController(IBackOfficeSecurityAccessor backofficeSecurityAccessor, IUmbracoVersion umbracoVersion,
-            ILogger<LessonsController> logger, IAppPolicyCache runtimeCache, IJsonSerializer jsonSerializer)
+    public LessonsController(
+        IBackOfficeSecurityAccessor backofficeSecurityAccessor,
+        IUmbracoVersion umbracoVersion,
+        ILogger<LessonsController> logger,
+        IAppPolicyCache runtimeCache,
+        IJsonSerializer jsonSerializer)
+    {
+        _backofficeSecurityAccessor = backofficeSecurityAccessor;
+        _umbracoVersion = umbracoVersion;
+        _logger = logger;
+        _runtimeCache = runtimeCache;
+        _jsonSerializer = jsonSerializer;
+    }
+
+    /// <summary>
+    /// Fetches available lessons for a given section from our.umbaco.org.
+    /// </summary>
+    /// <param name="path">Name of the documentation section to fetch from, ex: "getting-started", "Tutorials/Starter-kit/Lessons". </param>
+    /// <returns></returns>
+    [ValidateAngularAntiForgeryToken]
+    public IEnumerable<LessonModel> GetLessons(string path)
+    {
+        // information for the request, so we could in the future filter by user, allowed sections, langugae and user-type
+        IUser? user = _backofficeSecurityAccessor.BackOfficeSecurity?.CurrentUser;
+        string userType = string.Empty; // This is not in recent versions of Umbraco & the API Controller on our.umb does nothing with this data currently
+        string allowedSections = string.Empty;
+        string? language = string.Empty;
+
+        if (user is not null)
         {
-            _backofficeSecurityAccessor = backofficeSecurityAccessor;
-            _umbracoVersion = umbracoVersion;
-            _logger = logger;
-            _runtimeCache = runtimeCache;
-            _jsonSerializer = jsonSerializer;
+            allowedSections = string.Join(",", user.AllowedSections);
+            language = user.Language;
         }
 
-        /// <summary>
-        /// Fetches available lessons for a given section from our.umbaco.org
-        /// </summary>
-        /// <param name="path">Name of the documentation section to fetch from, ex: "getting-started", "Tutorials/Starter-kit/Lessons" </param>
-        /// <returns></returns>
-        [ValidateAngularAntiForgeryToken]
-        public IEnumerable<Lesson> GetLessons(string path)
+        string version = _umbracoVersion.SemanticVersion.ToSemanticString();
+
+        // construct the url and cache key
+        string url =
+            $"https://our.umbraco.org/Umbraco/Documentation/Lessons/GetDocsForPath?path={path}&userType={userType}&allowedSections={allowedSections}&lang={language}&version={version}";
+        string key = "umbraco-lessons-" + userType + language + allowedSections.Replace(",", "-") + path;
+
+        List<LessonModel>? result = new();
+
+        List<LessonModel>? FetchLesson()
         {
-            //information for the request, so we could in the future filter by user, allowed sections, langugae and user-type
-            var user = _backofficeSecurityAccessor.BackOfficeSecurity.CurrentUser;
-            var userType = string.Empty; //This is not in recent versions of Umbraco & the API Controller on our.umb does nothing with this data currently
-            var allowedSections = string.Join(",", user.AllowedSections);
-            var language = user.Language;
-            var version = _umbracoVersion.SemanticVersion.ToSemanticString();
-
-            //construct the url and cache key
-            var url =
-                $"https://our.umbraco.org/Umbraco/Documentation/Lessons/GetDocsForPath?path={path}&userType={userType}&allowedSections={allowedSections}&lang={language}&version={version}";
-            var key = "umbraco-lessons-" + userType + language + allowedSections.Replace(",", "-") + path;
-
-            var result = new List<Lesson>();
-
-            Func<List<Lesson>> fetchLesson = () =>
+            try
             {
-                try
-                {
-                    using var web = new HttpClient();
-                    //fetch dashboard json and parse to JObject
-                    var json = web.GetStringAsync(url);
-                    result = _jsonSerializer.Deserialize<IEnumerable<Lesson>>(json.Result).ToList();
-                }
-                catch (HttpRequestException ex)
-                {
-                    //Log it so we are aware there was an issue
-                    _logger.LogError(ex, "Error getting lesson content from {Url} ': {ExMessage}\n{InnerEx}", url, ex.Message, ex.InnerException);
+                using var web = new HttpClient();
 
-                    //The result is still a new/empty JObject() - So we will return it like this to avoid error codes which triggers UI warnings
-                    //So this will cache an empty response until cache expires
-                }
+                // fetch dashboard json and parse to JObject
+                Task<string> json = web.GetStringAsync(url);
+                result = _jsonSerializer.Deserialize<IEnumerable<LessonModel>>(json.Result)?.ToList();
+            }
+            catch (HttpRequestException ex)
+            {
+                // Log it so we are aware there was an issue
+                _logger.LogError(ex, "Error getting lesson content from {Url} ': {ExMessage}\n{InnerEx}", url, ex.Message, ex.InnerException);
 
-                return result;
-            };
-
-            //Get cache item or add new cache item with func
-            result = _runtimeCache.GetCacheItem(key, fetchLesson, new TimeSpan(0, 30, 0));
+                // The result is still a new/empty JObject() - So we will return it like this to avoid error codes which triggers UI warnings
+                // So this will cache an empty response until cache expires
+            }
 
             return result;
         }
 
+        // Get cache item or add new cache item with func
+        result = _runtimeCache.GetCacheItem(key, FetchLesson, new TimeSpan(0, 30, 0));
 
-        /// <summary>
-        /// This gets the steps that make up a specific lesson
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        [ValidateAngularAntiForgeryToken]
-        public async Task<IEnumerable<LessonStep>> GetLessonSteps(string path)
-        {
-            var url = $"https://our.umbraco.org/Umbraco/Documentation/Lessons/GetStepsForPath?path={path}";
-            using var web = new HttpClient();
-            //fetch dashboard json and parse to JObject
-            var json = await web.GetStringAsync(url);
-            return _jsonSerializer.Deserialize<List<LessonStep>>(json);
-        }
+        return result ?? Enumerable.Empty<LessonModel>();
     }
 
     /// <summary>
-    /// Simple POCO for binding JSON from our.umbraco WebAPI
+    /// This gets the steps that make up a specific lesson.
     /// </summary>
-    [DataContract(Name = "lesson")]
-    public class Lesson
+    /// <param name="path"></param>
+    /// <returns></returns>
+    [ValidateAngularAntiForgeryToken]
+    public async Task<IEnumerable<LessonStepModel>> GetLessonSteps(string path)
     {
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
+        string url = $"https://our.umbraco.org/Umbraco/Documentation/Lessons/GetStepsForPath?path={path}";
+        using HttpClient web = new();
 
-        [DataMember(Name = "path")]
-        public string Path { get; set; }
-
-        [DataMember(Name = "level")]
-        public string Level { get; set; }
-
-        [DataMember(Name = "url")]
-        public string Url { get; set; }
-
-        [DataMember(Name = "directories")]
-        public IEnumerable<Lesson> Directories { get; set; }
-    }
-
-
-    /// <summary>
-    /// Simple POCO for binding JSON from our.umbraco WebAPI
-    /// </summary>
-    [DataContract(Name = "LesssonStep")]
-    public class LessonStep
-    {
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
-
-        [DataMember(Name = "content")]
-        public string Content { get; set; }
+        // fetch dashboard json and parse to JObject
+        string json = await web.GetStringAsync(url);
+        return _jsonSerializer.Deserialize<List<LessonStepModel>>(json) ?? Enumerable.Empty<LessonStepModel>();
     }
 }

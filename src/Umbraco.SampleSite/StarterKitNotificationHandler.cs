@@ -1,49 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Routing;
 using Umbraco.Cms.Core.Events;
 using Umbraco.Cms.Core.Notifications;
 using Umbraco.Extensions;
 using Umbraco.SampleSite.Controllers;
 
-namespace Umbraco.SampleSite
+namespace Umbraco.SampleSite;
+
+public class StarterKitNotificationHandler : INotificationHandler<ServerVariablesParsingNotification>
 {
-    public class StarterKitNotificationHandler :INotificationHandler<ServerVariablesParsingNotification>
+    private readonly LinkGenerator _linkGenerator;
+
+    public StarterKitNotificationHandler(LinkGenerator linkGenerator) => _linkGenerator = linkGenerator;
+
+    /// <summary>
+    /// Handles the <see cref="ServerVariablesParsing"/> notification to add custom urls.
+    /// </summary>
+    public void Handle(ServerVariablesParsingNotification notification)
     {
-        private readonly LinkGenerator _linkGenerator;
+        IDictionary<string, object> serverVars = notification.ServerVariables;
 
-        public StarterKitNotificationHandler(LinkGenerator linkGenerator)
+        if (!serverVars.ContainsKey("umbracoUrls"))
         {
-            _linkGenerator = linkGenerator;
+            throw new ArgumentException("Missing umbracoUrls.");
         }
 
-        /// <summary>
-        /// Handles the <see cref="ServerVariablesParsing"/> notification to add custom urls
-        /// </summary>
-        public void Handle(ServerVariablesParsingNotification notification)
+        object umbracoUrlsObject = serverVars["umbracoUrls"] ?? throw new ArgumentException("Null umbracoUrls");
+
+        if (umbracoUrlsObject is not Dictionary<string, object> umbracoUrls)
         {
-            IDictionary<string, object> serverVars = notification.ServerVariables;
-
-            if (!serverVars.ContainsKey("umbracoUrls"))
-            {
-                throw new ArgumentException("Missing umbracoUrls.");
-            }
-            
-            var umbracoUrlsObject = serverVars["umbracoUrls"];
-            if (umbracoUrlsObject == null)
-            {
-                throw new ArgumentException("Null umbracoUrls");
-            }
-
-            if (!(umbracoUrlsObject is Dictionary<string, object> umbracoUrls))
-            {
-                throw new ArgumentException("Invalid umbracoUrls");
-            }
-
-            //Add to 'Umbraco.Sys.ServerVariables.umbracoUrls.lessonsApiBaseUrl' global JS object
-            //The URL/route for this API endpoint to be consumed by the Lessons AngularJS Service
-            umbracoUrls["lessonsApiBaseUrl"] = _linkGenerator.GetUmbracoApiServiceBaseUrl<LessonsController>(controller => controller.GetLessons(""));
+            throw new ArgumentException("Invalid umbracoUrls");
         }
 
+        // Add to 'Umbraco.Sys.ServerVariables.umbracoUrls.lessonsApiBaseUrl' global JS object
+        // The URL/route for this API endpoint to be consumed by the Lessons AngularJS Service
+        umbracoUrls["lessonsApiBaseUrl"] = _linkGenerator.GetUmbracoApiServiceBaseUrl<LessonsController>(controller => controller.GetLessons(string.Empty))!;
     }
 }

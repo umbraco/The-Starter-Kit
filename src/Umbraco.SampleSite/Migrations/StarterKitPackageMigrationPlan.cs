@@ -1,19 +1,16 @@
-﻿using System;
 using Umbraco.Cms.Core.Packaging;
-using Umbraco.Cms.Infrastructure.Packaging;
 
-namespace Umbraco.SampleSite.Migrations
+namespace Umbraco.SampleSite.Migrations;
+
+public class StarterKitPackageMigrationPlan : PackageMigrationPlan
 {
-    public class StarterKitPackageMigrationPlan : PackageMigrationPlan
+    public StarterKitPackageMigrationPlan()
+        : base("The-Starter-Kit")
     {
-        public StarterKitPackageMigrationPlan()
-            : base("The-Starter-Kit")
-        {
-        }
+    }
 
-        protected override void DefinePlan()
-        {
-            To<ImportPackageXmlMigration>(new Guid("A2A11BDF-1A21-4CE0-9E8E-D1D040FD503A"));
-        }
+    protected override void DefinePlan()
+    {
+        To<ImportPackageXmlMigration>(new Guid("A2A11BDF-1A21-4CE0-9E8E-D1D040FD503A"));
     }
 }

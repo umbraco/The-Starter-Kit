@@ -15,7 +15,7 @@ https://umbraco-starter-kit.s1.umbraco.io
 
 ## Development
 
-If you are doing development for the Starter Kit, you can launch the [Umbraco.SampleSite.Web](src/Umbraco.SampleSite.Web/) contained in this repo.
+If you are doing development for the Starter Kit, you can launch the [Umbraco.SampleSite.Web](examples/Umbraco.SampleSite.Web/) contained in this repo.
 
 Run the project in Visual Studio or the terminal and the package migrations will run from the source project [Umbraco.SampleSite](src/Umbraco.SampleSite/) the first time.
 

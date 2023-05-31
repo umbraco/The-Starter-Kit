@@ -1,57 +1,73 @@
-name: $(Build.DefinitionName)-$(date:yyyyMMdd)$(rev:.r)
+name: $(TeamProject)_$(Build.DefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
+parameters:
+  - name: cache_nuget
+    displayName: Cache NuGet packages
+    type: boolean
+    default: false
 
 variables:
-  buildConfiguration: 'Release'
-#  VersionNumber: $(Major).$(Minor).$(rev:.r)
-stages:
-  - stage: Windows
-    dependsOn: [] # this removes the implicit dependency on previous stage and causes this to run in parallel
-    jobs:
+  solution: Umbraco.SampleSite.sln
+  buildConfiguration: Release
+  DOTNET_NOLOGO: true
+  DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
 
-      - job: CreateNugetPacakges
-        displayName: 'Create Nuget Packages'
-        pool:
-          vmImage: 'windows-latest'
+stages: 
+  - stage: Build
+    variables:
+      NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
+      npm_config_cache: $(Pipeline.Workspace)/.npm_client
+    jobs:
+      - job: Build
+        pool: 
+          vmImage: ubuntu-latest
         steps:
+          # Checkout source (avoid shallow clone to calculate version height)
+          - checkout: self
+            fetchDepth: 0
+
+          # Setup build environment
+          - task: NuGetAuthenticate@1
+            displayName: Authenticate NuGet
 
           - task: UseDotNet@2
-            displayName: 'Use .Net sdk 7.x'
+            displayName: Use .NET SDK from global.json
             inputs:
-              version: 7.x
+              useGlobalJson: true
 
-          - task: DotNetCoreCLI@2
-            displayName: 'dotnet restore'
+          # Cache and restore NuGet packages
+          - task: Cache@2
+            condition: ${{ parameters.cache_nuget }}
+            displayName: Cache NuGet packages
             inputs:
-              command: 'restore'
-              projects: '**/Umbraco.SampleSite.csproj'
-              restoreArguments: '--source https://www.myget.org/F/umbraconightly/api/v3/index.json --source https://www.myget.org/F/umbracoprereleases/api/v3/index.json --source https://api.nuget.org/v3/index.json'
+              key: 'nuget | "$(Agent.OS)" | **/packages.lock.json, !**/bin/**, !**/obj/**'
+              restoreKeys: |
+                nuget | "$(Agent.OS)"
+                nuget
+              path: $(NUGET_PACKAGES)
 
-          - task: DotNetCoreCLI@2
-            displayName: 'dotnet build'
-            inputs:
-              command: 'build'
-              projects: '**/Umbraco.SampleSite.csproj'
-              arguments: '--configuration $(buildConfiguration) --no-restore'
+          - script: dotnet restore $(solution) --locked-mode
+            displayName: Restore NuGet packages
 
-          - task: PowerShell@1
-            displayName: 'dotnet pack'
-            inputs:
-              scriptType: inlineScript
-              inlineScript: >
-                $isRelease = [regex]::matches($env:BUILD_SOURCEBRANCH,"v\d+\/\d+.\d+.*");
+          # Build
+          - script: dotnet build $(solution) --configuration $(buildConfiguration) --no-restore -p:ContinuousIntegrationBuild=true
+            displayName: Run dotnet build
 
-                if ($isRelease.Count -gt 0)
-                {
-                   Write-Host "##vso[build.addbuildtag]Release build"
-                   dotnet pack --no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) ./src/Umbraco.SampleSite/Umbraco.SampleSite.csproj
-                }
-                else
-                {
-                   Write-Host "##vso[build.addbuildtag]Continuous build"
-                   dotnet pack --no-build --version-suffix preview.$(Build.BuildId) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) ./src/Umbraco.SampleSite/Umbraco.SampleSite.csproj
-                }
-          - task: PublishBuildArtifacts@1
-            displayName: 'Make NuGet Artifacts available for release'
+          # Pack (using --no-build causes RCL projects to generate an invalid package, even using .NET SDK 7, so keep --no-restore for now)
+          - script: dotnet pack $(solution) --configuration $(buildConfiguration) --no-restore --output $(Build.ArtifactStagingDirectory)/nupkg
+            displayName: Run dotnet pack
+
+          # Publish
+          - task: PublishPipelineArtifact@1
+            displayName: Publish NuGet packages
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-              ArtifactName: packages
+              targetPath: $(Build.ArtifactStagingDirectory)/nupkg
+              artifactName: nupkg
+
+          - task: PublishPipelineArtifact@1
+            displayName: Publish build output
+            inputs:
+              targetPath: $(Build.SourcesDirectory)
+              artifactName: build_output

@@ -1,0 +1,101 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms" Version="11.4.0" />
+  </ItemGroup>
+
+  <Import Project="..\..\src\Umbraco.SampleSite\build\Umbraco.TheStarterKit.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Umbraco.SampleSite\Umbraco.SampleSite.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="umbraco\Data\**" />
+    <Compile Remove="umbraco\logs\**" />
+    <Compile Remove="umbraco\MediaCache\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="umbraco\Data\**" />
+    <EmbeddedResource Remove="umbraco\logs\**" />
+    <EmbeddedResource Remove="umbraco\MediaCache\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="umbraco\Data\**" />
+    <None Remove="umbraco\logs\**" />
+    <None Remove="umbraco\MediaCache\**" />
+    <None Include="config\**\*.*">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
+    <None Include="umbraco\**\*.*">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="umbraco\Data\**" />
+    <Content Remove="umbraco\logs\**" />
+    <Content Remove="umbraco\MediaCache\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\media\0aslars0\7377957524_347859faac_b.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\1c3833ce637f4985a142e029d1d50cac\18720470241_ff77768544_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\1k2bvtyp\18720470241_ff77768544_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\1k2bvtyp\jan-skovgaard.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\3a8c3d0bd46b4c25907a6479354ac65d\16403439029_f500be349b_o.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\4c4e24ba8b1d44b6903412be100001fb\18095416144_44a566a5f4_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\5guogia1\7371127652_e01b6ab56f_b.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\732e8047f76342e09974ea886dfe05c0\18095416144_44a566a5f4_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\79a350528c974a118948172f027f1273\18720470241_ff77768544_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\abchlerf\poornima_nayar.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\amoot1xi\18531852339_981b067419_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\amoot1xi\matt-brailsford.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\b73f6c8a3e8e437fb4f7d5642a76ac43\18530280048_459b8b61b2_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\bm5hn4xl\18531854019_351c579559_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\bm5hn4xl\lee-kelleher.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\buumkg0y\14272036539_469ca21d5c_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\byodongi\18530280048_459b8b61b2_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\c4784c9fc99a4a5ab7e2224cf16dd354\18095416144_44a566a5f4_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\cqwfkfy3\7373036290_5e8420bf36_b.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\created-packages\Demo\package.xml" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\created-packages\Demo\package.zip" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\doxkuvnu\ravi-motha.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\dsypff0x\laura_weatherhead.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\fzobwfow\janae_cram.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\hrybwhjk\7373036208_30257976a0_b.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\inefcvn3\4730684907_8a7f8759cb_b.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\jdnh1nyd\5852022091_87c5d045ab_b.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\m5xlws44\busra_sengul.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\nhjhj1wp\erica_quessenberry.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\phdj3qhd\5852022211_9028df67c0_b.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\vvlnw31z\emmanuel_tissera.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\vwojnqfl\18095416144_44a566a5f4_h.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\vwojnqfl\jeavon-leopold.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\media\zt1cuzq0\16403439029_f500be349b_o.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\scripts\umbraco-starterkit-app.js" />
+    <_ContentIncludedByDefault Remove="Views\Partials\blocklist\default.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\CategoryLinks.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\ContactForm.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\bootstrap3-fluid.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\bootstrap3.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\base.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\embed.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\macro.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\media.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\rte.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\grid\editors\textstring.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\Navigation\SubNavigation.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\Navigation\TopNavigation.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Partials\SectionHeader.cshtml" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
+    <RazorCompileOnPublish>false</RazorCompileOnPublish>
+  </PropertyGroup>
+
+</Project>
