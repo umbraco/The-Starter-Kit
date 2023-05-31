@@ -1,4 +1,3 @@
-﻿using System;
 using Umbraco.Cms.Core.Packaging;
 
 namespace Umbraco.SampleSite.Migrations;

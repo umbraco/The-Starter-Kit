@@ -9,6 +9,7 @@
     <Title>Umbraco.TheStarterKit</Title>
     <Description>The default starter kit for Umbraco</Description>
     <PackageTags>umbraco umbraco-marketplace plugin package</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Authors>Umbraco HQ</Authors>
     <Nullable>enable</Nullable>
@@ -42,13 +43,12 @@
     </Content>
 
     <None Remove="Migrations\package.zip" />
-
     <EmbeddedResource Include="Migrations\package.zip" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Bergmania.OpenStreetMap" Version="5.1.0" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="12.0.0-rc1" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="12.0.0-rc2" />
 
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.113" PrivateAssets="all" IsImplicitlyDefined="true" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435" PrivateAssets="all" IsImplicitlyDefined="true" />
@@ -56,6 +56,10 @@
     <PackageReference Include="Umbraco.GitVersioning.Extensions" Version="0.2.0" PrivateAssets="all" IsImplicitlyDefined="true" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)/../../icon.png" Pack="true" PackagePath="" Visible="false" />
+  </ItemGroup>
+  
   <PropertyGroup>
     <GitVersionBaseDirectory>$(MSBuildThisFileDirectory)</GitVersionBaseDirectory>
   </PropertyGroup>
