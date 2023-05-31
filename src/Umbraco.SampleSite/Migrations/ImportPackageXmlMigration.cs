@@ -35,6 +35,5 @@ public class ImportPackageXmlMigration : PackageMigrationBase
     protected override void Migrate()
     {
         ImportPackage.FromEmbeddedResource(GetType()).Do();
-        Context.AddPostMigration<PublishRootBranchPostMigration>();
     }
 }
