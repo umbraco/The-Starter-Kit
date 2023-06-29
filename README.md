@@ -5,7 +5,7 @@
 You can find the Starter Kit on NuGet by running the following command:
 
 ```bash
-dotnet add package Umbraco.TheStarterKit --version 12.0.0-rc1
+dotnet add package Umbraco.TheStarterKit --version 12.0.0
 ```
 
 ## Content
