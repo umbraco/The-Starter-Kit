@@ -15,7 +15,7 @@ public partial class StarterKitComposer : IComposer
         // disable some of the default core tours since they don't make sense to have when the starter kit is installed
         builder.TourFilters().AddFilter(BackOfficeTourFilter.FilterAlias(ToursToRemoveRegex()));
 
-        builder.AddNotificationHandler<ServerVariablesParsingNotification, StarterKitNotificationHandler>();
+        // builder.AddNotificationHandler<ServerVariablesParsingNotification, StarterKitNotificationHandler>();
         builder.AddNotificationHandler<MigrationPlansExecutedNotification, PostMigrationNotificationHandler>();
     }
 
