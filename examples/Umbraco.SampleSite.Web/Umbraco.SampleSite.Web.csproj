@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="[13.0.0, 14)" />
+    <PackageReference Include="Umbraco.Cms" Version="14.0.0-rc2" />
   </ItemGroup>
   <Import Project="..\..\src\Umbraco.SampleSite\build\Umbraco.TheStarterKit.targets" />
   <ItemGroup>
