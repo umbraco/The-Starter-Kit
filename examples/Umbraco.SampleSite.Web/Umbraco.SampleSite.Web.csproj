@@ -7,6 +7,7 @@
   </ItemGroup>
   <Import Project="..\..\src\Umbraco.SampleSite\build\Umbraco.TheStarterKit.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Umbraco.SampleSite.StaticAssets\Umbraco.SampleSite.StaticAssets.csproj" />
     <ProjectReference Include="..\..\src\Umbraco.SampleSite\Umbraco.SampleSite.csproj" />
   </ItemGroup>
   <ItemGroup>

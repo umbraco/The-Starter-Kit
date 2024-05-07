@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>Umbraco.SampleSite.StaticAssets</PackageId>
+        <Product>Umbraco.SampleSite.StaticAssets</Product>
+        <Title>Umbraco.SampleSite.StaticAssets</Title>
+        <Description>...</Description>
+        <PackageTags>umbraco plugin package</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Umbraco.SampleSite\Umbraco.SampleSite.csproj" />
+    </ItemGroup>
+  
+</Project>

@@ -1,0 +1,6 @@
+{
+  "id": "Umbraco.SampleSite.StaticAssets",
+  "name": "Umbraco.SampleSite.StaticAssets",
+  "allowPackageTelemetry": true,
+  "extensions": []
+}
