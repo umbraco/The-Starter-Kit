@@ -13,6 +13,7 @@
     <Authors>Umbraco HQ</Authors>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="App_Plugins\StarterKit\**\*.*">
