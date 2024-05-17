@@ -3,11 +3,10 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="14.0.0-rc2" />
+    <PackageReference Include="Umbraco.Cms" Version="14.0.0-rc3" />
   </ItemGroup>
   <Import Project="..\..\src\Umbraco.SampleSite\build\Umbraco.TheStarterKit.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Umbraco.SampleSite.StaticAssets\Umbraco.SampleSite.StaticAssets.csproj" />
     <ProjectReference Include="..\..\src\Umbraco.SampleSite\Umbraco.SampleSite.csproj" />
   </ItemGroup>
   <ItemGroup>
