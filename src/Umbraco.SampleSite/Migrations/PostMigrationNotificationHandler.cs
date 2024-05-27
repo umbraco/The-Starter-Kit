@@ -38,9 +38,8 @@ public class PostMigrationNotificationHandler : INotificationHandler<MigrationPl
         IContent? contentHome = _contentService.GetRootContent().FirstOrDefault(x => x.ContentType.Alias == "home");
         if (contentHome is not null)
         {
-            // TODO: Use Publish instead
             // publish everything (moved here due to Deploy dependency checking)
-            _contentService.SaveAndPublishBranch(contentHome, true);
+            _contentService.PublishBranch(contentHome, true, []);
         }
         else
         {
