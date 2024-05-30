@@ -39,7 +39,7 @@ public class PostMigrationNotificationHandler : INotificationHandler<MigrationPl
         if (contentHome is not null)
         {
             // publish everything (moved here due to Deploy dependency checking)
-            _contentService.SaveAndPublishBranch(contentHome, true);
+            _contentService.PublishBranch(contentHome, true, []);
         }
         else
         {

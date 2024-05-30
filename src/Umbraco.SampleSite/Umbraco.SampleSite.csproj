@@ -13,6 +13,7 @@
     <Authors>Umbraco HQ</Authors>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="App_Plugins\StarterKit\**\*.*">
@@ -39,10 +40,10 @@
     <EmbeddedResource Include="Migrations\package.zip" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bergmania.OpenStreetMap" Version="5.3.1" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="[13.0.0, 14)" />
+    <PackageReference Include="Bergmania.OpenStreetMap" Version="6.0.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.113" PrivateAssets="all" IsImplicitlyDefined="true" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435" PrivateAssets="all" IsImplicitlyDefined="true" />
+    <PackageReference Include="Umbraco.Cms.Api.Management" Version="[14.0.0, 15)" />
     <PackageReference Include="Umbraco.GitVersioning.Extensions" Version="0.2.0" PrivateAssets="all" IsImplicitlyDefined="true" />
   </ItemGroup>
   <ItemGroup>
