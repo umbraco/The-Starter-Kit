@@ -17,22 +17,22 @@ public class LatestBlogPostsViewComponent : ViewComponent
     public LatestBlogPostsViewComponent(IPublishedContentQuery publishedContentQuery) =>
         _publishedContentQuery = publishedContentQuery;
 
-    public async Task<IViewComponentResult> InvokeAsync(decimal numberOfPosts, Guid startNodeKey)
+    public Task<IViewComponentResult> InvokeAsync(decimal numberOfPosts, Guid startNodeKey)
     {
         IPublishedContent? rootNode = _publishedContentQuery.Content(startNodeKey);
 
         if (rootNode is null)
         {
-            return View("NoContent");
+            return Task.FromResult<IViewComponentResult>(View("NoContent"));
         }
 
-        var blogposts = rootNode.Children
+        var blogposts = rootNode.Children()
             .OrderBy(x => x.CreateDate, Direction.Ascending)
             .ToList();
 
         if(blogposts.Count == 0)
         {
-            return View("NoContent");
+            return Task.FromResult<IViewComponentResult>(View("NoContent"));
         }
 
         var pageCount = (int)Math.Ceiling(blogposts.Count / numberOfPosts);
@@ -50,7 +50,7 @@ public class LatestBlogPostsViewComponent : ViewComponent
 
         var blogPage = blogposts.Skip((page - 1) * (int)numberOfPosts).Take((int)numberOfPosts).ToList();
 
-        return View(new LatestBlogPostsViewModel
+        return Task.FromResult<IViewComponentResult>(View(new LatestBlogPostsViewModel
         {
             BlogPosts = blogPage,
             Page = page,
@@ -58,6 +58,6 @@ public class LatestBlogPostsViewComponent : ViewComponent
             PageSize = (int)numberOfPosts,
             Total = blogposts.Count,
             Url = rootNode.Url()
-        });
+        }));
     }
 }
