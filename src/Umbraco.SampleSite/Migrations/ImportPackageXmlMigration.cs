@@ -9,7 +9,7 @@ using Umbraco.Cms.Infrastructure.Packaging;
 
 namespace Umbraco.SampleSite.Migrations;
 
-public class ImportPackageXmlMigration : PackageMigrationBase
+public class ImportPackageXmlMigration : AsyncPackageMigrationBase
 {
     public ImportPackageXmlMigration(
         IPackagingService packagingService,
@@ -32,8 +32,11 @@ public class ImportPackageXmlMigration : PackageMigrationBase
     {
     }
 
-    protected override void Migrate()
+
+
+    protected override Task MigrateAsync()
     {
         ImportPackage.FromEmbeddedResource(GetType()).Do();
+        return Task.CompletedTask;
     }
 }

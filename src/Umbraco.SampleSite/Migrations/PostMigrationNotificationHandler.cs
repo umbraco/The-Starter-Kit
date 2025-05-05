@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Events;
 using Umbraco.Cms.Core.Models;
@@ -39,7 +39,7 @@ public class PostMigrationNotificationHandler : INotificationHandler<MigrationPl
         if (contentHome is not null)
         {
             // publish everything (moved here due to Deploy dependency checking)
-            _contentService.PublishBranch(contentHome, true, []);
+            _contentService.PublishBranch(contentHome, PublishBranchFilter.IncludeUnpublished, []);
         }
         else
         {
