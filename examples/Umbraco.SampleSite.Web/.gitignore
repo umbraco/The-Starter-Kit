@@ -476,21 +476,13 @@ appsettings-schema.json
 
 # Media files
 /wwwroot/media/
-/Views/Blog.cshtml
-/Views/Blogpost.cshtml
-/Views/Partials/CategoryLinks.cshtml
-/Views/contact.cshtml
-/Views/Partials/ContactForm.cshtml
-/Views/contentPage.cshtml
-/Views/MacroPartials/FeaturedProducts.cshtml
-/Views/home.cshtml
-/Views/MacroPartials/LatestBlogposts.cshtml
-/Views/master.cshtml
+
+# Custom views, javascript and styles
+/Views/**/*.cshtml
+!/Views/_ViewImports.cshtml
+!/Views/Partials/blockgrid/*.cshtml
+!/Views/Partials/blocklist/*.cshtml
+/wwwroot/css/
+/wwwroot/scripts/
+
 /umbraco/models/ood.flag
-/Views/people.cshtml
-/Views/Person.cshtml
-/Views/Product.cshtml
-/Views/Products.cshtml
-/Views/Partials/SectionHeader.cshtml
-/Views/Partials/Navigation/SubNavigation.cshtml
-/Views/Partials/Navigation/TopNavigation.cshtml
