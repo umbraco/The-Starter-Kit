@@ -7,7 +7,6 @@ body:
   id: "version"
   attributes:
     label: "Which version of The Starter Kit are you using? (Please write the *exact* version, example: 13.0.0)"
-    description: ""
   validations:
     required: true
 - type: input
