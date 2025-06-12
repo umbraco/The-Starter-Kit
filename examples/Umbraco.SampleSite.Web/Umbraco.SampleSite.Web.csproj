@@ -3,7 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms" Version="16.0.0-rc6" />
+    <PackageReference Include="Umbraco.Cms" Version="16.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Umbraco.SampleSite\Umbraco.SampleSite.csproj" />
