@@ -43,8 +43,8 @@
     <PackageReference Include="Bergmania.OpenStreetMap" Version="7.0.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.8.118" PrivateAssets="all" IsImplicitlyDefined="true" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="all" IsImplicitlyDefined="true" />
-    <PackageReference Include="Umbraco.Cms.Api.Management" Version="17.0.0-beta" />
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="17.0.0-beta" />
+    <PackageReference Include="Umbraco.Cms.Api.Management" Version="17.0.0-rc1" />
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="17.0.0-rc1" />
     <PackageReference Include="Umbraco.GitVersioning.Extensions" Version="0.2.0" PrivateAssets="all" IsImplicitlyDefined="true" />
   </ItemGroup>
   <ItemGroup>
