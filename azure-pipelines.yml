@@ -87,7 +87,7 @@ stages:
           - task: upload-bom-dtrack@1
             displayName: 'Upload SBOM to Dependency-Track'
             inputs:
-              bomFilePath: bom-dotnet.xml
+              bomFilePath: '$(Build.ArtifactStagingDirectory)/bom/bom-dotnet.xml'
               dtrackProjName: 'Umbraco.SampleSite'
               dtrackProjVersion: '17'
               dtrackAPIKey: $(DT_API_KEY)
