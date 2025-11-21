@@ -55,6 +55,12 @@ stages:
           - script: dotnet build $(solution) --configuration $(buildConfiguration) --no-restore -p:ContinuousIntegrationBuild=true
             displayName: Run dotnet build
 
+          # Generate SBOM for backend projects
+          - powershell: |
+              dotnet tool install --global CycloneDX
+              dotnet-CycloneDX $(solution) --output $(Build.ArtifactStagingDirectory)/bom --filename bom-dotnet.xml
+            displayName: 'Generate Backend BOM'
+
           # Pack (using --no-build causes RCL projects to generate an invalid package, even using .NET SDK 7, so keep --no-restore for now)
           - script: dotnet pack $(solution) --configuration $(buildConfiguration) --no-restore --output $(Build.ArtifactStagingDirectory)/nupkg
             displayName: Run dotnet pack
@@ -72,39 +78,18 @@ stages:
               targetPath: $(Build.SourcesDirectory)
               artifactName: build_output
 
-  - stage: Dependency_Track_Nuget_Sbom
-    displayName: 'Dependency Tracking'
-    dependsOn: [Build]
-    jobs:
-      - job: DependencyTrack
-        displayName: Upload SBOM to DependencyTrack
-        pool:
-            vmImage: windows-latest
-        steps:
-        - checkout: self
-          fetchDepth: 0
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Backend BOM
+            inputs:
+              targetPath: $(Build.ArtifactStagingDirectory)/bom
+              artifactName: bom-backend
 
-        - task: UseDotNet@2
-          displayName: Use .NET 9 # Latest supported by CycloneDX tool
-          inputs:
-              version: 9.x
-
-        - script: dotnet tool install --global CycloneDX
-          displayName: 'Install CycloneDX .NET Tool'
-
-        - script: dotnet CycloneDX Umbraco.SampleSite.sln
-          displayName: 'Generate NuGet SBOM'
-
-        - publish: bom.xml
-          artifact: sbom
-          displayName: 'Publish NuGet SBOM Artifact'
-
-        - task: upload-bom-dtrack@1
-          displayName: 'Upload SBOM to Dependency-Track'
-          inputs:
-            bomFilePath: bom.xml
-            dtrackProjName: 'Umbraco.SampleSite'
-            dtrackProjVersion: '17'
-            dtrackAPIKey: $(DT_API_KEY)
-            dtrackURI: $(DT_API_URL)
-            dtrackProjAutoCreate: true
+          - task: upload-bom-dtrack@1
+            displayName: 'Upload SBOM to Dependency-Track'
+            inputs:
+              bomFilePath: bom-dotnet.xml
+              dtrackProjName: 'Umbraco.SampleSite'
+              dtrackProjVersion: '17'
+              dtrackAPIKey: $(DT_API_KEY)
+              dtrackURI: $(DT_API_URL)
+              dtrackProjAutoCreate: true
