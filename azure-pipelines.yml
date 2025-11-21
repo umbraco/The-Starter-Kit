@@ -14,14 +14,14 @@ variables:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
-stages: 
+stages:
   - stage: Build
     variables:
       NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
       npm_config_cache: $(Pipeline.Workspace)/.npm_client
     jobs:
       - job: Build
-        pool: 
+        pool:
           vmImage: ubuntu-latest
         steps:
           # Checkout source (avoid shallow clone to calculate version height)
@@ -71,3 +71,35 @@ stages:
             inputs:
               targetPath: $(Build.SourcesDirectory)
               artifactName: build_output
+
+  - stage: Dependency_Track_Nuget_Sbom
+    displayName: 'Dependency Tracking'
+    dependsOn: [Build]
+    jobs:
+      - job: DependencyTrack
+        displayName: Upload SBOM to DependencyTrack
+        pool:
+            vmImage: windows-latest
+        steps:
+        - checkout: self
+          fetchDepth: 0
+
+        - script: dotnet tool install --global CycloneDX
+          displayName: 'Install CycloneDX .NET Tool'
+
+        - script: dotnet CycloneDX Umbraco.SampleSite.sln
+          displayName: 'Generate NuGet SBOM'
+
+        - publish: bom.xml
+          artifact: sbom
+          displayName: 'Publish NuGet SBOM Artifact'
+
+        - task: upload-bom-dtrack@1
+          displayName: 'Upload SBOM to Dependency-Track'
+          inputs:
+            bomFilePath: bom.xml
+            dtrackProjName: 'Umbraco.SampleSite'
+            dtrackProjVersion: '17'
+            dtrackAPIKey: $(DT_API_KEY)
+            dtrackURI: $(DT_API_URL)
+            dtrackProjAutoCreate: true
