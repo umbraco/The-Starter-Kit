@@ -84,6 +84,11 @@ stages:
         - checkout: self
           fetchDepth: 0
 
+        - task: UseDotNet@2
+          displayName: Use .NET 9 # Latest supported by CycloneDX tool
+          inputs:
+              version: 9.x
+
         - script: dotnet tool install --global CycloneDX
           displayName: 'Install CycloneDX .NET Tool'
 
