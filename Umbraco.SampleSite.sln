@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33312.197
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11709.129 insiders
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umbraco.SampleSite", "src\Umbraco.SampleSite\Umbraco.SampleSite.csproj", "{237CAEED-10E8-4C2E-BA20-0578B1BA38FA}"
 EndProject
@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		.globalconfig = .globalconfig
 		azure-pipelines.yml = azure-pipelines.yml
+		Directory.Packages.props = Directory.Packages.props
 		global.json = global.json
 		icon.png = icon.png
 		NuGet.config = NuGet.config

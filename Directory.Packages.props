@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <!-- Global packages (private, build-time packages for all projects) -->
+  <ItemGroup>
+    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.9.50" />
+    <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
+    <GlobalPackageReference Include="Umbraco.GitVersioning.Extensions" Version="0.2.0" />
+  </ItemGroup>
+  <!-- Umbraco packages -->
+  <PropertyGroup>
+    <UmbracoCmsPackageVersion>[18.0.0--beta1.preview.178.g2daf9da, 19)</UmbracoCmsPackageVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Umbraco.Cms.Api.Management" Version="$(UmbracoCmsPackageVersion)" />
+    <PackageVersion Include="Umbraco.Cms.Web.Website" Version="$(UmbracoCmsPackageVersion)" />
+    <PackageVersion Include="Umbraco.Cms" Version="$(UmbracoCmsPackageVersion)" />
+    <PackageVersion Include="Umbraco.Cms.DevelopmentMode.Backoffice" Version="$(UmbracoCmsPackageVersion)" />
+  </ItemGroup>
+  <!-- Third-party packages -->
+  <ItemGroup>
+    <PackageVersion Include="Bergmania.OpenStreetMap" Version="7.0.0" />
+  </ItemGroup>
+</Project>

@@ -40,12 +40,12 @@
     <EmbeddedResource Include="Migrations\package.zip" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Bergmania.OpenStreetMap" Version="7.0.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.8.118" PrivateAssets="all" IsImplicitlyDefined="true" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="all" IsImplicitlyDefined="true" />
-    <PackageReference Include="Umbraco.Cms.Api.Management" Version="17.0.0-rc4" />
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="17.0.0-rc4" />
-    <PackageReference Include="Umbraco.GitVersioning.Extensions" Version="0.2.0" PrivateAssets="all" IsImplicitlyDefined="true" />
+    <PackageReference Include="Bergmania.OpenStreetMap" VersionOverride="7.0.0" />
+    <PackageReference Include="Nerdbank.GitVersioning" VersionOverride="3.8.118" PrivateAssets="all" IsImplicitlyDefined="true" />
+    <PackageReference Include="StyleCop.Analyzers" VersionOverride="1.2.0-beta.556" PrivateAssets="all" IsImplicitlyDefined="true" />
+    <PackageReference Include="Umbraco.Cms.Api.Management" />
+    <PackageReference Include="Umbraco.Cms.Web.Website" />
+    <PackageReference Include="Umbraco.GitVersioning.Extensions" VersionOverride="0.2.0" PrivateAssets="all" IsImplicitlyDefined="true" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)/../../icon.png" Pack="true" PackagePath="" Visible="false" />
