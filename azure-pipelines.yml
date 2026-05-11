@@ -71,3 +71,41 @@ stages:
             inputs:
               targetPath: $(Build.SourcesDirectory)
               artifactName: build_output
+
+  - stage: Dependency_Track
+    displayName: Dependency Track
+    dependsOn:
+      - Build
+    jobs:
+      - job: sbom
+        displayName: Upload SBOMs to Dependency Track
+        pool: 
+          vmImage: windows-latest
+        steps:
+          - checkout: self
+            fetchDepth: 0
+
+          - task: UseDotNet@2
+            displayName: Use .NET SDK from global.json
+            inputs:
+              useGlobalJson: true
+
+          - script: dotnet tool install --global CycloneDX
+            displayName: Install CycloneDX .NET global tool
+
+          - script: dotnet CycloneDX $(solution) --spec-version 1.6
+            displayName: Generate SBOM with CycloneDX
+
+          - publish: bom.xml
+            artifact: sbom
+            displayName: Publish SBOM artifact
+
+          - task: upload-bom-dtrack@1
+            displayName: Upload SBOM to Dependency Track
+            inputs:
+              bomFilePath: bom.xml
+              dtrackProjName: The-Starter-Kit
+              dtrackProjVersion: '17'
+              dtrackAPIKey: $(DT_API_KEY)
+              dtrackURI: $(DT_API_URL)
+              dtrackProjAutoCreate: true
