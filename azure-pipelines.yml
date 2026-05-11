@@ -85,6 +85,16 @@ stages:
           - checkout: self
             fetchDepth: 0
 
+          - task: PowerShell@2
+            displayName: Read version from version.json
+            inputs:
+              targetType: 'inline'
+              script: |
+                $versionJson = Get-Content -Path "version.json" -Raw | ConvertFrom-Json
+                $version = $versionJson.version
+                Write-Host "Version from version.json: $version"
+                Write-Host "##vso[task.setvariable variable=VersionNumber]$version"
+
           - task: UseDotNet@2
             displayName: Use .NET SDK from global.json
             inputs:
@@ -93,7 +103,7 @@ stages:
           - script: dotnet tool install --global CycloneDX
             displayName: Install CycloneDX .NET global tool
 
-          - script: dotnet CycloneDX $(solution) --spec-version 1.6
+          - script: dotnet CycloneDX $(solution) --spec-version 1.5
             displayName: Generate SBOM with CycloneDX
 
           - publish: bom.xml
@@ -105,7 +115,7 @@ stages:
             inputs:
               bomFilePath: bom.xml
               dtrackProjName: The-Starter-Kit
-              dtrackProjVersion: '17'
+              dtrackProjVersion: $(VersionNumber)
               dtrackAPIKey: $(DT_API_KEY)
               dtrackURI: $(DT_API_URL)
               dtrackProjAutoCreate: true
