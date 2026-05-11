@@ -92,8 +92,13 @@ stages:
               script: |
                 $versionJson = Get-Content -Path "version.json" -Raw | ConvertFrom-Json
                 $version = $versionJson.version
-                Write-Host "Version from version.json: $version"
-                Write-Host "##vso[task.setvariable variable=VersionNumber]$version"
+                if ([string]::IsNullOrWhiteSpace($version)) {
+                    throw "Version is empty or missing in version.json"
+                }
+                $majorVersion = $version.Split('.')[0]
+                Write-Host "Full version from version.json: $version"
+                Write-Host "Major version: $majorVersion"
+                Write-Host "##vso[task.setvariable variable=VersionNumber]$majorVersion"
 
           - task: UseDotNet@2
             displayName: Use .NET SDK from global.json
