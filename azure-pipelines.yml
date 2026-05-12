@@ -71,3 +71,56 @@ stages:
             inputs:
               targetPath: $(Build.SourcesDirectory)
               artifactName: build_output
+
+  - stage: Dependency_Track
+    displayName: Dependency Track
+    dependsOn:
+      - Build
+    jobs:
+      - job: sbom
+        displayName: Upload SBOMs to Dependency Track
+        pool: 
+          vmImage: windows-latest
+        steps:
+          - checkout: self
+            fetchDepth: 0
+
+          - task: PowerShell@2
+            displayName: Read version from version.json
+            inputs:
+              targetType: 'inline'
+              script: |
+                $versionJson = Get-Content -Path "version.json" -Raw | ConvertFrom-Json
+                $version = $versionJson.version
+                if ([string]::IsNullOrWhiteSpace($version)) {
+                    throw "Version is empty or missing in version.json"
+                }
+                $majorVersion = $version.Split('.')[0]
+                Write-Host "Full version from version.json: $version"
+                Write-Host "Major version: $majorVersion"
+                Write-Host "##vso[task.setvariable variable=VersionNumber]$majorVersion"
+
+          - task: UseDotNet@2
+            displayName: Use .NET SDK from global.json
+            inputs:
+              useGlobalJson: true
+
+          - script: dotnet tool install --global CycloneDX
+            displayName: Install CycloneDX .NET global tool
+
+          - script: dotnet CycloneDX $(solution) --spec-version 1.5
+            displayName: Generate SBOM with CycloneDX
+
+          - publish: bom.xml
+            artifact: sbom
+            displayName: Publish SBOM artifact
+
+          - task: upload-bom-dtrack@1
+            displayName: Upload SBOM to Dependency Track
+            inputs:
+              bomFilePath: bom.xml
+              dtrackProjName: The-Starter-Kit
+              dtrackProjVersion: $(VersionNumber)
+              dtrackAPIKey: $(DT_API_KEY)
+              dtrackURI: $(DT_API_URL)
+              dtrackProjAutoCreate: true
