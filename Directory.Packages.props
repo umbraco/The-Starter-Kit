@@ -11,7 +11,7 @@
   </ItemGroup>
   <!-- Umbraco packages -->
   <PropertyGroup>
-    <UmbracoCmsPackageVersion>[18.0.0-beta1, 19)</UmbracoCmsPackageVersion>
+    <UmbracoCmsPackageVersion>[18.0.0-rc1, 19)</UmbracoCmsPackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Umbraco.Cms.Api.Management" Version="$(UmbracoCmsPackageVersion)" />
