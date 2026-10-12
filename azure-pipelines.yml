@@ -13,6 +13,8 @@ variables:
   DOTNET_GENERATE_ASPNET_CERTIFICATE: false
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
+  # Whether this branch's major is released, so its uploads may become the latest version in Dependency-Track.
+  dependencyTrackMarkAsLatest: true
 
 stages: 
   - stage: Build
@@ -105,15 +107,42 @@ stages:
             inputs:
               useGlobalJson: true
 
-          - script: dotnet tool install --global CycloneDX
-            displayName: Install CycloneDX .NET global tool
+          - script: dotnet restore $(solution) --locked-mode
+            displayName: Restore NuGet packages
 
-          - script: dotnet CycloneDX $(solution) --spec-version 1.5
-            displayName: Generate SBOM with CycloneDX
+          - pwsh: |
+              dotnet tool install --tool-path "$(Agent.TempDirectory)/umbraco-sbom" Umbraco.Internal.Sbom
+              & "$(Agent.TempDirectory)/umbraco-sbom/umbraco-sbom" $(solution) --output-file "$(Build.SourcesDirectory)/bom.xml"
+              # Exit code 10 means the SBOM was written, with warnings for unresolved licenses.
+              if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne 10) { exit $LASTEXITCODE }
+              exit 0
+            displayName: Generate SBOM with Umbraco.Internal.Sbom
 
           - publish: bom.xml
             artifact: sbom
             displayName: Publish SBOM artifact
+
+          - pwsh: |
+              function Test-IsLatest([string] $name, [string] $version) {
+                  try {
+                      $versions = Invoke-RestMethod -Uri "$($env:DT_URL.TrimEnd('/'))/api/v1/project?name=$([uri]::EscapeDataString($name))&pageSize=1000" -Headers @{ 'X-Api-Key' = $env:DT_KEY }
+                  } catch {
+                      Write-Host "##vso[task.logissue type=warning]Could not read the versions of '$name' from Dependency-Track, so it is not marked as latest: $_"
+                      return $false
+                  }
+                  $latest = @($versions | Where-Object { $_.isLatest })[0]
+                  $latestMajor = 0
+                  $isLatest = -not ($latest -and [int]::TryParse($latest.version.Split('.')[0], [ref] $latestMajor) -and $latestMajor -gt [int] $version.Split('.')[0])
+                  Write-Host "Latest version of '$name' in Dependency-Track: $(if ($latest) { $latest.version } else { 'none' }). Mark $version as latest: $isLatest"
+                  return $isLatest
+              }
+
+              $isLatest = '$(dependencyTrackMarkAsLatest)' -eq 'true' -and (Test-IsLatest 'The-Starter-Kit' '$(VersionNumber)')
+              Write-Host "##vso[task.setvariable variable=isLatest]$($isLatest.ToString().ToLower())"
+            displayName: Determine whether to mark as latest
+            env:
+              DT_URL: $(DT_API_URL)
+              DT_KEY: $(DT_API_KEY)
 
           - task: upload-bom-dtrack@1
             displayName: Upload SBOM to Dependency Track
@@ -121,6 +150,8 @@ stages:
               bomFilePath: bom.xml
               dtrackProjName: The-Starter-Kit
               dtrackProjVersion: $(VersionNumber)
+              dtrackProjClassifier: APPLICATION
+              dtrackIsLatest: $(isLatest)
               dtrackAPIKey: $(DT_API_KEY)
               dtrackURI: $(DT_API_URL)
               dtrackProjAutoCreate: true
