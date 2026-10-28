@@ -24,7 +24,8 @@ public class PostMigrationNotificationHandler : INotificationHandler<MigrationPl
     public void Handle(MigrationPlansExecutedNotification notification)
     {
 
-        if (_runtimeState.Level is not RuntimeLevel.Run)
+        // Unattended package migrations run while the runtime is upgrading, so the content must be published then too.
+        if (_runtimeState.Level is not (RuntimeLevel.Run or RuntimeLevel.Upgrading))
         {
             return;
         }
