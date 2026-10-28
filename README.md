@@ -1,11 +1,11 @@
 ![CI](https://github.com/umbraco/The-Starter-Kit/workflows/CI/badge.svg?branch=dev-v8)
 
-# 18.0-Starter-Kit
+# 19.0-Starter-Kit
 
 You can find the Starter Kit on NuGet by running the following command:
 
 ```bash
-dotnet add package Umbraco.TheStarterKit --version 18.0.0
+dotnet add package Umbraco.TheStarterKit --version 19.0.0-beta1
 ```
 
 ## Development
